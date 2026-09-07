@@ -344,6 +344,11 @@ torch 1、smooth_stone 96）。箱は 11 × 3 × 12。データ線は {0, 3}、�
 （carry と borrow を 1 本の線に載せる）、`AND = carry(a, b, 0)` と `OR = carry(a, b, 1)`
 （論理演算が carry 比較器そのものになる）。
 
+### 追記（2026-09-08、同日後半）: 突き合わせられる bit slice
+
+上の 1 段 v7 は動く 1 段だが bit slice ではなかった: 入力 a に 3 cell（うち 1 つは pitch の外）が要り、P の第 2 入口と Wn の行が through-line になっておらず、東端が閉じていなかった。オペレータは「bit slice の突き合わせと pitch 整合を満たすまで 2 段目に進まない」と裁定した。そこで slice 契約（`docs/placement/slice-contract.md`）と、layout を pitch で n 個並べて n bit ALU として全入力・全 mode を解く checker（`tools/checks/alu_check_slices.py`）を書いた。結果 `artifacts/layouts/alu_slice_v8.json`（pitch 12、箱 12×4×14、292 block: comparator 50 / repeater 15 / wire 55 / barrel 7）: n=1 32/32、n=2 128/128、n=3 512/512、並べた配置の設置 lint 0。境界 cell の一覧は `docs/placement/slice1-result.md`、2 slice の層別図は `artifacts/images/alu_slice_v8_x2_layers.png`。未実施: 2 slice の合成世界とオペレータの world での検証。
+
+
 ## 主張しないこと
 
 - **まだ bit slice ではありません。** オペレータは、ビットスライス化・隣接段との突き合わせ・
