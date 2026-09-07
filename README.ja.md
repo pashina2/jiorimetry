@@ -1,4 +1,4 @@
-# 日本語
+# Jiorimetry（自織）— 規則から Minecraft 回路を導く実験的ツールチェーン
 
 > English: [README.md](README.md)
 
