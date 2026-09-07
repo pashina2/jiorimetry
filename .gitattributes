@@ -1,0 +1,7 @@
+# The repository is LF throughout, including on Windows checkouts.
+* text=auto eol=lf
+
+*.png binary
+*.nbt binary
+*.mca binary
+*.jar binary
