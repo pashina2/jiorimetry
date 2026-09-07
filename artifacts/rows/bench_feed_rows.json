@@ -1,0 +1,322 @@
+[
+ {
+  "a": 0,
+  "b": 0,
+  "cin": 0,
+  "levers_on": {
+   "a": true,
+   "b": true,
+   "cin": true
+  },
+  "feed_out": {
+   "a": 0,
+   "cin": 0,
+   "b": 0
+  },
+  "input_wire_power": {
+   "a": 0,
+   "b": 0,
+   "cin": 0
+  },
+  "sum_power": 0,
+  "cout_power": 0,
+  "sum_bit": 0,
+  "cout_bit": 0,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 3,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 15,
+   "2,1,1": 15,
+   "3,1,1": 15,
+   "4,1,3": 0,
+   "6,1,1": 0,
+   "6,1,3": 0,
+   "5,1,4": 0,
+   "1,1,-1": 0,
+   "3,1,-1": 0,
+   "2,1,3": 0
+  }
+ },
+ {
+  "a": 0,
+  "b": 0,
+  "cin": 1,
+  "levers_on": {
+   "a": true,
+   "b": true,
+   "cin": false
+  },
+  "feed_out": {
+   "a": 0,
+   "cin": 5,
+   "b": 0
+  },
+  "input_wire_power": {
+   "a": 0,
+   "b": 0,
+   "cin": 5
+  },
+  "sum_power": 5,
+  "cout_power": 0,
+  "sum_bit": 1,
+  "cout_bit": 0,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 4,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 15,
+   "2,1,1": 15,
+   "3,1,1": 10,
+   "4,1,3": 0,
+   "6,1,1": 5,
+   "6,1,3": 5,
+   "5,1,4": 5,
+   "1,1,-1": 0,
+   "3,1,-1": 5,
+   "2,1,3": 0
+  }
+ },
+ {
+  "a": 0,
+  "b": 1,
+  "cin": 0,
+  "levers_on": {
+   "a": true,
+   "b": false,
+   "cin": true
+  },
+  "feed_out": {
+   "a": 0,
+   "cin": 0,
+   "b": 5
+  },
+  "input_wire_power": {
+   "a": 0,
+   "b": 5,
+   "cin": 0
+  },
+  "sum_power": 5,
+  "cout_power": 0,
+  "sum_bit": 1,
+  "cout_bit": 0,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 4,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 15,
+   "2,1,1": 10,
+   "3,1,1": 10,
+   "4,1,3": 0,
+   "6,1,1": 5,
+   "6,1,3": 5,
+   "5,1,4": 5,
+   "1,1,-1": 0,
+   "3,1,-1": 0,
+   "2,1,3": 5
+  }
+ },
+ {
+  "a": 0,
+  "b": 1,
+  "cin": 1,
+  "levers_on": {
+   "a": true,
+   "b": false,
+   "cin": false
+  },
+  "feed_out": {
+   "a": 0,
+   "cin": 5,
+   "b": 5
+  },
+  "input_wire_power": {
+   "a": 0,
+   "b": 5,
+   "cin": 5
+  },
+  "sum_power": 0,
+  "cout_power": 5,
+  "sum_bit": 0,
+  "cout_bit": 1,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 5,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 15,
+   "2,1,1": 10,
+   "3,1,1": 5,
+   "4,1,3": 5,
+   "6,1,1": 10,
+   "6,1,3": 5,
+   "5,1,4": 0,
+   "1,1,-1": 0,
+   "3,1,-1": 5,
+   "2,1,3": 5
+  }
+ },
+ {
+  "a": 1,
+  "b": 0,
+  "cin": 0,
+  "levers_on": {
+   "a": false,
+   "b": true,
+   "cin": true
+  },
+  "feed_out": {
+   "a": 5,
+   "cin": 0,
+   "b": 0
+  },
+  "input_wire_power": {
+   "a": 5,
+   "b": 0,
+   "cin": 0
+  },
+  "sum_power": 5,
+  "cout_power": 0,
+  "sum_bit": 1,
+  "cout_bit": 0,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 4,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 10,
+   "2,1,1": 10,
+   "3,1,1": 10,
+   "4,1,3": 0,
+   "6,1,1": 5,
+   "6,1,3": 5,
+   "5,1,4": 5,
+   "1,1,-1": 5,
+   "3,1,-1": 0,
+   "2,1,3": 0
+  }
+ },
+ {
+  "a": 1,
+  "b": 0,
+  "cin": 1,
+  "levers_on": {
+   "a": false,
+   "b": true,
+   "cin": false
+  },
+  "feed_out": {
+   "a": 5,
+   "cin": 5,
+   "b": 0
+  },
+  "input_wire_power": {
+   "a": 5,
+   "b": 0,
+   "cin": 5
+  },
+  "sum_power": 0,
+  "cout_power": 5,
+  "sum_bit": 0,
+  "cout_bit": 1,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 5,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 10,
+   "2,1,1": 10,
+   "3,1,1": 5,
+   "4,1,3": 5,
+   "6,1,1": 10,
+   "6,1,3": 5,
+   "5,1,4": 0,
+   "1,1,-1": 5,
+   "3,1,-1": 5,
+   "2,1,3": 0
+  }
+ },
+ {
+  "a": 1,
+  "b": 1,
+  "cin": 0,
+  "levers_on": {
+   "a": false,
+   "b": false,
+   "cin": true
+  },
+  "feed_out": {
+   "a": 5,
+   "cin": 0,
+   "b": 5
+  },
+  "input_wire_power": {
+   "a": 5,
+   "b": 5,
+   "cin": 0
+  },
+  "sum_power": 0,
+  "cout_power": 5,
+  "sum_bit": 0,
+  "cout_bit": 1,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 5,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 10,
+   "2,1,1": 5,
+   "3,1,1": 5,
+   "4,1,3": 5,
+   "6,1,1": 10,
+   "6,1,3": 5,
+   "5,1,4": 0,
+   "1,1,-1": 5,
+   "3,1,-1": 0,
+   "2,1,3": 5
+  }
+ },
+ {
+  "a": 1,
+  "b": 1,
+  "cin": 1,
+  "levers_on": {
+   "a": false,
+   "b": false,
+   "cin": false
+  },
+  "feed_out": {
+   "a": 5,
+   "cin": 5,
+   "b": 5
+  },
+  "input_wire_power": {
+   "a": 5,
+   "b": 5,
+   "cin": 5
+  },
+  "sum_power": 5,
+  "cout_power": 5,
+  "sum_bit": 1,
+  "cout_bit": 1,
+  "arith_ok": true,
+  "levels_clean": true,
+  "rounds": 5,
+  "converged": true,
+  "cmp_out": {
+   "1,1,1": 10,
+   "2,1,1": 5,
+   "3,1,1": 0,
+   "4,1,3": 5,
+   "6,1,1": 15,
+   "6,1,3": 10,
+   "5,1,4": 5,
+   "1,1,-1": 5,
+   "3,1,-1": 5,
+   "2,1,3": 5
+  }
+ }
+]

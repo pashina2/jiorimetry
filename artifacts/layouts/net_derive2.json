@@ -1,0 +1,11 @@
+{"encode":{"a":{"0":0,"1":5},"b":{"0":0,"1":5},"cin":{"0":0,"1":5}},
+ "nodes":[
+  {"name":"c1","mode":"subtract","back":{"const":15},"sides":[{"input":"a"}]},
+  {"name":"c2","mode":"subtract","back":{"node":"c1"},"sides":[{"input":"b"}]},
+  {"name":"c3","mode":"subtract","back":{"node":"c2"},"sides":[{"input":"cin"}]},
+  {"name":"c4","mode":"compare","back":{"const":5},"sides":[{"node":"c3"}]},
+  {"name":"c5","mode":"subtract","back":{"const":15},"sides":[{"node":"c3"}]},
+  {"name":"c6","mode":"subtract","back":{"node":"c5"},"sides":[{"node":"c4"}]},
+  {"name":"c7","mode":"subtract","back":{"node":"c6"},"sides":[{"node":"c4"}]}],
+ "outputs":{"sum":{"node":"c7"},"cout":{"node":"c4"}},
+ "decode":{"sum":"level>=5","cout":"level>=5"}}

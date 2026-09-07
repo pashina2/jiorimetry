@@ -1,0 +1,30 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Anything the world tooling needs but this repository does not distribute.
+runtime/
+*.jar
+*.log
+hs_err_pid*.log
+
+# Generated worlds and run directories.
+world/
+*-run/
+*-build/
+*.mca
+*.dat
+*.dat_old
+session.lock
+
+# Checker side output; the committed copies under artifacts/rows/ are kept.
+*.json.rows.json
+!artifacts/rows/*.json.rows.json
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
