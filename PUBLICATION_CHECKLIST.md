@@ -98,5 +98,7 @@ lines are pasted verbatim in `README.md` section 5.
 
 - Line endings: LF everywhere (0 files contain CRLF).
 - No `__pycache__`, no `.pyc`, no build output committed.
-- 103 files, 2.3 MB total.
+- 105 files, 2.2 MB total.
+- Verified from a clean `git clone` of this repository, not from the working tree:
+  all four commands in section 4 produce the results quoted above.
 - No git remote is configured. Publishing is the operator's act.
