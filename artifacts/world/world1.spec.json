@@ -1,0 +1,516 @@
+{
+ "name": "world1",
+ "world": {
+  "template": "<host-path>",
+  "world_dir": "<host-path><session-scratchpad>",
+  "bbox": {
+   "min": [
+    99,
+    63,
+    97
+   ],
+   "max": [
+    107,
+    67,
+    105
+   ]
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25597,
+  "java_xmx": "3G"
+ },
+ "drives": {
+  "lv_a": {
+   "kind": "lever",
+   "pos": [
+    100,
+    66,
+    98
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_cin": {
+   "kind": "lever",
+   "pos": [
+    104,
+    66,
+    98
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_b": {
+   "kind": "lever",
+   "pos": [
+    100,
+    66,
+    103
+   ],
+   "face": "floor",
+   "facing": "north"
+  }
+ },
+ "reads": [
+  {
+   "name": "cout5",
+   "pos": [
+    105,
+    65,
+    103
+   ],
+   "bit": 0,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "cout0",
+   "pos": [
+    105,
+    65,
+    103
+   ],
+   "bit": 1,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "sum5",
+   "pos": [
+    103,
+    65,
+    104
+   ],
+   "bit": 2,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "sum0",
+   "pos": [
+    103,
+    65,
+    104
+   ],
+   "bit": 3,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "c1_on",
+   "pos": [
+    101,
+    65,
+    101
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_on",
+   "pos": [
+    102,
+    65,
+    101
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c3_on",
+   "pos": [
+    103,
+    65,
+    101
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c4_on",
+   "pos": [
+    104,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c5_on",
+   "pos": [
+    106,
+    65,
+    101
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c6_on",
+   "pos": [
+    106,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c7_on",
+   "pos": [
+    105,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "fa_on",
+   "pos": [
+    101,
+    65,
+    99
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "fcin_on",
+   "pos": [
+    103,
+    65,
+    99
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "fb_on",
+   "pos": [
+    102,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "k5_slot7",
+   "kind": "nbt",
+   "pos": [
+    103,
+    65,
+    103
+   ],
+   "path": "Items[7]"
+  }
+ ],
+ "regimes": [
+  {
+   "name": "warm_a0b0c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a0b0c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a0b1c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a0b1c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a1b0c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a1b0c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a1b1c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_a1b1c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_a0b0c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "cout5": false,
+     "cout0": true,
+     "sum5": false,
+     "sum0": true,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": false,
+     "c5_on": false,
+     "c6_on": false,
+     "c7_on": false,
+     "fa_on": false,
+     "fcin_on": false,
+     "fb_on": false
+    }
+   }
+  },
+  {
+   "name": "v_a0b0c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "cout5": false,
+     "cout0": true,
+     "sum5": true,
+     "sum0": false,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": false,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": true,
+     "fa_on": false,
+     "fcin_on": true,
+     "fb_on": false
+    }
+   }
+  },
+  {
+   "name": "v_a0b1c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "cout5": false,
+     "cout0": true,
+     "sum5": true,
+     "sum0": false,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": false,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": true,
+     "fa_on": false,
+     "fcin_on": false,
+     "fb_on": true
+    }
+   }
+  },
+  {
+   "name": "v_a0b1c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "cout5": true,
+     "cout0": false,
+     "sum5": false,
+     "sum0": true,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": true,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": false,
+     "fa_on": false,
+     "fcin_on": true,
+     "fb_on": true
+    }
+   }
+  },
+  {
+   "name": "v_a1b0c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "cout5": false,
+     "cout0": true,
+     "sum5": true,
+     "sum0": false,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": false,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": true,
+     "fa_on": true,
+     "fcin_on": false,
+     "fb_on": false
+    }
+   }
+  },
+  {
+   "name": "v_a1b0c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "cout5": true,
+     "cout0": false,
+     "sum5": false,
+     "sum0": true,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": true,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": false,
+     "fa_on": true,
+     "fcin_on": true,
+     "fb_on": false
+    }
+   }
+  },
+  {
+   "name": "v_a1b1c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "cout5": true,
+     "cout0": false,
+     "sum5": false,
+     "sum0": true,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": true,
+     "c4_on": true,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": false,
+     "fa_on": true,
+     "fcin_on": false,
+     "fb_on": true
+    }
+   }
+  },
+  {
+   "name": "v_a1b1c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 5,
+    "final_reads": {
+     "cout5": true,
+     "cout0": false,
+     "sum5": true,
+     "sum0": false,
+     "c1_on": true,
+     "c2_on": true,
+     "c3_on": false,
+     "c4_on": true,
+     "c5_on": true,
+     "c6_on": true,
+     "c7_on": true,
+     "fa_on": true,
+     "fcin_on": true,
+     "fb_on": true
+    }
+   }
+  }
+ ],
+ "limits": {
+  "max_rcon": 60000
+ },
+ "out_dir": "<host-path>"
+}

@@ -1,0 +1,1963 @@
+{
+  "world": "cpu",
+  "bbox": {
+    "min": [
+      6002,
+      133,
+      -4114
+    ],
+    "max": [
+      6016,
+      136,
+      -4101
+    ]
+  },
+  "command": "capture",
+  "at": "2026-09-07T21:27:00Z",
+  "provenance": {
+    "writer": "regioncap",
+    "report_kind": "bench_capture",
+    "promotion_grade": false,
+    "source_save": "<host-path> loader\\release fabric-loader-0.16.14-1.20.6\\saves\\cpu",
+    "region_files": [
+      {
+        "path": "<host-path> loader\\release fabric-loader-0.16.14-1.20.6\\saves\\cpu\\region\\r.11.-9.mca",
+        "sha256": "cd5215b8bca5878b59cbe2e6bd2cd70f671a1a393a0f46bc5e13141c691f605e",
+        "mtime": "2026-09-07T21:26:37Z",
+        "bytes": 4206592
+      }
+    ],
+    "level_dat": {
+      "path": "<host-path> loader\\release fabric-loader-0.16.14-1.20.6\\saves\\cpu\\level.dat",
+      "sha256": "abd957845294a13cae0ee83872b9da3d63541f2678fe83bbd9fc0e9f6c91fb04",
+      "mtime": "2026-09-07T21:23:06Z",
+      "bytes": 5374
+    },
+    "data_version": 3839,
+    "world_state": {
+      "data_version": 3839,
+      "day_time": 6000,
+      "time": 223290768,
+      "raining": false,
+      "thundering": false,
+      "game_rules": {
+        "maxChainedNeighborUpdates": null,
+        "randomTickSpeed": "3",
+        "doDaylightCycle": "false",
+        "doWeatherCycle": "false"
+      },
+      "basis": "level.dat Data, read-only; gamerule values are the file's strings and an absent key is None, never a default"
+    },
+    "world_open": true,
+    "world_open_basis": "level.dat mtime within 100000 s of the capture; session.lock is deliberately never opened or stat'ed by this tool",
+    "freshness": "last autosave; not a front observation (ADR-0130 D4.1 evidence stays the front's)",
+    "row_spelling": "minecraft:<id>[<prop>=<value>,...] with property names in ascending name order and no spaces; a state with no properties is bare. Identical to an aiwb_scan row.",
+    "air_ids": [
+      "minecraft:air",
+      "minecraft:cave_air",
+      "minecraft:void_air"
+    ],
+    "nbt_json": "nbt_json_v1",
+    "options": {
+      "with_block_entities": true,
+      "with_ticks": false,
+      "with_entities": false
+    }
+  },
+  "scan": {
+    "status": "ok",
+    "error": false,
+    "loaded": true,
+    "non_air": [
+      [
+        6003,
+        134,
+        -4111,
+        "minecraft:barrel[facing=north,open=false]"
+      ],
+      [
+        6004,
+        133,
+        -4111,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6004,
+        134,
+        -4111,
+        "minecraft:comparator[facing=west,mode=compare,powered=true]"
+      ],
+      [
+        6005,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6005,
+        133,
+        -4111,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6005,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6005,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6005,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6005,
+        134,
+        -4111,
+        "minecraft:redstone_wire[east=side,north=none,power=3,south=none,west=side]"
+      ],
+      [
+        6005,
+        134,
+        -4109,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6005,
+        134,
+        -4107,
+        "minecraft:redstone_block"
+      ],
+      [
+        6005,
+        134,
+        -4105,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6006,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        133,
+        -4112,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        133,
+        -4111,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=side,west=side]"
+      ],
+      [
+        6006,
+        134,
+        -4112,
+        "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+      ],
+      [
+        6006,
+        134,
+        -4111,
+        "minecraft:comparator[facing=west,mode=subtract,powered=true]"
+      ],
+      [
+        6006,
+        134,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6006,
+        134,
+        -4109,
+        "minecraft:comparator[facing=south,mode=subtract,powered=true]"
+      ],
+      [
+        6006,
+        134,
+        -4108,
+        "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+        6006,
+        134,
+        -4107,
+        "minecraft:comparator[facing=west,mode=subtract,powered=true]"
+      ],
+      [
+        6006,
+        134,
+        -4106,
+        "minecraft:repeater[delay=1,facing=south,locked=false,powered=false]"
+      ],
+      [
+        6006,
+        134,
+        -4105,
+        "minecraft:redstone_wire[east=side,north=side,power=0,south=none,west=side]"
+      ],
+      [
+        6007,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        133,
+        -4111,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        133,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6007,
+        134,
+        -4111,
+        "minecraft:redstone_wire[east=none,north=none,power=3,south=side,west=side]"
+      ],
+      [
+        6007,
+        134,
+        -4110,
+        "minecraft:comparator[facing=west,mode=subtract,powered=true]"
+      ],
+      [
+        6007,
+        134,
+        -4109,
+        "minecraft:comparator[facing=south,mode=subtract,powered=false]"
+      ],
+      [
+        6007,
+        134,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        134,
+        -4107,
+        "minecraft:comparator[facing=south,mode=subtract,powered=false]"
+      ],
+      [
+        6007,
+        134,
+        -4106,
+        "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+        6007,
+        134,
+        -4105,
+        "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+      ],
+      [
+        6007,
+        135,
+        -4109,
+        "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+        6007,
+        135,
+        -4108,
+        "minecraft:comparator[facing=north,mode=compare,powered=false]"
+      ],
+      [
+        6007,
+        135,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6007,
+        135,
+        -4106,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6008,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6008,
+        134,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        134,
+        -4109,
+        "minecraft:comparator[facing=north,mode=subtract,powered=true]"
+      ],
+      [
+        6008,
+        134,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        134,
+        -4107,
+        "minecraft:repeater[delay=1,facing=east,locked=false,powered=false]"
+      ],
+      [
+        6008,
+        134,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        134,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6008,
+        135,
+        -4108,
+        "minecraft:redstone_wire[east=side,north=none,power=6,south=none,west=side]"
+      ],
+      [
+        6008,
+        135,
+        -4106,
+        "minecraft:comparator[facing=west,mode=compare,powered=false]"
+      ],
+      [
+        6008,
+        135,
+        -4105,
+        "minecraft:redstone_torch[lit=true]"
+      ],
+      [
+        6009,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        133,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        133,
+        -4104,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        133,
+        -4103,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        134,
+        -4113,
+        "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+      ],
+      [
+        6009,
+        134,
+        -4110,
+        "minecraft:comparator[facing=west,mode=compare,powered=true]"
+      ],
+      [
+        6009,
+        134,
+        -4109,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=none,west=side]"
+      ],
+      [
+        6009,
+        134,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        134,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        134,
+        -4106,
+        "minecraft:repeater[delay=1,facing=south,locked=false,powered=false]"
+      ],
+      [
+        6009,
+        134,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        134,
+        -4104,
+        "minecraft:repeater[delay=1,facing=south,locked=false,powered=false]"
+      ],
+      [
+        6009,
+        134,
+        -4103,
+        "minecraft:redstone_wire[east=side,north=side,power=0,south=none,west=none]"
+      ],
+      [
+        6009,
+        134,
+        -4102,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        135,
+        -4109,
+        "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+        6009,
+        135,
+        -4108,
+        "minecraft:comparator[facing=north,mode=subtract,powered=true]"
+      ],
+      [
+        6009,
+        135,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        135,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6009,
+        135,
+        -4105,
+        "minecraft:repeater[delay=1,facing=west,locked=false,powered=true]"
+      ],
+      [
+        6009,
+        135,
+        -4102,
+        "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+        6010,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        133,
+        -4112,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        133,
+        -4103,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        133,
+        -4102,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=side,west=side]"
+      ],
+      [
+        6010,
+        134,
+        -4112,
+        "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+      ],
+      [
+        6010,
+        134,
+        -4111,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6010,
+        134,
+        -4103,
+        "minecraft:redstone_wire[east=none,north=none,power=0,south=side,west=side]"
+      ],
+      [
+        6010,
+        134,
+        -4102,
+        "minecraft:redstone_wire[east=side,north=side,power=0,south=none,west=none]"
+      ],
+      [
+        6010,
+        135,
+        -4111,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=side,west=none]"
+      ],
+      [
+        6010,
+        135,
+        -4110,
+        "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+      ],
+      [
+        6010,
+        135,
+        -4109,
+        "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+      ],
+      [
+        6010,
+        135,
+        -4108,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=side,west=side]"
+      ],
+      [
+        6010,
+        135,
+        -4107,
+        "minecraft:comparator[facing=west,mode=subtract,powered=true]"
+      ],
+      [
+        6010,
+        135,
+        -4106,
+        "minecraft:redstone_wire[east=side,north=side,power=0,south=side,west=none]"
+      ],
+      [
+        6010,
+        135,
+        -4105,
+        "minecraft:comparator[facing=north,mode=subtract,powered=false]"
+      ],
+      [
+        6010,
+        135,
+        -4104,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4104,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        133,
+        -4102,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6011,
+        134,
+        -4110,
+        "minecraft:comparator[facing=west,mode=subtract,powered=true]"
+      ],
+      [
+        6011,
+        134,
+        -4109,
+        "minecraft:comparator[facing=south,mode=subtract,powered=true]"
+      ],
+      [
+        6011,
+        134,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        134,
+        -4107,
+        "minecraft:comparator[facing=south,mode=subtract,powered=true]"
+      ],
+      [
+        6011,
+        134,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        134,
+        -4105,
+        "minecraft:comparator[facing=south,mode=subtract,powered=true]"
+      ],
+      [
+        6011,
+        134,
+        -4104,
+        "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+        6011,
+        134,
+        -4102,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6011,
+        135,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        135,
+        -4106,
+        "minecraft:comparator[facing=north,mode=subtract,powered=true]"
+      ],
+      [
+        6011,
+        135,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6011,
+        135,
+        -4104,
+        "minecraft:redstone_wire[east=side,north=side,power=3,south=side,west=side]"
+      ],
+      [
+        6012,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4112,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        133,
+        -4102,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6012,
+        134,
+        -4111,
+        "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+        6012,
+        134,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6012,
+        134,
+        -4109,
+        "minecraft:comparator[facing=east,mode=compare,powered=false]"
+      ],
+      [
+        6012,
+        134,
+        -4108,
+        "minecraft:comparator[facing=east,mode=subtract,powered=false]"
+      ],
+      [
+        6012,
+        134,
+        -4105,
+        "minecraft:repeater[delay=1,facing=east,locked=false,powered=false]"
+      ],
+      [
+        6012,
+        134,
+        -4102,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6013,
+        133,
+        -4113,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4112,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4111,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4104,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4103,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        133,
+        -4102,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        134,
+        -4113,
+        "minecraft:redstone_wire[east=none,north=none,power=0,south=side,west=side]"
+      ],
+      [
+        6013,
+        134,
+        -4112,
+        "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+      ],
+      [
+        6013,
+        134,
+        -4111,
+        "minecraft:comparator[facing=west,mode=compare,powered=true]"
+      ],
+      [
+        6013,
+        134,
+        -4110,
+        "minecraft:redstone_wire[east=side,north=side,power=3,south=none,west=none]"
+      ],
+      [
+        6013,
+        134,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6013,
+        134,
+        -4108,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ],
+      [
+        6013,
+        134,
+        -4105,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=side,west=side]"
+      ],
+      [
+        6013,
+        134,
+        -4104,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=side,west=none]"
+      ],
+      [
+        6013,
+        134,
+        -4103,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=side,west=none]"
+      ],
+      [
+        6013,
+        134,
+        -4102,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=none,west=side]"
+      ],
+      [
+        6014,
+        133,
+        -4110,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6014,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6014,
+        133,
+        -4108,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6014,
+        133,
+        -4107,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6014,
+        133,
+        -4106,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6014,
+        133,
+        -4105,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6014,
+        134,
+        -4110,
+        "minecraft:comparator[facing=south,mode=compare,powered=false]"
+      ],
+      [
+        6014,
+        134,
+        -4109,
+        "minecraft:comparator[facing=east,mode=subtract,powered=false]"
+      ],
+      [
+        6014,
+        134,
+        -4108,
+        "minecraft:repeater[delay=1,facing=south,locked=false,powered=false]"
+      ],
+      [
+        6014,
+        134,
+        -4107,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=side,west=none]"
+      ],
+      [
+        6014,
+        134,
+        -4106,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=side,west=none]"
+      ],
+      [
+        6014,
+        134,
+        -4105,
+        "minecraft:redstone_wire[east=none,north=side,power=0,south=none,west=side]"
+      ],
+      [
+        6015,
+        133,
+        -4109,
+        "minecraft:smooth_stone"
+      ],
+      [
+        6015,
+        134,
+        -4109,
+        "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]"
+      ]
+    ],
+    "non_air_count": 181,
+    "bbox": {
+      "min": [
+        6002,
+        133,
+        -4114
+      ],
+      "max": [
+        6016,
+        136,
+        -4101
+      ]
+    }
+  },
+  "block_entities": [
+    {
+      "pos": [
+        6003,
+        134,
+        -4111
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6003,
+        "y": 134,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4111,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6004,
+        134,
+        -4111
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6004,
+        "y": 134,
+        "z": -4111,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6006,
+        134,
+        -4111
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6006,
+        "y": 134,
+        "z": -4111,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6006,
+        134,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6006,
+        "y": 134,
+        "z": -4109,
+        "id": "minecraft:comparator",
+        "OutputSignal": 9
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6006,
+        134,
+        -4108
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6006,
+        "y": 134,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 5,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 6,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 7,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 8,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 9,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 10,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 11,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 12,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 13,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 14,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 15,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4108,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6006,
+        134,
+        -4107
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6006,
+        "y": 134,
+        "z": -4107,
+        "id": "minecraft:comparator",
+        "OutputSignal": 15
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6007,
+        134,
+        -4110
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6007,
+        "y": 134,
+        "z": -4110,
+        "id": "minecraft:comparator",
+        "OutputSignal": 6
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6007,
+        134,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6007,
+        "y": 134,
+        "z": -4109,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6007,
+        134,
+        -4107
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6007,
+        "y": 134,
+        "z": -4107,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6007,
+        134,
+        -4106
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6007,
+        "y": 134,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4106,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6007,
+        135,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6007,
+        "y": 135,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4109,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6007,
+        135,
+        -4108
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6007,
+        "y": 135,
+        "z": -4108,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6008,
+        134,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6008,
+        "y": 134,
+        "z": -4109,
+        "id": "minecraft:comparator",
+        "OutputSignal": 6
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6008,
+        135,
+        -4106
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6008,
+        "y": 135,
+        "z": -4106,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6009,
+        134,
+        -4110
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6009,
+        "y": 134,
+        "z": -4110,
+        "id": "minecraft:comparator",
+        "OutputSignal": 6
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6009,
+        135,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6009,
+        "y": 135,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 5,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 6,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 7,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 8,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 9,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 10,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 11,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 12,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 13,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 14,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 15,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4109,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6009,
+        135,
+        -4108
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6009,
+        "y": 135,
+        "z": -4108,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6010,
+        135,
+        -4107
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6010,
+        "y": 135,
+        "z": -4107,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6010,
+        135,
+        -4105
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6010,
+        "y": 135,
+        "z": -4105,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6011,
+        134,
+        -4110
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6011,
+        "y": 134,
+        "z": -4110,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6011,
+        134,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6011,
+        "y": 134,
+        "z": -4109,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6011,
+        134,
+        -4107
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6011,
+        "y": 134,
+        "z": -4107,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6011,
+        134,
+        -4105
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6011,
+        "y": 134,
+        "z": -4105,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6011,
+        134,
+        -4104
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6011,
+        "y": 134,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4104,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6011,
+        135,
+        -4106
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6011,
+        "y": 135,
+        "z": -4106,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6012,
+        134,
+        -4111
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6012,
+        "y": 134,
+        "Items": [
+          {
+            "count": 1,
+            "Slot": 0,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 1,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 2,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 3,
+            "id": "minecraft:bow"
+          },
+          {
+            "count": 1,
+            "Slot": 4,
+            "id": "minecraft:bow"
+          }
+        ],
+        "z": -4111,
+        "id": "minecraft:barrel"
+      },
+      "id": "minecraft:barrel"
+    },
+    {
+      "pos": [
+        6012,
+        134,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6012,
+        "y": 134,
+        "z": -4109,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6012,
+        134,
+        -4108
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6012,
+        "y": 134,
+        "z": -4108,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6013,
+        134,
+        -4111
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6013,
+        "y": 134,
+        "z": -4111,
+        "id": "minecraft:comparator",
+        "OutputSignal": 3
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6014,
+        134,
+        -4110
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6014,
+        "y": 134,
+        "z": -4110,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    },
+    {
+      "pos": [
+        6014,
+        134,
+        -4109
+      ],
+      "nbt": {
+        "keepPacked": 0,
+        "x": 6014,
+        "y": 134,
+        "z": -4109,
+        "id": "minecraft:comparator",
+        "OutputSignal": 0
+      },
+      "id": "minecraft:comparator"
+    }
+  ]
+}

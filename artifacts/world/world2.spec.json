@@ -1,0 +1,2560 @@
+{
+ "name": "world2",
+ "world": {
+  "template": "<host-path>",
+  "world_dir": "<host-path><session-scratchpad>",
+  "bbox": {
+   "min": [
+    97,
+    60,
+    98
+   ],
+   "max": [
+    113,
+    67,
+    112
+   ]
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25598,
+  "java_xmx": "3G"
+ },
+ "drives": {
+  "lv_k": {
+   "kind": "lever",
+   "pos": [
+    98,
+    66,
+    101
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_b": {
+   "kind": "lever",
+   "pos": [
+    98,
+    66,
+    105
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_a1": {
+   "kind": "lever",
+   "pos": [
+    108,
+    63,
+    105
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_a2": {
+   "kind": "lever",
+   "pos": [
+    107,
+    66,
+    106
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_a3": {
+   "kind": "lever",
+   "pos": [
+    111,
+    66,
+    106
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_p1": {
+   "kind": "lever",
+   "pos": [
+    100,
+    66,
+    99
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_p2": {
+   "kind": "lever",
+   "pos": [
+    99,
+    66,
+    108
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "lv_wn": {
+   "kind": "lever",
+   "pos": [
+    103,
+    66,
+    110
+   ],
+   "face": "floor",
+   "facing": "north"
+  }
+ },
+ "reads": [
+  {
+   "name": "r3",
+   "pos": [
+    106,
+    66,
+    109
+   ],
+   "bit": 0,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "r0",
+   "pos": [
+    106,
+    66,
+    109
+   ],
+   "bit": 1,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "f3",
+   "pos": [
+    109,
+    65,
+    102
+   ],
+   "bit": 2,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "f0",
+   "pos": [
+    109,
+    65,
+    102
+   ],
+   "bit": 3,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "g-1_1_2_on",
+   "pos": [
+    99,
+    65,
+    102
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "g-1_1_4_on",
+   "pos": [
+    99,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c1_1_2_on",
+   "pos": [
+    101,
+    65,
+    102
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c1_1_4_on",
+   "pos": [
+    101,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c1_1_6_on",
+   "pos": [
+    101,
+    65,
+    106
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_1_3_on",
+   "pos": [
+    102,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_1_4_on",
+   "pos": [
+    102,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_1_6_on",
+   "pos": [
+    102,
+    65,
+    106
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_2_5_on",
+   "pos": [
+    102,
+    66,
+    105
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c3_1_4_on",
+   "pos": [
+    103,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c3_2_7_on",
+   "pos": [
+    103,
+    66,
+    107
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "g4_0_5_on",
+   "pos": [
+    104,
+    64,
+    105
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c4_1_3_on",
+   "pos": [
+    104,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c4_2_5_on",
+   "pos": [
+    104,
+    66,
+    105
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c5_2_6_on",
+   "pos": [
+    105,
+    66,
+    106
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c5_2_8_on",
+   "pos": [
+    105,
+    66,
+    108
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c6_1_3_on",
+   "pos": [
+    106,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c6_1_4_on",
+   "pos": [
+    106,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c6_1_6_on",
+   "pos": [
+    106,
+    65,
+    106
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c6_1_8_on",
+   "pos": [
+    106,
+    65,
+    108
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c6_2_7_on",
+   "pos": [
+    106,
+    66,
+    107
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c7_1_4_on",
+   "pos": [
+    107,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c7_1_5_on",
+   "pos": [
+    107,
+    65,
+    105
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "g8_0_6_on",
+   "pos": [
+    108,
+    64,
+    106
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c8_1_2_on",
+   "pos": [
+    108,
+    65,
+    102
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c9_1_3_on",
+   "pos": [
+    109,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c9_1_4_on",
+   "pos": [
+    109,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "g11_1_4_on",
+   "pos": [
+    111,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "barrel_slot3",
+   "kind": "nbt",
+   "pos": [
+    112,
+    65,
+    104
+   ],
+   "path": "Items[3]"
+  }
+ ],
+ "regimes": [
+  {
+   "name": "warm_ADD_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_ADD_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_SUB_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_AND_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_OR_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_ADD_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": true,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": true,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": true,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_ADD_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 5,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": false,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": false,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": true,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 5,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": true,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 5,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": true,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 6,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": false,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": true,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_SUB_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 0,
+    "lv_p2": 0,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 5,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": true,
+     "f0": false,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": true,
+     "c1_1_4_on": true,
+     "c1_1_6_on": true,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": false,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": true,
+     "c5_2_6_on": true,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": true,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": true,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_AND_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_AND_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_AND_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_AND_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_AND_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_AND_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_AND_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_AND_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": false,
+     "c2_1_6_on": false,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": false,
+     "c6_1_8_on": false,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_OR_a0b0k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_OR_a0b0k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 10,
+    "final_reads": {
+     "r3": false,
+     "r0": true,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": false,
+     "c3_1_4_on": true,
+     "c3_2_7_on": false,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": false,
+     "c6_1_3_on": true,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_OR_a0b1k0",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": false,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_OR_a0b1k1",
+   "inputs": {
+    "lv_a1": 1,
+    "lv_a2": 1,
+    "lv_a3": 1,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": false,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": false,
+     "c6_1_4_on": true,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": false,
+     "c7_1_5_on": false,
+     "g8_0_6_on": false,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": false,
+     "g11_1_4_on": false
+    }
+   }
+  },
+  {
+   "name": "v_OR_a1b0k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_OR_a1b0k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 1,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": false,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": true,
+     "c3_1_4_on": true,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_OR_a1b1k0",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 1,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": false,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": true,
+     "c3_1_4_on": false,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  },
+  {
+   "name": "v_OR_a1b1k1",
+   "inputs": {
+    "lv_a1": 0,
+    "lv_a2": 0,
+    "lv_a3": 0,
+    "lv_b": 0,
+    "lv_k": 0,
+    "lv_p1": 1,
+    "lv_p2": 1,
+    "lv_wn": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 9,
+    "final_reads": {
+     "r3": true,
+     "r0": false,
+     "f3": false,
+     "f0": true,
+     "g-1_1_2_on": true,
+     "g-1_1_4_on": true,
+     "c1_1_2_on": false,
+     "c1_1_4_on": true,
+     "c1_1_6_on": false,
+     "c2_1_3_on": true,
+     "c2_1_4_on": true,
+     "c2_1_6_on": true,
+     "c2_2_5_on": true,
+     "c3_1_4_on": false,
+     "c3_2_7_on": true,
+     "g4_0_5_on": true,
+     "c4_1_3_on": true,
+     "c4_2_5_on": false,
+     "c5_2_6_on": false,
+     "c5_2_8_on": true,
+     "c6_1_3_on": true,
+     "c6_1_4_on": false,
+     "c6_1_6_on": true,
+     "c6_1_8_on": true,
+     "c6_2_7_on": false,
+     "c7_1_4_on": true,
+     "c7_1_5_on": true,
+     "g8_0_6_on": true,
+     "c8_1_2_on": false,
+     "c9_1_3_on": false,
+     "c9_1_4_on": true,
+     "g11_1_4_on": true
+    }
+   }
+  }
+ ],
+ "limits": {
+  "max_rcon": 200000
+ },
+ "out_dir": "<host-path>"
+}

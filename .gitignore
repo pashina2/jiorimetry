@@ -10,8 +10,10 @@ runtime/
 *.log
 hs_err_pid*.log
 
-# Generated worlds and run directories.
-world/
+# Generated worlds and run directories (NOT docs/world, tools/world,
+# artifacts/world, which are tracked).
+/world/
+/runtime/
 *-run/
 *-build/
 *.mca

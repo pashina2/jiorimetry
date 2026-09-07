@@ -1,0 +1,2543 @@
+{
+ "provenance": {
+  "writer": "worldprobe",
+  "report_kind": "bench_trace",
+  "spec_path": "notes/2026-09-07-world1/world1.spec.json",
+  "spec_sha256": "ce1052272f83f7eded24e02569a5acb75d72532eb19e009d7a7c642e1dbed6ac",
+  "utc": "2026-09-07T14:20:03Z"
+ },
+ "which": "run",
+ "spec_name": "world1",
+ "run_dir": "<host-path><session-scratchpad>",
+ "completed": true,
+ "world": {
+  "run_dir": "<host-path><session-scratchpad>",
+  "template": "<host-path>",
+  "mode": "world_dir",
+  "source": "<host-path><session-scratchpad>",
+  "copied": [
+   {
+    "rel": ".",
+    "kind": "whole world directory"
+   }
+  ],
+  "absent": [],
+  "data_version": {
+   "world": 3839,
+   "template": 3839
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25597
+ },
+ "tick_query": "The game is frozenTarget tick rate: 20.0 per second.\nAverage time per tick: 4.9ms (Target: 50.0ms)Percentiles: P50: 0.6ms P95: 48.7ms P99: 127.7ms, sample: 100",
+ "scarpet": {
+  "ok": true,
+  "reply": "= 5 (14ms)"
+ },
+ "regimes": [
+  {
+   "name": "warm_a0b0c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 3,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 6,
+   "settled": true,
+   "first_stable_gt": 6,
+   "last_change_gt": 6,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01011110000000",
+   "final_value": 10,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": false,
+    "c6_on": false,
+    "c7_on": false,
+    "fa_on": false,
+    "fcin_on": false,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "01010000000000",
+     10
+    ],
+    [
+     2,
+     "01011000000000",
+     10
+    ],
+    [
+     4,
+     "01011100000000",
+     10
+    ],
+    [
+     6,
+     "01011110000000",
+     10
+    ]
+   ],
+   "series": [
+    "01010000000000",
+    "01010000000000",
+    "01011000000000",
+    "01011000000000",
+    "01011100000000",
+    "01011100000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a0b0c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 10,
+   "settled": true,
+   "first_stable_gt": 10,
+   "last_change_gt": 10,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01101110111010",
+   "final_value": 6,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": false,
+    "fcin_on": true,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "01011110000000",
+     10
+    ],
+    [
+     2,
+     "01011110000010",
+     10
+    ],
+    [
+     6,
+     "01011110100010",
+     10
+    ],
+    [
+     8,
+     "01011110110010",
+     10
+    ],
+    [
+     10,
+     "01101110111010",
+     6
+    ]
+   ],
+   "series": [
+    "01011110000000",
+    "01011110000000",
+    "01011110000010",
+    "01011110000010",
+    "01011110000010",
+    "01011110000010",
+    "01011110100010",
+    "01011110100010",
+    "01011110110010",
+    "01011110110010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a0b1c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 2,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 2,
+   "settled": true,
+   "first_stable_gt": 2,
+   "last_change_gt": 2,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01101110111001",
+   "final_value": 6,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": false,
+    "fcin_on": false,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "01101110111010",
+     6
+    ],
+    [
+     2,
+     "01101110111001",
+     6
+    ]
+   ],
+   "series": [
+    "01101110111010",
+    "01101110111010",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a0b1c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10011111110011",
+   "final_value": 9,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": false,
+    "fa_on": false,
+    "fcin_on": true,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "01101110111001",
+     6
+    ],
+    [
+     2,
+     "01101110111011",
+     6
+    ],
+    [
+     6,
+     "10101111111011",
+     5
+    ],
+    [
+     8,
+     "10011111110011",
+     9
+    ]
+   ],
+   "series": [
+    "01101110111001",
+    "01101110111001",
+    "01101110111011",
+    "01101110111011",
+    "01101110111011",
+    "01101110111011",
+    "10101111111011",
+    "10101111111011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a1b0c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 3,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01101110111100",
+   "final_value": 6,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": true,
+    "fcin_on": false,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "10011111110011",
+     9
+    ],
+    [
+     2,
+     "10011111110100",
+     9
+    ],
+    [
+     6,
+     "01011110110100",
+     10
+    ],
+    [
+     8,
+     "01101110111100",
+     6
+    ]
+   ],
+   "series": [
+    "10011111110011",
+    "10011111110011",
+    "10011111110100",
+    "10011111110100",
+    "10011111110100",
+    "10011111110100",
+    "01011110110100",
+    "01011110110100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a1b0c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10011111110110",
+   "final_value": 9,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": false,
+    "fa_on": true,
+    "fcin_on": true,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "01101110111100",
+     6
+    ],
+    [
+     2,
+     "01101110111110",
+     6
+    ],
+    [
+     6,
+     "10101111111110",
+     5
+    ],
+    [
+     8,
+     "10011111110110",
+     9
+    ]
+   ],
+   "series": [
+    "01101110111100",
+    "01101110111100",
+    "01101110111110",
+    "01101110111110",
+    "01101110111110",
+    "01101110111110",
+    "10101111111110",
+    "10101111111110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a1b1c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 2,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 2,
+   "settled": true,
+   "first_stable_gt": 2,
+   "last_change_gt": 2,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10011111110101",
+   "final_value": 9,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": false,
+    "fa_on": true,
+    "fcin_on": false,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "10011111110110",
+     9
+    ],
+    [
+     2,
+     "10011111110101",
+     9
+    ]
+   ],
+   "series": [
+    "10011111110110",
+    "10011111110110",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_a1b1c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 10,
+   "settled": true,
+   "first_stable_gt": 10,
+   "last_change_gt": 10,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10101101111111",
+   "final_value": 5,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": false,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": true,
+    "fcin_on": true,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "10011111110101",
+     9
+    ],
+    [
+     2,
+     "10011111110111",
+     9
+    ],
+    [
+     4,
+     "10011101110111",
+     9
+    ],
+    [
+     10,
+     "10101101111111",
+     5
+    ]
+   ],
+   "series": [
+    "10011111110101",
+    "10011111110101",
+    "10011111110111",
+    "10011111110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a0b0c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 3,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01011110000000",
+   "final_value": 10,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": false,
+    "c6_on": false,
+    "c7_on": false,
+    "fa_on": false,
+    "fcin_on": false,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "10101101111111",
+     5
+    ],
+    [
+     2,
+     "10101101111000",
+     5
+    ],
+    [
+     4,
+     "10101111111000",
+     5
+    ],
+    [
+     6,
+     "01101110011000",
+     6
+    ],
+    [
+     8,
+     "01011110000000",
+     10
+    ]
+   ],
+   "series": [
+    "10101101111111",
+    "10101101111111",
+    "10101101111000",
+    "10101101111000",
+    "10101111111000",
+    "10101111111000",
+    "01101110011000",
+    "01101110011000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000",
+    "01011110000000"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 10,
+     "got": 10,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "cout0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a0b0c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 10,
+   "settled": true,
+   "first_stable_gt": 10,
+   "last_change_gt": 10,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01101110111010",
+   "final_value": 6,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": false,
+    "fcin_on": true,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "01011110000000",
+     10
+    ],
+    [
+     2,
+     "01011110000010",
+     10
+    ],
+    [
+     6,
+     "01011110100010",
+     10
+    ],
+    [
+     8,
+     "01011110110010",
+     10
+    ],
+    [
+     10,
+     "01101110111010",
+     6
+    ]
+   ],
+   "series": [
+    "01011110000000",
+    "01011110000000",
+    "01011110000010",
+    "01011110000010",
+    "01011110000010",
+    "01011110000010",
+    "01011110100010",
+    "01011110100010",
+    "01011110110010",
+    "01011110110010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010",
+    "01101110111010"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 6,
+     "got": 6,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "cout0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a0b1c0",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 2,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 2,
+   "settled": true,
+   "first_stable_gt": 2,
+   "last_change_gt": 2,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01101110111001",
+   "final_value": 6,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": false,
+    "fcin_on": false,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "01101110111010",
+     6
+    ],
+    [
+     2,
+     "01101110111001",
+     6
+    ]
+   ],
+   "series": [
+    "01101110111010",
+    "01101110111010",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001",
+    "01101110111001"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 6,
+     "got": 6,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "cout0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a0b1c1",
+   "inputs": {
+    "lv_a": 1,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10011111110011",
+   "final_value": 9,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": false,
+    "fa_on": false,
+    "fcin_on": true,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "01101110111001",
+     6
+    ],
+    [
+     2,
+     "01101110111011",
+     6
+    ],
+    [
+     6,
+     "10101111111011",
+     5
+    ],
+    [
+     8,
+     "10011111110011",
+     9
+    ]
+   ],
+   "series": [
+    "01101110111001",
+    "01101110111001",
+    "01101110111011",
+    "01101110111011",
+    "01101110111011",
+    "01101110111011",
+    "10101111111011",
+    "10101111111011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011",
+    "10011111110011"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 9,
+     "got": 9,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "cout0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a1b0c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 3,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "01101110111100",
+   "final_value": 6,
+   "final_reads": {
+    "cout5": false,
+    "cout0": true,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": false,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": true,
+    "fcin_on": false,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "10011111110011",
+     9
+    ],
+    [
+     2,
+     "10011111110100",
+     9
+    ],
+    [
+     6,
+     "01011110110100",
+     10
+    ],
+    [
+     8,
+     "01101110111100",
+     6
+    ]
+   ],
+   "series": [
+    "10011111110011",
+    "10011111110011",
+    "10011111110100",
+    "10011111110100",
+    "10011111110100",
+    "10011111110100",
+    "01011110110100",
+    "01011110110100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100",
+    "01101110111100"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 6,
+     "got": 6,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "cout0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a1b0c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 1,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10011111110110",
+   "final_value": 9,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": false,
+    "fa_on": true,
+    "fcin_on": true,
+    "fb_on": false
+   },
+   "changes": [
+    [
+     0,
+     "01101110111100",
+     6
+    ],
+    [
+     2,
+     "01101110111110",
+     6
+    ],
+    [
+     6,
+     "10101111111110",
+     5
+    ],
+    [
+     8,
+     "10011111110110",
+     9
+    ]
+   ],
+   "series": [
+    "01101110111100",
+    "01101110111100",
+    "01101110111110",
+    "01101110111110",
+    "01101110111110",
+    "01101110111110",
+    "10101111111110",
+    "10101111111110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110",
+    "10011111110110"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 9,
+     "got": 9,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "cout0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a1b1c0",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 2,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 2,
+   "settled": true,
+   "first_stable_gt": 2,
+   "last_change_gt": 2,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10011111110101",
+   "final_value": 9,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": false,
+    "sum0": true,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": true,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": false,
+    "fa_on": true,
+    "fcin_on": false,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "10011111110110",
+     9
+    ],
+    [
+     2,
+     "10011111110101",
+     9
+    ]
+   ],
+   "series": [
+    "10011111110110",
+    "10011111110110",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101",
+    "10011111110101"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 9,
+     "got": 9,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "cout0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum5": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_a1b1c1",
+   "inputs": {
+    "lv_a": 0,
+    "lv_b": 0,
+    "lv_cin": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 10,
+   "settled": true,
+   "first_stable_gt": 10,
+   "last_change_gt": 10,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "10101101111111",
+   "final_value": 5,
+   "final_reads": {
+    "cout5": true,
+    "cout0": false,
+    "sum5": true,
+    "sum0": false,
+    "c1_on": true,
+    "c2_on": true,
+    "c3_on": false,
+    "c4_on": true,
+    "c5_on": true,
+    "c6_on": true,
+    "c7_on": true,
+    "fa_on": true,
+    "fcin_on": true,
+    "fb_on": true
+   },
+   "changes": [
+    [
+     0,
+     "10011111110101",
+     9
+    ],
+    [
+     2,
+     "10011111110111",
+     9
+    ],
+    [
+     4,
+     "10011101110111",
+     9
+    ],
+    [
+     10,
+     "10101101111111",
+     5
+    ]
+   ],
+   "series": [
+    "10011111110101",
+    "10011111110101",
+    "10011111110111",
+    "10011111110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10011101110111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111",
+    "10101101111111"
+   ],
+   "nbt": {
+    "before": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "k5_slot7": {
+      "command": "data get block 103 65 103 Items[7]",
+      "reply": "103, 65, 103 has the following block data: {count: 46, Slot: 7b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 5,
+     "got": 5,
+     "equal": true
+    },
+    "final_reads": {
+     "cout5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "cout0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "sum5": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "sum0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c1_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_on": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c4_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c5_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c6_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c7_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fa_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fcin_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "fb_on": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     }
+    }
+   }
+  }
+ ],
+ "rcon": {
+  "roundtrips": 13996,
+  "limit": 60000,
+  "by_phase": {
+   "prepare": 9,
+   "regime:warm_a0b0c0": 872,
+   "regime:warm_a0b0c1": 866,
+   "regime:warm_a0b1c0": 875,
+   "regime:warm_a0b1c1": 866,
+   "regime:warm_a1b0c0": 880,
+   "regime:warm_a1b0c1": 865,
+   "regime:warm_a1b1c0": 874,
+   "regime:warm_a1b1c1": 869,
+   "regime:v_a0b0c0": 884,
+   "regime:v_a0b0c1": 873,
+   "regime:v_a0b1c0": 881,
+   "regime:v_a0b1c1": 868,
+   "regime:v_a1b0c0": 884,
+   "regime:v_a1b0c1": 873,
+   "regime:v_a1b1c0": 880,
+   "regime:v_a1b1c1": 877
+  }
+ }
+}
