@@ -14,16 +14,16 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 
 ## 1. ゼロベースとは何か（渡した物 / 渡さなかった物）
 
-| 席 | 種類 | 渡した物 | 渡さなかった物 | 記録 |
+| エージェント | 種類 | 渡した物 | 渡さなかった物 | 記録 |
 |---|---|---|---|---|
-| DERIVE-2（full adder の代数） | **blind** な Fable 席（文脈ゼロ） | DC の事実表 `docs/rules/facts-dc.md`（1.20.6-yarn source から DIRECTOR 7 が書いた comparator / container / wire / solid の規則。**回路の形は含まない**）+ 問い | オペレータの既存参照回路（本 export に含まない）、web、the development repository の他の file | `docs/algebra/derive2.md`、`derive2-blind-result.md`、`net_derive2.json`、`dc_eval.py`（当席系の独立評価器）8/8 |
-| PLACE-1（full adder の配置） | blind な Fable 席 | 配置の事実表 `docs/rules/facts-geometry.md` + DERIVE-2 の網 | 同上 | `docs/placement/place1.md` Bench 8/8 |
-| REUSE-1（全減算器） | blind な Fable 席 | DERIVE-2 と **byte 一致**の規則表（sha256 e6001fed…）、問いだけ差し替え | 同上 | `docs/algebra/reuse1.md` 8/8 |
-| ALU-1（ALU の代数） | Fable 席、**blind ではない** | 規則表 + この開発で導いた {0,3} 加算網（`given-adder03.json`）+ 減算網 + Astra の mux 案 | 既存回路、source（席は未開封） | `docs/algebra/alu1.md`、`net_alu1.json`、`dc_eval_alu.py` 32/32 |
-| PLACE-ALU-3（ALU の配置、本書） | Fable 席、blind ではない | 規則表 v2 `docs/rules/facts-dc-v2.md`、配置の事実表、VERT-1 の規則 `docs/rules/facts-vertical.md`、T6（30/32）、当席の解析（§3） | オペレータの既存参照回路、web | `docs/placement/placealu3-result.md` 32/32 |
-| RIG-1（給電器） | Fable 席 | 上記 + WORLD-1/2 の給電器の形 | 同上 | `docs/placement/rig1.md` 32/32 |
+| DERIVE-2（full adder の代数） | **blind** な Fable エージェント（文脈ゼロ） | DC の事実表 `docs/rules/facts-dc.md`（1.20.6-yarn source から DIRECTOR 7 が書いた comparator / container / wire / solid の規則。**回路の形は含まない**）+ 問い | オペレータの既存参照回路（本 export に含まない）、web、the development repository の他の file | `docs/algebra/derive2.md`、`derive2-blind-result.md`、`net_derive2.json`、`dc_eval.py`（当エージェント系の独立評価器）8/8 |
+| PLACE-1（full adder の配置） | blind な Fable エージェント | 配置の事実表 `docs/rules/facts-geometry.md` + DERIVE-2 の網 | 同上 | `docs/placement/place1.md` Bench 8/8 |
+| REUSE-1（全減算器） | blind な Fable エージェント | DERIVE-2 と **byte 一致**の規則表（sha256 e6001fed…）、問いだけ差し替え | 同上 | `docs/algebra/reuse1.md` 8/8 |
+| ALU-1（ALU の代数） | Fable エージェント、**blind ではない** | 規則表 + この開発で導いた {0,3} 加算網（`given-adder03.json`）+ 減算網 + Astra の mux 案 | 既存回路、source（エージェントは未開封） | `docs/algebra/alu1.md`、`net_alu1.json`、`dc_eval_alu.py` 32/32 |
+| PLACE-ALU-3（ALU の配置、本書） | Fable エージェント、blind ではない | 規則表 v2 `docs/rules/facts-dc-v2.md`、配置の事実表、VERT-1 の規則 `docs/rules/facts-vertical.md`、T6（30/32）、当エージェントの解析（§3） | オペレータの既存参照回路、web | `docs/placement/placealu3-result.md` 32/32 |
+| RIG-1（給電器） | Fable エージェント | 上記 + WORLD-1/2 の給電器の形 | 同上 | `docs/placement/rig1.md` 32/32 |
 
-ゼロベースの実体は **規則表が source 由来で回路の形を含まないこと**、**代数の最初の段が blind で出たこと**、**以後の段はこの開発で検証した物だけを再利用したこと**の 3 つ。B-??（貴方の既存回路）は Bench の較正点であって、席には渡していない（線 §8.4、`notes/2026-09-07-rebuild-line.md`）。
+ゼロベースの実体は **規則表が source 由来で回路の形を含まないこと**、**代数の最初の段が blind で出たこと**、**以後の段はこの開発で検証した物だけを再利用したこと**の 3 つ。B-??（貴方の既存回路）は Bench の較正点であって、エージェントには渡していない（線 §8.4、`notes/2026-09-07-rebuild-line.md`）。
 
 方針の出所: オペレータと第二モデルの査読者（2026-09-08 19:01Z）が定めた方針 — 既存回路の解法やオペレータの経験を設計の前提にしない、規則と実験で詰める、検証済み構成の再利用は可、未知の接続はオペレータに尋ねず小さく検証する（`docs/alu-place-handover.md` 冒頭）。
 
@@ -45,7 +45,7 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 | c4g / r | sub(c4,[nP]) / max(c7, c4g) | 論理 r / 合流 |
 | x1 / x2 / c3p / F | sub(a,[W]) / sub(W,[a]) / sub(c2,[x1,x2]) / cmp(K3,[c3p,P]) | a ⊕ W を経た carry/borrow |
 
-32 行の node 値: `artifacts/rows/node_values.txt`。当席の独立評価器 `dc_eval_alu.py` で 32/32。
+32 行の node 値: `artifacts/rows/node_values.txt`。当エージェントの独立評価器 `dc_eval_alu.py` で 32/32。
 
 ---
 
@@ -54,7 +54,7 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 - **176 block**: comparator 23 / repeater 14 / wire 35 / barrel 6（K3 ×4 = 247 個 = level 3、K9 ×2 = 988 個 = level 9）/ redstone_block 1 / torch 1 / smooth_stone 96（支持床 y=0 を含む）。箱 x 0..10、y 0..2、z 0..11。層別図 `alu_stage_v7_layers.png`（rig 込みは `artifacts/images/alu_v7_rig1_layers.png`）。
 - pin（wire cell）: a = (4,1,4) (8,1,5) (10,1,4)、b = (0,1,4)、k = (0,1,2)、P = (0,1,0) (0,1,8)、Wn = (4,1,10)。読み: r = wire (6,2,9)、f = comparator F (8,1,2) の出力（front (9,1,2)）。
 - 構造: y=1 が主層（k → f の壁 z=2..3、西の Qg1 塊、XOR の脚 x=6..10）、y=2 が r の cluster（c4〜c7、c4g、nP torch）と P の注入橋。縦の受け渡しは comparator → 強給電 solid → 真上の wire（VERT-1、Bench で無損失を確認、実機で成立）。
-- **T6（30/32）から v7（32/32）への設計変更**（PLACE-ALU-3、`placealu3-result.md`）: 落ちる 2 行 = SUB で a=1 の時 f=3（x2 の side に a が無い）。a を入れられる cell (5,1,6) は r cluster の c6 の支持で、handover §3 の案（c6 を (4,2,7) へ）は支持 (4,1,7) が Wn の給電 repeater なので不成立（当席の解析、`notes/2026-09-08-director-8-registrations.md`）。解いたのは代数の側:
+- **T6（30/32）から v7（32/32）への設計変更**（PLACE-ALU-3、`placealu3-result.md`）: 落ちる 2 行 = SUB で a=1 の時 f=3（x2 の side に a が無い）。a を入れられる cell (5,1,6) は r cluster の c6 の支持で、handover §3 の案（c6 を (4,2,7) へ）は支持 (4,1,7) が Wn の給電 repeater なので不成立（当エージェントの解析、`notes/2026-09-08-director-8-registrations.md`）。解いたのは代数の側:
   1. **S_x = max(a, W3)、xm = sub(S_x, [as])、as = sub(a, [Wn])**（x1 / x2 を copy 化、copy gate と W3b と K3 1 個を撤去、as 1 個を追加）。
   2. **P の kill を c7 の side から c5 / c6 の共有 side (5,2,5) へ**（15 > 9）。x=9 の P 線・橋・蓋 3 個が消え、配置不能だった (8,2,7)（comparator の上の wire）も消えた。
   3. dummy comparator (9,1,3): w3p (8,1,3) の wire 形状を N+E にして南の relay に漏らさない（Bench の形状規則、実機で成立）。
@@ -95,16 +95,16 @@ lamp: r = 6011 135 -4103、f = 6014 134 -4111（点灯 = 1）。mark 10 個（IN
 
 ## 6. 費用（実測、harness の token）
 
-| 便 | 席 | 時間 | token |
+| 段 | エージェント | 時間 | token |
 |---|---|---|---|
 | PLACE-ALU-3 | Fable | 12 分 | 145k |
 | WORLD-2 | Opus | 21 分 | 187k |
 | mark 調査 | Sonnet | 3.4 分 | 108k |
 | mark 修正 | Opus | 35 分 | 111k |
 | RIG-1（空振り + 本番） | Fable | 9 + 15.5 分 | 75k + 192k |
-| 合計 | | ≈ 1.6 h の席時間 | ≈ 820k |
+| 合計 | | ≈ 1.6 h のエージェント時間 | ≈ 820k |
 
-貴方の act: 配置 3 回、barrel の手詰め 6 個、restart 2 回、lever。当席の失点: in-game に無い旗 `--no-backup-gate` の案内、256 字を超える `/data merge` 行、表の座標に U+2212 を使い `Expected integer` を招いた（記憶に登録）、発注書の書き込みが権限で落ちて Fable 席 1 本が空振り。
+貴方の act: 配置 3 回、barrel の手詰め 6 個、restart 2 回、lever。当エージェントの失点: in-game に無い旗 `--no-backup-gate` の案内、256 字を超える `/data merge` 行、表の座標に U+2212 を使い `Expected integer` を招いた（記憶に登録）、発注書の書き込みが権限で落ちて Fable エージェント 1 本が空振り。
 
 ---
 

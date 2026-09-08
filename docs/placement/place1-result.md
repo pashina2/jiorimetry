@@ -1,5 +1,5 @@
 # PLACE-1 - DC full-adder stage (net.json, 7 comparators) as a concrete block structure
-Blind seat, 2026-09-07. Single working layer y=1, supports y=0. DC only, no timing.
+Blind agent, 2026-09-07. Single working layer y=1, supports y=0. DC only, no timing.
 
 Axes: +x = east, -x = west, +z = south, -z = north, +y = up.
 FACING convention (verified: AbstractRedstoneGateBlock.java:131-133, pos.offset(FACING) is the input):

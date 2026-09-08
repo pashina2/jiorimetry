@@ -17,5 +17,5 @@
 3. **spec**: freeze、lever 駆動、step 1 gt、settle 10、max_gt 40、`limits.max_rcon` = 200000（64 regime）、rcon port は 25598、java_xmx 3G。**warm-up 32 regime（記録するが比較しない）→ 本番 32 regime**（WORLD-1 §4 の理由）。read: r (6,2,9) wire power=3 と power=0、f wire (9,1,2) power=3 / 0、全 23 comparator の powered（Bench の cmp_out>0 から期待値）、barrel 1 個の Items を nbt で読む。
 4. **記録** `docs/world/world2-record.md`: §1 給電器、§2 Bench 予測（32 行）、§3 期待 final_value、§4 warm-up、（走行後）§5 走行、§6 表、§7 差異。結果 JSON / tables は worldprobe の出力を untouched で置く。
 
-## 費用 / 席
-Opus 席、上限 1.5 h、目安 150k token。host で全走は同時 1 本以下（他の重い process を起こさない）。
+## 費用 / エージェント
+Opus エージェント、上限 1.5 h、目安 150k token。host で全走は同時 1 本以下（他の重い process を起こさない）。

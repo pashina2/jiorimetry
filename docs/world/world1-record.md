@@ -1,6 +1,6 @@
 # WORLD-1 -- PLACE-1's full-adder stage in a fresh synthetic world
 
-Worker seat (Opus), 2026-09-07. Non-canonical (`notes/**`). Question: does the
+Worker agent (Opus), 2026-09-07. Non-canonical (`notes/**`). Question: does the
 PLACE-1 stage, placed in a void headless 1.20.6 world with no player, produce
 the same DC sum/cout levels as the Bench for all 8 input vectors?
 

@@ -58,7 +58,7 @@ done
 - The operator's Minecraft world and every save file. Nothing under `saves/` was read or
   copied for this export.
 - The pre-existing reference circuit used to calibrate the Bench, and its records. It is
-  referenced as a fact (the Bench was calibrated on it; no design seat was shown it) but no
+  referenced as a fact (the Bench was calibrated on it; no design agent was shown it) but no
   content from it is here. This is why three unit tests skip.
 - The Java mod that exposes the in-game placement commands. Not needed to reproduce
   anything in this repository.
@@ -106,4 +106,4 @@ lines are pasted verbatim in `README.md` section 5.
 
 ## Amendment (2026-09-08, operator ruling)
 
-Other-company model seats are credited by name and role. Astra (second-model reviewer) is named in the credits and wherever its review shaped the work. The earlier scan that required 0 hits of the name is withdrawn.
+Other-company model agents are credited by name and role. Astra (second-model reviewer) is named in the credits and wherever its review shaped the work. The earlier scan that required 0 hits of the name is withdrawn.

@@ -12,16 +12,16 @@ T6（Bench 30/32、`T6_with_pins.json`）を出発点に、ALU 1 段の物理配
 - `alu_check2.py` — 32 行の判定 + lint。pin は JSON の `pins`（wire cell）で自由に動かせる / 増やせる（増やしたら報告欄に書く）。`reads` も同様。
 - `../2026-09-08-placealu2/facts-dc-v2-given.md` — DC の規則（source 由来）。`../2026-09-07-place1/facts-geometry-given.md` — 配置の規則。`../2026-09-08-vert/README.md` — 縦の受け渡し + 斜め読みの規則（VERT-1）。
 - `../2026-09-08-alu-place-handover.md` §2 §4 — T6 の意味（各 cell の役割）と、動かすと再発する干渉の一覧。
-- `../2026-09-08-alu1/net_alu1.json` — 網（代数）。`node_values.txt` — 32 行の各 node の level（当席が評価器で出した）。
+- `../2026-09-08-alu1/net_alu1.json` — 網（代数）。`node_values.txt` — 32 行の各 node の level（当エージェントが評価器で出した）。
 
-## T6 の各 gate（当席の読み、y=1 が主層、y=2 が r の cluster と P 橋）
+## T6 の各 gate（当エージェントの読み、y=1 が主層、y=2 が r の cluster と P 橋）
 back/front/side は facing = 入力側、front = pos − facing。
 - 北半分（k→f の壁、変更不要）: kg (1,1,2) fW, c2 (2,1,3) fW, c2c (4,1,3) fW copy, c3p (6,1,3) fW, F (8,1,2) fW cmp（back K3 (7,1,2)、side w3p (8,1,3) と P rep (8,1,1)）、c1 (1,1,4) fS（back K9 (1,1,5)、side b (0,1,4)）、Qg2 (2,1,4) fS、c3 (3,1,4) fN（side a (4,1,4)、front S3 (3,1,5)）、xm (6,1,4) fS cmp（back S_x (6,1,5)）。P 行 z=0、P 注入 rep (1,1,1) (8,1,1)。
 - 西の塊（Qg1 (2,1,6) fS = sub(K3q (2,1,7), [nP1 (1,1,6) fW ← RB (0,1,6) + P rep (1,1,7) fS ← P (1,1,8); WnRep (3,1,6) rep fE ← Wn solid (4,1,6)])、Wn 給電列 (4,1,9) rep fS → post (4,1,8) → rep (4,1,7) fS → (4,1,6)。P の第 2 入口 (0,1,8)→(1,1,8)→rep (2,1,8) fW → P solid (3,1,8) → torch (3,2,8) = nP。
 - XOR の脚: x1 (7,1,5) fE = sub(a2 (8,1,5), [copy gate (7,1,6) fS ← W3 relay (7,1,7) ← W3b (8,1,7) fE = sub(K3 (9,1,7), [Wn (8,1,8)])]) → S_x (6,1,5)。x2 (6,1,6) fS = sub(W3 relay (6,1,7) ← W3a (6,1,8) fS = sub(K3 (6,1,9), [rep (7,1,8) fE ← Wn]), [side (5,1,6) = solid, side (7,1,6) = copy gate（向いていない → 0）]) → S_x。**落ちる 2 行の原因 = x2 の side に a が無い。**
 - y=2 の r cluster: uplink wire (3,2,5)（S3 (3,1,5) の上、= c3）、c4 (2,2,5) fN cmp（K3 (2,2,4)）→ S4 (2,2,6) → wire (2,2,7) → c4c (3,2,7) fW → S4b (4,2,7) → w4b (5,2,7)；c5 (4,2,5) fN sub（K9 (4,2,4)）→ S5 (4,2,6)；c6 (5,2,6) fW = sub(S5, [w4b]) → S6 (6,2,6)；c7 (6,2,7) fN = sub(S6, [w4b, P rep (7,2,7) fE ← (8,2,7)(9,2,7) ← x=9 の P 線 ← 橋 (7,1,1) rep → K3F (7,1,2) → (7,2,2) → rep (7,2,3) → (7,2,4)(8,2,4)(9,2,4..7)]) → S7 (6,2,8)；c4g (5,2,8) fN = sub(w4b, [rep (4,2,8) fW ← torch nP]) → S4g (5,2,9)；r = wire (6,2,9) = max(S7, S4g)。蓋 solid (8,2,3) (8,2,5) (8,2,8)。
 
-## 当席が確かめた事実（Bench / 幾何。使ってよい）
+## 当エージェントが確かめた事実（Bench / 幾何。使ってよい）
 1. handover §3 の案（c6 を (4,2,7) 北向き）は不成立: (4,2,7) の gate は (4,1,7) が solid でないと置けないが、(4,1,7) は (4,1,6) を Wn で強給電する唯一の repeater（他の 3 面は WnRep / a wire / a3 で塞がる）。
 2. x2 の side に a を置く唯一の cell は (5,1,6)。それは c6 (5,2,6) の支持でもある。∴ **c6（と S5 の読み手）が動く = y=2 の cluster の再配置が必須**。c6 が S5 (4,2,6) を back で読める cell は (5,2,6) / (3,2,6)（下が WnRep ✗）/ (4,2,7)（下が rep ✗）だけ。
 3. (5,1,1) rep + (5,1,2) solid は死んだ橋の跡（消しても 30/32 不変）。消してよい。

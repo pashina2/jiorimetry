@@ -1,6 +1,6 @@
 # WORLD-2 -- the ALU stage `alu_stage_v7` in a fresh synthetic world
 
-Worker seat (Opus), 2026-09-07/08, DIRECTOR 8 order
+Worker agent (Opus), 2026-09-07/08, DIRECTOR 8 order
 `docs/world/world2-order.md`. Non-canonical (`notes/**`).
 Question: does the ALU stage `artifacts/layouts/alu_stage_v7.json`
 (Bench 32/32 under `alu_check2.py`), placed in a void headless 1.20.6 world

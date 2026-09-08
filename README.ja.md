@@ -1,8 +1,6 @@
-# JioΣetry
+# Jiorimetry
 
 > English: [README.md](README.md)
-
-*Jiorimetry — 自織 (jiori, "self-weaving") + -metry.*
 
 Minecraft 1.20.6 の redstone 回路を、人が既に知っている回路を書き写すのではなく、**game の
 source から書き起こした規則表から導出する**実験的なツールチェーンです。出発点になる規則は DC の
@@ -23,13 +21,14 @@ source から書き起こした規則表から導出する**実験的なツー�
 1. **規則表。** 逆コンパイルした 1.20.6 の source を読み、行番号を引きながら DC の挙動を人が読める
    表にした物 — `ComparatorBlock`、`ComposterBlock`、`RedstoneTorchBlock`、`RedstoneWireBlock`、
    および solidity の述語。この表は **回路の形を含みません**。[`docs/rules/`](docs/rules) にあります。
-2. **代数。** モデルの席に規則表と問い（「この部品で全加算器を組め」）を渡すと、明示的な level
-   符号化を持つ comparator / torch / 定数 node の *網* が返ります — layout ではありません。網とは
-   別に書いた独立の評価器で検算します。[`docs/algebra/`](docs/algebra) を参照。
-3. **配置。** 2 つ目の席に幾何の規則表（隣接、dust の形状、斜めの読み、縦の受け渡し）と網を渡し、
+2. **代数。** エージェント（書かれた指示だけで動く model の 1 実行単位）に規則表と問い
+   （「この部品で全加算器を組め」）を渡すと、明示的な level 符号化を持つ comparator / torch /
+   定数 node の *網* が返ります — layout ではありません。網とは別に書いた独立の評価器で検算します。
+   [`docs/algebra/`](docs/algebra) を参照。
+3. **配置。** 2 つ目のエージェントに幾何の規則表（隣接、dust の形状、斜めの読み、縦の受け渡し）と網を渡し、
    座標を返させます。[`docs/placement/`](docs/placement) を参照。
 4. **Bench。** `tools/llmgen/capcell.py` は DC 規則の再実装で、block の一覧を不動点まで解きます。
-   席には決して見せない既存の参照回路に対して較正してあります。layout を通す費用はゼロ、1 秒。
+   エージェントには決して見せない既存の参照回路に対して較正してあります。layout を通す費用はゼロ、1 秒。
 5. **合成世界。** layout を、新しい void の 1.20.6 world の region file に、pin 固定の入力ではなく
    物理的な給電器つきで書き込み、headless server で tick させ、freeze/step しながら dust と
    comparator を 1 つ残らず RCON 越しに読み戻します。[`docs/world/`](docs/world) を参照。
@@ -43,7 +42,7 @@ Bench は安い oracle、合成世界は正直な oracle、そして数えるの
 
 ### 1 bit 全加算器（PLACE-1 / WORLD-1）
 
-level 符号化は {0, 5}。comparator 7 個。代数は **プロジェクトの文脈をゼロ** にした席が出しました
+level 符号化は {0, 5}。comparator 7 個。代数は **プロジェクトの文脈をゼロ** にしたエージェントが出しました
 — 渡したのは DC の規則表と問いだけです。
 
 - Bench: 8 入力 vector すべてで `ALL PASS` — [`docs/placement/place1-bench-output.txt`](docs/placement/place1-bench-output.txt)
@@ -111,9 +110,9 @@ world での走行。
 
 ---
 
-## 4. 由来（各席に何を渡したか）
+## 4. 由来（各エージェントに何を渡したか）
 
-| 段 | 席 | 渡した物 | 渡さなかった物 |
+| 段 | 文脈 | 渡した物 | 渡さなかった物 |
 |---|---|---|---|
 | DERIVE-2（加算器の代数） | blind、文脈ゼロ | DC の規則表 + 問い | 参照回路、web、他のあらゆる file |
 | PLACE-1（加算器の配置） | blind | 幾何の規則表 + DERIVE-2 の網 | 同上 |
@@ -122,7 +121,7 @@ world での走行。
 | PLACE-ALU-3（ALU の配置） | blind ではない | 規則表 v2 + 30/32 で落ちていた前身 + この session の解析 | 参照回路、web |
 | RIG-1（給電器） | blind ではない | 上記 + 合成世界の給電器の形 | 同上 |
 
-オペレータ自身の既存の参照回路は、**Bench の較正にのみ** 使いました。設計を出した席には一度も
+オペレータ自身の既存の参照回路は、**Bench の較正にのみ** 使いました。設計を出したエージェントには一度も
 見せていません。
 
 ---
@@ -260,17 +259,17 @@ file を byte 単位で再現します。
 
 ## 7. 実測の費用
 
-**最終段のみ**（2026-09-08: 32/32 → 合成世界 → オペレータの world → 給電器 rig）の席時間と token。
+**最終段のみ**（2026-09-08: 32/32 → 合成世界 → オペレータの world → 給電器 rig）のエージェント時間と token。
 それ以前の段は同じ基準で計測していません。
 
-| 便 | 席の class | 実時間 | token |
+| 段 | model の class | 実時間 | token |
 |---|---|---|---|
 | PLACE-ALU-3（32/32 の layout） | Fable | 12 分 | 145k |
 | WORLD-2（合成世界の走行） | Opus | 21 分 | 187k |
 | in-world の marker 調査 | Sonnet | 3.4 分 | 108k |
 | in-world の marker 修正 | Opus | 35 分 | 111k |
 | RIG-1（空振り 1 回 + 本番） | Fable | 9 + 15.5 分 | 75k + 192k |
-| **合計** | | **席時間 約 1.6 時間** | **約 820k** |
+| **合計** | | **エージェント時間 約 1.6 時間** | **約 820k** |
 
 同じ段における人間側の費用: 配置 command 3 回、container の手詰め 6 個、client の再起動 2 回、
 lever の操作。
@@ -298,20 +297,23 @@ tools/world/       合成世界の生成、RCON probe、region の capture
 **言語の規約。** 二言語の文書は 1 つの規約に従います: 英語の原本が `name.md`、日本語が
 `name.ja.md`、そして各々が冒頭で相手にリンクします。この規約に載っているのは、この README、
 4 枚の規則表（`docs/rules/`）、slice 契約、block の網羅表、ALU 1 段のレポート、実 world の記録、
-`tools/README.md` です。席が生成した結果 note と world の表 — `docs/algebra/*-result.md`、
+`tools/README.md` です。エージェントが生成した結果 note と world の表 — `docs/algebra/*-result.md`、
 `docs/placement/*-result.md`、`docs/placement/placealu2-partial.md`、`docs/world/world*-record.md`、
 `world*-tables.md`、`PUBLICATION_CHECKLIST.md` — は英語の原本であり、翻訳は付きません。残りの
 短い発注 note（`docs/algebra/` と `docs/placement/` の問い、`docs/alu-place-handover.md`）は、
 書かれた当時の日本語の作業記録そのままで、対になる英語版はありません。引用と非公開の材料は
-削ってありますが、数値・座標・file 参照・表は、対になる 2 つの file の間でも、元の記録との間でも
-変えていません。
+削ってあり、用語を 1 つ揃えてあります（書かれた指示だけで動く model の 1 実行単位を
+**エージェント** と呼びます）。数値・座標・file 参照・表は、対になる 2 つの file の間でも、
+元の記録との間でも変えていません。
+
+**名前について。** *Jiorimetry — 自織 (jiori, "self-weaving") + -metry.*
 
 ---
 
 ## 9. クレジット
 
 - **pashina** — オペレータ。回路意味論の裁定、実 world での検証、Bench の較正に使った参照回路。
-- 導出・配置・道具は、オペレータの指揮下で LLM の席（Claude Fable 5.1 / Opus 5）が作成。
+- 導出・配置・道具は、オペレータの指揮下で LLM のエージェント（Claude Fable 5.1 / Opus 5）が作成。
 - **Astra** — 第二 model の reviewer（発注の設計批評、導出した網の独立検算、mux の 2,990 例検算、配置と機械化提案を作り直させた批評）。
 
 MIT ライセンス — [LICENSE](LICENSE) を参照。

@@ -120,7 +120,7 @@ P pins read 6 and 8 (repeaters need > 0); Wn pin 15/0. Pins are exactly 3/0 at a
 * redstone_lamp at (6,2,10), (9,1,2) -> smooth_stone (full-cube conductor, same neighbour connectivity). The sweep shows no leak
   into the stage from either (32/32 identical to the pinned rows). Lamp column in section 4 = output > 0 by rule
   (RedstoneLampBlock lights on any received power; the r wire points into (6,2,10), the F output strongly powers (9,1,2)).
-* composter level source (given by the previous seat, not re-derived here): ComposterBlock.java:307-313 hasComparatorOutput /
+* composter level source (given by the previous agent, not re-derived here): ComposterBlock.java:307-313 hasComparatorOutput /
   getComparatorOutput return LEVEL; ComparatorBlock.java:103-109 reads it at the back. composter[level=3] is a blockstate, no block entity.
 
 ## 7. Bookkeeping

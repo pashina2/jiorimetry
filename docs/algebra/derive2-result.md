@@ -1,4 +1,4 @@
-# DERIVE-2 — DC full-adder stage from comparators + constants only (final, blind seat, 2026-09-07)
+# DERIVE-2 — DC full-adder stage from comparators + constants only (final, blind agent, 2026-09-07)
 
 ## 1. Encoding
 - a, b, cin, sum, cout: all in {0, 5}. Decode rule (one rule for every signal): bit = 1 iff level >= 5; level 0 = bit 0.
@@ -55,7 +55,7 @@ Edge cases exercised: c5 with side 0 -> 15 (row 8); c6 with back 0 -> 0 (row 1);
 
 ## 5. Count, files, cost
 - Count: 7 comparators (6 subtract, 1 compare), 1 container (level 5), 2 redstone blocks (1 if shared). A count, not a minimum
-  (exhaustive depth-2 search from {U, cout, constants} found no 2-comparator sum, so 3 after U+cout is what this seat could do).
+  (exhaustive depth-2 search from {U, cout, constants} found no 2-comparator sum, so 3 after U+cout is what this agent could do).
 - Files opened: scratchpad derive2/facts.md; minecraft-src/1.20.6-yarn/net/minecraft/block/AbstractRedstoneGateBlock.java
   (lines 128-149); minecraft-src/1.20.6-yarn/net/minecraft/world/RedstoneView.java (lines 40-65). Nothing under the development repository/, no web.
 - Written: scratchpad derive2/check.py (recheck script), this draft.

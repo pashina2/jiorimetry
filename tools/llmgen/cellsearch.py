@@ -361,7 +361,7 @@ class Scorer:
     so each is counted apart from the evaluations.
 
     THE PRE-FILTER SCORES, IT DOES NOT REFUSE (SPIKE-1b, a decision the order
-    left to this seat). The order asks for candidates with no lever-to-lamp
+    left to this agent). The order asks for candidates with no lever-to-lamp
     path to be 'rejected, 0 points certain, without running the machine'. Made
     a refusal -- an edit `mutate` retries, the way an unplaceable one is --
     it would stop the search dead: from the empty box EVERY first edit is

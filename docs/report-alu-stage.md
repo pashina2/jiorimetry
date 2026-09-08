@@ -14,16 +14,16 @@ DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORL
 
 ## 1. What "zero base" means (what was handed over / what was not)
 
-| seat | kind | handed over | withheld | record |
+| agent | kind | handed over | withheld | record |
 |---|---|---|---|---|
-| DERIVE-2 (the full adder algebra) | a **blind** Fable seat (zero context) | the DC rule sheet `docs/rules/facts-dc.md` (the rules for comparator / container / wire / solid, written by DIRECTOR 7 out of the 1.20.6-yarn source. **Contains no circuit shapes**) + the question | the operator's existing reference circuit (not included in this export), the web, every other file in the development repository | `docs/algebra/derive2.md`, `derive2-blind-result.md`, `net_derive2.json`, `dc_eval.py` (this seat's independent evaluator) 8/8 |
-| PLACE-1 (the full adder placement) | a blind Fable seat | the placement rule sheet `docs/rules/facts-geometry.md` + DERIVE-2's network | the same | `docs/placement/place1.md` Bench 8/8 |
-| REUSE-1 (full subtractor) | a blind Fable seat | a rule table **byte-identical** to DERIVE-2's (sha256 e6001fed…), with only the question swapped | the same | `docs/algebra/reuse1.md` 8/8 |
-| ALU-1 (the ALU algebra) | a Fable seat, **not blind** | the rule table + the {0,3} adder network derived in this development (`given-adder03.json`) + the subtractor network + the mux suggestion from Astra | existing circuits, the source (the seat never opened it) | `docs/algebra/alu1.md`, `net_alu1.json`, `dc_eval_alu.py` 32/32 |
-| PLACE-ALU-3 (the ALU placement, this document) | a Fable seat, not blind | the rule table v2 `docs/rules/facts-dc-v2.md`, the placement rule sheet, the VERT-1 rules `docs/rules/facts-vertical.md`, T6 (30/32), this seat's analysis (§3) | the operator's existing reference circuit, the web | `docs/placement/placealu3-result.md` 32/32 |
-| RIG-1 (the feeder rig) | a Fable seat | the above + the feeder shape from WORLD-1/2 | the same | `docs/placement/rig1.md` 32/32 |
+| DERIVE-2 (the full adder algebra) | a **blind** Fable agent (zero context) | the DC rule sheet `docs/rules/facts-dc.md` (the rules for comparator / container / wire / solid, written by DIRECTOR 7 out of the 1.20.6-yarn source. **Contains no circuit shapes**) + the question | the operator's existing reference circuit (not included in this export), the web, every other file in the development repository | `docs/algebra/derive2.md`, `derive2-blind-result.md`, `net_derive2.json`, `dc_eval.py` (this agent's independent evaluator) 8/8 |
+| PLACE-1 (the full adder placement) | a blind Fable agent | the placement rule sheet `docs/rules/facts-geometry.md` + DERIVE-2's network | the same | `docs/placement/place1.md` Bench 8/8 |
+| REUSE-1 (full subtractor) | a blind Fable agent | a rule table **byte-identical** to DERIVE-2's (sha256 e6001fed…), with only the question swapped | the same | `docs/algebra/reuse1.md` 8/8 |
+| ALU-1 (the ALU algebra) | a Fable agent, **not blind** | the rule table + the {0,3} adder network derived in this development (`given-adder03.json`) + the subtractor network + the mux suggestion from Astra | existing circuits, the source (the agent never opened it) | `docs/algebra/alu1.md`, `net_alu1.json`, `dc_eval_alu.py` 32/32 |
+| PLACE-ALU-3 (the ALU placement, this document) | a Fable agent, not blind | the rule table v2 `docs/rules/facts-dc-v2.md`, the placement rule sheet, the VERT-1 rules `docs/rules/facts-vertical.md`, T6 (30/32), this agent's analysis (§3) | the operator's existing reference circuit, the web | `docs/placement/placealu3-result.md` 32/32 |
+| RIG-1 (the feeder rig) | a Fable agent | the above + the feeder shape from WORLD-1/2 | the same | `docs/placement/rig1.md` 32/32 |
 
-The substance of "zero base" is three things: **the rule tables come from the source and contain no circuit shapes**, **the first stage of the algebra came out blind**, and **every stage after that reused only what had been verified inside this development**. B-?? (your existing circuit) is a calibration point for the Bench and was never handed to a seat (the line, §8.4, `notes/2026-09-07-rebuild-line.md`).
+The substance of "zero base" is three things: **the rule tables come from the source and contain no circuit shapes**, **the first stage of the algebra came out blind**, and **every stage after that reused only what had been verified inside this development**. B-?? (your existing circuit) is a calibration point for the Bench and was never handed to a agent (the line, §8.4, `notes/2026-09-07-rebuild-line.md`).
 
 The origin of the policy: the operator and Astra (second-model reviewer) (2026-09-08 19:01Z) set it — do not take the solutions of existing circuits or the operator's experience as premises of the design, settle things with rules and experiments, reuse of verified constructions is allowed, and an unknown connection is verified in the small rather than put to the operator as a question (`docs/alu-place-handover.md`, opening).
 
@@ -45,7 +45,7 @@ The origin of the policy: the operator and Astra (second-model reviewer) (2026-0
 | c4g / r | sub(c4,[nP]) / max(c7, c4g) | the logic r / the merge |
 | x1 / x2 / c3p / F | sub(a,[W]) / sub(W,[a]) / sub(c2,[x1,x2]) / cmp(K3,[c3p,P]) | the carry/borrow that goes through a ⊕ W |
 
-The node values for the 32 rows: `artifacts/rows/node_values.txt`. 32/32 on this seat's independent evaluator `dc_eval_alu.py`.
+The node values for the 32 rows: `artifacts/rows/node_values.txt`. 32/32 on this agent's independent evaluator `dc_eval_alu.py`.
 
 ---
 
@@ -54,7 +54,7 @@ The node values for the 32 rows: `artifacts/rows/node_values.txt`. 32/32 on this
 - **176 blocks**: comparator 23 / repeater 14 / wire 35 / barrel 6 (K3 ×4 = 247 items = level 3, K9 ×2 = 988 items = level 9) / redstone_block 1 / torch 1 / smooth_stone 96 (including the support floor at y=0). Box x 0..10, y 0..2, z 0..11. The layer map is `alu_stage_v7_layers.png` (with the rig, `artifacts/images/alu_v7_rig1_layers.png`).
 - The pins (wire cells): a = (4,1,4) (8,1,5) (10,1,4), b = (0,1,4), k = (0,1,2), P = (0,1,0) (0,1,8), Wn = (4,1,10). The reads: r = the wire (6,2,9), f = the output of comparator F (8,1,2) (its front (9,1,2)).
 - Structure: y=1 is the main layer (the k → f wall at z=2..3, the Qg1 cluster to the west, the XOR legs at x=6..10), y=2 is the r cluster (c4–c7, c4g, the nP torch) and the injection bridge for P. The vertical hand-off is comparator → strongly powered solid → the wire directly above (VERT-1; losslessness confirmed on the Bench, and it holds on real hardware).
-- **The design changes from T6 (30/32) to v7 (32/32)** (PLACE-ALU-3, `placealu3-result.md`): the 2 failing rows are f=3 under SUB when a=1 (there is no `a` on x2's side). The cell (5,1,6) where `a` could be brought in is the support for c6 of the r cluster, and the proposal in handover §3 (move c6 to (4,2,7)) does not hold because the support (4,1,7) is the feeding repeater for Wn (this seat's analysis, `notes/2026-09-08-director-8-registrations.md`). What solved it was the algebra side:
+- **The design changes from T6 (30/32) to v7 (32/32)** (PLACE-ALU-3, `placealu3-result.md`): the 2 failing rows are f=3 under SUB when a=1 (there is no `a` on x2's side). The cell (5,1,6) where `a` could be brought in is the support for c6 of the r cluster, and the proposal in handover §3 (move c6 to (4,2,7)) does not hold because the support (4,1,7) is the feeding repeater for Wn (this agent's analysis, `notes/2026-09-08-director-8-registrations.md`). What solved it was the algebra side:
   1. **S_x = max(a, W3), xm = sub(S_x, [as]), as = sub(a, [Wn])** (x1 / x2 turned into copies; the copy gate, W3b and one K3 removed, one `as` added).
   2. **The P kill moved from c7's side to the shared side of c5 / c6 at (5,2,5)** (15 > 9). The P line at x=9, the bridge and 3 caps disappear, and so does (8,2,7) (a wire above a comparator), which could not be placed.
   3. The dummy comparator (9,1,3): it makes the wire shape of w3p (8,1,3) N+E so that it does not leak into the relay to the south (a Bench shape rule; it holds on real hardware).
@@ -95,16 +95,16 @@ Example: all OFF = SUB 1−1−1 → r lit, f lit. Wn ON = ADD 1+1+1 = 3 → the
 
 ## 6. Costs (measured, harness tokens)
 
-| shipment | seat | time | tokens |
+| stage | agent | time | tokens |
 |---|---|---|---|
 | PLACE-ALU-3 | Fable | 12 min | 145k |
 | WORLD-2 | Opus | 21 min | 187k |
 | marker investigation | Sonnet | 3.4 min | 108k |
 | marker fix | Opus | 35 min | 111k |
 | RIG-1 (an aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
-| total | | ≈ 1.6 h of seat time | ≈ 820k |
+| total | | ≈ 1.6 h of agent time | ≈ 820k |
 
-Your acts: 3 placements, filling 6 barrels by hand, 2 restarts, the levers. This seat's misses: guiding you to a flag `--no-backup-gate` that does not exist in game; a `/data merge` line over 256 characters; using U+2212 in the coordinates of a table, which brought on `Expected integer` (recorded to memory); and an order whose write failed on permissions, which cost one Fable seat an aborted shipment.
+Your acts: 3 placements, filling 6 barrels by hand, 2 restarts, the levers. This agent's misses: guiding you to a flag `--no-backup-gate` that does not exist in game; a `/data merge` line over 256 characters; using U+2212 in the coordinates of a table, which brought on `Expected integer` (recorded to memory); and an order whose write failed on permissions, which cost one Fable agent an aborted stage.
 
 ---
 

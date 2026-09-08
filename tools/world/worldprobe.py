@@ -17,7 +17,7 @@ item entities are silently gone -- hole 2 of
 `notes/2026-09-06-state-holes-frame.md`. See `provision`.
 
 WHAT IT DOES NOT DO. It writes no verdict. `settle_gt`, `final_value` and the
-per-gt series are readings; whether a reading is right is the seat's sentence,
+per-gt series are readings; whether a reading is right is the agent's sentence,
 written in a bench note. The one concession is `expect`: if the spec states an
 expectation, it is evaluated and recorded as true/false beside the reading,
 never as a word like "pass".
@@ -97,7 +97,7 @@ def _check_keys(obj, where, required, optional=()):
     """Fail loud on a missing OR an unknown key, at every nesting level.
 
     Unknown keys are rejected and not ignored: a spec is the only thing
-    standing between a seat and a wrong measurement, and a silently dropped
+    standing between a agent and a wrong measurement, and a silently dropped
     `settle_gt` would produce a number that still looks like a reading."""
     if not isinstance(obj, dict):
         raise SpecError("%s: expected an object, got %s"
@@ -632,7 +632,7 @@ def launch(run_dir, log_path, xmx="3G", timeout=300):
 
 
 def port_is_free(host, port, timeout=1.0):
-    """True when nothing is listening -- another seat's server may hold it."""
+    """True when nothing is listening -- another agent's server may hold it."""
     sock = socket.socket()
     sock.settimeout(timeout)
     try:
@@ -648,8 +648,8 @@ def port_is_free(host, port, timeout=1.0):
 def set_rcon_port(run_dir, port):
     """Rewrite the RUN DIR copy of server.properties.
 
-    The template is never edited: it is shared with every other seat's run, and
-    a second seat measuring at the same time must be able to take its own
+    The template is never edited: it is shared with every other agent's run, and
+    a second agent measuring at the same time must be able to take its own
     port without this one moving under it."""
     path = Path(run_dir) / "server.properties"
     out, seen = [], False
@@ -833,7 +833,7 @@ def read_nbt(s, reads):
     """{name: the server's verbatim reply} for every `nbt` read point.
 
     The reply is stored as it came back and is not parsed: a `data get` answer
-    carries counts, slots, ids and components, and the seat's sentence is
+    carries counts, slots, ids and components, and the agent's sentence is
     written against the text the server actually said."""
     out = {}
     for r in nbt_reads(reads):
@@ -1128,7 +1128,7 @@ def md_cell(value):
 
 
 def tables_md(result):
-    """The result as markdown. Readings only; the seat writes the sentence."""
+    """The result as markdown. Readings only; the agent writes the sentence."""
     lines = ["# worldprobe -- %s (%s)" % (result["spec_name"], result["which"]), "",
              "writer `%s`, report_kind `%s`, %s. Units: gt."
              % (WRITER, REPORT_KIND, result["provenance"]["utc"]), "",
@@ -1218,7 +1218,7 @@ def connect(spec, run_dir, log_name, result):
     host = server.get("host", "127.0.0.1")
     port = server.get("rcon_port", 25585)
     if not port_is_free(host, port):
-        raise ProbeError("%s:%d is already listening -- another seat holds this "
+        raise ProbeError("%s:%d is already listening -- another agent holds this "
                          "port. Set spec.server.rcon_port to a free one; the "
                          "template server.properties is not edited." % (host, port))
     set_rcon_port(run_dir, port)

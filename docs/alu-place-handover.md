@@ -5,7 +5,7 @@
 ## 1. 最後に検証した配置（上書き禁止）
 
 - `artifacts/layouts/alu_stage_T6_30of32.json` — 182 block（comparator 22、repeater 14、wire 37、barrel 7、redstone_block 1、torch 1、smooth_stone 100）、箱 x 0..9 / y 0..2 / z 0..11。
-- 実行: `cd notes/2026-09-08-placealu2 && python check_alu_stage.py alu_stage_T6_30of32.json` → `PASS 30/32`（当席が 2026-09-07T19:26Z に再現）。pin と read は script の docstring。Bench = `tools/llmgen/capcell.py` の `Bench`（loader `bench_sweep.py` 同梱、状態文字列を自前で解く、barrel は stack 64 で宣言）。
+- 実行: `cd notes/2026-09-08-placealu2 && python check_alu_stage.py alu_stage_T6_30of32.json` → `PASS 30/32`（当エージェントが 2026-09-07T19:26Z に再現）。pin と read は script の docstring。Bench = `tools/llmgen/capcell.py` の `Bench`（loader `bench_sweep.py` 同梱、状態文字列を自前で解く、barrel は stack 64 で宣言）。
 - 網の意味（ALU-1、`docs/algebra/alu1.md`）: データ {0,3}、P ∈ {0,15}（0 = 算術、15 = 論理）、Wn ∈ {0,15}（**反転極性**: 15 = ADD/AND、0 = SUB/OR、局所で W3 = sub(K3, [Wn]) = 3 iff Wn = 0）。r = wire (6,2,9)、f = F (8,1,2) の出力。
 
 ## 2. 落ちる 2 行と原因（特定済み）
@@ -27,12 +27,12 @@ Wn の給電 repeater (4,1,7)（facing south、back (4,1,8) = Wn post）を東�
 - **y=2 の wire は、水平隣が air のとき真下（y=1）の wire を斜めに読む（−1）**（VERT-1、`docs/rules/facts-vertical.md`）。塞いだ蓋: (8,2,3)（w3p の上）、(8,2,5)（a2 (8,1,5) の上）、(8,2,8)（Wn (8,1,8) の上）。y=2 の線を動かす時は真下の隣の y=1 wire を全部確認する。
 - repeater / comparator の facing = **入力側**（back = pos + facing、front = pos − facing）。P の repeater (7,2,3) を逆向きに置いた失点あり。
 - comparator の side は wire / redstone_block / **自分へ向いた gate** だけを読む（torch・container・solid の受電は 0）。torch は back からは 15 と読める（(3,2,8) の torch = nP、その取り付け block (3,1,8) を P で強給電）。
-- cc3（c3 の copy）の side cell に Wn を置いていた席の誤り → (4,1,6) を強給電 solid の柱に（WnRep の back は solid の強受電を読める）。
+- cc3（c3 の copy）の side cell に Wn を置いていたエージェントの誤り → (4,1,6) を強給電 solid の柱に（WnRep の back は solid の強受電を読める）。
 - 縦の受け渡し（comparator front → 強給電 solid → 真上の wire → y=2 の gate）は Bench で無損失（5 値）。**実機は未確認**。
 
 ## 5. 段階の記録（再現用）
 
-`south_step1.json`（北半分 + c3 の uplink (3,2,5) + c4 (2,2,5) / c5 (4,2,5) at y=2、32 行で c4 / c5 正） → T2b（c6 / c7 / P 線、32 行で c7 正） → T4（c4g + solid 2 個で合流する r、torch の nP kill、32 行で r 正） → T6（f の経路: x1 (7,1,5) fE、x2 (6,1,6) fS、W3 生成 2 個 (6,1,8) fS / (8,1,7) fE、Wn の行 z=10..11、30/32）。中間 JSON は当席の scratchpad にあり、消える。T6 だけ notes に保存。
+`south_step1.json`（北半分 + c3 の uplink (3,2,5) + c4 (2,2,5) / c5 (4,2,5) at y=2、32 行で c4 / c5 正） → T2b（c6 / c7 / P 線、32 行で c7 正） → T4（c4g + solid 2 個で合流する r、torch の nP kill、32 行で r 正） → T6（f の経路: x1 (7,1,5) fE、x2 (6,1,6) fS、W3 生成 2 個 (6,1,8) fS / (8,1,7) fE、Wn の行 z=10..11、30/32）。中間 JSON は当エージェントの scratchpad にあり、消える。T6 だけ notes に保存。
 
 ## 6. その後
 

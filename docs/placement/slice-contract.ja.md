@@ -18,7 +18,7 @@ ALU 1 段 v7（`artifacts/layouts/alu_stage_v7.json`、Bench 32/32）を、下�
 ## 与件
 - v7 と PLACE-ALU-3 の設計（`docs/placement/placealu3-result.md`: S_x = max(a,W3) − a·[Wn=0]、P kill を c5/c6 の side に、dummy comparator の形状）、node の値表 `node_values.txt`、網 `artifacts/layouts/net_alu1.json`。
 - 器: `tools/checks/alu_check_slices.py`（layout の `slice` 節 = pitch / through / ports を読み、n 個並べて解く）、`tools/checks/alu_check2.py`（1 段の 32 行 + lint L1/L2/L3。tiled した n=2 の layout にも lint を掛ける = `alu_check_slices.tiled(lay,2)` を JSON に書いて `lint`）。Bench = `tools/llmgen/capcell.py`。
-- v7 を契約で読むと何が落ちるか（当席の実測）: `v7_as_slice.json`（pitch 11、a = (10,1,4) だけ）で n=1 20/32、n=2 38/128。a の 3 cell、P の第 2 入口 (0,1,8)、Wn の行（x=4..8 のみ）、東端 (9..10) の部品が契約違反。
+- v7 を契約で読むと何が落ちるか（当エージェントの実測）: `v7_as_slice.json`（pitch 11、a = (10,1,4) だけ）で n=1 20/32、n=2 38/128。a の 3 cell、P の第 2 入口 (0,1,8)、Wn の行（x=4..8 のみ）、東端 (9..10) の部品が契約違反。
 
 ## 返すもの（`docs/placement/slice-contract.md`）
 - `alu_slice_v8.json`（`slice` 節つき）、`draft_<n>.json`（10 分ごと）。

@@ -18,7 +18,7 @@ Can ALU stage v7 (`artifacts/layouts/alu_stage_v7.json`, Bench 32/32) be rebuilt
 ## The given
 - v7 and the PLACE-ALU-3 design (`docs/placement/placealu3-result.md`: S_x = max(a,W3) − a·[Wn=0], the P kill on the side of c5/c6, the shape of the dummy comparator), the node value table `node_values.txt`, and the network `artifacts/layouts/net_alu1.json`.
 - The instruments: `tools/checks/alu_check_slices.py` (reads the layout's `slice` section = pitch / through / ports, lays out n copies and solves them), `tools/checks/alu_check2.py` (32 rows for one stage + lint L1/L2/L3; the lint can also be applied to a tiled n=2 layout = write `alu_check_slices.tiled(lay,2)` to JSON and run `lint`). Bench = `tools/llmgen/capcell.py`.
-- What falls over when v7 is read against the contract (this seat's own measurement): `v7_as_slice.json` (pitch 11, `a` only at (10,1,4)) gives n=1 20/32, n=2 38/128. The 3 cells of `a`, P's second entry (0,1,8), the Wn row (x=4..8 only) and the parts at the east end (9..10) all violate the contract.
+- What falls over when v7 is read against the contract (this agent's own measurement): `v7_as_slice.json` (pitch 11, `a` only at (10,1,4)) gives n=1 20/32, n=2 38/128. The 3 cells of `a`, P's second entry (0,1,8), the Wn row (x=4..8 only) and the parts at the east end (9..10) all violate the contract.
 
 ## What to return (`docs/placement/slice-contract.md`)
 - `alu_slice_v8.json` (with a `slice` section) and `draft_<n>.json` (every 10 minutes).

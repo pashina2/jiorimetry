@@ -1,8 +1,6 @@
-# JioΣetry
+# Jiorimetry
 
 > 日本語: [README.ja.md](README.ja.md)
-
-*Jiorimetry — 自織 (jiori, "self-weaving") + -metry.*
 
 An experimental toolchain that **derives** Minecraft 1.20.6 redstone circuits from rule
 sheets written out of the game source, rather than transcribing circuits a human already
@@ -26,16 +24,17 @@ Two artifacts exist so far:
    decompiled 1.20.6 source and citing line numbers — `ComparatorBlock`, `ComposterBlock`,
    `RedstoneTorchBlock`, `RedstoneWireBlock`, and the solidity predicates. The sheet
    contains **no circuit shapes**. It is in [`docs/rules/`](docs/rules).
-2. **Algebra.** A model seat is given the rule sheet and a question ("build a full adder
-   out of these parts") and returns a *network* of comparator/torch/constant nodes with an
-   explicit level encoding — not a layout. Verified by an independent evaluator written
-   separately from the network. See [`docs/algebra/`](docs/algebra).
-3. **Placement.** A second seat is given a geometry rule sheet (adjacency, dust shapes,
+2. **Algebra.** An agent — one model instance working from a written order — receives the
+   rule sheet and a question ("build a full adder out of these parts") and returns a
+   *network* of comparator/torch/constant nodes with an explicit level encoding — not a
+   layout. Verified by an independent evaluator written separately from the network. See
+   [`docs/algebra/`](docs/algebra).
+3. **Placement.** A second agent is given a geometry rule sheet (adjacency, dust shapes,
    diagonal reads, vertical hand-off) and the network, and returns coordinates. See
    [`docs/placement/`](docs/placement).
 4. **Bench.** `tools/llmgen/capcell.py` is a re-implementation of the DC rules that solves
    a block list to a fixed point. It is calibrated against a pre-existing reference circuit
-   the seats never see. Running the layout through it costs nothing and takes a second.
+   the agents never see. Running the layout through it costs nothing and takes a second.
 5. **Synthetic world.** The layout is written into region files of a fresh void 1.20.6
    world with physical feeders instead of pinned inputs, a headless server ticks it, and
    every dust and comparator is read back over RCON with freeze/step. See
@@ -52,7 +51,7 @@ is the one that counts.
 
 ### 1-bit full adder (PLACE-1 / WORLD-1)
 
-Level encoding {0, 5}. Seven comparators. The algebra was produced by a seat with **zero
+Level encoding {0, 5}. Seven comparators. The algebra was produced by a agent with **zero
 project context** — it was given only the DC rule sheet and the question.
 
 - Bench: `ALL PASS` over all 8 input vectors — [`docs/placement/place1-bench-output.txt`](docs/placement/place1-bench-output.txt)
@@ -114,9 +113,9 @@ The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input n
 
 ---
 
-## 4. Provenance (what each seat was given)
+## 4. Provenance (what each agent was given)
 
-| stage | seat | given | withheld |
+| stage | context | given | withheld |
 |---|---|---|---|
 | DERIVE-2 (adder algebra) | blind, zero context | DC rule sheet + the question | the reference circuit, the web, every other file |
 | PLACE-1 (adder placement) | blind | geometry rule sheet + DERIVE-2's network | same |
@@ -126,7 +125,7 @@ The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input n
 | RIG-1 (feeder) | not blind | the above + the synthetic-world feeder shape | same |
 
 The operator's own pre-existing reference circuit was used **only** to calibrate the Bench.
-It was never shown to any seat that produced a design.
+It was never shown to any agent that produced a design.
 
 ---
 
@@ -268,17 +267,17 @@ mod is distributed here.
 
 ## 7. Measured costs
 
-Seat time and tokens for the **closing stage only** (2026-09-08: 32/32 → synthetic world →
+Agent time and tokens for the **closing stage only** (2026-09-08: 32/32 → synthetic world →
 operator's world → feeder rig). Earlier stages are not instrumented to the same standard.
 
-| shipment | seat class | wall clock | tokens |
+| stage | model class | wall clock | tokens |
 |---|---|---|---|
 | PLACE-ALU-3 (the 32/32 layout) | Fable | 12 min | 145k |
 | WORLD-2 (synthetic world run) | Opus | 21 min | 187k |
 | in-world marker investigation | Sonnet | 3.4 min | 108k |
 | in-world marker fix | Opus | 35 min | 111k |
 | RIG-1 (one aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
-| **total** | | **≈ 1.6 h of seat time** | **≈ 820k** |
+| **total** | | **≈ 1.6 h of agent time** | **≈ 820k** |
 
 Human cost over the same stage: three placement commands, filling six containers by hand,
 two client restarts, and flipping levers.
@@ -307,15 +306,18 @@ tools/world/       synthetic world build, RCON probe, region capture
 `name.md`, the Japanese is `name.ja.md`, and each links to the other on its first lines.
 That covers this README, the four rule sheets in `docs/rules/`, the slice contract, the
 block-coverage table, the ALU stage report, the live-world record, and `tools/README.md`.
-The result notes and world tables the seats produced — `docs/algebra/*-result.md`,
+The result notes and world tables the agents produced — `docs/algebra/*-result.md`,
 `docs/placement/*-result.md`, `docs/placement/placealu2-partial.md`,
 `docs/world/world*-record.md`, `world*-tables.md`, `PUBLICATION_CHECKLIST.md` — are English
 originals and carry no translation. The remaining short order notes (the questions under
 `docs/algebra/` and `docs/placement/`, and `docs/alu-place-handover.md`) are the Japanese
 working records as they were written and have no English counterpart. Quotations and
-private material have been removed throughout; the numbers, coordinates, file references
-and tables are unchanged, both between the two files of a pair and against the original
-records.
+private material have been removed throughout, and one term was normalised (one model
+instance working from a written order is called an **agent**); the numbers, coordinates,
+file references and tables are unchanged, both between the two files of a pair and against
+the original records.
+
+**The name.** *Jiorimetry — 自織 (jiori, "self-weaving") + -metry.*
 
 ---
 
@@ -324,7 +326,7 @@ records.
 - **Astra** — second-model reviewer (design critique of the orders, independent re-checks of the derived networks, the 2,990-case mux check, and the review that reshaped the placement and the algorithmisation proposal).
 - **pashina** — operator: circuit semantics rulings, in-world verification, and the
   reference circuit used to calibrate the Bench.
-- Derivations, placements and tooling by LLM seats (Claude Fable 5.1 / Opus 5) under the
+- Derivations, placements and tooling by LLM agents (Claude Fable 5.1 / Opus 5) under the
   operator's direction.
 
 MIT licensed — see [LICENSE](LICENSE).

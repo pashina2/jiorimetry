@@ -1,4 +1,4 @@
-# DC full subtractor, {0,3} interface — FINAL (blind derivation seat, 2026-09-08)
+# DC full subtractor, {0,3} interface — FINAL (blind derivation agent, 2026-09-08)
 
 Relation: a - b - bin = d - 2*bout, all five signals in {0,3}, decode bit = [level >= 3].
 Primitives used: sub(i,j) = max(0, i-j)  (i=back, j=max of sides); cmp(i,j) = i if i >= j else 0; i==0 -> 0. (facts.md :12)
