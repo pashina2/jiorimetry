@@ -1,4 +1,4 @@
-# PLACE-ALU-2 — 記録（DIRECTOR 7、2026-09-08 18:51:33Z）
+# PLACE-ALU-2 — 記録（DIRECTOR 7、2026-09-07 18:51:33Z）
 
 - エージェント: Fable、40 分上限、Astra の条件（中継近傍を先に、幅制約なし、copy 自由、網の共有を解いてよい、未完なら衝突と試した修正を残す）。**harness の turn 上限（12）で 28 分時点に停止**（続行の手段が無い）。実測 179k token（自己申告 70k）。
 - **鍵の発見（エージェントの §0）**: k → f のデータ経路は 1 層では段の全幅を横切る壁（k, kg, c2, S2, c2c, S2b, c3p, S3p, F）になり、P（北の行）は南半分（c4..c7、c4g、r、x1/x2、Wn）へ 1 層では届かない。これが前 2 回の崩壊の共通原因。**決めた修正 = y=2 の P 橋**（強給電した solid の上の repeater 連鎖で壁を越え、solid の下の wire へ無損失で降ろす。gate は水平しか読まないので solid の上の repeater は漏れない）。さらに (A) P の注入は spur wire でなく **consumer の side へ向いた repeater**（15 か 0）で、(B) Qg を 2 段に分割（Qg1 = sub(K3, [nP1 gate, WnRep repeater])、Qg2 = sub(back = S_L) が c2 へ向く）。

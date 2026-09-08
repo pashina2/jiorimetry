@@ -1,4 +1,4 @@
-# PLACE-ALU-1 — 記録（DIRECTOR 7、2026-09-08 18:01:13Z）
+# PLACE-ALU-1 — 記録（DIRECTOR 7、2026-09-07 18:01:13Z）
 
 - エージェント: Fable、35 分上限、与件 = 規則表 2 つ + ALU-1 の網 + PLACE-1 の配置例。**収束せず**（interface は決定、block 一覧は未完、packing 2 回とも中継 solid の 6 面隣接で破綻）。実測 25 分、87k token（自己申告 45k）。
 - source でエージェントが見つけた事実 2 つ（当エージェントが検算）: (1) **torch は comparator の side から 0 と読まれる**（`RedstoneTorchBlock.getStrongRedstonePower` :103-108 は DOWN 以外 0、side は strong を読む）→ ALU-1 の nP（torch）は 1 層では成立せず、`sub(back = redstone_block 15, side = P)` に置換（真理値表同一、+1 comparator +1 redstone_block −torch）。**当エージェントの規則表の誤り**（side は gate / torch の strong power を読める、と書いていた）。(2) 提案の `sub(W15, K12)` は side が container を読めないので不成立 → W を反転極性の 15 線（Wn）で運び、`sub(K3, [Wn])` で局所変換（極性の合意が要る）。

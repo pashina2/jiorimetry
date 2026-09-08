@@ -1,8 +1,8 @@
-# VERT-1 — a micro-test of the vertical hand-off (Bench only, DIRECTOR 7, 2026-09-08 19:01:51Z)
+# VERT-1 — a micro-test of the vertical hand-off (Bench only, DIRECTOR 7, 2026-09-07 19:01:51Z)
 
 > 日本語: [facts-vertical.ja.md](facts-vertical.ja.md)
 
-Policy (Astra, Astra, with the operator's agreement): an unknown connection is verified in the small rather than put to the operator as a question. The Bench (a replica of the rules, calibrated on B-??) and the confirmation on real hardware are recorded separately. **This test is Bench only; the real hardware is unconfirmed.**
+Policy (Astra, with the operator's agreement): an unknown connection is verified in the small rather than put to the operator as a question. The Bench (a replica of the rules, calibrated on B-??) and the confirmation on real hardware are recorded separately. **This test is Bench only; the real hardware is unconfirmed.**
 
 Shape: a pinned wire L → comparator cA (compare, back = the wire) → the solid S at its front (strongly powered = L) → **the wire directly above S** → comparator cB at y=2.
 

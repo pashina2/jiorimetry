@@ -1,4 +1,4 @@
-# ALU-1 — 検算記録（DIRECTOR 7、2026-09-08 17:27:55Z）
+# ALU-1 — 検算記録（DIRECTOR 7、2026-09-07 17:27:55Z）
 
 - エージェント: Fable subagent、**blind ではない**（与件 = 規則表（不変、`facts-given.md`）+ {0,3} 加算網（`given-adder03.json`）+ 減算網 + 第二モデルの査読者が示した 5 subtract の mux 案）。縛りなし: 規則表の DC 部品（comparator / torch / repeater / dust の max / 定数）を何でも、費用は block 見積で。符号化はエージェントが選ぶ。オペレータは部品の制約を外して進めるよう裁定した。
 - 実測: harness 1,359 s（22.7 分）、**69.5k token**（自己申告 45k）。エージェントが開いた file = 与件 4 つだけ（source も the development repository も未開封）。

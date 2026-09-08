@@ -1,4 +1,4 @@
-# REUSE-1 — 検算記録（DIRECTOR 7、2026-09-08 16:34:20Z）
+# REUSE-1 — 検算記録（DIRECTOR 7、2026-09-07 16:34:20Z）
 
 - 目的: R0 の再利用性試験。**規則表は DERIVE-2 と byte 一致**（`facts-given.md`、sha256 e6001fed…）、問いは関数（1 bit 全減算器、a − b − bin = d − 2·bout）と**符号化の強制**（{0, 3}、真 = 3）だけ差し替え。エージェント = blind な Fable subagent（文脈ゼロ）。
 - 実測: harness 599 s（10 分）、**65.5k token**（自己申告 25k）。エージェントが開いた file = 規則表 1 つだけ（source は 1 file も開いていない）。

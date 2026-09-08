@@ -1,4 +1,4 @@
-# VERT-1 — 縦の受け渡しの micro 試験（Bench のみ、DIRECTOR 7、2026-09-08 19:01:51Z）
+# VERT-1 — 縦の受け渡しの micro 試験（Bench のみ、DIRECTOR 7、2026-09-07 19:01:51Z）
 
 > English: [facts-vertical.md](facts-vertical.md)
 
