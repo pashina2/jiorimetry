@@ -329,7 +329,7 @@ the original records.
 
 - **Astra** — second-model reviewer (GPT-6, OpenAI). Design critique of the orders, independent re-checks of the derived networks, the 2,990-case mux check, and the review that reshaped the placement and the algorithmisation proposal.
 - **pashina** — operator: circuit semantics rulings, in-world verification, and the
-  reference circuit used to calibrate the Bench.
+  reference circuit used to calibrate the Bench. [@pashina_2](https://x.com/pashina_2)
 - Derivations, placements and tooling by LLM agents (Claude Fable 5.1 / Opus 5) under the
   operator's direction.
 

@@ -316,7 +316,7 @@ tools/world/       合成世界の生成、RCON probe、region の capture
 
 ## 9. クレジット
 
-- **pashina** — オペレータ。回路意味論の裁定、実 world での検証、Bench の較正に使った参照回路。
+- **pashina** — オペレータ。回路意味論の裁定、実 world での検証、Bench の較正に使った参照回路。[@pashina_2](https://x.com/pashina_2)
 - 導出・配置・道具は、オペレータの指揮下で LLM のエージェント（Claude Fable 5.1 / Opus 5）が作成。
 - **Astra** — 第二 model の reviewer（GPT-6、OpenAI）。発注の設計批評、導出した網の独立検算、mux の 2,990 例検算、配置と機械化提案を作り直させた批評。
 
