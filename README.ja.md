@@ -13,7 +13,7 @@ source から書き起こした規則表から導出する**実験的なツー�
 |---|---|---|---|
 | 1 bit 全加算器 | 8/8 | 8/8、全 read 一致 | 配置して読み戻し 8/8 |
 | 1 bit ALU 1 段 `v7`（ADD / SUB / AND / OR。1 段であって tiling できる slice ではない — §3） | 32/32 | 32/32、read 1024/1024 | 配置、静止 comparator 23/23、lever 5 本 + lamp 2 個の給電器で駆動 |
-| bit slice `alu_slice_v8`（pitch 12、n=1/2/3 で tiling） | 32/32、128/128、512/512 | 未実施 | 未実施 |
+| bit slice `alu_slice_v9`（pitch 12、n=1/2/3 で tiling、契約 checker C1〜C6 PASS） | 32/32、128/128、512/512 | 未実施 | 未実施 |
 
 ---
 
@@ -89,7 +89,9 @@ layout の配置 lint 0。詳細と境界 cell の一覧は `docs/placement/slic
 `artifacts/images/alu_slice_v8_x2_layers.png`。未実施: 2 slice の合成世界での走行と、オペレータの
 world での走行。
 
-![alu_slice_v8 を 2 slice 並べた層別図（pitch 12、n=2 Bench 128/128）](artifacts/images/alu_slice_v8_x2_layers.png)
+**第二 reviewer の訂正（2026-09-08）。** Astra が checker を読み、n bit の関数表しか検査していないこと、契約 2 条（through-line の出口を各 slice 内で 15 に戻す）が未測定で `v8` はそれに違反していること（P の出口 9、Wn の出口 12）を指摘しました。契約の各条項を直接測る第二の checker `tools/checks/alu_check_contract.py`（箱、slice ごとの through-line 入口 level、slice ごとの carry level、port の面、境界の組と slice ごとの局所真理値表、lint と repeater の側面 lock）を書き、検査しないものは docstring に明記しました。`v8` はこれに落ちます（512 行で through-line 不一致 1024）。`artifacts/layouts/alu_slice_v9.json` は出口の wire 2 個を west 向き repeater に置き換えたもの（block 数不変）で、両方の checker を通ります: n=1 32/32、n=2 128/128、n=3 512/512、契約 FAIL 0。契約 2 条項を改訂し、改訂は `docs/placement/slice-contract.ja.md` に、詳細は `docs/placement/slice1-result.md` §4（英語）に記録しました。
+
+![alu_slice_v9 を 2 slice 並べた層別図（pitch 12、n=2 Bench 128/128、契約 C1〜C6 PASS）](artifacts/images/alu_slice_v9_x2_layers.png)
 
 
 ## 3. **主張しない** こと

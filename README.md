@@ -15,7 +15,7 @@ Two artifacts exist so far:
 |---|---|---|---|
 | 1-bit full adder | 8/8 | 8/8, all reads matched | placed and read, 8/8 |
 | 1-bit ALU stage `v7` (ADD / SUB / AND / OR; one stage, not a tiling slice — section 3) | 32/32 | 32/32, 1024/1024 reads | placed, 23/23 static comparators, driven by a 5-lever rig with two lamps |
-| bit slice `alu_slice_v8` (pitch 12, tiled n=1/2/3) | 32/32, 128/128, 512/512 | not yet run | not yet run |
+| bit slice `alu_slice_v9` (pitch 12, tiled n=1/2/3; contract checker C1-C6 PASS) | 32/32, 128/128, 512/512 | not yet run | not yet run |
 
 ---
 
@@ -90,7 +90,9 @@ two level-9), 1 redstone block, 1 torch, 96 smooth stone. Box 11 × 3 × 12.
 
 The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input needed three cells (one outside the pitch), the second `P` entry and the `Wn` row were not through-lines, and its east edge was not closed. The operator ruled that bit-slice abutment and pitch alignment had to be met before any second stage. A slice contract was written (`docs/placement/slice-contract.md`) and an n-slice checker (`tools/checks/alu_check_slices.py`) that tiles a layout by its pitch and solves the n-bit ALU function for all inputs and modes. Result `artifacts/layouts/alu_slice_v8.json` (pitch 12, box 12x4x14, 292 blocks: comparator 50, repeater 15, wire 55, barrel 7): n=1 32/32, n=2 128/128, n=3 512/512, placement lint 0 on the tiled layout. Details and the boundary cell list: `docs/placement/slice1-result.md`; two-slice layer map: `artifacts/images/alu_slice_v8_x2_layers.png`. Not yet done: the two-slice run in a synthetic world and in the operator's world.
 
-![Two abutting slices of `alu_slice_v8`, layer by layer (pitch 12; n=2 Bench 128/128).](artifacts/images/alu_slice_v8_x2_layers.png)
+**Second reviewer's correction (2026-09-08).** Astra read the checker and found that it verifies the n-bit function table only: clause 2 of the contract (the through-line exit restored to 15 inside each slice) was never measured, and `v8` violates it (P exits at 9, Wn at 12). A second checker, `tools/checks/alu_check_contract.py`, now measures every clause directly (box, through-line entry level per slice, carry level per slice, port faces, boundary pairs and per-slice local truth table, lint and repeater side lock) and states in its docstring what it does not check. `v8` fails it (1024 through-line mismatches over 512 rows). `artifacts/layouts/alu_slice_v9.json` replaces the two exit wires with repeaters facing west (block count unchanged) and passes both checkers: n=1 32/32, n=2 128/128, n=3 512/512, contract 0 FAIL. Two contract clauses were amended and the amendment is recorded in `docs/placement/slice-contract.md`; details in `docs/placement/slice1-result.md` section 4.
+
+![Two abutting slices of `alu_slice_v9`, layer by layer (pitch 12; n=2 Bench 128/128; contract C1-C6 PASS).](artifacts/images/alu_slice_v9_x2_layers.png)
 
 
 ## 3. What is **not** claimed

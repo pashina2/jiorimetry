@@ -110,7 +110,7 @@ lamp: r = 6011 135 -4103、f = 6014 134 -4111（点灯 = 1）。mark 10 個（IN
 
 ## 7. 主張の範囲と、しないこと
 
-- **主張**: 1 bit ALU 1 段（`v7`。1 段であって tiling できる slice ではない。slice `v8` は後の結果で README と `docs/placement/slice1-result.md` に記録）が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → オペレータの world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
+- **主張**: 1 bit ALU 1 段（`v7`。1 段であって tiling できる slice ではない。slice `v8`・`v9` は後の結果で README と `docs/placement/slice1-result.md` に記録）が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → オペレータの world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
 - **しない**: 8 段、tiling（a3 pin が x=10 に出ているので pitch ≥ 11 か折り返し）、速度、既存参照回路との密度比較（費用は絶対値で報告する方針）、および仕様変更に対する無改修性（R0 の 3 条件）。
 - 32 行全部をオペレータの world で回した記録はまだ無い（給電は lever なので、オペレータが回すか、rig を写しの world に置いて worldprobe で自動掃引する = ブラッシュアップ D）。
 

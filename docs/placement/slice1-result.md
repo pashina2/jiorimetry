@@ -53,3 +53,47 @@ PX=12, Z=13, 292 blocks: smooth_stone 164 (35 floor at y=0, the rest supports/re
 Opened: the order; `alu_check_slices.py`, `v7_as_slice.json` (slice section only); `../2026-09-08-placealu3/alu_stage_v7.json`, `alu_check2.py`, `placealu3-result.md`, `node_values.txt`; `../2026-09-08-alu1/net_alu1.json`; `../2026-09-08-placealu2/bench_sweep.py`, `facts-dc-v2-given.md`; `../2026-09-07-place1/facts-geometry-given.md`; `../2026-09-08-vert/README.md`; `../2026-09-08-alu-place-handover.md` (header list + section 4); `tools/workbench/llmgen/capcell.py` (a 3-line grep only; it lives in the main checkout, not in this worktree). Not opened: `machine.py`, anything under `notes/bench/`, web. No world / aiwb / tools / git touched.
 
 Wall time: 22:52:27Z (order read) -> 23:19Z (result written), about 27 min; the n=3 run alone took 3 min 11 s. Self-estimated tokens: about 95k input (file reads + reasoning), about 30k output.
+
+## 4. v9 - after the second reviewer (Astra), 2026-09-08T09:25Z
+
+Astra's independent reading of `tools/checks/alu_check_slices.py` (single seat) found that the checker verifies the n-bit function table only: clause 2 (through-line exit restored to 15) was never measured, and v8 violates it - with P = 15 the exit (11,2,0) reads 9 and the next entry 8; Wn exits at 12, next entry 11 (measured P row: 15 14 13 12 | 15 14 .. 9 | 8 7 6 5 | 15 ..). v8 passed n=1/2/3 only because every P/Wn consumer renormalises through a repeater; a longer consumer chain would not. The reading also listed which clauses the function table leaves unchecked (box, port faces, f/k cell types, closure pairs, support/side-lock lint).
+
+Response: a second checker, `tools/checks/alu_check_contract.py`, measures each clause directly (C1 box, C2 through-line entry level per slice, C3 carry level per slice against the expected carry of the lower bits, C4 port faces, C5 boundary pairs + per-slice local truth table, C6 lint + repeater side lock); its docstring says which predicates are measured, which are structural, and which are not checked at all (Bench rule gaps). On v8:
+
+```
+$ python tools/checks/alu_check_contract.py artifacts/layouts/alu_slice_v8.json
+... FAIL C2 ADD A=0 B=0 k=0: slice 1 entry Wn of (12, 3, 12) reads 11, pin 15
+measured n=3 rows=512: C2 through-entry mismatches=1024, C3 carry mismatches=0, C5 local-table mismatches=0
+CONTRACT FAIL: 6 FAIL, 3 notes
+```
+
+v9 = v8 with the two exit wires replaced by repeaters facing west: (11,2,0) and (11,3,12). The next slice's entry wire then reads exactly the pin level (15/0), so every slice sees the same P/Wn levels as slice 0. Block count unchanged (292; wire 53, repeater 17). Nothing else moved. Layer map: `artifacts/images/alu_slice_v9_x2_layers.png`.
+
+```
+$ python tools/checks/alu_check_slices.py artifacts/layouts/alu_slice_v9.json 1
+n=1 PASS 32/32
+$ python tools/checks/alu_check_slices.py artifacts/layouts/alu_slice_v9.json 2
+n=2 PASS 128/128
+$ python tools/checks/alu_check_slices.py artifacts/layouts/alu_slice_v9.json 3
+n=3 PASS 512/512
+$ python tools/checks/alu_check_contract.py artifacts/layouts/alu_slice_v9.json
+C1 box x 0..11 y 0..3 z 0..13  PX=12  cells=292  (y=3 used)
+C4 port a (10, 1, 13) on south face
+C4 port b (0, 3, 6) on top face
+note C4 port b (0, 3, 6) lies in the x=0 column; allowed only through C5
+C4 port r (6, 3, 9) on top face
+note C5 x=0 wire (0,2,4) faces air in the previous slice
+note C5 x=0 wire (0,3,6) faces air in the previous slice
+C5 boundary pair (11,2,0) repeater -> next (0,2,0) wire [allowed]
+C5 boundary pair (11,2,2) comparator -> next (0,2,2) wire [allowed]
+C5 boundary pair (11,3,12) repeater -> next (0,3,12) wire [allowed]
+C6 lint tiled n=2: L1=0 L2=0 L3=48
+measured n=3 rows=512: C2 through-entry mismatches=0, C3 carry mismatches=0, C5 local-table mismatches=0
+CONTRACT PASS: 0 FAIL, 3 notes
+```
+
+Two contract amendments, decided by the DIRECTOR seat and disclosed (circuit-semantics domain; the operator can overrule); also recorded at the end of `slice-contract.md`:
+- Clause 2: the exit cell (PX-1,y,z) may be a wire **or a repeater facing west**; the measured predicate is "the entry wire of every slice i>0 reads exactly the pin level". A repeater at the exit is the only placement that makes the entry level of slice i identical to slice 0.
+- Clause 4: the ground of "no port on an x face" is closure. A port in the x=0 / x=PX-1 column is allowed when its cross-boundary neighbour is air (C5 measures this: (0,3,6) faces the previous slice's (11,3,6) = air, and no diagonal wire pair exists). Moving b off the x=0 column physically was tried on paper: every cell east of the b drop is a comparator, a repeater, a strongly powered relay or a barrel, so a second route would cost a new chain (a y=1 spine or a top-face detour) and was not bought.
+
+Not done: the two-slice run in a synthetic world (WORLD-3) and in the operator's world; both remain the independent tier for the Bench's rule gaps (C6 "-").

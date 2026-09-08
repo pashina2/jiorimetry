@@ -5,7 +5,7 @@ root. `--exclude-dir=.git` and `--binary-files=without-match` are used throughou
 byte coincidences do not count as hits.
 
 Last run: 2026-09-08, re-run after the terminology change described in section 6.
-119 tracked files. Commit hashes are not cited here: every hash in this repository changed
+122 tracked files. Commit hashes are not cited here: every hash in this repository changed
 once, when the commit author was corrected before publication.
 
 ## 1. Scans
@@ -99,19 +99,21 @@ done
 python tools/checks/alu_check2.py       artifacts/layouts/alu_stage_v7.json    # PASS 32/32
 python tools/checks/bench_sweep.py      artifacts/layouts/layout_place1.json   # ALL PASS
 python tools/checks/alu_check_slices.py artifacts/layouts/v7_as_slice.json 1   # n=1 PASS 20/32
+python tools/checks/alu_check_slices.py artifacts/layouts/alu_slice_v9.json 3  # n=3 PASS 512/512
+python tools/checks/alu_check_contract.py artifacts/layouts/alu_slice_v9.json  # CONTRACT PASS: 0 FAIL, 3 notes
 cd tools/llmgen && python -m unittest test_capcell test_strength               # OK (skipped=3)
 ```
 
-All four produced the expected result on the commit this checklist describes. The printed
+All six produced the expected result on the commit this checklist describes. The printed
 lines are pasted verbatim in `README.md` section 5.
 
 ## 5. Hygiene
 
 - Line endings: LF everywhere (0 of the 112 text files contain CRLF; the 7 PNGs are binary).
 - No `__pycache__`, no `.pyc`, no build output committed.
-- 119 files, 2,306,365 bytes (2.2 MB) tracked.
+- 122 files, 2,399,761 bytes (2.4 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
-  all four commands in section 4 produce the results quoted above.
+  all six commands in section 4 produce the results quoted above.
 - Not yet published as of this checklist: the repository is local and has no remote. The
   operator's stated plan is a **private** GitHub repository first, so that the rendering can
   be checked before anyone else reads it. Making it public is a separate act by the operator.
@@ -163,4 +165,6 @@ whether anything unfit for publication remained. Findings and what was done:
 | `untouched` for `artifacts/world/*.json` contradicted section 3 (run metadata redacted) | wording now says: measured values unchanged, run metadata redacted |
 | the scan table reads as a guarantee stronger than pattern scans can give | stated explicitly (section 1); full readings cover the four key documents only |
 | the Credits line for Astra | no objection |
+
+Second reading, of the slice checker (same day): the function-table checker does not measure the contract, and `v8` violates clause 2 (through-line exit not restored to 15). Disposition: `tools/checks/alu_check_contract.py` added, `v9` replaces `v8` in the results, the contract amendment is recorded in `docs/placement/slice-contract.md`, and the README no longer says `v8` meets the contract.
 

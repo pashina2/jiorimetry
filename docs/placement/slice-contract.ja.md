@@ -24,3 +24,13 @@ ALU 1 段 v7（`artifacts/layouts/alu_stage_v7.json`、Bench 32/32）を、下�
 - `alu_slice_v8.json`（`slice` 節つき）、`draft_<n>.json`（10 分ごと）。
 - `slice1-result.md`: (1) n=1/2/3 の PASS 行（印字そのまま）、(2) lint 行、(3) 契約の各項をどう満たしたか（through-line の経路と repeater の位置、a の copy、f→k の cell、x=0 / x=PX−1 の cell 一覧と境界の向こうの cell）、(4) PX、block 数、部品の内訳、(5) 未達なら最後の draft と衝突の場所、(6) 開いた file、時間、token。
 上限 45 分。web なし、オペレータの既存参照回路の参照は禁止、world / aiwb / tools / git に触れない。
+
+## 第二 reviewer の読みを受けた改訂（2026-09-08）
+
+Astra（第二 model、reviewer）は `tools/checks/alu_check_slices.py` が n bit の関数表しか検査していないこと、`v8` が 2 条の文言に違反していること（P = 15 のとき出口 9、次の入口 8。Wn は 12 と 11）を示しました。関数表が通ったのは、P/Wn の消費側が全て repeater で正規化しているためです。契約の各条項を直接測る第二の checker `tools/checks/alu_check_contract.py` を書き、測るもの・構造で見るもの・検査しないものを docstring に列挙しました。DIRECTOR 席が 2 条項を改訂しました（開示。オペレータは覆せます）:
+
+- **2 条。** 出口 cell（PX-1, y, z）は wire **または west 向き repeater**。測定述語は「n = 3 の全行で、slice i > 0 の入口 wire が pin level と正確に一致する（15 は 15、0 は 0）」。出口に repeater を置く配置だけが、slice i に slice 0 と同じ level を見せます。
+- **4 条。** 「x 面に port を置かない」の根拠は閉包です。x = 0 / x = PX-1 列の port は、境界の向こうが air で斜めの wire 対が無ければ許可し、checker がそれを測って（C5）port を報告します（C4 note）。`v9` はこの読みで `b` を (0, 3, 6) に残しています。
+
+`v9` = `v8` の (11,2,0) と (11,3,12) を wire から `repeater[facing=west]` に変えたもの: n = 1/2/3 で 32/32、128/128、512/512、契約 FAIL 0、note 3。
+

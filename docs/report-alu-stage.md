@@ -110,7 +110,7 @@ The operator's acts: 3 placements, filling 6 barrels by hand, 2 restarts, the le
 
 ## 7. The scope of the claim, and what is not claimed
 
-- **Claimed**: a 1-bit ALU stage (`v7`; one stage, not a tiling slice — the slice `v8` is a later result recorded in the README and `docs/placement/slice1-result.md`), in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → the operator's world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
+- **Claimed**: a 1-bit ALU stage (`v7`; one stage, not a tiling slice — the slices `v8` and `v9` are later results recorded in the README and `docs/placement/slice1-result.md`), in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → the operator's world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
 - **Not claimed**: 8 stages; tiling (the a3 pin sticks out at x=10, so either pitch ≥ 11 or a fold-back); speed; a density comparison against an existing reference circuit (the policy is to report costs in absolute numbers); and immunity from rework under a change of specification (the 3 conditions of R0).
 - There is still no record of all 32 rows having been run in the operator's world (the feeding is by lever, so either the operator runs them, or the rig is placed in a copy of the world and swept automatically with worldprobe = brush-up D).
 

@@ -24,3 +24,13 @@ Can ALU stage v7 (`artifacts/layouts/alu_stage_v7.json`, Bench 32/32) be rebuilt
 - `alu_slice_v8.json` (with a `slice` section) and `draft_<n>.json` (every 10 minutes).
 - `slice1-result.md`: (1) the PASS lines for n=1/2/3 (printed verbatim), (2) the lint lines, (3) how each clause of the contract was satisfied (the route of the through-lines and the position of the repeaters, the copy of `a`, the f→k cells, the list of cells at x=0 / x=PX−1 and the cells beyond the boundary), (4) PX, the block count, the breakdown by part, (5) if it is not met, the last draft and the location of the collision, (6) the files opened, the time, the tokens.
 The limit is 45 minutes. No web; referring to the operator's existing reference circuit is forbidden; do not touch world / aiwb / tools / git.
+
+## Amendment after the second reviewer's reading (2026-09-08)
+
+Astra (second model, reviewer) showed that `tools/checks/alu_check_slices.py` verifies the n-bit function table only and that `v8` violates clause 2 as written (with P = 15 the exit reads 9, the next entry 8; Wn 12 and 11). The table passed because every P/Wn consumer renormalises through a repeater. A second checker, `tools/checks/alu_check_contract.py`, measures the clauses directly; its docstring lists what is measured, what is structural, and what is not checked. Two clauses were amended by the DIRECTOR seat (disclosed; the operator can overrule):
+
+- **Clause 2.** The exit cell (PX-1, y, z) may be a wire **or a repeater facing west**. The measured predicate is: for n = 3 and every row, the entry wire of every slice i > 0 reads exactly the pin level (15 stays 15, 0 stays 0). A repeater at the exit is the only placement under which slice i sees the same levels as slice 0.
+- **Clause 4.** The ground of "do not place a port on an x face" is closure. A port in the x = 0 or x = PX-1 column is allowed when its cross-boundary neighbour is air and no diagonal wire pair exists; the checker measures this (C5) and reports the port (C4 note). `v9` keeps `b` at (0, 3, 6) under this reading.
+
+`v9` = `v8` with (11,2,0) and (11,3,12) changed from wire to `repeater[facing=west]`: n = 1/2/3 32/32, 128/128, 512/512 and contract 0 FAIL, 3 notes.
+
