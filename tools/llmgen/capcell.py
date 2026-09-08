@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tools/llmgen/capcell.py -- a CAPTURED artifact on the machine, a
+"""tools/workbench/llmgen/capcell.py -- a CAPTURED artifact on the machine, a
 band of it cut out as a CELL, the cell's gate table measured with its cut
 faces held as open inputs, and the cell tiled back into an artifact.
 
@@ -20,8 +20,8 @@ three things MB-1 did not have:
     wool under it (RedstoneWireBlock: strong power downward), a gate one
     layer down powers the wool a dust stands on. The neighbour layers are
     handed to the machine as blocks whose state is HELD (`pinned`): read by
-    everything, updated by nothing. That is what 'the cut face is an open
-    input' means mechanically (`circuit-identification-by-calibrated-sweep`).
+    everything, updated by nothing. That is what «the cut face is an open
+    input» means mechanically (`circuit-identification-by-calibrated-sweep`).
   * the captured connection props are the machine's, re-derived with the
     target rule (`placement_state_t`), never the rows' -- so a tiled copy
     whose top and bottom layers differ from the capture's gets the props its
@@ -55,7 +55,7 @@ The block-kind table `MAP` is MB-1's, row for row, with the same solidity
 column cross-checked against GAP-7's `data/workbench/physics/solidity.json`
 by `test_capcell.py`.
 
-CLI: python tools/llmgen/capcell.py <tile|census> ...
+CLI: python tools/workbench/llmgen/capcell.py <tile|census> ...
 """
 
 import argparse
@@ -232,15 +232,21 @@ def placement_state_t(blocks, targets, pos):
 class Bench(M.Machine):
     """The machine plus the observer and target rules, `containers` (levels
     of cells OUTSIDE the capture that a gate reads: a calibrated parameter,
-    never a silent zero), and `pinned` cells whose state is held."""
+    never a silent zero), `pinned` cells whose state is held, and `floors`:
+    dust cells that a source outside the capture drives to a level -- the
+    cell reads max(its neighbours, the floor), so the circuit can raise it
+    (a held pin cannot be raised, and a solution that feeds its own input
+    back through a strongly powered block passes a held pin and latches in
+    the world: WORLD-4 `v_p4_T0`, 2026-09-08)."""
 
     def __init__(self, blocks, targets=(), containers=None, block_entities=None,
-                 pinned=(), pinned_signals=None):
+                 pinned=(), pinned_signals=None, floors=None):
         observers = {p: v for p, v in blocks.items() if v[0] == OBSERVER}
         rest = {p: v for p, v in blocks.items() if v[0] != OBSERVER}
         self.containers = {tuple(k): int(v) for k, v in (containers or {}).items()}
         self.targets = set(targets)
         self.pinned = set(pinned)
+        self.floors = {tuple(k): int(v) for k, v in (floors or {}).items()}
         M.Machine.__init__(self, rest, block_entities=block_entities)
         for pos, (name, props) in observers.items():
             self.blocks[pos] = (name, dict(props))
@@ -292,6 +298,11 @@ class Bench(M.Machine):
             return self.containers[back]
         return M.Machine.gate_back(self, pos)
 
+    def dust_input(self, pos):
+        value = M.Machine.dust_input(self, pos)
+        floor = self.floors.get(pos)
+        return value if floor is None else max(value, floor)
+
     # -- dynamics ----------------------------------------------------------
     def _settle_sync(self):
         M.Machine._settle_sync(self)
@@ -333,12 +344,20 @@ class Bench(M.Machine):
                 n += 1
         return n
 
-    def dc_solve(self, limit=200):
+    def dc_solve(self, limit=200, seed=None):
         """The tickless fixpoint (MB-1): dust to its fixpoint, every gate's
         stored signal and POWERED set to what its inputs say, repeated until
         nothing moves; then the schedule is emptied and the observers'
         memory re-seeded. A circuit with feedback may have more than one DC
-        solution; this returns the one the iteration walks to."""
+        solution; this returns the one the iteration walks to from the
+        current state, or from the all-on state when `seed="hot"` (every
+        unpinned dust 15, every gate powered, every torch out, every lamp
+        lit). `dc_solve_both` runs cold and hot and reports the cells on
+        which the two solutions differ."""
+        if seed == "hot":
+            self._seed_hot()
+        elif seed is not None:
+            raise M.MachineError("unknown seed %r" % (seed,))
         rounds = 0
         for rounds in range(1, limit + 1):
             self._dirty = set(self._dust)
@@ -382,6 +401,57 @@ class Bench(M.Machine):
         self.pending.clear()
         self._dirty = set()
         self._seen = {p: self._state_key(p) for p in self._watch}
+
+    def _seed_hot(self):
+        for pos in self._dust:
+            self.blocks[pos][1]["power"] = "15"
+        for pos in self._parts:
+            name, props = self.blocks[pos]
+            if name == COMPARATOR:
+                props["powered"] = "true"
+                self.cmp_out[pos] = 15
+            elif name == REPEATER:
+                props["powered"] = "true"
+            elif name in (M.TORCH, M.WALL_TORCH):
+                props["lit"] = "false"
+        for pos in self._lamps:
+            self.blocks[pos][1]["lit"] = "true"
+        self._dirty = set(self._dust)
+
+    def _snapshot(self):
+        out = {}
+        for pos, (name, props) in self.blocks.items():
+            if name == DUST:
+                out[pos] = ("power", props["power"])
+            elif name == COMPARATOR:
+                out[pos] = ("powered", props["powered"], self.cmp_out.get(pos))
+            elif name in (REPEATER, OBSERVER, LEVER):
+                out[pos] = ("powered", props["powered"])
+            elif name in (M.TORCH, M.WALL_TORCH, M.LAMP):
+                out[pos] = ("lit", props["lit"])
+        return out
+
+    def _restore(self, snap):
+        for pos, rec in snap.items():
+            props = self.blocks[pos][1]
+            props[rec[0]] = rec[1]
+            if len(rec) == 3:
+                self.cmp_out[pos] = rec[2]
+        self._reseed()
+
+    def dc_solve_both(self, limit=200):
+        """Cold solve, then hot solve; returns (rounds_cold, conv_cold,
+        conv_hot, diff) where diff = {pos: (cold, hot)} over every cell whose
+        DC state differs between the two. An empty diff is the evidence that
+        the DC solution is unique on this bench (two seeds, not a proof). The
+        bench is left in the COLD solution."""
+        rounds, conv = self.dc_solve(limit)
+        cold = self._snapshot()
+        _, conv_hot = self.dc_solve(limit, seed="hot")
+        hot = self._snapshot()
+        diff = {p: (cold[p], hot[p]) for p in cold if cold[p] != hot[p]}
+        self._restore(cold)
+        return rounds, conv, conv_hot, diff
 
     def set_levers(self, values):
         """{pos: bool}, one settle for the lot (a vector is one edit)."""

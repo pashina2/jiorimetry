@@ -1,0 +1,35 @@
+{
+ "blocks": [
+  [
+   1,
+   1,
+   0,
+   "minecraft:repeater[facing=west]"
+  ],
+  [
+   3,
+   1,
+   0,
+   "minecraft:redstone_wire"
+  ],
+  [
+   4,
+   1,
+   0,
+   "minecraft:redstone_wire"
+  ],
+  [
+   4,
+   1,
+   1,
+   "minecraft:repeater[facing=north]"
+  ],
+  [
+   4,
+   1,
+   2,
+   "minecraft:repeater[facing=north]"
+  ]
+ ],
+ "barrels": {}
+}

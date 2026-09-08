@@ -13,7 +13,7 @@ source から書き起こした規則表から導出する**実験的なツー�
 |---|---|---|---|
 | 1 bit 全加算器 | 8/8 | 8/8、全 read 一致 | 配置して読み戻し 8/8 |
 | 1 bit ALU 1 段 `v7`（ADD / SUB / AND / OR。1 段であって tiling できる slice ではない — §3） | 32/32 | 32/32、read 1024/1024 | 配置、静止 comparator 23/23、lever 5 本 + lamp 2 個の給電器で駆動 |
-| bit slice `alu_slice_v9`（pitch 12、n=1/2/3 で tiling、契約 checker C1〜C6 PASS） | 32/32、128/128、512/512 | 未実施 | 未実施 |
+| bit slice `alu_slice_v9`（pitch 12、n=1/2/3 で tiling、契約 checker C1〜C6 PASS） | 32/32、128/128、512/512 | 2 slice: 128/128、read 14,976 点で不一致 0 | 未実施 |
 
 ---
 
@@ -90,6 +90,12 @@ layout の配置 lint 0。詳細と境界 cell の一覧は `docs/placement/slic
 world での走行。
 
 **第二 reviewer の訂正（2026-09-08）。** Astra が checker を読み、n bit の関数表しか検査していないこと、契約 2 条（through-line の出口を各 slice 内で 15 に戻す）が未測定で `v8` はそれに違反していること（P の出口 9、Wn の出口 12）を指摘しました。契約の各条項を直接測る第二の checker `tools/checks/alu_check_contract.py`（箱、slice ごとの through-line 入口 level、slice ごとの carry level、port の面、境界の組と slice ごとの局所真理値表、lint と repeater の側面 lock）を書き、検査しないものは docstring に明記しました。`v8` はこれに落ちます（512 行で through-line 不一致 1024）。`artifacts/layouts/alu_slice_v9.json` は出口の wire 2 個を west 向き repeater に置き換えたもの（block 数不変）で、両方の checker を通ります: n=1 32/32、n=2 128/128、n=3 512/512、契約 FAIL 0。契約 2 条項を改訂し、改訂は `docs/placement/slice-contract.ja.md` に、詳細は `docs/placement/slice1-result.md` §4（英語）に記録しました。
+
+**合成世界での 2 slice（WORLD-4、2026-09-08）。** `v9` を 2 slice 突き合わせ、給電器 41 block、n=2 の 128 行全部を headless 1.20.6 world で lever 駆動: r0、r1、f、slice 1 の through-line 入口、中間 carry、全 comparator の powered が read 14,976 点すべてで Bench と一致。記録 `docs/world/world4-record.md`、生データ `artifacts/world/world4b1..b3.run.result.json`（rcon 予算のため 3 run に分割）。
+
+### PLACER-0: 規則駆動の配置器と、world が見つけた latch
+
+オペレータは LLM が導出している部分のアルゴリズム化を求めました。PLACER-0（`tools/placer0/`、`docs/placement/placer0.md`）はその小さな実証です: ALU の断片から切り出した配置問題 6 つ（pin、出力 cell、禁止 cell、block 予算。`artifacts/placer0/problems.json`）、Bench を oracle にした判定器、DC 規則を逆向きに読んだ手で (部分配置, 未解決の要求) 上を探す IDA*。充足可能な 5 問を人の座標なしで 5/5 解きました（p3 は出題者の誤りで充足不能）。第二 reviewer（Astra）は、探索器と判定器が Bench の規則の穴を共有していると指摘し、大きくする前に 5 解を world で再生するよう求めました。WORLD-4 がそれで、14 行中 13 行が一致し、残る 1 行（`p4_throughline`、T = 0）は latch でした（§6）。Bench を修正し（pin は床、DC 解は cold と hot の 2 seed から）、修正後の判定器は旧 p4 解を落とし、配置器は 0.9 s で gain が減衰する loop の解を出し直しました（`artifacts/placer0/sol_p4_throughline.json`。latch する旧解は `sol_p4_throughline.latched.json` として保存）。
 
 ![alu_slice_v9 を 2 slice 並べた層別図（pitch 12、n=2 Bench 128/128、契約 C1〜C6 PASS）](artifacts/images/alu_slice_v9_x2_layers.png)
 
@@ -263,6 +269,8 @@ file を byte 単位で再現します。
 
 ---
 
+- **held pin は latch を隠す（WORLD-4、`p4_throughline` の T = 0）。** PLACER-0 の解は Bench の判定器も配置器の oracle（同じ Bench）も通ったのに world で latch しました: 解の relay が pin の dust を強給電し、T が一度 15 になると pin が自分で 15 を保つ。Bench が見えなかったのは、pin が回路から持ち上げられない固定値だったこと、そして cold start の反復は第 2 の不動点があっても 0 の不動点に歩くことの 2 つ。どちらも `tools/llmgen/capcell.py` で直しました: pin は床（隣と source の max）、`dc_solve_both` が cold と hot の seed から解いて 2 解が違う cell を報告します（`test_capcell.py` の `FloorAndLatchTests`）。修正後の Bench では旧 p4 が world の latch と同じ T = 0 で BISTABLE になり、この repository の他の layout は全部通ります。この失敗の型は第二 reviewer が走行前に予言し、world が実例を出しました。記録: `docs/world/world4-record.md` §7.1〜7.3。
+
 ## 7. 実測の費用
 
 **最終段のみ**（2026-09-07: 32/32 → 合成世界 → オペレータの world → 給電器 rig）のエージェント時間と token。
@@ -272,6 +280,8 @@ file を byte 単位で再現します。
 |---|---|---|---|
 | PLACE-ALU-3（32/32 の layout） | Fable | 12 分 | 145k |
 | WORLD-2（合成世界の走行） | Opus | 21 分 | 187k |
+| PLACER-0（規則駆動の配置器の実証） | Opus | 50 分 | 232k |
+| WORLD-4（PLACER-0 の 5 解 + v9 の 2 slice を合成世界で） | Opus | 46 分 | 296k |
 | in-world の marker 調査 | Sonnet | 3.4 分 | 108k |
 | in-world の marker 修正 | Opus | 35 分 | 111k |
 | RIG-1（空振り 1 回 + 本番） | Fable | 9 + 15.5 分 | 75k + 192k |
@@ -298,6 +308,8 @@ artifacts/layouts/ block 一覧と node の網（JSON）
 artifacts/programs/ 配置 program
 artifacts/rows/    行ごとの真理値表と node 値の表
 artifacts/world/   worldprobe の spec と結果（計測値は無改変、実行 metadata は redact 済み — PUBLICATION_CHECKLIST.md §3）、region の capture
+artifacts/placer0/ PLACER-0 の問題 6 つと配置器が見つけた解
+tools/placer0/     規則駆動の配置器と Bench を oracle にした判定器
 artifacts/images/  層別図と網の図
 tools/llmgen/      Bench（capcell）と、その土台の規則機械
 tools/checks/      上で使った掃引・checker・評価器

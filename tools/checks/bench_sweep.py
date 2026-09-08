@@ -30,7 +30,8 @@ def build(layout, pins):
             while n>0:
                 c=min(64,n); items.append({"id":"minecraft:cobblestone","count":c,"max_count":64}); n-=c
             be[pos]={"items":items}
-    return CC.Bench(blocks, block_entities=be, pinned=list(pins.keys()))
+    # pins are FLOORS (sources the circuit may raise), not held values: WORLD-4 p4 latch, 2026-09-08
+    return CC.Bench(blocks, block_entities=be, floors={pos: int(st["power"]) for pos, st in pins.items()})
 def read_out(b, pos):
     e=b.blocks.get(tuple(pos))
     if e is None: return None

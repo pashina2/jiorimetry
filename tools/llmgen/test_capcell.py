@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tools/llmgen/test_capcell.py -- falsifiers for capcell.py: the
+"""tools/workbench/llmgen/test_capcell.py -- falsifiers for capcell.py: the
 capture -> machine mapping, the Bench's observer / target / pinned / container
 rules, tiling and the identity vocabulary. Hermetic except one test that
 reads the committed B-?? capture when it is present."""
@@ -16,11 +16,9 @@ if str(HERE) not in sys.path:
 
 import capcell as CC                                       # noqa: E402
 import machine as M                                        # noqa: E402
-from library import DUST, LEVER, OBSERVER, COMPARATOR, SMOOTH_STONE   # noqa: E402
+from library import DUST, LEVER, OBSERVER, COMPARATOR, REPEATER, SMOOTH_STONE   # noqa: E402
 
-# The calibration capture of the operator's reference circuit is not part of
-# the public export; the tests that need it skip.
-CAPTURE = ROOT / "fixtures" / "reference" / "capture.r1.json"
+CAPTURE = ROOT / "notes" / "bench" / "artifacts" / "B-final" / "capture.r1.json"
 SOLIDITY = ROOT / "data" / "workbench" / "physics" / "solidity.json"
 
 
@@ -238,6 +236,58 @@ class GuardTests(unittest.TestCase):
     def test_cp932_guard(self):
         src = (HERE / "capcell.py").read_text(encoding="utf-8")
         self.assertIn('sys.stdout.reconfigure(errors="backslashreplace")', src)
+
+
+class FloorAndLatchTests(unittest.TestCase):
+    """floors: a pin is a source the circuit may raise; dc_solve_both: the
+    two-seed probe that finds the WORLD-4 p4 latch (2026-09-08)."""
+
+    def floor_rig(self, on):
+        return {
+            (0, 0, 0): (DUST, {"power": "0"}), (0, -1, 0): (SMOOTH_STONE, {}),
+            (1, 0, 0): (DUST, {"power": "0"}), (1, -1, 0): (SMOOTH_STONE, {}),
+            (2, 0, 0): (LEVER, {"face": "floor", "facing": "north", "powered": "true" if on else "false"}),
+            (2, -1, 0): (SMOOTH_STONE, {}),
+        }
+
+    def test_floored_dust_reads_the_max_of_its_floor_and_its_neighbours(self):
+        off = CC.Bench(self.floor_rig(False), floors={(0, 0, 0): 3})
+        off.dc_solve()
+        self.assertEqual(off.dust_powers([(0, 0, 0), (1, 0, 0)]), (3, 2))
+        on = CC.Bench(self.floor_rig(True), floors={(0, 0, 0): 3})
+        on.dc_solve()
+        self.assertEqual(on.dust_powers([(0, 0, 0), (1, 0, 0)]), (14, 15))
+
+    def latch_rig(self):
+        """WORLD-4 sol_p4: pin dust (0,1,1) -> repeater (0,1,2) facing north -> relay (0,1,3)
+        -> dust (1,1,3) -> repeater (1,1,2) facing south -> relay (1,1,1), which touches the pin."""
+        return {
+            (0, 1, 1): (DUST, {"power": "0"}), (0, 0, 1): (SMOOTH_STONE, {}),
+            (0, 1, 2): (REPEATER, {"facing": "north", "delay": "1", "locked": "false", "powered": "false"}),
+            (0, 0, 2): (SMOOTH_STONE, {}),
+            (0, 1, 3): (SMOOTH_STONE, {}),
+            (1, 1, 3): (DUST, {"power": "0"}), (1, 0, 3): (SMOOTH_STONE, {}),
+            (1, 1, 2): (REPEATER, {"facing": "south", "delay": "1", "locked": "false", "powered": "false"}),
+            (1, 0, 2): (SMOOTH_STONE, {}),
+            (1, 1, 1): (SMOOTH_STONE, {}),
+        }
+
+    def test_a_held_pin_hides_the_latch_and_a_floored_pin_shows_it(self):
+        held = CC.Bench(self.latch_rig(), pinned={(0, 1, 1)})
+        _, conv, conv_hot, diff = held.dc_solve_both()
+        self.assertTrue(conv and conv_hot)
+        self.assertEqual(diff, {})
+        floored = CC.Bench(self.latch_rig(), floors={(0, 1, 1): 0})
+        rounds, conv, conv_hot, diff = floored.dc_solve_both()
+        self.assertTrue(conv and conv_hot)
+        self.assertIn((0, 1, 1), diff)
+        self.assertEqual(diff[(0, 1, 1)], (("power", "0"), ("power", "15")))
+        # left in the cold solution
+        self.assertEqual(floored.dust_powers([(0, 1, 1)]), (0,))
+        lit = CC.Bench(self.latch_rig(), floors={(0, 1, 1): 15})
+        _, conv, conv_hot, diff = lit.dc_solve_both()
+        self.assertEqual(diff, {})
+        self.assertEqual(lit.dust_powers([(0, 1, 1), (1, 1, 3)]), (15, 15))
 
 
 if __name__ == "__main__":

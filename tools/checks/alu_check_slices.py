@@ -34,7 +34,9 @@ def run(lay,n,A,B,k,P,Wn):
     for i in range(n):
         for key,val in (("a",(A>>i)&1),("b",(B>>i)&1)):
             c=S["ports"][key]; pins[(c[0]+i*PX,c[1],c[2])]={"power":3*val}
-    bench=BS.build(T,pins); rnd,conv=bench.dc_solve()
+    bench=BS.build(T,pins); rnd,conv,conv_hot,diff=bench.dc_solve_both()
+    if diff: print("BISTABLE",{"A":A,"B":B,"k":k,"P":P,"Wn":Wn},sorted(diff.items())[:4]); conv=False
+    conv=conv and conv_hot
     rs=[read(bench,(S["ports"]["r"][0]+i*PX,S["ports"]["r"][1],S["ports"]["r"][2])) for i in range(n)]
     f=read(bench,(S["ports"]["f"][0]+(n-1)*PX,S["ports"]["f"][1],S["ports"]["f"][2]))
     return rs,f,conv,bench

@@ -51,7 +51,9 @@ def run(lay,a,b,k,P,Wn):
     pins={}
     for key,lv in (("a",3*a),("b",3*b),("k",3*k),("P",P),("Wn",Wn)):
         for c in lay["pins"][key]: pins[tuple(c)]={"power":lv}
-    bench=BS.build(lay,pins); rnd,conv=bench.dc_solve()
+    bench=BS.build(lay,pins); rnd,conv,conv_hot,diff=bench.dc_solve_both()
+    if diff: print("BISTABLE",{"a":a,"b":b,"k":k,"P":P,"Wn":Wn},sorted(diff.items())[:4]); conv=False
+    conv=conv and conv_hot
     return read(bench,lay["reads"]["r"]), read(bench,lay["reads"]["f"]), conv, bench
 if __name__=="__main__":
     lay=json.load(open(sys.argv[1],encoding="utf-8")); verbose='-v' in sys.argv

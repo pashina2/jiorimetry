@@ -1,0 +1,55 @@
+{
+ "blocks": [
+  [
+   0,
+   1,
+   3,
+   "minecraft:redstone_wire"
+  ],
+  [
+   1,
+   1,
+   3,
+   "minecraft:repeater[facing=west]"
+  ],
+  [
+   2,
+   1,
+   2,
+   "minecraft:barrel[facing=up,open=false]"
+  ],
+  [
+   2,
+   1,
+   3,
+   "minecraft:comparator[facing=north,mode=subtract]"
+  ],
+  [
+   2,
+   1,
+   4,
+   "minecraft:comparator[facing=north,mode=subtract]"
+  ],
+  [
+   3,
+   1,
+   3,
+   "minecraft:repeater[facing=east]"
+  ],
+  [
+   4,
+   1,
+   3,
+   "minecraft:repeater[facing=east]"
+  ],
+  [
+   5,
+   1,
+   3,
+   "minecraft:redstone_wire"
+  ]
+ ],
+ "barrels": {
+  "2,1,2": 247
+ }
+}

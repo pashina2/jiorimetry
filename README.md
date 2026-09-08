@@ -15,7 +15,7 @@ Two artifacts exist so far:
 |---|---|---|---|
 | 1-bit full adder | 8/8 | 8/8, all reads matched | placed and read, 8/8 |
 | 1-bit ALU stage `v7` (ADD / SUB / AND / OR; one stage, not a tiling slice — section 3) | 32/32 | 32/32, 1024/1024 reads | placed, 23/23 static comparators, driven by a 5-lever rig with two lamps |
-| bit slice `alu_slice_v9` (pitch 12, tiled n=1/2/3; contract checker C1-C6 PASS) | 32/32, 128/128, 512/512 | not yet run | not yet run |
+| bit slice `alu_slice_v9` (pitch 12, tiled n=1/2/3; contract checker C1-C6 PASS) | 32/32, 128/128, 512/512 | two slices: 128/128, 14,976 read points 0 mismatches | not yet run |
 
 ---
 
@@ -91,6 +91,12 @@ two level-9), 1 redstone block, 1 torch, 96 smooth stone. Box 11 × 3 × 12.
 The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input needed three cells (one outside the pitch), the second `P` entry and the `Wn` row were not through-lines, and its east edge was not closed. The operator ruled that bit-slice abutment and pitch alignment had to be met before any second stage. A slice contract was written (`docs/placement/slice-contract.md`) and an n-slice checker (`tools/checks/alu_check_slices.py`) that tiles a layout by its pitch and solves the n-bit ALU function for all inputs and modes. Result `artifacts/layouts/alu_slice_v8.json` (pitch 12, box 12x4x14, 292 blocks: comparator 50, repeater 15, wire 55, barrel 7): n=1 32/32, n=2 128/128, n=3 512/512, placement lint 0 on the tiled layout. Details and the boundary cell list: `docs/placement/slice1-result.md`; two-slice layer map: `artifacts/images/alu_slice_v8_x2_layers.png`. Not yet done: the two-slice run in a synthetic world and in the operator's world.
 
 **Second reviewer's correction (2026-09-08).** Astra read the checker and found that it verifies the n-bit function table only: clause 2 of the contract (the through-line exit restored to 15 inside each slice) was never measured, and `v8` violates it (P exits at 9, Wn at 12). A second checker, `tools/checks/alu_check_contract.py`, now measures every clause directly (box, through-line entry level per slice, carry level per slice, port faces, boundary pairs and per-slice local truth table, lint and repeater side lock) and states in its docstring what it does not check. `v8` fails it (1024 through-line mismatches over 512 rows). `artifacts/layouts/alu_slice_v9.json` replaces the two exit wires with repeaters facing west (block count unchanged) and passes both checkers: n=1 32/32, n=2 128/128, n=3 512/512, contract 0 FAIL. Two contract clauses were amended and the amendment is recorded in `docs/placement/slice-contract.md`; details in `docs/placement/slice1-result.md` section 4.
+
+**Two slices in the synthetic world (WORLD-4, 2026-09-08).** Two abutting `v9` slices, 41 feeder blocks, all 128 rows of n=2 driven by levers in a headless 1.20.6 world: r0, r1, f, the slice-1 through-line entries, the intermediate carry and every comparator's powered state agree with the Bench at all 14,976 read points. Record `docs/world/world4-record.md`, raw `artifacts/world/world4b1..b3.run.result.json` (three runs because of the rcon budget).
+
+### PLACER-0: a rule-driven placer, and the latch the world found
+
+The operator asked for the LLM-derived part to be algorithmised. PLACER-0 (`tools/placer0/`, `docs/placement/placer0.md`) is a small pilot: six placement problems cut from the ALU fragments (pins, output cells, forbidden cells, a block budget; `artifacts/placer0/problems.json`), a Bench-oracle judge, and an IDA* search over (partial layout, unresolved requirements) whose moves are the DC rules read backwards. It solved 5 of the 5 satisfiable problems with no human coordinates (p3 was unsatisfiable by the problem author's mistake). The second reviewer (Astra) then pointed out that the searcher and the judge share the Bench's rule gaps, and asked for the five solutions to be replayed in a world before anything larger was built. WORLD-4 did that: 13 of the 14 rows matched, and the one that did not (`p4_throughline`, T = 0) is a latch — see section 6. The Bench was corrected (pins are floors, and every DC solve now runs from a cold and a hot seed), the corrected judge rejects the old p4 solution, and the placer re-solved p4 in 0.9 s with a loop whose gain decays instead (`artifacts/placer0/sol_p4_throughline.json`; the latched one is kept as `sol_p4_throughline.latched.json`).
 
 ![Two abutting slices of `alu_slice_v9`, layer by layer (pitch 12; n=2 Bench 128/128; contract C1-C6 PASS).](artifacts/images/alu_slice_v9_x2_layers.png)
 
@@ -271,6 +277,19 @@ mod is distributed here.
 
 ---
 
+- **A held pin hides a latch (WORLD-4, `p4_throughline` at T = 0).** The PLACER-0 solution
+  passed the Bench judge and the placer's oracle (the same Bench) and latched in the world:
+  a solution relay strongly powered the pin dust, so after T had been 15 the pin held
+  itself at 15. The Bench could not see it because a pinned cell was a HELD value that the
+  circuit could not raise, and because a cold-start iteration walks to the 0 fixed point even
+  when a second one exists. Both are fixed in `tools/llmgen/capcell.py`: a pin is now a
+  floor (max of neighbours and source), and `dc_solve_both` solves from a cold and a hot
+  seed and reports the cells on which the two solutions differ (`test_capcell.py`,
+  `FloorAndLatchTests`). Under the corrected Bench the old p4 is BISTABLE at T = 0 exactly
+  where the world latched, and every other layout in this repository still passes. The class
+  of failure had been predicted by the second reviewer before the run; the world supplied the
+  instance. Record: `docs/world/world4-record.md` sections 7.1-7.3.
+
 ## 7. Measured costs
 
 Agent time and tokens for the **closing stage only** (2026-09-07: 32/32 → synthetic world →
@@ -280,6 +299,8 @@ operator's world → feeder rig). Earlier stages are not instrumented to the sam
 |---|---|---|---|
 | PLACE-ALU-3 (the 32/32 layout) | Fable | 12 min | 145k |
 | WORLD-2 (synthetic world run) | Opus | 21 min | 187k |
+| PLACER-0 (rule-driven placer pilot) | Opus | 50 min | 232k |
+| WORLD-4 (five PLACER-0 solutions + two v9 slices in a synthetic world) | Opus | 46 min | 296k |
 | in-world marker investigation | Sonnet | 3.4 min | 108k |
 | in-world marker fix | Opus | 35 min | 111k |
 | RIG-1 (one aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
@@ -306,6 +327,8 @@ artifacts/layouts/ block lists and node networks (JSON)
 artifacts/programs/ placement programs
 artifacts/rows/    per-row truth tables and node value tables
 artifacts/world/   worldprobe specs and results (measured values unchanged; run metadata redacted — PUBLICATION_CHECKLIST.md section 3), and region captures
+artifacts/placer0/ the six PLACER-0 problems and the solutions the placer found
+tools/placer0/     the rule-driven placer and its Bench-oracle judge
 artifacts/images/  layer maps and network diagrams
 tools/llmgen/      the Bench (capcell) and the rule machine it runs on
 tools/checks/      the sweeps, checkers and evaluators used above
