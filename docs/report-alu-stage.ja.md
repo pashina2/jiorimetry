@@ -1,14 +1,14 @@
-# ALU 1 段 — ゼロベースから貴方の world まで（レポート、2026-09-08）
+# ALU 1 段 — ゼロベースからオペレータの world まで（レポート、2026-09-08）
 
 > English: [report-alu-stage.md](report-alu-stage.md)
 
-DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1 → 貴方の world の full adder、REUSE-1、ALU-1、PLACE-ALU-1/2、T6 30/32）は DIRECTOR 7（`f9d66fa1`）の仕事で、本書はそれを引き継いで 32/32 → 合成世界 → 貴方の world → 給電器までを閉じた記録。非正典（`notes/**`）。時刻は UTC。
+DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1 → オペレータの world の full adder、REUSE-1、ALU-1、PLACE-ALU-1/2、T6 30/32）は DIRECTOR 7（`f9d66fa1`）の仕事で、本書はそれを引き継いで 32/32 → 合成世界 → オペレータの world → 給電器までを閉じた記録。非正典（`notes/**`）。時刻は UTC。
 
 ---
 
 ## 0. 一言で
 
-**1 bit の ALU slice（ADD / SUB / AND / OR）を、Minecraft 1.20.6 の source から書いた規則表と代数だけから機械が導き、Bench（規則の写し）→ 合成 vanilla world → 貴方の world の 3 段で検算し、貴方が lever 5 本で 32 行全部を手で確かめられる状態にした。** 既存の redstone 回路も、貴方の経験も、設計の前提には入れていない（§1 に何を渡し、何を渡さなかったかを書く）。
+**1 bit の ALU slice（ADD / SUB / AND / OR）を、Minecraft 1.20.6 の source から書いた規則表と代数だけから機械が導き、Bench（規則の写し）→ 合成 vanilla world → オペレータの world の 3 段で検算し、lever 5 本で 32 行全部を手で確かめられる状態にした。** 既存の redstone 回路も、オペレータの経験も、設計の前提には入れていない（§1 に何を渡し、何を渡さなかったかを書く）。
 
 ---
 
@@ -23,7 +23,7 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 | PLACE-ALU-3（ALU の配置、本書） | Fable エージェント、blind ではない | 規則表 v2 `docs/rules/facts-dc-v2.md`、配置の事実表、VERT-1 の規則 `docs/rules/facts-vertical.md`、T6（30/32）、当エージェントの解析（§3） | オペレータの既存参照回路、web | `docs/placement/placealu3-result.md` 32/32 |
 | RIG-1（給電器） | Fable エージェント | 上記 + WORLD-1/2 の給電器の形 | 同上 | `docs/placement/rig1.md` 32/32 |
 
-ゼロベースの実体は **規則表が source 由来で回路の形を含まないこと**、**代数の最初の段が blind で出たこと**、**以後の段はこの開発で検証した物だけを再利用したこと**の 3 つ。B-??（貴方の既存回路）は Bench の較正点であって、エージェントには渡していない（線 §8.4、`notes/2026-09-07-rebuild-line.md`）。
+ゼロベースの実体は **規則表が source 由来で回路の形を含まないこと**、**代数の最初の段が blind で出たこと**、**以後の段はこの開発で検証した物だけを再利用したこと**の 3 つ。B-??（オペレータの既存回路）は Bench の較正点であって、エージェントには渡していない（線 §8.4、`notes/2026-09-07-rebuild-line.md`）。
 
 方針の出所: オペレータと第二モデルの査読者（2026-09-08 19:01Z）が定めた方針 — 既存回路の解法やオペレータの経験を設計の前提にしない、規則と実験で詰める、検証済み構成の再利用は可、未知の接続はオペレータに尋ねず小さく検証する（`docs/alu-place-handover.md` 冒頭）。
 
@@ -68,14 +68,14 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 |---|---|---|---|
 | Bench | `tools/llmgen/capcell.py` の `Bench`（規則の写し、B-?? で較正）、pin 固定 | **32/32**、r/f は正確に {0,3} | `artifacts/rows/alu_stage_v7.json.rows.json` |
 | 合成世界（WORLD-2） | headless vanilla 1.20.6、void world、lever 給電（compare gate + barrel 247 + side wire、lever ON = bit 0）、worldprobe で freeze/step、warm-up 32 + 本番 32 regime | **r/f 32/32、全 read 1024/1024**（comparator 23 + 給電器の powered 込み）、settle 2..14 gt、rcon 103,169 | `artifacts/world/world2.run.result.json`（untouched）、`record.md`（予測を先に書いた 2 段構成） |
-| 貴方の world（LIVE-ALU） | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + barrel 6 個（bow 5 / 16 本）、region file の読み（regioncap） | 配置 176/176、静止 comparator **23/23**、ADD 0+0+1 → r 3 / f 0、SUB 0−0−1 → r 3 / f 3、**24/24** | `docs/world/live-alu-record.md`、capture 3 本 |
+| オペレータの world（LIVE-ALU） | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + barrel 6 個（bow 5 / 16 本）、region file の読み（regioncap） | 配置 176/176、静止 comparator **23/23**、ADD 0+0+1 → r 3 / f 0、SUB 0−0−1 → r 3 / f 3、**24/24** | `docs/world/live-alu-record.md`、capture 3 本 |
 | 給電器（RIG-1） | lever 5 本、composter[level=3] ×4（block entity なし）、lamp 2、93 block、`/aiwb place alu_stage_v7_rig1 6001 131 -4114` | Bench 32/32（lever 状態だけから）、world で SUB 1−0−0 → r 3 点灯 / f 0 消灯、comparator 23/23 | `docs/placement/rig1.md`、`rig1-result.md`、capture |
 
 Bench が隠して world で見えた 3 点（全部 world で確認済み）: dummy comparator の wire 形状、pin の隣の強給電 relay（as ≤ a、as ≤ 3 で値は不変）、置いた直後の block update 不在（warm-up が要る = WORLD-1/2 の機構と同じ）。
 
 ---
 
-## 5. 操作の手引き（貴方の world）
+## 5. 操作の手引き（オペレータの world）
 
 origin (6005,133,−4113)、y=133 床 / 134 主層 / 135 cluster。
 
@@ -104,15 +104,15 @@ lamp: r = 6011 135 -4103、f = 6014 134 -4111（点灯 = 1）。mark 10 個（IN
 | RIG-1（空振り + 本番） | Fable | 9 + 15.5 分 | 75k + 192k |
 | 合計 | | ≈ 1.6 h のエージェント時間 | ≈ 820k |
 
-貴方の act: 配置 3 回、barrel の手詰め 6 個、restart 2 回、lever。当エージェントの失点: in-game に無い旗 `--no-backup-gate` の案内、256 字を超える `/data merge` 行、表の座標に U+2212 を使い `Expected integer` を招いた（記憶に登録）、発注書の書き込みが権限で落ちて Fable エージェント 1 本が空振り。
+オペレータの act: 配置 3 回、barrel の手詰め 6 個、restart 2 回、lever。当エージェントの失点: in-game に無い旗 `--no-backup-gate` の案内、256 字を超える `/data merge` 行、表の座標に U+2212 を使い `Expected integer` を招いた（記憶に登録）、発注書の書き込みが権限で落ちて Fable エージェント 1 本が空振り。
 
 ---
 
 ## 7. 主張の範囲と、しないこと
 
-- **主張**: 1 bit ALU slice が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → 貴方の world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
+- **主張**: 1 bit ALU slice が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → オペレータの world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
 - **しない**: 8 段、tiling（a3 pin が x=10 に出ているので pitch ≥ 11 か折り返し）、速度、既存参照回路との密度比較（費用は絶対値で報告する方針）、および仕様変更に対する無改修性（R0 の 3 条件）。
-- 32 行全部を貴方の world で回した記録はまだ無い（給電は lever なので、貴方が回すか、rig を写しの world に置いて worldprobe で自動掃引する = ブラッシュアップ D）。
+- 32 行全部をオペレータの world で回した記録はまだ無い（給電は lever なので、オペレータが回すか、rig を写しの world に置いて worldprobe で自動掃引する = ブラッシュアップ D）。
 
 ---
 
@@ -122,7 +122,7 @@ lamp: r = 6011 135 -4103、f = 6014 134 -4111（点灯 = 1）。mark 10 個（IN
 - **B** barrel を composter に（K3 4 個は可。K9 2 個は composter の上限 8 なので、定数 8 で組み直す代数の変更が要る）
 - **C** 入力側にも lamp（lever の向きでなく level で見える）
 - **D** rig 込みで 32 行を自動掃引（写しの world + worldprobe）
-- **E** 2 段目の接合（f(i) → k(i+1)、P / Wn の通し）— 貴方の go 待ち
+- **E** 2 段目の接合（f(i) → k(i+1)、P / Wn の通し）— オペレータの go 待ち
 
 ---
 

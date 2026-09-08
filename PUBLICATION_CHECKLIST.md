@@ -4,7 +4,9 @@ Run before the repository is made public. Every command below is run from the re
 root. `--exclude-dir=.git` and `--binary-files=without-match` are used throughout, so PNG
 byte coincidences do not count as hits.
 
-Last run: 2026-09-08, against the tree committed as `ed024a7` (13 commits, 119 tracked files).
+Last run: 2026-09-08, re-run after the terminology change described in section 6.
+119 tracked files. Commit hashes are not cited here: every hash in this repository changed
+once, when the commit author was corrected before publication.
 
 ## 1. Scans
 
@@ -19,7 +21,7 @@ file does not itself contain the literal strings it forbids. The regexes still m
 | operator's account name | `pas[i]s` | **0** | 0 |
 | e-mail addresses | `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}` | **0** | 0 |
 | absolute Windows paths | `[a-z]:[\\/]users` | **0** | 0 |
-| session identifiers | RFC-4122 UUID | **0** | 0 |
+| session identifiers, full form | RFC-4122 UUID | **0** | 0 |
 | API keys | `api[_-]?key` | **0** | 0 |
 | private key material | `BEGIN [A-Z ]*PRIVATE` | **0** | 0 |
 | secrets | `\bsecret\b` | **0** | 0 |
@@ -40,6 +42,9 @@ line:
 - `\btoken\b` — 14 hits, all LLM token counts in cost tables. No credentials.
 - `password` — 9 hits, all the *name* of an RCON command-line flag (`--password`) or of a
   file the reader must create themselves (`rcon-password.txt`). No values.
+
+A pattern table only finds what its patterns describe. Section 6 lists the internal
+references these patterns cannot match, which are present and are kept on purpose.
 
 Reproduce:
 
@@ -101,8 +106,38 @@ lines are pasted verbatim in `README.md` section 5.
 - 119 files, 2,306,365 bytes (2.2 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all four commands in section 4 produce the results quoted above.
-- No git remote is configured. Publishing is the operator's act.
+- Published by the operator on 2026-09-08 to a **private** GitHub repository first, so that
+  the rendering could be checked before anyone else could read it. Making it public is a
+  separate act by the operator.
 
+
+## 6. Internal references deliberately kept
+
+A second scan on 2026-09-08 looked for internal references that the pattern table in
+section 1 cannot match. They are present and are kept. None is a credential, a personal
+detail, or a real address.
+
+| what | example | where | why it stays |
+|---|---|---|---|
+| development session short ids | `0c3d10be`, `f9d66fa1`, `3ef098ad` | 11 files, in document titles | they say which run wrote which document — the thing section 4 of the README makes claims about |
+| internal role names | `DIRECTOR 7`, `DIRECTOR 8`, `CONDUCTOR 6` | document titles | same |
+| the placement command of an unpublished mod | `/aiwb place <program> <x> <y> <z>` | 9 files | `tools/llmgen/cell_to_program.py` exists to emit those lines; deleting them would delete the tool's output format. The mod itself is not distributed |
+| coordinates in the operator's single-player save | `6005 133 -4113`, `6001 131 -4114` | 5 files | they are the placement origin the records were taken at, in a world no one else can reach |
+| paths in the private development repository | `tools/workbench/…`, `data/workbench/…`, `notes/…` | documents and tool docstrings | they record where a rule came from. They do not resolve here — section 3 already says this of `notes/…` |
+| internal decision ids | `ADR-…`, `OC-…`, `PROV-…`, `GAP-7`, `M9`, `M12`, `M15` | mostly tool docstrings | same |
+
+The section 1 row "session identifiers, full form" covers the RFC-4122 form only. The
+8-hex short ids above are session identifiers too and were never removed. That row is not
+a claim that every session identifier is gone; before this section existed it could be
+read as one.
+
+Two things were changed rather than kept:
+
+- The report pair `docs/report-alu-stage.md` / `.ja.md` addressed the operator in the
+  second person ("your world", "Your acts"). It now names the operator in the third
+  person, because the reader of a public document is not the person being addressed.
+- One term was normalised across every file: one model instance working from a written
+  order is called an **agent**.
 
 ## Amendment (2026-09-08, operator ruling)
 

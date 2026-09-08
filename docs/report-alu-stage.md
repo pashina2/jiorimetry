@@ -1,14 +1,14 @@
-# The 1-stage ALU — from zero base to your world (report, 2026-09-08)
+# The 1-stage ALU — from zero base to the operator's world (report, 2026-09-08)
 
 > 日本語: [report-alu-stage.ja.md](report-alu-stage.ja.md)
 
-DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORLD-1 → the full adder in your world, REUSE-1, ALU-1, PLACE-ALU-1/2, T6 30/32) was the work of DIRECTOR 7 (`f9d66fa1`); this document takes that over and is the record of closing 32/32 → the synthetic world → your world → the feeder rig. Non-canonical (`notes/**`). Times are UTC.
+DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORLD-1 → the full adder in the operator's world, REUSE-1, ALU-1, PLACE-ALU-1/2, T6 30/32) was the work of DIRECTOR 7 (`f9d66fa1`); this document takes that over and is the record of closing 32/32 → the synthetic world → the operator's world → the feeder rig. Non-canonical (`notes/**`). Times are UTC.
 
 ---
 
 ## 0. In one sentence
 
-**A 1-bit ALU slice (ADD / SUB / AND / OR) was derived by a machine from nothing but a rule table written out of the Minecraft 1.20.6 source and the algebra, checked in three stages — the Bench (a replica of the rules) → a synthetic vanilla world → your world — and brought to a state where you can verify all 32 rows by hand with 5 levers.** Neither existing redstone circuits nor your own experience entered the premises of the design (§1 records what was handed over and what was not).
+**A 1-bit ALU slice (ADD / SUB / AND / OR) was derived by a machine from nothing but a rule table written out of the Minecraft 1.20.6 source and the algebra, checked in three stages — the Bench (a replica of the rules) → a synthetic vanilla world → the operator's world — and brought to a state where all 32 rows can be verified by hand with 5 levers.** Neither existing redstone circuits nor the operator's own experience entered the premises of the design (§1 records what was handed over and what was not).
 
 ---
 
@@ -23,7 +23,7 @@ DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORL
 | PLACE-ALU-3 (the ALU placement, this document) | a Fable agent, not blind | the rule table v2 `docs/rules/facts-dc-v2.md`, the placement rule sheet, the VERT-1 rules `docs/rules/facts-vertical.md`, T6 (30/32), this agent's analysis (§3) | the operator's existing reference circuit, the web | `docs/placement/placealu3-result.md` 32/32 |
 | RIG-1 (the feeder rig) | a Fable agent | the above + the feeder shape from WORLD-1/2 | the same | `docs/placement/rig1.md` 32/32 |
 
-The substance of "zero base" is three things: **the rule tables come from the source and contain no circuit shapes**, **the first stage of the algebra came out blind**, and **every stage after that reused only what had been verified inside this development**. B-?? (your existing circuit) is a calibration point for the Bench and was never handed to an agent (the line, §8.4, `notes/2026-09-07-rebuild-line.md`).
+The substance of "zero base" is three things: **the rule tables come from the source and contain no circuit shapes**, **the first stage of the algebra came out blind**, and **every stage after that reused only what had been verified inside this development**. B-?? (the operator's pre-existing circuit) is a calibration point for the Bench and was never handed to an agent (the line, §8.4, `notes/2026-09-07-rebuild-line.md`).
 
 The origin of the policy: the operator and Astra (second-model reviewer) (2026-09-08 19:01Z) set it — do not take the solutions of existing circuits or the operator's experience as premises of the design, settle things with rules and experiments, reuse of verified constructions is allowed, and an unknown connection is verified in the small rather than put to the operator as a question (`docs/alu-place-handover.md`, opening).
 
@@ -68,14 +68,14 @@ The node values for the 32 rows: `artifacts/rows/node_values.txt`. 32/32 on this
 |---|---|---|---|
 | Bench | the `Bench` in `tools/llmgen/capcell.py` (a replica of the rules, calibrated on B-??), pins fixed | **32/32**, r/f land exactly on {0,3} | `artifacts/rows/alu_stage_v7.json.rows.json` |
 | synthetic world (WORLD-2) | headless vanilla 1.20.6, void world, lever feeding (compare gate + barrel 247 + side wire, lever ON = bit 0), freeze/step with worldprobe, a regime of 32 warm-up + 32 real | **r/f 32/32, all reads 1024/1024** (comparator 23 + the powered state of the feeders), settle 2..14 gt, rcon 103,169 | `artifacts/world/world2.run.result.json` (untouched), `record.md` (a two-part structure in which the prediction was written first) |
-| your world (LIVE-ALU) | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + 6 barrels (5 / 16 bows), reading the region files (regioncap) | 176/176 placed, **23/23** comparators at rest, ADD 0+0+1 → r 3 / f 0, SUB 0−0−1 → r 3 / f 3, **24/24** | `docs/world/live-alu-record.md`, 3 captures |
+| the operator's world (LIVE-ALU) | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + 6 barrels (5 / 16 bows), reading the region files (regioncap) | 176/176 placed, **23/23** comparators at rest, ADD 0+0+1 → r 3 / f 0, SUB 0−0−1 → r 3 / f 3, **24/24** | `docs/world/live-alu-record.md`, 3 captures |
 | the feeder rig (RIG-1) | 5 levers, composter[level=3] ×4 (no block entity), 2 lamps, 93 blocks, `/aiwb place alu_stage_v7_rig1 6001 131 -4114` | Bench 32/32 (from the lever states alone), and in the world SUB 1−0−0 → r 3 lit / f 0 dark, comparators 23/23 | `docs/placement/rig1.md`, `rig1-result.md`, a capture |
 
 Three things the Bench hid and the world showed (all of them since confirmed in the world): the wire shape of the dummy comparator; the strongly powered relay next to a pin (as ≤ a, and with as ≤ 3 the value is unchanged); and the absence of a block update immediately after placement (a warm-up is needed = the same mechanism as WORLD-1/2).
 
 ---
 
-## 5. Operating instructions (your world)
+## 5. Operating instructions (the operator's world)
 
 Origin (6005,133,−4113); y=133 is the floor, 134 the main layer, 135 the cluster.
 
@@ -104,15 +104,15 @@ Example: all OFF = SUB 1−1−1 → r lit, f lit. Wn ON = ADD 1+1+1 = 3 → the
 | RIG-1 (an aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
 | total | | ≈ 1.6 h of agent time | ≈ 820k |
 
-Your acts: 3 placements, filling 6 barrels by hand, 2 restarts, the levers. This agent's misses: guiding you to a flag `--no-backup-gate` that does not exist in game; a `/data merge` line over 256 characters; using U+2212 in the coordinates of a table, which brought on `Expected integer` (recorded to memory); and an order whose write failed on permissions, which cost one Fable agent an aborted stage.
+The operator's acts: 3 placements, filling 6 barrels by hand, 2 restarts, the levers. This agent's misses: guiding the operator to a flag `--no-backup-gate` that does not exist in game; a `/data merge` line over 256 characters; using U+2212 in the coordinates of a table, which brought on `Expected integer` (recorded to memory); and an order whose write failed on permissions, which cost one Fable agent an aborted stage.
 
 ---
 
 ## 7. The scope of the claim, and what is not claimed
 
-- **Claimed**: a 1-bit ALU slice, in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → your world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
+- **Claimed**: a 1-bit ALU slice, in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → the operator's world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
 - **Not claimed**: 8 stages; tiling (the a3 pin sticks out at x=10, so either pitch ≥ 11 or a fold-back); speed; a density comparison against an existing reference circuit (the policy is to report costs in absolute numbers); and immunity from rework under a change of specification (the 3 conditions of R0).
-- There is still no record of all 32 rows having been run in your world (the feeding is by lever, so either you run them, or the rig is placed in a copy of the world and swept automatically with worldprobe = brush-up D).
+- There is still no record of all 32 rows having been run in the operator's world (the feeding is by lever, so either the operator runs them, or the rig is placed in a copy of the world and swept automatically with worldprobe = brush-up D).
 
 ---
 
@@ -122,7 +122,7 @@ Your acts: 3 placements, filling 6 barrels by hand, 2 restarts, the levers. This
 - **B** barrels → composters (the 4 K3 are possible; the 2 K9 are not, since a composter tops out at 8, so it needs a change of algebra that rebuilds around the constant 8)
 - **C** lamps on the input side too (visible by level rather than by lever orientation)
 - **D** an automatic sweep of the 32 rows with the rig included (a copy of the world + worldprobe)
-- **E** the joining of a second stage (f(i) → k(i+1), passing P / Wn through) — awaiting your go
+- **E** the joining of a second stage (f(i) → k(i+1), passing P / Wn through) — awaiting the operator's go
 
 ---
 
