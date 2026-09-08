@@ -319,7 +319,6 @@ records.
   reference circuit used to calibrate the Bench.
 - Derivations, placements and tooling by LLM seats (Claude Fable 5.1 / Opus 5) under the
   operator's direction.
-- One design suggestion and two error corrections came from Astra — second-model reviewer (design critique, independent re-checks).
 
 MIT licensed — see [LICENSE](LICENSE).
 
