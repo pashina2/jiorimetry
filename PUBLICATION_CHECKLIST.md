@@ -4,7 +4,7 @@ Run before the repository is made public. Every command below is run from the re
 root. `--exclude-dir=.git` and `--binary-files=without-match` are used throughout, so PNG
 byte coincidences do not count as hits.
 
-Last run: 2026-09-08, against the tree committed as the initial commit.
+Last run: 2026-09-08, against the tree committed as `ed024a7` (13 commits, 119 tracked files).
 
 ## 1. Scans
 
@@ -27,6 +27,8 @@ file does not itself contain the literal strings it forbids. The regexes still m
 | X / Twitter material | `x\.com`, `twit[t]er` | **0** | 0 |
 | operator's save path | `saves/[c]pu` | **0** | 0 |
 | withheld reference-circuit directory | `notes/[b]ench` | **0** | 0 |
+| decompiled game source (imports) | `import\s+net\.mine[c]raft` | **0** | 0 |
+| decompiled game source (class bodies) | `public\s+class\s+\w*Blo[c]k` | **0** | 0 |
 
 The counts above are for the export excluding this file's own English labels: the words
 "Discord" and "Twitter" appear here three times as the *names* of the categories being
@@ -94,9 +96,9 @@ lines are pasted verbatim in `README.md` section 5.
 
 ## 5. Hygiene
 
-- Line endings: LF everywhere (0 files contain CRLF).
+- Line endings: LF everywhere (0 of the 112 text files contain CRLF; the 7 PNGs are binary).
 - No `__pycache__`, no `.pyc`, no build output committed.
-- 105 files, 2.2 MB total.
+- 119 files, 2,306,365 bytes (2.2 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all four commands in section 4 produce the results quoted above.
 - No git remote is configured. Publishing is the operator's act.
