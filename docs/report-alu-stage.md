@@ -25,7 +25,7 @@ DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORL
 
 The substance of "zero base" is three things: **the rule tables come from the source and contain no circuit shapes**, **the first stage of the algebra came out blind**, and **every stage after that reused only what had been verified inside this development**. B-?? (the operator's pre-existing circuit) is a calibration point for the Bench and was never handed to an agent (the line, §8.4, `notes/2026-09-07-rebuild-line.md`).
 
-The origin of the policy: the operator and Astra (second-model reviewer) (2026-09-07 19:01Z) set it — do not take the solutions of existing circuits or the operator's experience as premises of the design, settle things with rules and experiments, reuse of verified constructions is allowed, and an unknown connection is verified in the small rather than put to the operator as a question (`docs/alu-place-handover.md`, opening).
+The origin of the policy: the operator and Astra (second-model reviewer, GPT-6) (2026-09-07 19:01Z) set it — do not take the solutions of existing circuits or the operator's experience as premises of the design, settle things with rules and experiments, reuse of verified constructions is allowed, and an unknown connection is verified in the small rather than put to the operator as a question (`docs/alu-place-handover.md`, opening).
 
 ---
 

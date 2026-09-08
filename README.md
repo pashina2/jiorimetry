@@ -120,7 +120,7 @@ The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input n
 | DERIVE-2 (adder algebra) | blind, zero context | DC rule sheet + the question | the reference circuit, the web, every other file |
 | PLACE-1 (adder placement) | blind | geometry rule sheet + DERIVE-2's network | same |
 | REUSE-1 (full subtractor) | blind | a **byte-identical** rule sheet (sha256 `e6001fed…`), only the question swapped | same |
-| ALU-1 (ALU algebra) | not blind | rule sheet + the {0,3} adder and subtractor networks derived above + a mux suggestion from Astra (second-model reviewer) | the reference circuit; the source was not opened |
+| ALU-1 (ALU algebra) | not blind | rule sheet + the {0,3} adder and subtractor networks derived above + a mux suggestion from Astra (second-model reviewer, GPT-6) | the reference circuit; the source was not opened |
 | PLACE-ALU-3 (ALU placement) | not blind | rule sheets v2 + the failing 30/32 predecessor + this session's analysis | the reference circuit, the web |
 | RIG-1 (feeder) | not blind | the above + the synthetic-world feeder shape | same |
 
@@ -279,6 +279,10 @@ operator's world → feeder rig). Earlier stages are not instrumented to the sam
 | RIG-1 (one aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
 | **total** | | **≈ 1.6 h of agent time** | **≈ 820k** |
 
+Astra's review is not in this table: it ran outside this instrumentation, and its wall
+clock and tokens were not measured. The table is therefore the cost of the deriving and
+placing agents only, not of every agent that shaped the result.
+
 Human cost over the same stage: three placement commands, filling six containers by hand,
 two client restarts, and flipping levers.
 
@@ -323,7 +327,7 @@ the original records.
 
 ## 9. Credits
 
-- **Astra** — second-model reviewer (design critique of the orders, independent re-checks of the derived networks, the 2,990-case mux check, and the review that reshaped the placement and the algorithmisation proposal).
+- **Astra** — second-model reviewer (GPT-6, OpenAI). Design critique of the orders, independent re-checks of the derived networks, the 2,990-case mux check, and the review that reshaped the placement and the algorithmisation proposal.
 - **pashina** — operator: circuit semantics rulings, in-world verification, and the
   reference circuit used to calibrate the Bench.
 - Derivations, placements and tooling by LLM agents (Claude Fable 5.1 / Opus 5) under the

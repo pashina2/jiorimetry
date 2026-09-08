@@ -141,4 +141,4 @@ Two things were changed rather than kept:
 
 ## Amendment (2026-09-08, operator ruling)
 
-Other-company model agents are credited by name and role. Astra (second-model reviewer) is named in the credits and wherever its review shaped the work. The earlier scan that required 0 hits of the name is withdrawn.
+Other-company model agents are credited by name and role. Astra (second-model reviewer, GPT-6, OpenAI) is named in the credits and wherever its review shaped the work. The earlier scan that required 0 hits of the name is withdrawn.
