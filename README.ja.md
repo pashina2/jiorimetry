@@ -131,8 +131,11 @@ world での走行。
 Python 3.11 以上、標準ライブラリのみ。Bench の経路にインストールする package はありません。
 
 ```
-git clone <this repo> && cd jiorimetry
+git clone https://github.com/pashina2/jiorimetry.git && cd jiorimetry
 ```
+
+git を使わない場合: [ZIP でまとめて download](https://github.com/pashina2/jiorimetry/archive/refs/heads/main.zip) して
+展開し、展開先の directory で以下の command を実行してください。
 
 ### Bench — ALU slice、32 行
 

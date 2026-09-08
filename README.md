@@ -134,8 +134,11 @@ It was never shown to any agent that produced a design.
 Python 3.11+, standard library only. No packages to install for the Bench path.
 
 ```
-git clone <this repo> && cd jiorimetry
+git clone https://github.com/pashina2/jiorimetry.git && cd jiorimetry
 ```
+
+Without git: [download the repository as a ZIP](https://github.com/pashina2/jiorimetry/archive/refs/heads/main.zip),
+unpack it, and run the commands below from the unpacked directory.
 
 ### Bench — the ALU slice, 32 rows
 
