@@ -8,7 +8,7 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 
 ## 0. 一言で
 
-**1 bit の ALU slice（ADD / SUB / AND / OR）を、Minecraft 1.20.6 の source から書いた規則表と代数だけから機械が導き、Bench（規則の写し）→ 合成 vanilla world → オペレータの world の 3 段で検算し、lever 5 本で 32 行全部を手で確かめられる状態にした。** 既存の redstone 回路も、オペレータの経験も、設計の前提には入れていない（§1 に何を渡し、何を渡さなかったかを書く）。
+**1 bit の ALU 1 段（ADD / SUB / AND / OR）を、Minecraft 1.20.6 の source から書いた規則表と代数だけから機械が導き、Bench（規則の写し）→ 合成 vanilla world → オペレータの world の 3 段で検算し、lever 5 本で 32 行全部を手で確かめられる状態にした。** 既存の redstone 回路も、オペレータの経験も、設計の前提には入れていない（§1 に何を渡し、何を渡さなかったかを書く）。
 
 ---
 
@@ -67,7 +67,7 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 | 段 | 器 | 結果 | 一次記録 |
 |---|---|---|---|
 | Bench | `tools/llmgen/capcell.py` の `Bench`（規則の写し、B-?? で較正）、pin 固定 | **32/32**、r/f は正確に {0,3} | `artifacts/rows/alu_stage_v7.json.rows.json` |
-| 合成世界（WORLD-2） | headless vanilla 1.20.6、void world、lever 給電（compare gate + barrel 247 + side wire、lever ON = bit 0）、worldprobe で freeze/step、warm-up 32 + 本番 32 regime | **r/f 32/32、全 read 1024/1024**（comparator 23 + 給電器の powered 込み）、settle 2..14 gt、rcon 103,169 | `artifacts/world/world2.run.result.json`（untouched）、`record.md`（予測を先に書いた 2 段構成） |
+| 合成世界（WORLD-2） | headless vanilla 1.20.6、void world、lever 給電（compare gate + barrel 247 + side wire、lever ON = bit 0）、worldprobe で freeze/step、warm-up 32 + 本番 32 regime | **r/f 32/32、全 read 1024/1024**（comparator 23 + 給電器の powered 込み）、settle 2..14 gt、rcon 103,169 | `artifacts/world/world2.run.result.json`（計測値は無改変、実行 metadata は redact 済み — `PUBLICATION_CHECKLIST.md` §3）、`record.md`（予測を先に書いた 2 段構成） |
 | オペレータの world（LIVE-ALU） | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + barrel 6 個（bow 5 / 16 本）、region file の読み（regioncap） | 配置 176/176、静止 comparator **23/23**、ADD 0+0+1 → r 3 / f 0、SUB 0−0−1 → r 3 / f 3、**24/24** | `docs/world/live-alu-record.md`、capture 3 本 |
 | 給電器（RIG-1） | lever 5 本、composter[level=3] ×4（block entity なし）、lamp 2、93 block、`/aiwb place alu_stage_v7_rig1 6001 131 -4114` | Bench 32/32（lever 状態だけから）、world で SUB 1−0−0 → r 3 点灯 / f 0 消灯、comparator 23/23 | `docs/placement/rig1.md`、`rig1-result.md`、capture |
 
@@ -110,7 +110,7 @@ lamp: r = 6011 135 -4103、f = 6014 134 -4111（点灯 = 1）。mark 10 個（IN
 
 ## 7. 主張の範囲と、しないこと
 
-- **主張**: 1 bit ALU slice が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → オペレータの world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
+- **主張**: 1 bit ALU 1 段（`v7`。1 段であって tiling できる slice ではない。slice `v8` は後の結果で README と `docs/placement/slice1-result.md` に記録）が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → オペレータの world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
 - **しない**: 8 段、tiling（a3 pin が x=10 に出ているので pitch ≥ 11 か折り返し）、速度、既存参照回路との密度比較（費用は絶対値で報告する方針）、および仕様変更に対する無改修性（R0 の 3 条件）。
 - 32 行全部をオペレータの world で回した記録はまだ無い（給電は lever なので、オペレータが回すか、rig を写しの world に置いて worldprobe で自動掃引する = ブラッシュアップ D）。
 

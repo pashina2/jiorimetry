@@ -12,7 +12,8 @@ source から書き起こした規則表から導出する**実験的なツー�
 | 成果物 | Bench | 合成 vanilla world | オペレータの world |
 |---|---|---|---|
 | 1 bit 全加算器 | 8/8 | 8/8、全 read 一致 | 配置して読み戻し 8/8 |
-| 1 bit ALU slice（ADD / SUB / AND / OR） | 32/32 | 32/32、read 1024/1024 | 配置、静止 comparator 23/23、lever 5 本 + lamp 2 個の給電器で駆動 |
+| 1 bit ALU 1 段 `v7`（ADD / SUB / AND / OR。1 段であって tiling できる slice ではない — §3） | 32/32 | 32/32、read 1024/1024 | 配置、静止 comparator 23/23、lever 5 本 + lamp 2 個の給電器で駆動 |
+| bit slice `alu_slice_v8`（pitch 12、n=1/2/3 で tiling） | 32/32、128/128、512/512 | 未実施 | 未実施 |
 
 ---
 
@@ -51,7 +52,7 @@ level 符号化は {0, 5}。comparator 7 個。代数は **プロジェクトの
   [`artifacts/world/world1.run.result.json`](artifacts/world/world1.run.result.json)
 - オペレータの world: 配置して読み戻し、8/8。
 
-### 1 bit ALU slice（`alu_stage_v7`）
+### 1 bit ALU 1 段（`alu_stage_v7`）
 
 データ線は {0, 3}。制御線は 2 本: `P` ∈ {0, 15} が算術と論理を選び、`Wn` ∈ {0, 15} が ADD/AND と
 SUB/OR を選びます。効いている恒等式は 3 つ:
@@ -137,7 +138,7 @@ git clone https://github.com/pashina2/jiorimetry.git && cd jiorimetry
 git を使わない場合: [ZIP でまとめて download](https://github.com/pashina2/jiorimetry/archive/refs/heads/main.zip) して
 展開し、展開先の directory で以下の command を実行してください。
 
-### Bench — ALU slice、32 行
+### Bench — ALU 1 段 `v7`、32 行
 
 ```
 $ python tools/checks/alu_check2.py artifacts/layouts/alu_stage_v7.json
@@ -294,7 +295,7 @@ docs/report-alu-stage.md   ALU 1 段の物語としての記録
 artifacts/layouts/ block 一覧と node の網（JSON）
 artifacts/programs/ 配置 program
 artifacts/rows/    行ごとの真理値表と node 値の表
-artifacts/world/   worldprobe の spec と結果（無改変）、region の capture
+artifacts/world/   worldprobe の spec と結果（計測値は無改変、実行 metadata は redact 済み — PUBLICATION_CHECKLIST.md §3）、region の capture
 artifacts/images/  層別図と網の図
 tools/llmgen/      Bench（capcell）と、その土台の規則機械
 tools/checks/      上で使った掃引・checker・評価器

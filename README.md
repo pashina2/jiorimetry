@@ -14,7 +14,8 @@ Two artifacts exist so far:
 | artifact | Bench | synthetic vanilla world | operator's world |
 |---|---|---|---|
 | 1-bit full adder | 8/8 | 8/8, all reads matched | placed and read, 8/8 |
-| 1-bit ALU slice (ADD / SUB / AND / OR) | 32/32 | 32/32, 1024/1024 reads | placed, 23/23 static comparators, driven by a 5-lever rig with two lamps |
+| 1-bit ALU stage `v7` (ADD / SUB / AND / OR; one stage, not a tiling slice — section 3) | 32/32 | 32/32, 1024/1024 reads | placed, 23/23 static comparators, driven by a 5-lever rig with two lamps |
+| bit slice `alu_slice_v8` (pitch 12, tiled n=1/2/3) | 32/32, 128/128, 512/512 | not yet run | not yet run |
 
 ---
 
@@ -60,7 +61,7 @@ project context** — it was given only the DC rule sheet and the question.
   [`artifacts/world/world1.run.result.json`](artifacts/world/world1.run.result.json)
 - Operator's world: placed and read back, 8/8.
 
-### 1-bit ALU slice (`alu_stage_v7`)
+### 1-bit ALU stage (`alu_stage_v7`)
 
 Data lines carry {0, 3}. Two control lines: `P` ∈ {0, 15} selects arithmetic vs. logic,
 `Wn` ∈ {0, 15} selects ADD/AND vs. SUB/OR. Three identities do the work:
@@ -140,7 +141,7 @@ git clone https://github.com/pashina2/jiorimetry.git && cd jiorimetry
 Without git: [download the repository as a ZIP](https://github.com/pashina2/jiorimetry/archive/refs/heads/main.zip),
 unpack it, and run the commands below from the unpacked directory.
 
-### Bench — the ALU slice, 32 rows
+### Bench — the ALU stage `v7`, 32 rows
 
 ```
 $ python tools/checks/alu_check2.py artifacts/layouts/alu_stage_v7.json
@@ -302,7 +303,7 @@ docs/report-alu-stage.md   the narrative record of the ALU stage
 artifacts/layouts/ block lists and node networks (JSON)
 artifacts/programs/ placement programs
 artifacts/rows/    per-row truth tables and node value tables
-artifacts/world/   untouched worldprobe specs and results, and region captures
+artifacts/world/   worldprobe specs and results (measured values unchanged; run metadata redacted — PUBLICATION_CHECKLIST.md section 3), and region captures
 artifacts/images/  layer maps and network diagrams
 tools/llmgen/      the Bench (capcell) and the rule machine it runs on
 tools/checks/      the sweeps, checkers and evaluators used above

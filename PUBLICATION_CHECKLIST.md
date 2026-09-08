@@ -26,7 +26,7 @@ file does not itself contain the literal strings it forbids. The regexes still m
 | private key material | `BEGIN [A-Z ]*PRIVATE` | **0** | 0 |
 | secrets | `\bsecret\b` | **0** | 0 |
 | Discord material | `dis[c]ord` | **0** | 0 |
-| X / Twitter material | `x\.com`, `twit[t]er` | **0** | 0 |
+| X / Twitter material | `x\.com`, `twit[t]er` | **2** | 2 — the operator's own public handle, linked once in each README's Credits (deliberate; section 6) |
 | operator's save path | `saves/[c]pu` | **0** | 0 |
 | withheld reference-circuit directory | `notes/[b]ench` | **0** | 0 |
 | decompiled game source (imports) | `import\s+net\.mine[c]raft` | **0** | 0 |
@@ -35,6 +35,12 @@ file does not itself contain the literal strings it forbids. The regexes still m
 The counts above are for the export excluding this file's own English labels: the words
 "Discord" and "Twitter" appear here three times as the *names* of the categories being
 excluded, and nowhere else in the repository.
+
+These are pattern scans. They bound what a regular expression can find; they do not prove
+the absence of a quoted utterance or a game-code fragment that happens to avoid every
+pattern. The four documents a reader meets first — both READMEs, this checklist and
+`docs/report-alu-stage.md` — were additionally read in full with that question by the author
+and by a second reviewer (Astra, section 7). Every other file was scanned only.
 
 Three further patterns return hits that are **not** findings and were reviewed line by
 line:
@@ -106,9 +112,9 @@ lines are pasted verbatim in `README.md` section 5.
 - 119 files, 2,306,365 bytes (2.2 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all four commands in section 4 produce the results quoted above.
-- Published by the operator on 2026-09-08 to a **private** GitHub repository first, so that
-  the rendering could be checked before anyone else could read it. Making it public is a
-  separate act by the operator.
+- Not yet published as of this checklist: the repository is local and has no remote. The
+  operator's stated plan is a **private** GitHub repository first, so that the rendering can
+  be checked before anyone else reads it. Making it public is a separate act by the operator.
 
 
 ## 6. Internal references deliberately kept
@@ -122,6 +128,7 @@ detail, or a real address.
 | development session short ids | `0c3d10be`, `f9d66fa1`, `3ef098ad` | 11 files, in document titles | they say which run wrote which document — the thing section 4 of the README makes claims about |
 | internal role names | `DIRECTOR 7`, `DIRECTOR 8`, `CONDUCTOR 6` | document titles | same |
 | the placement command of an unpublished mod | `/aiwb place <program> <x> <y> <z>` | 9 files | `tools/llmgen/cell_to_program.py` exists to emit those lines; deleting them would delete the tool's output format. The mod itself is not distributed |
+| the operator's public X handle | `@pashina_2` | both READMEs, Credits | the operator's chosen public identity for this work (the same name the license carries). It makes the GitHub account ↔ X account correspondence explicit; removing the two links is one edit if the operator prefers not to |
 | coordinates in the operator's single-player save | `6005 133 -4113`, `6001 131 -4114` | 5 files | they are the placement origin the records were taken at, in a world no one else can reach |
 | paths in the private development repository | `tools/workbench/…`, `data/workbench/…`, `notes/…` | documents and tool docstrings | they record where a rule came from. They do not resolve here — section 3 already says this of `notes/…` |
 | internal decision ids | `ADR-…`, `OC-…`, `PROV-…`, `GAP-7`, `M9`, `M12`, `M15` | mostly tool docstrings | same |
@@ -142,3 +149,18 @@ Two things were changed rather than kept:
 ## Amendment (2026-09-08, operator ruling)
 
 Other-company model agents are credited by name and role. Astra (second-model reviewer, GPT-6, OpenAI) is named in the credits and wherever its review shaped the work. The earlier scan that required 0 hits of the name is withdrawn.
+
+## 7. Second reviewer's reading (2026-09-08)
+
+Astra (second model, reviewer) read the four key documents with the single question of
+whether anything unfit for publication remained. Findings and what was done:
+
+| finding | disposition |
+|---|---|
+| section 5 said the repository was already on private GitHub; it was local with no remote | corrected (section 5) |
+| section 1 reported 0 X URLs while both Credits link `@pashina_2` | row corrected to 2, kept deliberately (section 6) |
+| `v7` was called an "ALU slice" in both READMEs' result tables and headings and in the report, while README section 3 says it is not a slice (20/32 under the slice checker) | `v7` is now "ALU stage" everywhere; the slice `v8` has its own row in the result table |
+| `untouched` for `artifacts/world/*.json` contradicted section 3 (run metadata redacted) | wording now says: measured values unchanged, run metadata redacted |
+| the scan table reads as a guarantee stronger than pattern scans can give | stated explicitly (section 1); full readings cover the four key documents only |
+| the Credits line for Astra | no objection |
+

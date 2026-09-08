@@ -8,7 +8,7 @@ DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORL
 
 ## 0. In one sentence
 
-**A 1-bit ALU slice (ADD / SUB / AND / OR) was derived by a machine from nothing but a rule table written out of the Minecraft 1.20.6 source and the algebra, checked in three stages — the Bench (a replica of the rules) → a synthetic vanilla world → the operator's world — and brought to a state where all 32 rows can be verified by hand with 5 levers.** Neither existing redstone circuits nor the operator's own experience entered the premises of the design (§1 records what was handed over and what was not).
+**A 1-bit ALU stage (ADD / SUB / AND / OR) was derived by a machine from nothing but a rule table written out of the Minecraft 1.20.6 source and the algebra, checked in three stages — the Bench (a replica of the rules) → a synthetic vanilla world → the operator's world — and brought to a state where all 32 rows can be verified by hand with 5 levers.** Neither existing redstone circuits nor the operator's own experience entered the premises of the design (§1 records what was handed over and what was not).
 
 ---
 
@@ -67,7 +67,7 @@ The node values for the 32 rows: `artifacts/rows/node_values.txt`. 32/32 on this
 | stage | instrument | result | primary record |
 |---|---|---|---|
 | Bench | the `Bench` in `tools/llmgen/capcell.py` (a replica of the rules, calibrated on B-??), pins fixed | **32/32**, r/f land exactly on {0,3} | `artifacts/rows/alu_stage_v7.json.rows.json` |
-| synthetic world (WORLD-2) | headless vanilla 1.20.6, void world, lever feeding (compare gate + barrel 247 + side wire, lever ON = bit 0), freeze/step with worldprobe, a regime of 32 warm-up + 32 real | **r/f 32/32, all reads 1024/1024** (comparator 23 + the powered state of the feeders), settle 2..14 gt, rcon 103,169 | `artifacts/world/world2.run.result.json` (untouched), `record.md` (a two-part structure in which the prediction was written first) |
+| synthetic world (WORLD-2) | headless vanilla 1.20.6, void world, lever feeding (compare gate + barrel 247 + side wire, lever ON = bit 0), freeze/step with worldprobe, a regime of 32 warm-up + 32 real | **r/f 32/32, all reads 1024/1024** (comparator 23 + the powered state of the feeders), settle 2..14 gt, rcon 103,169 | `artifacts/world/world2.run.result.json` (measured values unchanged; run metadata redacted, `PUBLICATION_CHECKLIST.md` section 3), `record.md` (a two-part structure in which the prediction was written first) |
 | the operator's world (LIVE-ALU) | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + 6 barrels (5 / 16 bows), reading the region files (regioncap) | 176/176 placed, **23/23** comparators at rest, ADD 0+0+1 → r 3 / f 0, SUB 0−0−1 → r 3 / f 3, **24/24** | `docs/world/live-alu-record.md`, 3 captures |
 | the feeder rig (RIG-1) | 5 levers, composter[level=3] ×4 (no block entity), 2 lamps, 93 blocks, `/aiwb place alu_stage_v7_rig1 6001 131 -4114` | Bench 32/32 (from the lever states alone), and in the world SUB 1−0−0 → r 3 lit / f 0 dark, comparators 23/23 | `docs/placement/rig1.md`, `rig1-result.md`, a capture |
 
@@ -110,7 +110,7 @@ The operator's acts: 3 placements, filling 6 barrels by hand, 2 restarts, the le
 
 ## 7. The scope of the claim, and what is not claimed
 
-- **Claimed**: a 1-bit ALU slice, in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → the operator's world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
+- **Claimed**: a 1-bit ALU stage (`v7`; one stage, not a tiling slice — the slice `v8` is a later result recorded in the README and `docs/placement/slice1-result.md`), in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → the operator's world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
 - **Not claimed**: 8 stages; tiling (the a3 pin sticks out at x=10, so either pitch ≥ 11 or a fold-back); speed; a density comparison against an existing reference circuit (the policy is to report costs in absolute numbers); and immunity from rework under a change of specification (the 3 conditions of R0).
 - There is still no record of all 32 rows having been run in the operator's world (the feeding is by lever, so either the operator runs them, or the rig is placed in a copy of the world and swept automatically with worldprobe = brush-up D).
 
