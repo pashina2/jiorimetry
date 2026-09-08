@@ -89,6 +89,8 @@ layout の配置 lint 0。詳細と境界 cell の一覧は `docs/placement/slic
 `artifacts/images/alu_slice_v8_x2_layers.png`。未実施: 2 slice の合成世界での走行と、オペレータの
 world での走行。
 
+![alu_slice_v8 を 2 slice 並べた層別図（pitch 12、n=2 Bench 128/128）](artifacts/images/alu_slice_v8_x2_layers.png)
+
 
 ## 3. **主張しない** こと
 
