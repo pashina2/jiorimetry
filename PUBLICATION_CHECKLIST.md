@@ -5,7 +5,7 @@ root. `--exclude-dir=.git` and `--binary-files=without-match` are used throughou
 byte coincidences do not count as hits.
 
 Last run: 2026-09-08, re-run after the terminology change described in section 6.
-157 tracked files. Commit hashes are not cited here: every hash in this repository changed
+233 tracked files. Commit hashes are not cited here: every hash in this repository changed
 once, when the commit author was corrected before publication.
 
 ## 1. Scans
@@ -114,7 +114,7 @@ lines are pasted verbatim in `README.md` section 5.
 
 - Line endings: LF everywhere (0 of the 112 text files contain CRLF; the 7 PNGs are binary).
 - No `__pycache__`, no `.pyc`, no build output committed.
-- 157 files, 8,527,526 bytes (8.5 MB) tracked.
+- 233 files, 22,720,806 bytes (22.7 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all six commands in section 4 produce the results quoted above.
 - Not yet published as of this checklist: the repository is local and has no remote. The
@@ -168,6 +168,8 @@ whether anything unfit for publication remained. Findings and what was done:
 | `untouched` for `artifacts/world/*.json` contradicted section 3 (run metadata redacted) | wording now says: measured values unchanged, run metadata redacted |
 | the scan table reads as a guarantee stronger than pattern scans can give | stated explicitly (section 1); full readings cover the four key documents only |
 | the Credits line for Astra | no objection |
+
+Fourth round (same day, FEED-1): the world stage became a tool (`tools/world/feed.py`); its outputs for the runs cited in the README are in `artifacts/world/feed1/` with the same run-metadata redaction as `world4*.json`; the reviewer's pitch-14 slice is included as `artifacts/layouts/reviewer_slice_p14_relocated.json` with credit; the p4 "latch" was traced to a 56-gt decay and is reported in README section 6.
 
 Third round (same day, WORLD-4): the second reviewer asked for the placer's five solutions to be replayed in a world; one latched (`p4_throughline`, T = 0) where the Bench and the judge had passed it. Disposition: `tools/llmgen/capcell.py` now treats pins as floors and solves from two seeds (`dc_solve_both`), the checkers use it, PLACER-0 and WORLD-4 are added to the export (`tools/placer0/`, `artifacts/placer0/`, `docs/world/world4-*`), and the failure is reported in README section 6.
 

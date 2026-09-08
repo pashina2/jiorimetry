@@ -1,0 +1,43 @@
+{
+ "name": "feed_world4",
+ "artifacts": [
+  {
+   "name": "p1_sub2side",
+   "problem": "../2026-09-08-placer0/problems.json",
+   "problem_name": "p1_sub2side",
+   "solution": "../2026-09-08-placer0/sol_p1_sub2side.json"
+  },
+  {
+   "name": "p2_copy_into_side",
+   "problem": "../2026-09-08-placer0/problems.json",
+   "problem_name": "p2_copy_into_side",
+   "solution": "../2026-09-08-placer0/sol_p2_copy_into_side.json"
+  },
+  {
+   "name": "p4_throughline",
+   "problem": "../2026-09-08-placer0/problems.json",
+   "problem_name": "p4_throughline",
+   "solution": "../2026-09-08-placer0/sol_p4_throughline.json"
+  },
+  {
+   "name": "p5_max_merge",
+   "problem": "../2026-09-08-placer0/problems.json",
+   "problem_name": "p5_max_merge",
+   "solution": "../2026-09-08-placer0/sol_p5_max_merge.json"
+  },
+  {
+   "name": "p6_vertical_cap",
+   "problem": "../2026-09-08-placer0/problems.json",
+   "problem_name": "p6_vertical_cap",
+   "solution": "../2026-09-08-placer0/sol_p6_vertical_cap.json"
+  },
+  {
+   "name": "slice_v9_n2",
+   "layout": "../2026-09-08-slice1/alu_slice_v9.json",
+   "require": {
+    "kind": "alu_slice",
+    "n": 2
+   }
+  }
+ ]
+}

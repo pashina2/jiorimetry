@@ -1,0 +1,11 @@
+{
+ "name": "feed_p4sep",
+ "artifacts": [
+  {
+   "name": "p4_throughline_sep",
+   "problem": "problems_p4sep.json",
+   "problem_name": "p4_throughline_sep",
+   "solution": "../2026-09-08-placer0/sol_p4_throughline.json"
+  }
+ ]
+}

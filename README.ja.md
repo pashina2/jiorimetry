@@ -13,7 +13,8 @@ source から書き起こした規則表から導出する**実験的なツー�
 |---|---|---|---|
 | 1 bit 全加算器 | 8/8 | 8/8、全 read 一致 | 配置して読み戻し 8/8 |
 | 1 bit ALU 1 段 `v7`（ADD / SUB / AND / OR。1 段であって tiling できる slice ではない — §3） | 32/32 | 32/32、read 1024/1024 | 配置、静止 comparator 23/23、lever 5 本 + lamp 2 個の給電器で駆動 |
-| bit slice `alu_slice_v9`（pitch 12、n=1/2/3 で tiling、契約 checker C1〜C6 PASS） | 32/32、128/128、512/512 | 2 slice: 128/128、read 14,976 点で不一致 0 | 未実施 |
+| bit slice `alu_slice_v9`（pitch 12、n=1/2/3 で tiling、契約 checker C1〜C6 PASS） | 32/32、128/128、512/512 | 2 slice: 128/128、read 14,976 点で不一致 0。`feed.py` で無人再現、19,328 点 | 未実施 |
+| pitch 14 で Wn 端子を移した bit slice。第二 reviewer が v9 の内部を固定した探索で見つけた（`artifacts/layouts/reviewer_slice_p14_relocated.json`、311 block） | 672/672（n=1/2/3、reviewer の判定器）、当席で 32/32・128/128 | 2 slice: 128/128、read 20,608 点で不一致 0、無人（`feed.py`） | 未実施 |
 
 ---
 
@@ -95,7 +96,7 @@ world での走行。
 
 ### PLACER-0: 規則駆動の配置器と、world が見つけた latch
 
-オペレータは LLM が導出している部分のアルゴリズム化を求めました。PLACER-0（`tools/placer0/`、`docs/placement/placer0.md`）はその小さな実証です: ALU の断片から切り出した配置問題 6 つ（pin、出力 cell、禁止 cell、block 予算。`artifacts/placer0/problems.json`）、Bench を oracle にした判定器、DC 規則を逆向きに読んだ手で (部分配置, 未解決の要求) 上を探す IDA*。充足可能な 5 問を人の座標なしで 5/5 解きました（p3 は出題者の誤りで充足不能）。第二 reviewer（Astra）は、探索器と判定器が Bench の規則の穴を共有していると指摘し、大きくする前に 5 解を world で再生するよう求めました。WORLD-4 がそれで、14 行中 13 行が一致し、残る 1 行（`p4_throughline`、T = 0）は latch でした（§6）。Bench を修正し（pin は床、DC 解は cold と hot の 2 seed から）、修正後の判定器は旧 p4 解を落とし、配置器は 0.9 s で gain が減衰する loop の解を出し直しました（`artifacts/placer0/sol_p4_throughline.json`。latch する旧解は `sol_p4_throughline.latched.json` として保存）。
+オペレータは LLM が導出している部分のアルゴリズム化を求め、のちに方向として明言しました: LLM の占有範囲を縮め、最終的に導出そのものをアルゴリズムにする。最初に外した工程は実機段です。`tools/world/feed.py`（FEED-1）は layout を受け取り、各 pin の給電器 cell を探索し、要求から計算した期待値（Bench からではなく）に対して fed layout を Bench で検算し、world と worldprobe の spec を作って走らせ、道具の出力から表を書きます。WORLD-2 と WORLD-4 を無人で再現し、見たことのない slice（reviewer の pitch 14）を 128/128 で走らせました。以後の 13 run は model token 0。記録 `docs/world/feed1-record.md`、仕様 `docs/world/feed1-spec.md`。PLACER-0（`tools/placer0/`、`docs/placement/placer0.md`）はその小さな実証です: ALU の断片から切り出した配置問題 6 つ（pin、出力 cell、禁止 cell、block 予算。`artifacts/placer0/problems.json`）、Bench を oracle にした判定器、DC 規則を逆向きに読んだ手で (部分配置, 未解決の要求) 上を探す IDA*。充足可能な 5 問を人の座標なしで 5/5 解きました（p3 は出題者の誤りで充足不能）。第二 reviewer（Astra）は、探索器と判定器が Bench の規則の穴を共有していると指摘し、大きくする前に 5 解を world で再生するよう求めました。WORLD-4 がそれで、14 行中 13 行が一致し、残る 1 行（`p4_throughline`、T = 0）は latch でした（§6）。Bench を修正し（pin は床、DC 解は cold と hot の 2 seed から）、修正後の判定器は旧 p4 解を落とし、配置器は 0.9 s で gain が減衰する loop の解を出し直しました（`artifacts/placer0/sol_p4_throughline.json`。latch する旧解は `sol_p4_throughline.latched.json` として保存）。
 
 ![alu_slice_v9 を 2 slice 並べた層別図（pitch 12、n=2 Bench 128/128、契約 C1〜C6 PASS）](artifacts/images/alu_slice_v9_x2_layers.png)
 
@@ -271,6 +272,8 @@ file を byte 単位で再現します。
 
 - **held pin は latch を隠す（WORLD-4、`p4_throughline` の T = 0）。** PLACER-0 の解は Bench の判定器も配置器の oracle（同じ Bench）も通ったのに world で latch しました: 解の relay が pin の dust を強給電し、T が一度 15 になると pin が自分で 15 を保つ。Bench が見えなかったのは、pin が回路から持ち上げられない固定値だったこと、そして cold start の反復は第 2 の不動点があっても 0 の不動点に歩くことの 2 つ。どちらも `tools/llmgen/capcell.py` で直しました: pin は床（隣と source の max）、`dc_solve_both` が cold と hot の seed から解いて 2 解が違う cell を報告します（`test_capcell.py` の `FloorAndLatchTests`）。修正後の Bench では旧 p4 が world の latch と同じ T = 0 で BISTABLE になり、この repository の他の layout は全部通ります。この失敗の型は第二 reviewer が走行前に予言し、world が実例を出しました。記録: `docs/world/world4-record.md` §7.1〜7.3。
 
+- **56 gt の減衰を latch と読んだ（FEED-1、解き直した `p4`）。** Bench の修正後に配置器が解き直した `p4` は、1 周ごとに 1 level 落ちる loop を持つ。実機では 3 回の run とも T = 0 で O = 15 のまま、Bench はどの seed からも O = 0 で、spec と観測の衝突として記録した。loop の全 cell を gt ごとに読む trace（`docs/world/p4-decay-trace.md`）で、loop は代数どおりに減衰していた — wire 1 hop で 1 level、1 周 4 gt、14 → 0 に 56 gt — が、どの run も 40 gt で regime を切っていた。DC の判定器は正しく、無いのは時間の条項（整定の上限）。第二 reviewer が境界契約の第 3 条件として挙げていたもので、未実装。
+
 ## 7. 実測の費用
 
 **最終段のみ**（2026-09-07: 32/32 → 合成世界 → オペレータの world → 給電器 rig）のエージェント時間と token。
@@ -282,6 +285,9 @@ file を byte 単位で再現します。
 | WORLD-2（合成世界の走行） | Opus | 21 分 | 187k |
 | PLACER-0（規則駆動の配置器の実証） | Opus | 50 分 | 232k |
 | WORLD-4（PLACER-0 の 5 解 + v9 の 2 slice を合成世界で） | Opus | 46 分 | 296k |
+| FEED-1（`feed.py`: 実機段を 1 コマンドに。一回払い） | Opus | 2 時間 20 分 | 337k |
+| PLACER-1a（pitch 11 の断片探索。BUDGET ×3、配置器の欠陥 2 件） | Opus | 1 時間 17 分 | 290k |
+| FEED-1 以後の実機 run 全部（13 run、rcon 360 万回、wall 25 分） | なし | — | 0 |
 | in-world の marker 調査 | Sonnet | 3.4 分 | 108k |
 | in-world の marker 修正 | Opus | 35 分 | 111k |
 | RIG-1（空振り 1 回 + 本番） | Fable | 9 + 15.5 分 | 75k + 192k |
@@ -310,6 +316,8 @@ artifacts/rows/    行ごとの真理値表と node 値の表
 artifacts/world/   worldprobe の spec と結果（計測値は無改変、実行 metadata は redact 済み — PUBLICATION_CHECKLIST.md §3）、region の capture
 artifacts/placer0/ PLACER-0 の問題 6 つと配置器が見つけた解
 tools/placer0/     規則駆動の配置器と Bench を oracle にした判定器
+tools/world/feed.py 実機段を 1 コマンドに: 給電器の探索、要求に対する Bench 検算、world、spec、走行、表
+artifacts/world/feed1/ 上で引いた run の feed.py 出力（spec、worldprobe の結果、表。実行 metadata は redact）
 artifacts/images/  層別図と網の図
 tools/llmgen/      Bench（capcell）と、その土台の規則機械
 tools/checks/      上で使った掃引・checker・評価器

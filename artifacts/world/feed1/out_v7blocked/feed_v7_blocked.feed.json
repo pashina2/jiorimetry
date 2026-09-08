@@ -1,0 +1,602 @@
+{
+ "job": "feed_v7_blocked",
+ "artifacts": [
+  {
+   "name": "alu_stage_v7_blocked",
+   "kind": "alu_stage",
+   "artifact_cells": 179,
+   "readout_added": [
+    [
+     [
+      9,
+      1,
+      2
+     ],
+     "minecraft:redstone_wire"
+    ],
+    [
+     [
+      9,
+      0,
+      2
+     ],
+     "minecraft:smooth_stone"
+    ]
+   ],
+   "rows": 32,
+   "feeders": [
+    {
+     "pin": "P",
+     "cell": [
+      0,
+      1,
+      0
+     ],
+     "kind": "ctrl",
+     "note": "base [0, 1, -1]",
+     "lever": [
+      0,
+      2,
+      -1
+     ],
+     "cells": [
+      [
+       [
+        0,
+        1,
+        -1
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        0,
+        2,
+        -1
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "P",
+     "cell": [
+      0,
+      1,
+      8
+     ],
+     "kind": "ctrl",
+     "note": "base [0, 1, 7]",
+     "lever": [
+      0,
+      2,
+      7
+     ],
+     "cells": [
+      [
+       [
+        0,
+        1,
+        7
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        0,
+        2,
+        7
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "Wn",
+     "cell": [
+      4,
+      1,
+      10
+     ],
+     "kind": "ctrl",
+     "note": "base [3, 1, 10]",
+     "lever": [
+      3,
+      2,
+      10
+     ],
+     "cells": [
+      [
+       [
+        3,
+        1,
+        10
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        3,
+        2,
+        10
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "a0",
+     "cell": [
+      4,
+      1,
+      4
+     ],
+     "kind": "data",
+     "note": "under gate [4, 0, 5] facing=south",
+     "lever": [
+      5,
+      0,
+      3
+     ],
+     "cells": [
+      [
+       [
+        4,
+        0,
+        5
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        4,
+        0,
+        6
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        5,
+        0,
+        5
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        5,
+        -1,
+        4
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        5,
+        -1,
+        3
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        5,
+        0,
+        3
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        4,
+        -1,
+        5
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        5,
+        -1,
+        5
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        5,
+        -2,
+        4
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "a0",
+     "cell": [
+      8,
+      1,
+      5
+     ],
+     "kind": "data",
+     "note": "under gate [8, 0, 6] facing=south",
+     "lever": [
+      7,
+      1,
+      7
+     ],
+     "cells": [
+      [
+       [
+        8,
+        0,
+        6
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        8,
+        0,
+        7
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        7,
+        0,
+        6
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        7,
+        0,
+        7
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        7,
+        1,
+        7
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        8,
+        -1,
+        6
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        7,
+        -1,
+        6
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": [
+      [
+       7,
+       0,
+       6
+      ],
+      [
+       7,
+       0,
+       7
+      ],
+      [
+       8,
+       0,
+       7
+      ]
+     ]
+    },
+    {
+     "pin": "a0",
+     "cell": [
+      10,
+      1,
+      4
+     ],
+     "kind": "data",
+     "note": "direct gate [10, 1, 5] facing=south",
+     "lever": [
+      11,
+      2,
+      6
+     ],
+     "cells": [
+      [
+       [
+        10,
+        1,
+        5
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        10,
+        1,
+        6
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        11,
+        1,
+        5
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        11,
+        1,
+        6
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        11,
+        2,
+        6
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        10,
+        0,
+        5
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        11,
+        0,
+        5
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "b0",
+     "cell": [
+      0,
+      1,
+      4
+     ],
+     "kind": "data",
+     "note": "under gate [0, 0, 5] facing=south",
+     "lever": [
+      -1,
+      1,
+      6
+     ],
+     "cells": [
+      [
+       [
+        0,
+        0,
+        5
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        0,
+        0,
+        6
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        -1,
+        0,
+        5
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        -1,
+        0,
+        6
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -1,
+        1,
+        6
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        0,
+        -1,
+        5
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -1,
+        -1,
+        5
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "k",
+     "cell": [
+      0,
+      1,
+      2
+     ],
+     "kind": "data",
+     "note": "direct gate [-1, 1, 2] facing=west",
+     "lever": [
+      -2,
+      2,
+      1
+     ],
+     "cells": [
+      [
+       [
+        -1,
+        1,
+        2
+       ],
+       "minecraft:comparator[facing=west,mode=compare]"
+      ],
+      [
+       [
+        -2,
+        1,
+        2
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        -1,
+        1,
+        1
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        -2,
+        1,
+        1
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -2,
+        2,
+        1
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        -1,
+        0,
+        2
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -1,
+        0,
+        1
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    }
+   ],
+   "levers": {
+    "P_0": [
+     0,
+     2,
+     -1
+    ],
+    "P_1": [
+     0,
+     2,
+     7
+    ],
+    "Wn_0": [
+     3,
+     2,
+     10
+    ],
+    "a0_0": [
+     5,
+     0,
+     3
+    ],
+    "a0_1": [
+     7,
+     1,
+     7
+    ],
+    "a0_2": [
+     11,
+     2,
+     6
+    ],
+    "b0_0": [
+     -1,
+     1,
+     6
+    ],
+    "k_0": [
+     -2,
+     2,
+     1
+    ]
+   },
+   "bench_pass": "32/32"
+  }
+ ],
+ "runs": [],
+ "table": [],
+ "refused": null,
+ "world": {
+  "bbox": [
+   [
+    96,
+    61,
+    99
+   ],
+   [
+    112,
+    67,
+    113
+   ]
+  ],
+  "origins": {
+   "alu_stage_v7_blocked": [
+    0,
+    0,
+    1
+   ]
+  }
+ }
+}

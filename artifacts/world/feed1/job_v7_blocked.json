@@ -1,0 +1,9 @@
+{
+ "name": "feed_v7_blocked",
+ "artifacts": [
+  {
+   "name": "alu_stage_v7_blocked",
+   "layout": "alu_stage_v7_blocked.json"
+  }
+ ]
+}

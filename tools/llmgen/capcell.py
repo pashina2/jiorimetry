@@ -20,8 +20,8 @@ three things MB-1 did not have:
     wool under it (RedstoneWireBlock: strong power downward), a gate one
     layer down powers the wool a dust stands on. The neighbour layers are
     handed to the machine as blocks whose state is HELD (`pinned`): read by
-    everything, updated by nothing. That is what «the cut face is an open
-    input» means mechanically (`circuit-identification-by-calibrated-sweep`).
+    everything, updated by nothing. That is what "the cut face is an open
+    input" means mechanically (`circuit-identification-by-calibrated-sweep`).
   * the captured connection props are the machine's, re-derived with the
     target rule (`placement_state_t`), never the rows' -- so a tiled copy
     whose top and bottom layers differ from the capture's gets the props its

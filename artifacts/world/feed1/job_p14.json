@@ -1,0 +1,13 @@
+{
+ "name": "feed_p14",
+ "artifacts": [
+  {
+   "name": "p14_n2",
+   "layout": "../2026-09-08-slice-search/relocated/p14.json",
+   "require": {
+    "kind": "alu_slice",
+    "n": 2
+   }
+  }
+ ]
+}

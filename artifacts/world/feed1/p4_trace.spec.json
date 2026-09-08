@@ -1,0 +1,912 @@
+{
+ "name": "p4_trace",
+ "world": {
+  "template": "<host-path>/carpet-work",
+  "world_dir": "out_p4sep\\world_build\\world",
+  "bbox": {
+   "min": [
+    98,
+    63,
+    99
+   ],
+   "max": [
+    108,
+    68,
+    104
+   ]
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25598,
+  "java_xmx": "3G"
+ },
+ "drives": {
+  "p4_throughline_sep__T_0": {
+   "kind": "lever",
+   "pos": [
+    99,
+    66,
+    101
+   ],
+   "face": "floor",
+   "facing": "north"
+  }
+ },
+ "reads": [
+  {
+   "name": "pin_0",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 0,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "pin_1",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 1,
+   "match": "minecraft:redstone_wire[power=1]"
+  },
+  {
+   "name": "pin_2",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 2,
+   "match": "minecraft:redstone_wire[power=2]"
+  },
+  {
+   "name": "pin_3",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 3,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "pin_4",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 4,
+   "match": "minecraft:redstone_wire[power=4]"
+  },
+  {
+   "name": "pin_5",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 5,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "pin_6",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 6,
+   "match": "minecraft:redstone_wire[power=6]"
+  },
+  {
+   "name": "pin_7",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 7,
+   "match": "minecraft:redstone_wire[power=7]"
+  },
+  {
+   "name": "pin_8",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 8,
+   "match": "minecraft:redstone_wire[power=8]"
+  },
+  {
+   "name": "pin_9",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 9,
+   "match": "minecraft:redstone_wire[power=9]"
+  },
+  {
+   "name": "pin_10",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 10,
+   "match": "minecraft:redstone_wire[power=10]"
+  },
+  {
+   "name": "pin_11",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 11,
+   "match": "minecraft:redstone_wire[power=11]"
+  },
+  {
+   "name": "pin_12",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 12,
+   "match": "minecraft:redstone_wire[power=12]"
+  },
+  {
+   "name": "pin_13",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 13,
+   "match": "minecraft:redstone_wire[power=13]"
+  },
+  {
+   "name": "pin_14",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 14,
+   "match": "minecraft:redstone_wire[power=14]"
+  },
+  {
+   "name": "pin_15",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "bit": 15,
+   "match": "minecraft:redstone_wire[power=15]"
+  },
+  {
+   "name": "w013_0",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 16,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "w013_1",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 17,
+   "match": "minecraft:redstone_wire[power=1]"
+  },
+  {
+   "name": "w013_2",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 18,
+   "match": "minecraft:redstone_wire[power=2]"
+  },
+  {
+   "name": "w013_3",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 19,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "w013_4",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 20,
+   "match": "minecraft:redstone_wire[power=4]"
+  },
+  {
+   "name": "w013_5",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 21,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "w013_6",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 22,
+   "match": "minecraft:redstone_wire[power=6]"
+  },
+  {
+   "name": "w013_7",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 23,
+   "match": "minecraft:redstone_wire[power=7]"
+  },
+  {
+   "name": "w013_8",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 24,
+   "match": "minecraft:redstone_wire[power=8]"
+  },
+  {
+   "name": "w013_9",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 25,
+   "match": "minecraft:redstone_wire[power=9]"
+  },
+  {
+   "name": "w013_10",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 26,
+   "match": "minecraft:redstone_wire[power=10]"
+  },
+  {
+   "name": "w013_11",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 27,
+   "match": "minecraft:redstone_wire[power=11]"
+  },
+  {
+   "name": "w013_12",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 28,
+   "match": "minecraft:redstone_wire[power=12]"
+  },
+  {
+   "name": "w013_13",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 29,
+   "match": "minecraft:redstone_wire[power=13]"
+  },
+  {
+   "name": "w013_14",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 30,
+   "match": "minecraft:redstone_wire[power=14]"
+  },
+  {
+   "name": "w013_15",
+   "pos": [
+    100,
+    65,
+    103
+   ],
+   "bit": 31,
+   "match": "minecraft:redstone_wire[power=15]"
+  },
+  {
+   "name": "w113_0",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 32,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "w113_1",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 33,
+   "match": "minecraft:redstone_wire[power=1]"
+  },
+  {
+   "name": "w113_2",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 34,
+   "match": "minecraft:redstone_wire[power=2]"
+  },
+  {
+   "name": "w113_3",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 35,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "w113_4",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 36,
+   "match": "minecraft:redstone_wire[power=4]"
+  },
+  {
+   "name": "w113_5",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 37,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "w113_6",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 38,
+   "match": "minecraft:redstone_wire[power=6]"
+  },
+  {
+   "name": "w113_7",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 39,
+   "match": "minecraft:redstone_wire[power=7]"
+  },
+  {
+   "name": "w113_8",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 40,
+   "match": "minecraft:redstone_wire[power=8]"
+  },
+  {
+   "name": "w113_9",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 41,
+   "match": "minecraft:redstone_wire[power=9]"
+  },
+  {
+   "name": "w113_10",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 42,
+   "match": "minecraft:redstone_wire[power=10]"
+  },
+  {
+   "name": "w113_11",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 43,
+   "match": "minecraft:redstone_wire[power=11]"
+  },
+  {
+   "name": "w113_12",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 44,
+   "match": "minecraft:redstone_wire[power=12]"
+  },
+  {
+   "name": "w113_13",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 45,
+   "match": "minecraft:redstone_wire[power=13]"
+  },
+  {
+   "name": "w113_14",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 46,
+   "match": "minecraft:redstone_wire[power=14]"
+  },
+  {
+   "name": "w113_15",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "bit": 47,
+   "match": "minecraft:redstone_wire[power=15]"
+  },
+  {
+   "name": "O_0",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 48,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "O_1",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 49,
+   "match": "minecraft:redstone_wire[power=1]"
+  },
+  {
+   "name": "O_2",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 50,
+   "match": "minecraft:redstone_wire[power=2]"
+  },
+  {
+   "name": "O_3",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 51,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "O_4",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 52,
+   "match": "minecraft:redstone_wire[power=4]"
+  },
+  {
+   "name": "O_5",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 53,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "O_6",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 54,
+   "match": "minecraft:redstone_wire[power=6]"
+  },
+  {
+   "name": "O_7",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 55,
+   "match": "minecraft:redstone_wire[power=7]"
+  },
+  {
+   "name": "O_8",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 56,
+   "match": "minecraft:redstone_wire[power=8]"
+  },
+  {
+   "name": "O_9",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 57,
+   "match": "minecraft:redstone_wire[power=9]"
+  },
+  {
+   "name": "O_10",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 58,
+   "match": "minecraft:redstone_wire[power=10]"
+  },
+  {
+   "name": "O_11",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 59,
+   "match": "minecraft:redstone_wire[power=11]"
+  },
+  {
+   "name": "O_12",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 60,
+   "match": "minecraft:redstone_wire[power=12]"
+  },
+  {
+   "name": "O_13",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 61,
+   "match": "minecraft:redstone_wire[power=13]"
+  },
+  {
+   "name": "O_14",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 62,
+   "match": "minecraft:redstone_wire[power=14]"
+  },
+  {
+   "name": "O_15",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 63,
+   "match": "minecraft:redstone_wire[power=15]"
+  },
+  {
+   "name": "w121_0",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 64,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "w121_1",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 65,
+   "match": "minecraft:redstone_wire[power=1]"
+  },
+  {
+   "name": "w121_2",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 66,
+   "match": "minecraft:redstone_wire[power=2]"
+  },
+  {
+   "name": "w121_3",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 67,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "w121_4",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 68,
+   "match": "minecraft:redstone_wire[power=4]"
+  },
+  {
+   "name": "w121_5",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 69,
+   "match": "minecraft:redstone_wire[power=5]"
+  },
+  {
+   "name": "w121_6",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 70,
+   "match": "minecraft:redstone_wire[power=6]"
+  },
+  {
+   "name": "w121_7",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 71,
+   "match": "minecraft:redstone_wire[power=7]"
+  },
+  {
+   "name": "w121_8",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 72,
+   "match": "minecraft:redstone_wire[power=8]"
+  },
+  {
+   "name": "w121_9",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 73,
+   "match": "minecraft:redstone_wire[power=9]"
+  },
+  {
+   "name": "w121_10",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 74,
+   "match": "minecraft:redstone_wire[power=10]"
+  },
+  {
+   "name": "w121_11",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 75,
+   "match": "minecraft:redstone_wire[power=11]"
+  },
+  {
+   "name": "w121_12",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 76,
+   "match": "minecraft:redstone_wire[power=12]"
+  },
+  {
+   "name": "w121_13",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 77,
+   "match": "minecraft:redstone_wire[power=13]"
+  },
+  {
+   "name": "w121_14",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 78,
+   "match": "minecraft:redstone_wire[power=14]"
+  },
+  {
+   "name": "w121_15",
+   "pos": [
+    101,
+    66,
+    101
+   ],
+   "bit": 79,
+   "match": "minecraft:redstone_wire[power=15]"
+  },
+  {
+   "name": "c012",
+   "pos": [
+    100,
+    65,
+    102
+   ],
+   "bit": 80,
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c112",
+   "pos": [
+    101,
+    65,
+    102
+   ],
+   "bit": 81,
+   "match": "minecraft:comparator[powered=true]"
+  }
+ ],
+ "regimes": [
+  {
+   "name": "wake_T15",
+   "inputs": {
+    "p4_throughline_sep__T_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "wake_T0",
+   "inputs": {
+    "p4_throughline_sep__T_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_T15",
+   "inputs": {
+    "p4_throughline_sep__T_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_T0",
+   "inputs": {
+    "p4_throughline_sep__T_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_T15b",
+   "inputs": {
+    "p4_throughline_sep__T_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_T0b",
+   "inputs": {
+    "p4_throughline_sep__T_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  }
+ ],
+ "limits": {
+  "max_rcon": 600000
+ },
+ "out_dir": "out_p4trace"
+}

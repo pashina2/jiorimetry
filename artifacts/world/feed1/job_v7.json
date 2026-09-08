@@ -1,0 +1,9 @@
+{
+ "name": "feed_v7",
+ "artifacts": [
+  {
+   "name": "alu_stage_v7",
+   "layout": "../2026-09-08-placealu3/alu_stage_v7.json"
+  }
+ ]
+}

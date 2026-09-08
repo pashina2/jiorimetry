@@ -1,0 +1,648 @@
+{
+ "job": "feed_p14",
+ "artifacts": [
+  {
+   "name": "p14_n2",
+   "kind": "alu_slice_n2",
+   "artifact_cells": 622,
+   "readout_added": [
+    [
+     [
+      28,
+      2,
+      2
+     ],
+     "minecraft:redstone_wire"
+    ],
+    [
+     [
+      28,
+      1,
+      2
+     ],
+     "minecraft:smooth_stone"
+    ]
+   ],
+   "rows": 128,
+   "feeders": [
+    {
+     "pin": "P",
+     "cell": [
+      0,
+      2,
+      0
+     ],
+     "kind": "ctrl",
+     "note": "base [0, 2, -1]",
+     "lever": [
+      0,
+      3,
+      -1
+     ],
+     "cells": [
+      [
+       [
+        0,
+        2,
+        -1
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        0,
+        3,
+        -1
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "Wn",
+     "cell": [
+      0,
+      3,
+      10
+     ],
+     "kind": "ctrl",
+     "note": "base [0, 3, 9]",
+     "lever": [
+      0,
+      4,
+      9
+     ],
+     "cells": [
+      [
+       [
+        0,
+        3,
+        9
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        0,
+        4,
+        9
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "a0",
+     "cell": [
+      12,
+      1,
+      13
+     ],
+     "kind": "data",
+     "note": "direct gate [12, 1, 14] facing=south",
+     "lever": [
+      13,
+      2,
+      15
+     ],
+     "cells": [
+      [
+       [
+        12,
+        1,
+        14
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        12,
+        1,
+        15
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        13,
+        1,
+        14
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        13,
+        1,
+        15
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        13,
+        2,
+        15
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        12,
+        0,
+        14
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        13,
+        0,
+        14
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "a1",
+     "cell": [
+      26,
+      1,
+      13
+     ],
+     "kind": "data",
+     "note": "direct gate [26, 1, 14] facing=south",
+     "lever": [
+      27,
+      2,
+      15
+     ],
+     "cells": [
+      [
+       [
+        26,
+        1,
+        14
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        26,
+        1,
+        15
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        27,
+        1,
+        14
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        27,
+        1,
+        15
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        27,
+        2,
+        15
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        26,
+        0,
+        14
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        27,
+        0,
+        14
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "b0",
+     "cell": [
+      2,
+      3,
+      6
+     ],
+     "kind": "data",
+     "note": "direct gate [2, 3, 7] facing=south",
+     "lever": [
+      1,
+      4,
+      8
+     ],
+     "cells": [
+      [
+       [
+        2,
+        3,
+        7
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        2,
+        3,
+        8
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        1,
+        3,
+        7
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        1,
+        3,
+        8
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        1,
+        4,
+        8
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        2,
+        2,
+        7
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        1,
+        2,
+        7
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "b1",
+     "cell": [
+      16,
+      3,
+      6
+     ],
+     "kind": "data",
+     "note": "direct gate [16, 3, 7] facing=south",
+     "lever": [
+      15,
+      4,
+      8
+     ],
+     "cells": [
+      [
+       [
+        16,
+        3,
+        7
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        16,
+        3,
+        8
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        15,
+        3,
+        7
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        15,
+        3,
+        8
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        15,
+        4,
+        8
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        16,
+        2,
+        7
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        15,
+        2,
+        7
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    },
+    {
+     "pin": "k",
+     "cell": [
+      0,
+      2,
+      2
+     ],
+     "kind": "data",
+     "note": "direct gate [0, 2, 3] facing=south",
+     "lever": [
+      -1,
+      3,
+      4
+     ],
+     "cells": [
+      [
+       [
+        0,
+        2,
+        3
+       ],
+       "minecraft:comparator[facing=south,mode=compare]"
+      ],
+      [
+       [
+        0,
+        2,
+        4
+       ],
+       "minecraft:barrel[facing=up,open=false]"
+      ],
+      [
+       [
+        -1,
+        2,
+        3
+       ],
+       "minecraft:redstone_wire"
+      ],
+      [
+       [
+        -1,
+        2,
+        4
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -1,
+        3,
+        4
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ],
+      [
+       [
+        0,
+        1,
+        3
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -1,
+        1,
+        3
+       ],
+       "minecraft:smooth_stone"
+      ]
+     ],
+     "substitutions": []
+    }
+   ],
+   "levers": {
+    "P_0": [
+     0,
+     3,
+     -1
+    ],
+    "Wn_0": [
+     0,
+     4,
+     9
+    ],
+    "a0_0": [
+     13,
+     2,
+     15
+    ],
+    "a1_0": [
+     27,
+     2,
+     15
+    ],
+    "b0_0": [
+     1,
+     4,
+     8
+    ],
+    "b1_0": [
+     15,
+     4,
+     8
+    ],
+    "k_0": [
+     -1,
+     3,
+     4
+    ]
+   },
+   "bench_pass": "128/128"
+  }
+ ],
+ "runs": [
+  {
+   "cmd": [
+    "<python>",
+    "<dev-repo>/tools/world/worldprobe.py",
+    "run",
+    "--spec",
+    "docs/world/out_p14_final/p14_n2_1.spec.json",
+    "--run-dir",
+    "<host-path><session-scratchpad>/w_p14/run_p14_n2_1_try2"
+   ],
+   "returncode": 0,
+   "wall_s": 204.7,
+   "stdout": "\nwarm_SUB_A3B2k0      settle_gt=16 last_change_gt=16 final_value=1381 events=[]\nwarm_AND_A0B0k0      settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nwarm_AND_A0B2k0      settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nwarm_AND_A1B0k0      settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nwarm_AND_A1B2k0      settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nwarm_AND_A2B0k0      settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nwarm_AND_A2B2k0      settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nwarm_AND_A3B0k0      settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nwarm_AND_A3B2k0      settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nwarm_OR_A0B0k0       settle_gt=30 last_change_gt=30 final_value=1621 events=[]\nwarm_OR_A0B2k0       settle_gt=16 last_change_gt=16 final_value=1685 events=[]\nwarm_OR_A1B0k0       settle_gt=24 last_change_gt=24 final_value=1637 events=[]\nwarm_OR_A1B2k0       settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nwarm_OR_A2B0k0       settle_gt=24 last_change_gt=24 final_value=1685 events=[]\nwarm_OR_A2B2k0       settle_gt=10 last_change_gt=10 final_value=1685 events=[]\nwarm_OR_A3B0k0       settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nwarm_OR_A3B2k0       settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nv_ADD_A0B0k0         settle_gt=None last_change_gt=40 final_value=2389 events=[]\nv_ADD_A0B2k0         settle_gt=16 last_change_gt=16 final_value=2453 events=[]\nv_ADD_A1B0k0         settle_gt=24 last_change_gt=24 final_value=2405 events=[]\nv_ADD_A1B2k0         settle_gt=16 last_change_gt=16 final_value=2469 events=[]\nv_ADD_A2B0k0         settle_gt=24 last_change_gt=24 final_value=2453 events=[]\nv_ADD_A2B2k0         settle_gt=16 last_change_gt=16 final_value=2393 events=[]\nv_ADD_A3B0k0         settle_gt=24 last_change_gt=24 final_value=2469 events=[]\nv_ADD_A3B2k0         settle_gt=16 last_change_gt=16 final_value=2409 events=[]\nv_SUB_A0B0k0         settle_gt=30 last_change_gt=30 final_value=1365 events=[]\nv_SUB_A0B2k0         settle_gt=16 last_change_gt=16 final_value=1433 events=[]\nv_SUB_A1B0k0         settle_gt=24 last_change_gt=24 final_value=1381 events=[]\nv_SUB_A1B2k0         settle_gt=16 last_change_gt=16 final_value=1449 events=[]\nv_SUB_A2B0k0         settle_gt=24 last_change_gt=24 final_value=1429 events=[]\nv_SUB_A2B2k0         settle_gt=16 last_change_gt=16 final_value=1365 events=[]\nv_SUB_A3B0k0         settle_gt=24 last_change_gt=24 final_value=1445 events=[]\nv_SUB_A3B2k0         settle_gt=16 last_change_gt=16 final_value=1381 events=[]\nv_AND_A0B0k0         settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nv_AND_A0B2k0         settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nv_AND_A1B0k0         settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nv_AND_A1B2k0         settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nv_AND_A2B0k0         settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nv_AND_A2B2k0         settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nv_AND_A3B0k0         settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nv_AND_A3B2k0         settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nv_OR_A0B0k0          settle_gt=30 last_change_gt=30 final_value=1621 events=[]\nv_OR_A0B2k0          settle_gt=16 last_change_gt=16 final_value=1685 events=[]\nv_OR_A1B0k0          settle_gt=24 last_change_gt=24 final_value=1637 events=[]\nv_OR_A1B2k0          settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nv_OR_A2B0k0          settle_gt=24 last_change_gt=24 final_value=1685 events=[]\nv_OR_A2B2k0          settle_gt=10 last_change_gt=10 final_value=1685 events=[]\nv_OR_A3B0k0          settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nv_OR_A3B2k0          settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nwrote docs/world/out_p14_final/p14_n2_1.run.result.json\nwrote docs/world/out_p14_final/p14_n2_1.run.tables.md\n",
+   "stderr": "",
+   "spec": "p14_n2_1",
+   "rcon": 449634,
+   "completed": true
+  },
+  {
+   "cmd": [
+    "<python>",
+    "<dev-repo>/tools/world/worldprobe.py",
+    "run",
+    "--spec",
+    "docs/world/out_p14_final/p14_n2_2.spec.json",
+    "--run-dir",
+    "<host-path><session-scratchpad>/w_p14/run_p14_n2_2_try2"
+   ],
+   "returncode": 0,
+   "wall_s": 196.6,
+   "stdout": "k1      settle_gt=16 last_change_gt=16 final_value=1365 events=[]\nwarm_AND_A0B0k1      settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nwarm_AND_A0B2k1      settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nwarm_AND_A1B0k1      settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nwarm_AND_A1B2k1      settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nwarm_AND_A2B0k1      settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nwarm_AND_A2B2k1      settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nwarm_AND_A3B0k1      settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nwarm_AND_A3B2k1      settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nwarm_OR_A0B0k1       settle_gt=30 last_change_gt=30 final_value=1621 events=[]\nwarm_OR_A0B2k1       settle_gt=16 last_change_gt=16 final_value=1685 events=[]\nwarm_OR_A1B0k1       settle_gt=24 last_change_gt=24 final_value=1637 events=[]\nwarm_OR_A1B2k1       settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nwarm_OR_A2B0k1       settle_gt=24 last_change_gt=24 final_value=1685 events=[]\nwarm_OR_A2B2k1       settle_gt=10 last_change_gt=10 final_value=1685 events=[]\nwarm_OR_A3B0k1       settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nwarm_OR_A3B2k1       settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nv_ADD_A0B0k1         settle_gt=None last_change_gt=40 final_value=2405 events=[]\nv_ADD_A0B2k1         settle_gt=16 last_change_gt=16 final_value=2469 events=[]\nv_ADD_A1B0k1         settle_gt=None last_change_gt=38 final_value=2454 events=[]\nv_ADD_A1B2k1         settle_gt=16 last_change_gt=16 final_value=2394 events=[]\nv_ADD_A2B0k1         settle_gt=None last_change_gt=38 final_value=2469 events=[]\nv_ADD_A2B2k1         settle_gt=16 last_change_gt=16 final_value=2409 events=[]\nv_ADD_A3B0k1         settle_gt=None last_change_gt=38 final_value=2394 events=[]\nv_ADD_A3B2k1         settle_gt=16 last_change_gt=16 final_value=2458 events=[]\nv_SUB_A0B0k1         settle_gt=None last_change_gt=36 final_value=1450 events=[]\nv_SUB_A0B2k1         settle_gt=16 last_change_gt=16 final_value=1386 events=[]\nv_SUB_A1B0k1         settle_gt=None last_change_gt=36 final_value=1365 events=[]\nv_SUB_A1B2k1         settle_gt=16 last_change_gt=16 final_value=1433 events=[]\nv_SUB_A2B0k1         settle_gt=None last_change_gt=36 final_value=1382 events=[]\nv_SUB_A2B2k1         settle_gt=16 last_change_gt=16 final_value=1450 events=[]\nv_SUB_A3B0k1         settle_gt=None last_change_gt=36 final_value=1429 events=[]\nv_SUB_A3B2k1         settle_gt=16 last_change_gt=16 final_value=1365 events=[]\nv_AND_A0B0k1         settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nv_AND_A0B2k1         settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nv_AND_A1B0k1         settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nv_AND_A1B2k1         settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nv_AND_A2B0k1         settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nv_AND_A2B2k1         settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nv_AND_A3B0k1         settle_gt=18 last_change_gt=18 final_value=2645 events=[]\nv_AND_A3B2k1         settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nv_OR_A0B0k1          settle_gt=30 last_change_gt=30 final_value=1621 events=[]\nv_OR_A0B2k1          settle_gt=16 last_change_gt=16 final_value=1685 events=[]\nv_OR_A1B0k1          settle_gt=24 last_change_gt=24 final_value=1637 events=[]\nv_OR_A1B2k1          settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nv_OR_A2B0k1          settle_gt=24 last_change_gt=24 final_value=1685 events=[]\nv_OR_A2B2k1          settle_gt=10 last_change_gt=10 final_value=1685 events=[]\nv_OR_A3B0k1          settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nv_OR_A3B2k1          settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nwrote docs/world/out_p14_final/p14_n2_2.run.result.json\nwrote docs/world/out_p14_final/p14_n2_2.run.tables.md\n",
+   "stderr": "",
+   "spec": "p14_n2_2",
+   "rcon": 449408,
+   "completed": true
+  },
+  {
+   "cmd": [
+    "<python>",
+    "<dev-repo>/tools/world/worldprobe.py",
+    "run",
+    "--spec",
+    "docs/world/out_p14_final/p14_n2_3.spec.json",
+    "--run-dir",
+    "<host-path><session-scratchpad>/w_p14/run_p14_n2_3_try2"
+   ],
+   "returncode": 0,
+   "wall_s": 191.7,
+   "stdout": "k0      settle_gt=16 last_change_gt=16 final_value=1365 events=[]\nwarm_AND_A0B1k0      settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nwarm_AND_A0B3k0      settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nwarm_AND_A1B1k0      settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nwarm_AND_A1B3k0      settle_gt=4 last_change_gt=4 final_value=2661 events=[]\nwarm_AND_A2B1k0      settle_gt=24 last_change_gt=24 final_value=2645 events=[]\nwarm_AND_A2B3k0      settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nwarm_AND_A3B1k0      settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nwarm_AND_A3B3k0      settle_gt=16 last_change_gt=16 final_value=2725 events=[]\nwarm_OR_A0B1k0       settle_gt=30 last_change_gt=30 final_value=1637 events=[]\nwarm_OR_A0B3k0       settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nwarm_OR_A1B1k0       settle_gt=18 last_change_gt=18 final_value=1637 events=[]\nwarm_OR_A1B3k0       settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nwarm_OR_A2B1k0       settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nwarm_OR_A2B3k0       settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nwarm_OR_A3B1k0       settle_gt=18 last_change_gt=18 final_value=1701 events=[]\nwarm_OR_A3B3k0       settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nv_ADD_A0B1k0         settle_gt=None last_change_gt=40 final_value=2405 events=[]\nv_ADD_A0B3k0         settle_gt=16 last_change_gt=16 final_value=2469 events=[]\nv_ADD_A1B1k0         settle_gt=None last_change_gt=38 final_value=2454 events=[]\nv_ADD_A1B3k0         settle_gt=16 last_change_gt=16 final_value=2394 events=[]\nv_ADD_A2B1k0         settle_gt=None last_change_gt=38 final_value=2469 events=[]\nv_ADD_A2B3k0         settle_gt=16 last_change_gt=16 final_value=2409 events=[]\nv_ADD_A3B1k0         settle_gt=None last_change_gt=38 final_value=2394 events=[]\nv_ADD_A3B3k0         settle_gt=16 last_change_gt=16 final_value=2458 events=[]\nv_SUB_A0B1k0         settle_gt=None last_change_gt=36 final_value=1450 events=[]\nv_SUB_A0B3k0         settle_gt=16 last_change_gt=16 final_value=1386 events=[]\nv_SUB_A1B1k0         settle_gt=None last_change_gt=36 final_value=1365 events=[]\nv_SUB_A1B3k0         settle_gt=16 last_change_gt=16 final_value=1433 events=[]\nv_SUB_A2B1k0         settle_gt=None last_change_gt=36 final_value=1382 events=[]\nv_SUB_A2B3k0         settle_gt=16 last_change_gt=16 final_value=1450 events=[]\nv_SUB_A3B1k0         settle_gt=None last_change_gt=36 final_value=1429 events=[]\nv_SUB_A3B3k0         settle_gt=16 last_change_gt=16 final_value=1365 events=[]\nv_AND_A0B1k0         settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nv_AND_A0B3k0         settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nv_AND_A1B1k0         settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nv_AND_A1B3k0         settle_gt=4 last_change_gt=4 final_value=2661 events=[]\nv_AND_A2B1k0         settle_gt=24 last_change_gt=24 final_value=2645 events=[]\nv_AND_A2B3k0         settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nv_AND_A3B1k0         settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nv_AND_A3B3k0         settle_gt=16 last_change_gt=16 final_value=2725 events=[]\nv_OR_A0B1k0          settle_gt=30 last_change_gt=30 final_value=1637 events=[]\nv_OR_A0B3k0          settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nv_OR_A1B1k0          settle_gt=18 last_change_gt=18 final_value=1637 events=[]\nv_OR_A1B3k0          settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nv_OR_A2B1k0          settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nv_OR_A2B3k0          settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nv_OR_A3B1k0          settle_gt=18 last_change_gt=18 final_value=1701 events=[]\nv_OR_A3B3k0          settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nwrote docs/world/out_p14_final/p14_n2_3.run.result.json\nwrote docs/world/out_p14_final/p14_n2_3.run.tables.md\n",
+   "stderr": "",
+   "spec": "p14_n2_3",
+   "rcon": 449303,
+   "completed": true
+  },
+  {
+   "cmd": [
+    "<python>",
+    "<dev-repo>/tools/world/worldprobe.py",
+    "run",
+    "--spec",
+    "docs/world/out_p14_final/p14_n2_4.spec.json",
+    "--run-dir",
+    "<host-path><session-scratchpad>/w_p14/run_p14_n2_4"
+   ],
+   "returncode": 0,
+   "wall_s": 196.2,
+   "stdout": "arm_SUB_A3B3k1      settle_gt=16 last_change_gt=16 final_value=1450 events=[]\nwarm_AND_A0B1k1      settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nwarm_AND_A0B3k1      settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nwarm_AND_A1B1k1      settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nwarm_AND_A1B3k1      settle_gt=4 last_change_gt=4 final_value=2661 events=[]\nwarm_AND_A2B1k1      settle_gt=24 last_change_gt=24 final_value=2645 events=[]\nwarm_AND_A2B3k1      settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nwarm_AND_A3B1k1      settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nwarm_AND_A3B3k1      settle_gt=16 last_change_gt=16 final_value=2725 events=[]\nwarm_OR_A0B1k1       settle_gt=30 last_change_gt=30 final_value=1637 events=[]\nwarm_OR_A0B3k1       settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nwarm_OR_A1B1k1       settle_gt=18 last_change_gt=18 final_value=1637 events=[]\nwarm_OR_A1B3k1       settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nwarm_OR_A2B1k1       settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nwarm_OR_A2B3k1       settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nwarm_OR_A3B1k1       settle_gt=18 last_change_gt=18 final_value=1701 events=[]\nwarm_OR_A3B3k1       settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nv_ADD_A0B1k1         settle_gt=None last_change_gt=36 final_value=2454 events=[]\nv_ADD_A0B3k1         settle_gt=16 last_change_gt=16 final_value=2394 events=[]\nv_ADD_A1B1k1         settle_gt=24 last_change_gt=24 final_value=2470 events=[]\nv_ADD_A1B3k1         settle_gt=16 last_change_gt=16 final_value=2410 events=[]\nv_ADD_A2B1k1         settle_gt=24 last_change_gt=24 final_value=2394 events=[]\nv_ADD_A2B3k1         settle_gt=16 last_change_gt=16 final_value=2458 events=[]\nv_ADD_A3B1k1         settle_gt=24 last_change_gt=24 final_value=2410 events=[]\nv_ADD_A3B3k1         settle_gt=16 last_change_gt=16 final_value=2474 events=[]\nv_SUB_A0B1k1         settle_gt=None last_change_gt=36 final_value=1434 events=[]\nv_SUB_A0B3k1         settle_gt=16 last_change_gt=16 final_value=1370 events=[]\nv_SUB_A1B1k1         settle_gt=24 last_change_gt=24 final_value=1450 events=[]\nv_SUB_A1B3k1         settle_gt=16 last_change_gt=16 final_value=1386 events=[]\nv_SUB_A2B1k1         settle_gt=24 last_change_gt=24 final_value=1366 events=[]\nv_SUB_A2B3k1         settle_gt=16 last_change_gt=16 final_value=1434 events=[]\nv_SUB_A3B1k1         settle_gt=24 last_change_gt=24 final_value=1382 events=[]\nv_SUB_A3B3k1         settle_gt=16 last_change_gt=16 final_value=1450 events=[]\nv_AND_A0B1k1         settle_gt=30 last_change_gt=30 final_value=2645 events=[]\nv_AND_A0B3k1         settle_gt=4 last_change_gt=4 final_value=2645 events=[]\nv_AND_A1B1k1         settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nv_AND_A1B3k1         settle_gt=4 last_change_gt=4 final_value=2661 events=[]\nv_AND_A2B1k1         settle_gt=24 last_change_gt=24 final_value=2645 events=[]\nv_AND_A2B3k1         settle_gt=16 last_change_gt=16 final_value=2709 events=[]\nv_AND_A3B1k1         settle_gt=24 last_change_gt=24 final_value=2661 events=[]\nv_AND_A3B3k1         settle_gt=16 last_change_gt=16 final_value=2725 events=[]\nv_OR_A0B1k1          settle_gt=30 last_change_gt=30 final_value=1637 events=[]\nv_OR_A0B3k1          settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nv_OR_A1B1k1          settle_gt=18 last_change_gt=18 final_value=1637 events=[]\nv_OR_A1B3k1          settle_gt=16 last_change_gt=16 final_value=1701 events=[]\nv_OR_A2B1k1          settle_gt=24 last_change_gt=24 final_value=1701 events=[]\nv_OR_A2B3k1          settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nv_OR_A3B1k1          settle_gt=18 last_change_gt=18 final_value=1701 events=[]\nv_OR_A3B3k1          settle_gt=10 last_change_gt=10 final_value=1701 events=[]\nwrote docs/world/out_p14_final/p14_n2_4.run.result.json\nwrote docs/world/out_p14_final/p14_n2_4.run.tables.md\n",
+   "stderr": "",
+   "spec": "p14_n2_4",
+   "rcon": 449514,
+   "completed": true
+  }
+ ],
+ "table": [
+  {
+   "artifact": "p14_n2",
+   "kind": "alu_slice_n2",
+   "bench": "128/128",
+   "world_rows": 128,
+   "world_fail": 0,
+   "read_points": 20608,
+   "mismatch": "0/20608",
+   "settle_gt": "4..30 (19 unsettled)",
+   "blocks": 663,
+   "rcon": 1797859,
+   "first_counterexample": null
+  }
+ ],
+ "refused": null,
+ "world": {
+  "bbox": [
+   [
+    98,
+    63,
+    99
+   ],
+   [
+    129,
+    69,
+    117
+   ]
+  ],
+  "origins": {
+   "p14_n2": [
+    0,
+    0,
+    1
+   ]
+  },
+  "world_dir": "<host-path><session-scratchpad>/w_p14/world_build/world",
+  "blocks": 663,
+  "block_entities": 19,
+  "reused": true,
+  "regions": [
+   "r.0.0.mca"
+  ],
+  "data_version": 3839
+ },
+ "specs": [
+  {
+   "artifact": "p14_n2",
+   "spec": "docs/world/out_p14_final/p14_n2_1.spec.json",
+   "est_rcon": 447478
+  },
+  {
+   "artifact": "p14_n2",
+   "spec": "docs/world/out_p14_final/p14_n2_2.spec.json",
+   "est_rcon": 447478
+  },
+  {
+   "artifact": "p14_n2",
+   "spec": "docs/world/out_p14_final/p14_n2_3.spec.json",
+   "est_rcon": 447478
+  },
+  {
+   "artifact": "p14_n2",
+   "spec": "docs/world/out_p14_final/p14_n2_4.spec.json",
+   "est_rcon": 447478
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "name": "feed_v7_walled",
+ "artifacts": [
+  {
+   "name": "alu_stage_v7_walled",
+   "layout": "alu_stage_v7_walled.json"
+  }
+ ]
+}

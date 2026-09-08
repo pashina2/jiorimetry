@@ -1,0 +1,144 @@
+{
+ "job": "feed_p4sep",
+ "artifacts": [
+  {
+   "name": "p4_throughline_sep",
+   "kind": "placer0",
+   "artifact_cells": 68,
+   "readout_added": [],
+   "rows": 2,
+   "feeders": [
+    {
+     "pin": "T",
+     "cell": [
+      0,
+      1,
+      1
+     ],
+     "kind": "ctrl",
+     "note": "base [-1, 1, 1]",
+     "lever": [
+      -1,
+      2,
+      1
+     ],
+     "cells": [
+      [
+       [
+        -1,
+        1,
+        1
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        -1,
+        2,
+        1
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    }
+   ],
+   "levers": {
+    "T_0": [
+     -1,
+     2,
+     1
+    ]
+   },
+   "bench_pass": "2/2"
+  }
+ ],
+ "runs": [
+  {
+   "cmd": [
+    "<python>",
+    "<dev-repo>/tools/world/worldprobe.py",
+    "run",
+    "--spec",
+    "out_p4sep/p4_throughline_sep.spec.json",
+    "--run-dir",
+    "out_p4sep/run_p4_throughline_sep"
+   ],
+   "returncode": 0,
+   "wall_s": 67.1,
+   "stdout": "wake_on              settle_gt=10 last_change_gt=10 final_value=2 events=[]\nwake_off             settle_gt=0 last_change_gt=0 final_value=2 events=[]\nwarm_T0              settle_gt=0 last_change_gt=22 final_value=1 events=[]\nwarm_T15             settle_gt=10 last_change_gt=10 final_value=2 events=[]\nv_T0                 settle_gt=0 last_change_gt=0 final_value=2 events=[]\nv_T15                settle_gt=0 last_change_gt=0 final_value=2 events=[]\nwrote out_p4sep/p4_throughline_sep.run.result.json\nwrote out_p4sep/p4_throughline_sep.run.tables.md\n",
+   "stderr": "",
+   "spec": "p4_throughline_sep",
+   "rcon": 3519,
+   "completed": true
+  }
+ ],
+ "table": [
+  {
+   "artifact": "p4_throughline_sep",
+   "kind": "placer0",
+   "bench": "2/2",
+   "world_rows": 2,
+   "world_fail": 1,
+   "read_points": 14,
+   "mismatch": "7/14",
+   "settle_gt": "0..0 (0 unsettled)",
+   "blocks": 70,
+   "rcon": 3519,
+   "first_counterexample": {
+    "regime": "v_T0",
+    "read": "O_0",
+    "cell": [
+     107,
+     65,
+     101
+    ],
+    "expected": true,
+    "got": false,
+    "other_reads": [
+     "O_15",
+     "c0_1_2",
+     "c1_1_2",
+     "d2_2_1",
+     "d4_3_1"
+    ]
+   }
+  }
+ ],
+ "refused": null,
+ "world": {
+  "bbox": [
+   [
+    98,
+    63,
+    99
+   ],
+   [
+    108,
+    68,
+    104
+   ]
+  ],
+  "origins": {
+   "p4_throughline_sep": [
+    0,
+    0,
+    0
+   ]
+  },
+  "world_dir": "out_p4sep/world_build/world",
+  "blocks": 70,
+  "block_entities": 0,
+  "regions": [
+   "r.0.0.mca"
+  ],
+  "data_version": 3839
+ },
+ "specs": [
+  {
+   "artifact": "p4_throughline_sep",
+   "spec": "out_p4sep/p4_throughline_sep.spec.json",
+   "est_rcon": 2554
+  }
+ ]
+}

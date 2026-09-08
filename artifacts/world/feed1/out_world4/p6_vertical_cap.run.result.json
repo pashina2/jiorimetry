@@ -1,0 +1,878 @@
+{
+ "provenance": {
+  "writer": "worldprobe",
+  "report_kind": "bench_trace",
+  "spec_path": "docs/world/out_world4/p6_vertical_cap.spec.json",
+  "spec_sha256": "27851b99d21b378d3cc6295e35e22a799df0905af0978d47ed66ade6d5e75619",
+  "utc": "2026-09-08T11:31:43Z"
+ },
+ "which": "run",
+ "spec_name": "p6_vertical_cap",
+ "run_dir": "<host-path><session-scratchpad>/w_w4/run_p6_vertical_cap",
+ "completed": true,
+ "world": {
+  "run_dir": "<host-path><session-scratchpad>/w_w4/run_p6_vertical_cap",
+  "template": "<host-path>/carpet-work",
+  "mode": "world_dir",
+  "source": "<host-path><session-scratchpad>/w_w4/world_build/world",
+  "copied": [
+   {
+    "rel": ".",
+    "kind": "whole world directory"
+   }
+  ],
+  "absent": [],
+  "data_version": {
+   "world": 3839,
+   "template": 3839
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25598
+ },
+ "tick_query": "The game is frozenTarget tick rate: 20.0 per second.\nAverage time per tick: 3.5ms (Target: 50.0ms)Percentiles: P50: 0.7ms P95: 34.5ms P99: 51.0ms, sample: 100",
+ "scarpet": {
+  "ok": true,
+  "reply": "= 5 (11ms)"
+ },
+ "regimes": [
+  {
+   "name": "wake_on",
+   "inputs": {
+    "p1_sub2side__Wn_0": 1,
+    "p1_sub2side__a_0": 1,
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 1,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 1,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 15,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 4,
+   "settled": true,
+   "first_stable_gt": 4,
+   "last_change_gt": 4,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "100101",
+   "final_value": 1,
+   "final_reads": {
+    "O_0": true,
+    "O_3": false,
+    "c2_1_-1": false,
+    "c2_1_1": true,
+    "c3_1_3": false,
+    "d3_1_2": true
+   },
+   "changes": [
+    [
+     0,
+     "100000",
+     1
+    ],
+    [
+     2,
+     "100100",
+     1
+    ],
+    [
+     4,
+     "100101",
+     1
+    ]
+   ],
+   "series": [
+    "100000",
+    "100000",
+    "100100",
+    "100100",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101"
+   ],
+   "nbt": {
+    "before": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "wake_off",
+   "inputs": {
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 0,
+    "p2_copy_into_side__a_0": 0,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 0,
+    "p5_max_merge__a_0": 0,
+    "p6_vertical_cap__N_0": 0,
+    "p6_vertical_cap__d_0": 0,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 0,
+    "slice_v9_n2__a0_0": 0,
+    "slice_v9_n2__a1_0": 0,
+    "slice_v9_n2__b0_0": 0,
+    "slice_v9_n2__b1_0": 0,
+    "slice_v9_n2__k_0": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 15,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "011010",
+   "final_value": 2,
+   "final_reads": {
+    "O_0": false,
+    "O_3": true,
+    "c2_1_-1": true,
+    "c2_1_1": false,
+    "c3_1_3": true,
+    "d3_1_2": false
+   },
+   "changes": [
+    [
+     0,
+     "100101",
+     1
+    ],
+    [
+     2,
+     "101101",
+     1
+    ],
+    [
+     4,
+     "101001",
+     1
+    ],
+    [
+     6,
+     "101000",
+     1
+    ],
+    [
+     8,
+     "011010",
+     2
+    ]
+   ],
+   "series": [
+    "100101",
+    "100101",
+    "101101",
+    "101101",
+    "101001",
+    "101001",
+    "101000",
+    "101000",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010"
+   ],
+   "nbt": {
+    "before": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_N15d0",
+   "inputs": {
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 1,
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 12,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "100101",
+   "final_value": 1,
+   "final_reads": {
+    "O_0": true,
+    "O_3": false,
+    "c2_1_-1": false,
+    "c2_1_1": true,
+    "c3_1_3": false,
+    "d3_1_2": true
+   },
+   "changes": [
+    [
+     0,
+     "011010",
+     2
+    ],
+    [
+     2,
+     "010010",
+     2
+    ],
+    [
+     4,
+     "010110",
+     2
+    ],
+    [
+     6,
+     "010111",
+     2
+    ],
+    [
+     8,
+     "100101",
+     1
+    ]
+   ],
+   "series": [
+    "011010",
+    "011010",
+    "010010",
+    "010010",
+    "010110",
+    "010110",
+    "010111",
+    "010111",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101"
+   ],
+   "nbt": {
+    "before": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "warm_N15d3",
+   "inputs": {
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 1,
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "011010",
+   "final_value": 2,
+   "final_reads": {
+    "O_0": false,
+    "O_3": true,
+    "c2_1_-1": true,
+    "c2_1_1": false,
+    "c3_1_3": true,
+    "d3_1_2": false
+   },
+   "changes": [
+    [
+     0,
+     "100101",
+     1
+    ],
+    [
+     2,
+     "101101",
+     1
+    ],
+    [
+     4,
+     "101001",
+     1
+    ],
+    [
+     6,
+     "101000",
+     1
+    ],
+    [
+     8,
+     "011010",
+     2
+    ]
+   ],
+   "series": [
+    "100101",
+    "100101",
+    "101101",
+    "101101",
+    "101001",
+    "101001",
+    "101000",
+    "101000",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010"
+   ],
+   "nbt": {
+    "before": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   }
+  },
+  {
+   "name": "v_N15d0",
+   "inputs": {
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 1,
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "100101",
+   "final_value": 1,
+   "final_reads": {
+    "O_0": true,
+    "O_3": false,
+    "c2_1_-1": false,
+    "c2_1_1": true,
+    "c3_1_3": false,
+    "d3_1_2": true
+   },
+   "changes": [
+    [
+     0,
+     "011010",
+     2
+    ],
+    [
+     2,
+     "010010",
+     2
+    ],
+    [
+     4,
+     "010110",
+     2
+    ],
+    [
+     6,
+     "010111",
+     2
+    ],
+    [
+     8,
+     "100101",
+     1
+    ]
+   ],
+   "series": [
+    "011010",
+    "011010",
+    "010010",
+    "010010",
+    "010110",
+    "010110",
+    "010111",
+    "010111",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101",
+    "100101"
+   ],
+   "nbt": {
+    "before": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 1,
+     "got": 1,
+     "equal": true
+    },
+    "final_reads": {
+     "O_0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "O_3": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c2_1_-1": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c2_1_1": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c3_1_3": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "d3_1_2": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_N15d3",
+   "inputs": {
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 1,
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "011010",
+   "final_value": 2,
+   "final_reads": {
+    "O_0": false,
+    "O_3": true,
+    "c2_1_-1": true,
+    "c2_1_1": false,
+    "c3_1_3": true,
+    "d3_1_2": false
+   },
+   "changes": [
+    [
+     0,
+     "100101",
+     1
+    ],
+    [
+     2,
+     "101101",
+     1
+    ],
+    [
+     4,
+     "101001",
+     1
+    ],
+    [
+     6,
+     "101000",
+     1
+    ],
+    [
+     8,
+     "011010",
+     2
+    ]
+   ],
+   "series": [
+    "100101",
+    "100101",
+    "101101",
+    "101101",
+    "101001",
+    "101001",
+    "101000",
+    "101000",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010",
+    "011010"
+   ],
+   "nbt": {
+    "before": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    },
+    "after": {
+     "barrel_slot3": {
+      "command": "data get block 102 65 173 Items[3]",
+      "reply": "102, 65, 173 has the following block data: {count: 55, Slot: 3b, id: \"minecraft:cobblestone\"}"
+     }
+    }
+   },
+   "expect": {
+    "final_value": {
+     "expected": 2,
+     "got": 2,
+     "equal": true
+    },
+    "final_reads": {
+     "O_0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "O_3": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_1_-1": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_1_1": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c3_1_3": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "d3_1_2": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     }
+    }
+   }
+  }
+ ],
+ "rcon": {
+  "roundtrips": 3645,
+  "limit": 600000,
+  "by_phase": {
+   "prepare": 9,
+   "regime:wake_on": 654,
+   "regime:wake_off": 650,
+   "regime:warm_N15d0": 640,
+   "regime:warm_N15d3": 563,
+   "regime:v_N15d0": 564,
+   "regime:v_N15d3": 565
+  }
+ }
+}

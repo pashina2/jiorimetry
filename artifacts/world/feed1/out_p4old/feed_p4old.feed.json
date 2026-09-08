@@ -1,0 +1,339 @@
+{
+ "job": "feed_p4old",
+ "artifacts": [
+  {
+   "name": "p4_throughline_latched",
+   "kind": "placer0",
+   "artifact_cells": 67,
+   "readout_added": [],
+   "rows": 2,
+   "feeders": [],
+   "levers": {},
+   "refused": {
+    "T": {
+     "cell": [
+      0,
+      1,
+      1
+     ],
+     "tried": 8,
+     "reasons": {
+      "bistable": 4,
+      "collision": 4
+     },
+     "examples": [
+      {
+       "cells": [
+        [
+         0,
+         1,
+         0
+        ],
+        [
+         0,
+         2,
+         0
+        ]
+       ],
+       "note": "base [0, 1, 0]",
+       "reason": "bistable",
+       "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+       "subst": false
+      },
+      {
+       "cells": [
+        [
+         0,
+         1,
+         2
+        ],
+        [
+         0,
+         2,
+         2
+        ]
+       ],
+       "note": "base [0, 1, 2]",
+       "reason": "collision",
+       "detail": "[0, 1, 2] holds minecraft:repeater[facing=north]",
+       "subst": false
+      },
+      {
+       "cells": [
+        [
+         1,
+         1,
+         1
+        ],
+        [
+         1,
+         2,
+         1
+        ]
+       ],
+       "note": "base [1, 1, 1]",
+       "reason": "collision",
+       "detail": "[1, 1, 1] holds minecraft:smooth_stone",
+       "subst": false
+      },
+      {
+       "cells": [
+        [
+         -1,
+         1,
+         1
+        ],
+        [
+         -1,
+         2,
+         1
+        ]
+       ],
+       "note": "base [-1, 1, 1]",
+       "reason": "bistable",
+       "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+       "subst": false
+      },
+      {
+       "cells": [
+        [
+         0,
+         1,
+         0
+        ],
+        [
+         0,
+         2,
+         0
+        ]
+       ],
+       "note": "base [0, 1, 0]",
+       "reason": "bistable",
+       "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+       "subst": true
+      },
+      {
+       "cells": [
+        [
+         0,
+         1,
+         2
+        ],
+        [
+         0,
+         2,
+         2
+        ]
+       ],
+       "note": "base [0, 1, 2]",
+       "reason": "collision",
+       "detail": "[0, 1, 2] holds minecraft:repeater[facing=north]",
+       "subst": true
+      },
+      {
+       "cells": [
+        [
+         1,
+         1,
+         1
+        ],
+        [
+         1,
+         2,
+         1
+        ]
+       ],
+       "note": "base [1, 1, 1]",
+       "reason": "collision",
+       "detail": "[1, 1, 1] holds minecraft:smooth_stone",
+       "subst": true
+      },
+      {
+       "cells": [
+        [
+         -1,
+         1,
+         1
+        ],
+        [
+         -1,
+         2,
+         1
+        ]
+       ],
+       "note": "base [-1, 1, 1]",
+       "reason": "bistable",
+       "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+       "subst": true
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "runs": [],
+ "table": [],
+ "refused": {
+  "artifact": "p4_throughline_latched",
+  "pins": {
+   "T": {
+    "cell": [
+     0,
+     1,
+     1
+    ],
+    "tried": 8,
+    "reasons": {
+     "bistable": 4,
+     "collision": 4
+    },
+    "examples": [
+     {
+      "cells": [
+       [
+        0,
+        1,
+        0
+       ],
+       [
+        0,
+        2,
+        0
+       ]
+      ],
+      "note": "base [0, 1, 0]",
+      "reason": "bistable",
+      "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+      "subst": false
+     },
+     {
+      "cells": [
+       [
+        0,
+        1,
+        2
+       ],
+       [
+        0,
+        2,
+        2
+       ]
+      ],
+      "note": "base [0, 1, 2]",
+      "reason": "collision",
+      "detail": "[0, 1, 2] holds minecraft:repeater[facing=north]",
+      "subst": false
+     },
+     {
+      "cells": [
+       [
+        1,
+        1,
+        1
+       ],
+       [
+        1,
+        2,
+        1
+       ]
+      ],
+      "note": "base [1, 1, 1]",
+      "reason": "collision",
+      "detail": "[1, 1, 1] holds minecraft:smooth_stone",
+      "subst": false
+     },
+     {
+      "cells": [
+       [
+        -1,
+        1,
+        1
+       ],
+       [
+        -1,
+        2,
+        1
+       ]
+      ],
+      "note": "base [-1, 1, 1]",
+      "reason": "bistable",
+      "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+      "subst": false
+     },
+     {
+      "cells": [
+       [
+        0,
+        1,
+        0
+       ],
+       [
+        0,
+        2,
+        0
+       ]
+      ],
+      "note": "base [0, 1, 0]",
+      "reason": "bistable",
+      "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+      "subst": true
+     },
+     {
+      "cells": [
+       [
+        0,
+        1,
+        2
+       ],
+       [
+        0,
+        2,
+        2
+       ]
+      ],
+      "note": "base [0, 1, 2]",
+      "reason": "collision",
+      "detail": "[0, 1, 2] holds minecraft:repeater[facing=north]",
+      "subst": true
+     },
+     {
+      "cells": [
+       [
+        1,
+        1,
+        1
+       ],
+       [
+        1,
+        2,
+        1
+       ]
+      ],
+      "note": "base [1, 1, 1]",
+      "reason": "collision",
+      "detail": "[1, 1, 1] holds minecraft:smooth_stone",
+      "subst": true
+     },
+     {
+      "cells": [
+       [
+        -1,
+        1,
+        1
+       ],
+       [
+        -1,
+        2,
+        1
+       ]
+      ],
+      "note": "base [-1, 1, 1]",
+      "reason": "bistable",
+      "detail": "cold and hot DC differ at [[0, 1, 1], [0, 1, 2], [1, 1, 2]] (T=0)",
+      "subst": true
+     }
+    ]
+   }
+  }
+ }
+}

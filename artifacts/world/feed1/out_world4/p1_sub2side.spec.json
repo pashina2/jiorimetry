@@ -1,0 +1,540 @@
+{
+ "name": "p1_sub2side",
+ "world": {
+  "template": "<host-path>/carpet-work",
+  "world_dir": "<host-path><session-scratchpad>/w_w4/world_build/world",
+  "bbox": {
+   "min": [
+    97,
+    63,
+    99
+   ],
+   "max": [
+    125,
+    69,
+    209
+   ]
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25598,
+  "java_xmx": "3G"
+ },
+ "drives": {
+  "p1_sub2side__Wn_0": {
+   "kind": "lever",
+   "pos": [
+    105,
+    66,
+    101
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p1_sub2side__a_0": {
+   "kind": "lever",
+   "pos": [
+    101,
+    66,
+    100
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p2_copy_into_side__a_0": {
+   "kind": "lever",
+   "pos": [
+    101,
+    66,
+    118
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p4_throughline__T_0": {
+   "kind": "lever",
+   "pos": [
+    100,
+    66,
+    138
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p5_max_merge__W3_0": {
+   "kind": "lever",
+   "pos": [
+    99,
+    66,
+    158
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p5_max_merge__a_0": {
+   "kind": "lever",
+   "pos": [
+    99,
+    66,
+    154
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p6_vertical_cap__N_0": {
+   "kind": "lever",
+   "pos": [
+    100,
+    66,
+    176
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "p6_vertical_cap__d_0": {
+   "kind": "lever",
+   "pos": [
+    103,
+    66,
+    173
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__P_0": {
+   "kind": "lever",
+   "pos": [
+    100,
+    67,
+    192
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__Wn_0": {
+   "kind": "lever",
+   "pos": [
+    100,
+    68,
+    204
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__a0_0": {
+   "kind": "lever",
+   "pos": [
+    111,
+    66,
+    208
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__a1_0": {
+   "kind": "lever",
+   "pos": [
+    123,
+    66,
+    208
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__b0_0": {
+   "kind": "lever",
+   "pos": [
+    99,
+    68,
+    201
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__b1_0": {
+   "kind": "lever",
+   "pos": [
+    111,
+    68,
+    201
+   ],
+   "face": "floor",
+   "facing": "north"
+  },
+  "slice_v9_n2__k_0": {
+   "kind": "lever",
+   "pos": [
+    98,
+    67,
+    194
+   ],
+   "face": "floor",
+   "facing": "north"
+  }
+ },
+ "reads": [
+  {
+   "name": "O_0",
+   "pos": [
+    102,
+    65,
+    105
+   ],
+   "bit": 0,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "O_3",
+   "pos": [
+    102,
+    65,
+    105
+   ],
+   "bit": 1,
+   "match": "minecraft:redstone_wire[power=3]"
+  },
+  {
+   "name": "c0_1_1",
+   "pos": [
+    100,
+    65,
+    101
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_1_3",
+   "pos": [
+    102,
+    65,
+    103
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_1_4",
+   "pos": [
+    102,
+    65,
+    104
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "d1_1_3",
+   "pos": [
+    101,
+    65,
+    103
+   ],
+   "match": "minecraft:repeater[powered=true]"
+  },
+  {
+   "name": "d3_1_3",
+   "pos": [
+    103,
+    65,
+    103
+   ],
+   "match": "minecraft:repeater[powered=true]"
+  },
+  {
+   "name": "d4_1_3",
+   "pos": [
+    104,
+    65,
+    103
+   ],
+   "match": "minecraft:repeater[powered=true]"
+  },
+  {
+   "name": "barrel_slot3",
+   "kind": "nbt",
+   "pos": [
+    100,
+    65,
+    100
+   ],
+   "path": "Items[3]"
+  }
+ ],
+ "regimes": [
+  {
+   "name": "wake_on",
+   "inputs": {
+    "p1_sub2side__Wn_0": 1,
+    "p1_sub2side__a_0": 1,
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 1,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 1,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "wake_off",
+   "inputs": {
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 0,
+    "p2_copy_into_side__a_0": 0,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 0,
+    "p5_max_merge__a_0": 0,
+    "p6_vertical_cap__N_0": 0,
+    "p6_vertical_cap__d_0": 0,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 0,
+    "slice_v9_n2__a0_0": 0,
+    "slice_v9_n2__a1_0": 0,
+    "slice_v9_n2__b0_0": 0,
+    "slice_v9_n2__b1_0": 0,
+    "slice_v9_n2__k_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_Wn0a0",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_Wn15a0",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 1,
+    "p1_sub2side__a_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_Wn0a3",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_Wn15a3",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 1,
+    "p1_sub2side__a_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_Wn0a0",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 2,
+    "final_reads": {
+     "O_0": false,
+     "O_3": true,
+     "c0_1_1": false,
+     "c2_1_3": true,
+     "c2_1_4": true,
+     "d1_1_3": false,
+     "d3_1_3": false,
+     "d4_1_3": false
+    }
+   }
+  },
+  {
+   "name": "v_Wn15a0",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 1,
+    "p1_sub2side__a_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 1,
+    "final_reads": {
+     "O_0": true,
+     "O_3": false,
+     "c0_1_1": false,
+     "c2_1_3": false,
+     "c2_1_4": false,
+     "d1_1_3": false,
+     "d3_1_3": true,
+     "d4_1_3": true
+    }
+   }
+  },
+  {
+   "name": "v_Wn0a3",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 0,
+    "p1_sub2side__a_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 1,
+    "final_reads": {
+     "O_0": true,
+     "O_3": false,
+     "c0_1_1": true,
+     "c2_1_3": false,
+     "c2_1_4": false,
+     "d1_1_3": true,
+     "d3_1_3": false,
+     "d4_1_3": false
+    }
+   }
+  },
+  {
+   "name": "v_Wn15a3",
+   "inputs": {
+    "p2_copy_into_side__a_0": 1,
+    "p4_throughline__T_0": 0,
+    "p5_max_merge__W3_0": 1,
+    "p5_max_merge__a_0": 1,
+    "p6_vertical_cap__N_0": 1,
+    "p6_vertical_cap__d_0": 1,
+    "slice_v9_n2__P_0": 0,
+    "slice_v9_n2__Wn_0": 1,
+    "slice_v9_n2__a0_0": 1,
+    "slice_v9_n2__a1_0": 1,
+    "slice_v9_n2__b0_0": 1,
+    "slice_v9_n2__b1_0": 1,
+    "slice_v9_n2__k_0": 1,
+    "p1_sub2side__Wn_0": 1,
+    "p1_sub2side__a_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 1,
+    "final_reads": {
+     "O_0": true,
+     "O_3": false,
+     "c0_1_1": true,
+     "c2_1_3": false,
+     "c2_1_4": false,
+     "d1_1_3": true,
+     "d3_1_3": true,
+     "d4_1_3": true
+    }
+   }
+  }
+ ],
+ "limits": {
+  "max_rcon": 600000
+ },
+ "out_dir": "docs/world/out_world4"
+}
