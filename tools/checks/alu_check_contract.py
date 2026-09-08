@@ -3,12 +3,13 @@ instead of inferring it from the n-bit function table (alu_check_slices.py check
 showed, passes layouts whose through-lines exit below 15).
 usage: python alu_check_contract.py layout.json
 Clauses (M = measured on the Bench, S = structural on the layout, - = not checked here):
- C1 pitch/box   S  PX <= 12, every cell in x 0..PX-1, y 0..3, z 0..13; y=3 use reported
+ C1 pitch/box   S  PX <= 12, every cell in x 0..PX-1, y 0..3, z 0..13; y=3 use reported; duplicate coordinates and
+                   barrel counts on non-barrel cells are FAILs (2026-09-08, after the second reviewer's reading of this file)
  C2 through     S  entry (0,y,z) is a wire; exit (PX-1,y,z) is a wire or a repeater facing west
                 M  n=3, all rows: the entry wire of slices 1 and 2 reads exactly the pin level (15 stays 15, 0 stays 0)
  C3 carry       S  k = wire (0,yk,zk); f = comparator facing west at (PX-1,yk,zk)
                 M  n=3, all 512 rows: the k wire of slices 1 and 2 reads exactly 3*carry expected from the lower bits
-                   (ADD carry, SUB borrow, AND/OR 0)
+                   (ADD carry, SUB borrow, AND/OR 0), and the final f reads 3*carry-out of the top slice
  C4 ports       S  a, b, r are single wire cells on the south face (z = Zmax) or the top face (y = 3); a port in the x=0 /
                    x=PX-1 column is reported and must pass C5 (its cross-boundary neighbour is air) -- the ground of the
                    x-face rule is closure, which C5 measures
@@ -18,7 +19,10 @@ Clauses (M = measured on the Bench, S = structural on the layout, - = not checke
                 M  n=3, all 512 rows: every slice's r equals the 1-bit function of (a_i, b_i, measured k_i) for the mode
                    (the local table is unchanged by the neighbours)
  C6 rules       S  lint L1 (support) / L2 (diagonal wire link) / L3 (wire beside a strongly powered relay, info) on the
-                   tiled n=2 layout; repeater side lock (a repeater/comparator facing into either side of a repeater)
+                   tiled n=2 layout; repeater side lock on the tiled n=2 layout (a repeater/comparator facing into either
+                   side of a repeater, neighbours included)
+                M  every measured row must converge, and the DC solution must be the same from a cold and a hot seed
+                   (alu_check_slices.run folds Bench.dc_solve_both into conv)
                 -  Bench rule gaps are shared with every Bench-based check; the world stages are the independent tier
 """
 import sys, json, os
@@ -85,7 +89,12 @@ def main(path):
     lay = json.load(open(path, encoding="utf-8"))
     S = lay["slice"]
     PX = S["pitch"]
-    M = {(b[0], b[1], b[2]): b[3] for b in lay["blocks"]}
+    M = {}
+    dups = []
+    for b in lay["blocks"]:
+        if (b[0], b[1], b[2]) in M:
+            dups.append((b[0], b[1], b[2]))
+        M[(b[0], b[1], b[2])] = b[3]
     fails = []
     notes = []
 
@@ -110,6 +119,12 @@ def main(path):
         fail("C1", "cells outside y 0..3")
     if Z > 13:
         fail("C1", "z max %d > 13" % Z)
+    if dups:
+        fail("C1", "duplicate coordinates in blocks (later entry silently wins): %s" % dups[:5])
+    for key in (lay.get("barrels") or {}):
+        c = tuple(int(t) for t in key.split(","))
+        if kind(M.get(c, "")) != "barrel":
+            fail("C1", "barrel count at %s but the block there is %s" % (key, M.get(c)))
     print("C1 box x 0..%d y %d..%d z 0..%d  PX=%d  cells=%d%s" % (max(xs), min(ys), max(ys), Z, PX, len(M), "  (y=3 used)" if max(ys) == 3 else ""))
     # C2 structural
     for name, cells in S["through"].items():
@@ -188,11 +203,12 @@ def main(path):
         fail("C6", "L1 support: %s" % l1[:5])
     if l2:
         fail("C6", "L2 diagonal wire link: %s" % l2[:5])
-    for (x, y, z), e in M.items():
+    MT = {(b[0], b[1], b[2]): b[3] for b in T["blocks"]}   # side lock is checked on the tiled n=2 layout (a neighbour slice can lock a boundary repeater)
+    for (x, y, z), e in MT.items():
         if kind(e) != "repeater":
             continue
         for dx, dz in SIDES[facing(e)]:
-            o = M.get((x + dx, y, z + dz))
+            o = MT.get((x + dx, y, z + dz))
             if o and kind(o) in ("repeater", "comparator"):
                 ox, oz = OUT[facing(o)]
                 if (x + dx + ox, z + dz + oz) == (x, z):
@@ -200,12 +216,22 @@ def main(path):
     # measured, n=3
     n = 3
     c2bad = c3bad = c5bad = rows = 0
+    convbad = fbad = 0
     for mode, (P, Wn) in CS.MODES.items():
         for A in range(2 ** n):
             for B in range(2 ** n):
                 for kk in (0, 1):
                     rs, fo, conv, bench = CS.run(lay, n, A, B, kk, P, Wn)
                     rows += 1
+                    if not conv:
+                        convbad += 1
+                        if convbad <= 3:
+                            fail("C6", "%s A=%d B=%d k=%d: Bench did not converge, or the DC solution is not unique (BISTABLE)" % (mode, A, B, kk))
+                    fexp = 3 * expected_carry(mode, A, B, kk, n)
+                    if fo != fexp:
+                        fbad += 1
+                        if fbad <= 3:
+                            fail("C3", "%s A=%d B=%d k=%d: final f reads %s, expected %d" % (mode, A, B, kk, fo, fexp))
                     for i in (1, 2):
                         for name, lv in (("P", P), ("Wn", Wn)):
                             for c in S["through"][name]:
@@ -228,7 +254,7 @@ def main(path):
                             c5bad += 1
                             if c5bad <= 6:
                                 fail("C5", "%s A=%d B=%d k=%d: slice %d r=%s, local table says %d (k_i=%d)" % (mode, A, B, kk, i, rs[i], exp, ki))
-    print("measured n=3 rows=%d: C2 through-entry mismatches=%d, C3 carry mismatches=%d, C5 local-table mismatches=%d" % (rows, c2bad, c3bad, c5bad))
+    print("measured n=3 rows=%d: C2 through-entry mismatches=%d, C3 carry mismatches=%d (final f mismatches=%d), C5 local-table mismatches=%d, non-converged/bistable rows=%d" % (rows, c2bad, c3bad, fbad, c5bad, convbad))
     print("CONTRACT %s: %d FAIL, %d notes" % ("PASS" if not fails else "FAIL", len(fails), len(notes)))
     return not fails
 
