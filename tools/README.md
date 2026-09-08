@@ -1,5 +1,7 @@
 # tools/
 
+> 日本語: [README.ja.md](README.ja.md)
+
 Everything here is standard-library Python 3.11+. Run it from the repository root; the
 `sys.path` lines resolve relative to each file, so no installation and no `PYTHONPATH` are
 needed.

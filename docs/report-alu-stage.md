@@ -1,136 +1,138 @@
-# ALU 1 段 — ゼロベースから貴方の world まで（レポート、2026-09-08）
+# The 1-stage ALU — from zero base to your world (report, 2026-09-08)
 
-DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1 → 貴方の world の full adder、REUSE-1、ALU-1、PLACE-ALU-1/2、T6 30/32）は DIRECTOR 7（`f9d66fa1`）の仕事で、本書はそれを引き継いで 32/32 → 合成世界 → 貴方の world → 給電器までを閉じた記録。非正典（`notes/**`）。時刻は UTC。
+> 日本語: [report-alu-stage.ja.md](report-alu-stage.ja.md)
 
----
-
-## 0. 一言で
-
-**1 bit の ALU slice（ADD / SUB / AND / OR）を、Minecraft 1.20.6 の source から書いた規則表と代数だけから機械が導き、Bench（規則の写し）→ 合成 vanilla world → 貴方の world の 3 段で検算し、貴方が lever 5 本で 32 行全部を手で確かめられる状態にした。** 既存の redstone 回路も、貴方の経験も、設計の前提には入れていない（§1 に何を渡し、何を渡さなかったかを書く）。
+DIRECTOR 8 (Fable 5.1 `0c3d10be`). The first half (DERIVE-2 → PLACE-1 → WORLD-1 → the full adder in your world, REUSE-1, ALU-1, PLACE-ALU-1/2, T6 30/32) was the work of DIRECTOR 7 (`f9d66fa1`); this document takes that over and is the record of closing 32/32 → the synthetic world → your world → the feeder rig. Non-canonical (`notes/**`). Times are UTC.
 
 ---
 
-## 1. ゼロベースとは何か（渡した物 / 渡さなかった物）
+## 0. In one sentence
 
-| 席 | 種類 | 渡した物 | 渡さなかった物 | 記録 |
+**A 1-bit ALU slice (ADD / SUB / AND / OR) was derived by a machine from nothing but a rule table written out of the Minecraft 1.20.6 source and the algebra, checked in three stages — the Bench (a replica of the rules) → a synthetic vanilla world → your world — and brought to a state where you can verify all 32 rows by hand with 5 levers.** Neither existing redstone circuits nor your own experience entered the premises of the design (§1 records what was handed over and what was not).
+
+---
+
+## 1. What "zero base" means (what was handed over / what was not)
+
+| seat | kind | handed over | withheld | record |
 |---|---|---|---|---|
-| DERIVE-2（full adder の代数） | **blind** な Fable 席（文脈ゼロ） | DC の事実表 `docs/rules/facts-dc.md`（1.20.6-yarn source から DIRECTOR 7 が書いた comparator / container / wire / solid の規則。**回路の形は含まない**）+ 問い | オペレータの既存参照回路（本 export に含まない）、web、the development repository の他の file | `docs/algebra/derive2.md`、`derive2-blind-result.md`、`net_derive2.json`、`dc_eval.py`（当席系の独立評価器）8/8 |
-| PLACE-1（full adder の配置） | blind な Fable 席 | 配置の事実表 `docs/rules/facts-geometry.md` + DERIVE-2 の網 | 同上 | `docs/placement/place1.md` Bench 8/8 |
-| REUSE-1（全減算器） | blind な Fable 席 | DERIVE-2 と **byte 一致**の規則表（sha256 e6001fed…）、問いだけ差し替え | 同上 | `docs/algebra/reuse1.md` 8/8 |
-| ALU-1（ALU の代数） | Fable 席、**blind ではない** | 規則表 + この開発で導いた {0,3} 加算網（`given-adder03.json`）+ 減算網 + the second-model reviewer の mux 案 | 既存回路、source（席は未開封） | `docs/algebra/alu1.md`、`net_alu1.json`、`dc_eval_alu.py` 32/32 |
-| PLACE-ALU-3（ALU の配置、本書） | Fable 席、blind ではない | 規則表 v2 `docs/rules/facts-dc-v2.md`、配置の事実表、VERT-1 の規則 `docs/rules/facts-vertical.md`、T6（30/32）、当席の解析（§3） | オペレータの既存参照回路、web | `docs/placement/placealu3-result.md` 32/32 |
-| RIG-1（給電器） | Fable 席 | 上記 + WORLD-1/2 の給電器の形 | 同上 | `docs/placement/rig1.md` 32/32 |
+| DERIVE-2 (the full adder algebra) | a **blind** Fable seat (zero context) | the DC rule sheet `docs/rules/facts-dc.md` (the rules for comparator / container / wire / solid, written by DIRECTOR 7 out of the 1.20.6-yarn source. **Contains no circuit shapes**) + the question | the operator's existing reference circuit (not included in this export), the web, every other file in the development repository | `docs/algebra/derive2.md`, `derive2-blind-result.md`, `net_derive2.json`, `dc_eval.py` (this seat's independent evaluator) 8/8 |
+| PLACE-1 (the full adder placement) | a blind Fable seat | the placement rule sheet `docs/rules/facts-geometry.md` + DERIVE-2's network | the same | `docs/placement/place1.md` Bench 8/8 |
+| REUSE-1 (full subtractor) | a blind Fable seat | a rule table **byte-identical** to DERIVE-2's (sha256 e6001fed…), with only the question swapped | the same | `docs/algebra/reuse1.md` 8/8 |
+| ALU-1 (the ALU algebra) | a Fable seat, **not blind** | the rule table + the {0,3} adder network derived in this development (`given-adder03.json`) + the subtractor network + the mux suggestion from the second-model reviewer | existing circuits, the source (the seat never opened it) | `docs/algebra/alu1.md`, `net_alu1.json`, `dc_eval_alu.py` 32/32 |
+| PLACE-ALU-3 (the ALU placement, this document) | a Fable seat, not blind | the rule table v2 `docs/rules/facts-dc-v2.md`, the placement rule sheet, the VERT-1 rules `docs/rules/facts-vertical.md`, T6 (30/32), this seat's analysis (§3) | the operator's existing reference circuit, the web | `docs/placement/placealu3-result.md` 32/32 |
+| RIG-1 (the feeder rig) | a Fable seat | the above + the feeder shape from WORLD-1/2 | the same | `docs/placement/rig1.md` 32/32 |
 
-ゼロベースの実体は **規則表が source 由来で回路の形を含まないこと**、**代数の最初の段が blind で出たこと**、**以後の段はこの開発で検証した物だけを再利用したこと**の 3 つ。B-??（貴方の既存回路）は Bench の較正点であって、席には渡していない（線 §8.4、`notes/2026-09-07-rebuild-line.md`）。
+The substance of "zero base" is three things: **the rule tables come from the source and contain no circuit shapes**, **the first stage of the algebra came out blind**, and **every stage after that reused only what had been verified inside this development**. B-?? (your existing circuit) is a calibration point for the Bench and was never handed to a seat (the line, §8.4, `notes/2026-09-07-rebuild-line.md`).
 
-方針の出所: オペレータと第二モデルの査読者（2026-09-08 19:01Z）が定めた方針 — 既存回路の解法やオペレータの経験を設計の前提にしない、規則と実験で詰める、検証済み構成の再利用は可、未知の接続はオペレータに尋ねず小さく検証する（`docs/alu-place-handover.md` 冒頭）。
+The origin of the policy: the operator and the second-model reviewer (2026-09-08 19:01Z) set it — do not take the solutions of existing circuits or the operator's experience as premises of the design, settle things with rules and experiments, reuse of verified constructions is allowed, and an unknown connection is verified in the small rather than put to the operator as a question (`docs/alu-place-handover.md`, opening).
 
 ---
 
-## 2. 代数（ALU-1、`docs/algebra/alu1-result.md`）
+## 2. The algebra (ALU-1, `docs/algebra/alu1-result.md`)
 
-- データ a / b / k / r / f ∈ {0, 3}（bit = level ≥ 3）。制御 2 線: **P ∈ {0, 15}**（0 = 算術、15 = 論理）、**W ∈ {0, 3}**（ADD/AND = 0、SUB/OR = 3）。物理では W の代わりに **Wn ∈ {0,15}**（15 = ADD/AND）を配り、局所で W3 = sub(K3, [Wn]) に変換する（PLACE-ALU-1 の source 検証: torch は side から 0、side は container を読めない）。
-- 恒等式 3 つ: (i) r_SUB = r_ADD = parity(a, b, k)、(ii) f = maj(a ⊕ W, b, k)（carry と borrow を 1 本に）、(iii) AND = carry(a, b, 0)、OR = carry(a, b, 1)（論理演算 = carry 比較器そのもの）。
-- 網（comparator 16 + torch 1 + 定数 K3 / K9）:
+- Data a / b / k / r / f ∈ {0, 3} (bit = level ≥ 3). Two control lines: **P ∈ {0, 15}** (0 = arithmetic, 15 = logic) and **W ∈ {0, 3}** (ADD/AND = 0, SUB/OR = 3). In the physical circuit, **Wn ∈ {0,15}** (15 = ADD/AND) is distributed instead of W and converted locally by W3 = sub(K3, [Wn]) (the source checks of PLACE-ALU-1: a torch is 0 from the side, and the side cannot read a container).
+- Three identities: (i) r_SUB = r_ADD = parity(a, b, k), (ii) f = maj(a ⊕ W, b, k) (carry and borrow on one wire), (iii) AND = carry(a, b, 0), OR = carry(a, b, 1) (the logic operations *are* the carry comparator).
+- The network (16 comparators + 1 torch + the constants K3 / K9):
 
-| node | 式 | 意味 |
+| node | expression | meaning |
 |---|---|---|
-| kg | sub(k, [P]) | k、論理では 0 |
-| Qg | sub(W, [nP]) | W、算術では 0（論理で k の代わりに W を入れる） |
+| kg | sub(k, [P]) | k, and 0 in logic |
+| Qg | sub(W, [nP]) | W, and 0 in arithmetic (in logic W goes in instead of k) |
 | c1 / c2 / c3 | sub(K9,[b]) / sub(c1,[kg,Qg]) / sub(c2,[a]) | 9 − 3·(a + b + k') |
-| c4 | cmp(K3, [c3]) | carry（= 論理結果） |
+| c4 | cmp(K3, [c3]) | carry (= the logic result) |
 | c5 / c6 / c7 | sub(K9,[c3]) / sub(c5,[c4]) / sub(c6,[c4,P]) | r_arith = 3·[c3 ∈ {0,6}] |
-| c4g / r | sub(c4,[nP]) / max(c7, c4g) | 論理 r / 合流 |
-| x1 / x2 / c3p / F | sub(a,[W]) / sub(W,[a]) / sub(c2,[x1,x2]) / cmp(K3,[c3p,P]) | a ⊕ W を経た carry/borrow |
+| c4g / r | sub(c4,[nP]) / max(c7, c4g) | the logic r / the merge |
+| x1 / x2 / c3p / F | sub(a,[W]) / sub(W,[a]) / sub(c2,[x1,x2]) / cmp(K3,[c3p,P]) | the carry/borrow that goes through a ⊕ W |
 
-32 行の node 値: `artifacts/rows/node_values.txt`。当席の独立評価器 `dc_eval_alu.py` で 32/32。
-
----
-
-## 3. 配置（v7、`artifacts/layouts/alu_stage_v7.json`）
-
-- **176 block**: comparator 23 / repeater 14 / wire 35 / barrel 6（K3 ×4 = 247 個 = level 3、K9 ×2 = 988 個 = level 9）/ redstone_block 1 / torch 1 / smooth_stone 96（支持床 y=0 を含む）。箱 x 0..10、y 0..2、z 0..11。層別図 `alu_stage_v7_layers.png`（rig 込みは `artifacts/images/alu_v7_rig1_layers.png`）。
-- pin（wire cell）: a = (4,1,4) (8,1,5) (10,1,4)、b = (0,1,4)、k = (0,1,2)、P = (0,1,0) (0,1,8)、Wn = (4,1,10)。読み: r = wire (6,2,9)、f = comparator F (8,1,2) の出力（front (9,1,2)）。
-- 構造: y=1 が主層（k → f の壁 z=2..3、西の Qg1 塊、XOR の脚 x=6..10）、y=2 が r の cluster（c4〜c7、c4g、nP torch）と P の注入橋。縦の受け渡しは comparator → 強給電 solid → 真上の wire（VERT-1、Bench で無損失を確認、実機で成立）。
-- **T6（30/32）から v7（32/32）への設計変更**（PLACE-ALU-3、`placealu3-result.md`）: 落ちる 2 行 = SUB で a=1 の時 f=3（x2 の side に a が無い）。a を入れられる cell (5,1,6) は r cluster の c6 の支持で、handover §3 の案（c6 を (4,2,7) へ）は支持 (4,1,7) が Wn の給電 repeater なので不成立（当席の解析、`notes/2026-09-08-director-8-registrations.md`）。解いたのは代数の側:
-  1. **S_x = max(a, W3)、xm = sub(S_x, [as])、as = sub(a, [Wn])**（x1 / x2 を copy 化、copy gate と W3b と K3 1 個を撤去、as 1 個を追加）。
-  2. **P の kill を c7 の side から c5 / c6 の共有 side (5,2,5) へ**（15 > 9）。x=9 の P 線・橋・蓋 3 個が消え、配置不能だった (8,2,7)（comparator の上の wire）も消えた。
-  3. dummy comparator (9,1,3): w3p (8,1,3) の wire 形状を N+E にして南の relay に漏らさない（Bench の形状規則、実機で成立）。
-- lint（`alu_check2.py`）: L1 支持（vanilla の設置条件）、L2 斜め読み（VERT-1）、L3 強給電 relay に触れる wire（情報）。v7 = L1/L2 0。
+The node values for the 32 rows: `artifacts/rows/node_values.txt`. 32/32 on this seat's independent evaluator `dc_eval_alu.py`.
 
 ---
 
-## 4. 検算の 3 段
+## 3. The placement (v7, `artifacts/layouts/alu_stage_v7.json`)
 
-| 段 | 器 | 結果 | 一次記録 |
+- **176 blocks**: comparator 23 / repeater 14 / wire 35 / barrel 6 (K3 ×4 = 247 items = level 3, K9 ×2 = 988 items = level 9) / redstone_block 1 / torch 1 / smooth_stone 96 (including the support floor at y=0). Box x 0..10, y 0..2, z 0..11. The layer map is `alu_stage_v7_layers.png` (with the rig, `artifacts/images/alu_v7_rig1_layers.png`).
+- The pins (wire cells): a = (4,1,4) (8,1,5) (10,1,4), b = (0,1,4), k = (0,1,2), P = (0,1,0) (0,1,8), Wn = (4,1,10). The reads: r = the wire (6,2,9), f = the output of comparator F (8,1,2) (its front (9,1,2)).
+- Structure: y=1 is the main layer (the k → f wall at z=2..3, the Qg1 cluster to the west, the XOR legs at x=6..10), y=2 is the r cluster (c4–c7, c4g, the nP torch) and the injection bridge for P. The vertical hand-off is comparator → strongly powered solid → the wire directly above (VERT-1; losslessness confirmed on the Bench, and it holds on real hardware).
+- **The design changes from T6 (30/32) to v7 (32/32)** (PLACE-ALU-3, `placealu3-result.md`): the 2 failing rows are f=3 under SUB when a=1 (there is no `a` on x2's side). The cell (5,1,6) where `a` could be brought in is the support for c6 of the r cluster, and the proposal in handover §3 (move c6 to (4,2,7)) does not hold because the support (4,1,7) is the feeding repeater for Wn (this seat's analysis, `notes/2026-09-08-director-8-registrations.md`). What solved it was the algebra side:
+  1. **S_x = max(a, W3), xm = sub(S_x, [as]), as = sub(a, [Wn])** (x1 / x2 turned into copies; the copy gate, W3b and one K3 removed, one `as` added).
+  2. **The P kill moved from c7's side to the shared side of c5 / c6 at (5,2,5)** (15 > 9). The P line at x=9, the bridge and 3 caps disappear, and so does (8,2,7) (a wire above a comparator), which could not be placed.
+  3. The dummy comparator (9,1,3): it makes the wire shape of w3p (8,1,3) N+E so that it does not leak into the relay to the south (a Bench shape rule; it holds on real hardware).
+- The lint (`alu_check2.py`): L1 support (the vanilla placement conditions), L2 diagonal reads (VERT-1), L3 a wire touching a strongly powered relay (informational). v7 = L1/L2 0.
+
+---
+
+## 4. The three stages of checking
+
+| stage | instrument | result | primary record |
 |---|---|---|---|
-| Bench | `tools/llmgen/capcell.py` の `Bench`（規則の写し、B-?? で較正）、pin 固定 | **32/32**、r/f は正確に {0,3} | `artifacts/rows/alu_stage_v7.json.rows.json` |
-| 合成世界（WORLD-2） | headless vanilla 1.20.6、void world、lever 給電（compare gate + barrel 247 + side wire、lever ON = bit 0）、worldprobe で freeze/step、warm-up 32 + 本番 32 regime | **r/f 32/32、全 read 1024/1024**（comparator 23 + 給電器の powered 込み）、settle 2..14 gt、rcon 103,169 | `artifacts/world/world2.run.result.json`（untouched）、`record.md`（予測を先に書いた 2 段構成） |
-| 貴方の world（LIVE-ALU） | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + barrel 6 個（bow 5 / 16 本）、region file の読み（regioncap） | 配置 176/176、静止 comparator **23/23**、ADD 0+0+1 → r 3 / f 0、SUB 0−0−1 → r 3 / f 3、**24/24** | `docs/world/live-alu-record.md`、capture 3 本 |
-| 給電器（RIG-1） | lever 5 本、composter[level=3] ×4（block entity なし）、lamp 2、93 block、`/aiwb place alu_stage_v7_rig1 6001 131 -4114` | Bench 32/32（lever 状態だけから）、world で SUB 1−0−0 → r 3 点灯 / f 0 消灯、comparator 23/23 | `docs/placement/rig1.md`、`rig1-result.md`、capture |
+| Bench | the `Bench` in `tools/llmgen/capcell.py` (a replica of the rules, calibrated on B-??), pins fixed | **32/32**, r/f land exactly on {0,3} | `artifacts/rows/alu_stage_v7.json.rows.json` |
+| synthetic world (WORLD-2) | headless vanilla 1.20.6, void world, lever feeding (compare gate + barrel 247 + side wire, lever ON = bit 0), freeze/step with worldprobe, a regime of 32 warm-up + 32 real | **r/f 32/32, all reads 1024/1024** (comparator 23 + the powered state of the feeders), settle 2..14 gt, rcon 103,169 | `artifacts/world/world2.run.result.json` (untouched), `record.md` (a two-part structure in which the prediction was written first) |
+| your world (LIVE-ALU) | `/aiwb place alu_stage_v7_nobarrel 6005 133 -4113` + 6 barrels (5 / 16 bows), reading the region files (regioncap) | 176/176 placed, **23/23** comparators at rest, ADD 0+0+1 → r 3 / f 0, SUB 0−0−1 → r 3 / f 3, **24/24** | `docs/world/live-alu-record.md`, 3 captures |
+| the feeder rig (RIG-1) | 5 levers, composter[level=3] ×4 (no block entity), 2 lamps, 93 blocks, `/aiwb place alu_stage_v7_rig1 6001 131 -4114` | Bench 32/32 (from the lever states alone), and in the world SUB 1−0−0 → r 3 lit / f 0 dark, comparators 23/23 | `docs/placement/rig1.md`, `rig1-result.md`, a capture |
 
-Bench が隠して world で見えた 3 点（全部 world で確認済み）: dummy comparator の wire 形状、pin の隣の強給電 relay（as ≤ a、as ≤ 3 で値は不変）、置いた直後の block update 不在（warm-up が要る = WORLD-1/2 の機構と同じ）。
+Three things the Bench hid and the world showed (all of them since confirmed in the world): the wire shape of the dummy comparator; the strongly powered relay next to a pin (as ≤ a, and with as ≤ 3 the value is unchanged); and the absence of a block update immediately after placement (a warm-up is needed = the same mechanism as WORLD-1/2).
 
 ---
 
-## 5. 操作の手引き（貴方の world）
+## 5. Operating instructions (your world)
 
-origin (6005,133,−4113)、y=133 床 / 134 主層 / 135 cluster。
+Origin (6005,133,−4113); y=133 is the floor, 134 the main layer, 135 the cluster.
 
-| lever（y=135） | 座標 | ON | OFF |
+| lever (y=135) | coordinates | ON | OFF |
 |---|---|---|---|
 | a | 6017 135 -4108 | a = 0 | a = 1 |
 | b | 6003 135 -4108 | b = 0 | b = 1 |
 | k | 6003 135 -4112 | k = 0 | k = 1 |
-| P | 6001 135 -4109 | 論理（AND/OR） | 算術（ADD/SUB） |
+| P | 6001 135 -4109 | logic (AND/OR) | arithmetic (ADD/SUB) |
 | Wn | 6009 135 -4102 | ADD / AND | SUB / OR |
 
-lamp: r = 6011 135 -4103、f = 6014 134 -4111（点灯 = 1）。mark 10 個（IN a×3 / b / k / P×2 / Wn、OUT r / f）は積み上がる（`flows.py` の `_mark_put` を union に、2026-09-08 の裁定 A）。期待表 32 行は `docs/placement/rig1-result.md` §4。
+The lamps: r = 6011 135 -4103, f = 6014 134 -4111 (lit = 1). The 10 marks (IN a×3 / b / k / P×2 / Wn, OUT r / f) now stack up (`_mark_put` in `flows.py` was made a union; ruling A of 2026-09-08). The 32-row expectation table is in `docs/placement/rig1-result.md` §4.
 
-例: 全 OFF = SUB 1−1−1 → r 点灯・f 点灯。Wn ON = ADD 1+1+1 = 3 → 同じ。さらに k ON（k=0）= 1+1 = 2 → r 消灯・f 点灯。
+Example: all OFF = SUB 1−1−1 → r lit, f lit. Wn ON = ADD 1+1+1 = 3 → the same. Then k ON (k=0) = 1+1 = 2 → r dark, f lit.
 
 ---
 
-## 6. 費用（実測、harness の token）
+## 6. Costs (measured, harness tokens)
 
-| 便 | 席 | 時間 | token |
+| shipment | seat | time | tokens |
 |---|---|---|---|
-| PLACE-ALU-3 | Fable | 12 分 | 145k |
-| WORLD-2 | Opus | 21 分 | 187k |
-| mark 調査 | Sonnet | 3.4 分 | 108k |
-| mark 修正 | Opus | 35 分 | 111k |
-| RIG-1（空振り + 本番） | Fable | 9 + 15.5 分 | 75k + 192k |
-| 合計 | | ≈ 1.6 h の席時間 | ≈ 820k |
+| PLACE-ALU-3 | Fable | 12 min | 145k |
+| WORLD-2 | Opus | 21 min | 187k |
+| marker investigation | Sonnet | 3.4 min | 108k |
+| marker fix | Opus | 35 min | 111k |
+| RIG-1 (an aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
+| total | | ≈ 1.6 h of seat time | ≈ 820k |
 
-貴方の act: 配置 3 回、barrel の手詰め 6 個、restart 2 回、lever。当席の失点: in-game に無い旗 `--no-backup-gate` の案内、256 字を超える `/data merge` 行、表の座標に U+2212 を使い `Expected integer` を招いた（記憶に登録）、発注書の書き込みが権限で落ちて Fable 席 1 本が空振り。
-
----
-
-## 7. 主張の範囲と、しないこと
-
-- **主張**: 1 bit ALU slice が、規則表と代数から機械が導いた配置（Bench 32/32）→ 合成世界 32/32 → 貴方の world（静止 23/23 + 動作 3 状態）で一致し、lever で操作できる。full adder（8/8 三系）に続く 2 個目。
-- **しない**: 8 段、tiling（a3 pin が x=10 に出ているので pitch ≥ 11 か折り返し）、速度、既存参照回路との密度比較（費用は絶対値で報告する方針）、および仕様変更に対する無改修性（R0 の 3 条件）。
-- 32 行全部を貴方の world で回した記録はまだ無い（給電は lever なので、貴方が回すか、rig を写しの world に置いて worldprobe で自動掃引する = ブラッシュアップ D）。
+Your acts: 3 placements, filling 6 barrels by hand, 2 restarts, the levers. This seat's misses: guiding you to a flag `--no-backup-gate` that does not exist in game; a `/data merge` line over 256 characters; using U+2212 in the coordinates of a table, which brought on `Expected integer` (recorded to memory); and an order whose write failed on permissions, which cost one Fable seat an aborted shipment.
 
 ---
 
-## 8. ブラッシュアップ候補
+## 7. The scope of the claim, and what is not claimed
 
-- **A** a の pin 3 cell → 1 cell（配置の再検討、tiling の前提）
-- **B** barrel を composter に（K3 4 個は可。K9 2 個は composter の上限 8 なので、定数 8 で組み直す代数の変更が要る）
-- **C** 入力側にも lamp（lever の向きでなく level で見える）
-- **D** rig 込みで 32 行を自動掃引（写しの world + worldprobe）
-- **E** 2 段目の接合（f(i) → k(i+1)、P / Wn の通し）— 貴方の go 待ち
+- **Claimed**: a 1-bit ALU slice, in a placement that a machine derived from the rule tables and the algebra (Bench 32/32) → the synthetic world 32/32 → your world (23/23 at rest + 3 driven states), agrees throughout and can be operated with levers. It is the second artifact after the full adder (8/8 in all three tiers).
+- **Not claimed**: 8 stages; tiling (the a3 pin sticks out at x=10, so either pitch ≥ 11 or a fold-back); speed; a density comparison against an existing reference circuit (the policy is to report costs in absolute numbers); and immunity from rework under a change of specification (the 3 conditions of R0).
+- There is still no record of all 32 rows having been run in your world (the feeding is by lever, so either you run them, or the rig is placed in a copy of the world and swept automatically with worldprobe = brush-up D).
 
 ---
 
-## 9. 参照
+## 8. Brush-up candidates
 
-- 線（方針と履歴）: `notes/2026-09-07-rebuild-line.md`（§8.2 OC-D110 = 基礎は信号強度演算、§8.4 B-?? の位置、§8.5 1 周目）
-- 引き継ぎ: `docs/alu-place-handover.md`（§2 落ちる 2 行、§4 干渉の規則）
-- 規則表: `docs/rules/facts-dc.md`、`docs/rules/facts-dc-v2.md`、`docs/rules/facts-geometry.md`、`docs/rules/facts-vertical.md`
-- 代数: `docs/algebra/derive2.md`、`docs/algebra/reuse1.md`、`docs/algebra/alu1.md`
-- 配置: `docs/placement/placealu2.md`（T6、partial）、`docs/placement/placealu3-result.md`（v7、checker、program、層別図）
-- 世界: `docs/world/world1-record.md`、`docs/world/world2-record.md`、`docs/world/live-alu-record.md`、`docs/placement/rig1.md`
-- 登録（時系列）: `notes/2026-09-07-director-7-registrations.md`、`notes/2026-09-08-director-8-registrations.md`
-- 器: `tools/llmgen/capcell.py`（Bench）、`tools/world/worldprobe.py`（写しの world の観測）、`tools/world/regioncap.py`（region file の読み）、`tools/workbench/bridge/flows.py`（aiwb の flow、mark の修正 `3ef098ad`）
+- **A** the 3 pin cells of `a` → 1 cell (a rework of the placement; the premise for tiling)
+- **B** barrels → composters (the 4 K3 are possible; the 2 K9 are not, since a composter tops out at 8, so it needs a change of algebra that rebuilds around the constant 8)
+- **C** lamps on the input side too (visible by level rather than by lever orientation)
+- **D** an automatic sweep of the 32 rows with the rig included (a copy of the world + worldprobe)
+- **E** the joining of a second stage (f(i) → k(i+1), passing P / Wn through) — awaiting your go
+
+---
+
+## 9. References
+
+- The line (policy and history): `notes/2026-09-07-rebuild-line.md` (§8.2 OC-D110 = the foundation is signal-strength arithmetic, §8.4 the position of B-??, §8.5 the first round)
+- Handover: `docs/alu-place-handover.md` (§2 the 2 failing rows, §4 the interference rules)
+- Rule tables: `docs/rules/facts-dc.md`, `docs/rules/facts-dc-v2.md`, `docs/rules/facts-geometry.md`, `docs/rules/facts-vertical.md`
+- Algebra: `docs/algebra/derive2.md`, `docs/algebra/reuse1.md`, `docs/algebra/alu1.md`
+- Placement: `docs/placement/placealu2.md` (T6, partial), `docs/placement/placealu3-result.md` (v7, the checker, the program, the layer map)
+- Worlds: `docs/world/world1-record.md`, `docs/world/world2-record.md`, `docs/world/live-alu-record.md`, `docs/placement/rig1.md`
+- Registrations (chronological): `notes/2026-09-07-director-7-registrations.md`, `notes/2026-09-08-director-8-registrations.md`
+- Instruments: `tools/llmgen/capcell.py` (the Bench), `tools/world/worldprobe.py` (observing a copy of the world), `tools/world/regioncap.py` (reading the region files), `tools/workbench/bridge/flows.py` (the aiwb flows, the mark fix `3ef098ad`)

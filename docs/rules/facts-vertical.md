@@ -1,13 +1,15 @@
-# VERT-1 — 縦の受け渡しの micro 試験（Bench のみ、DIRECTOR 7、2026-09-08 19:01:51Z）
+# VERT-1 — a micro-test of the vertical hand-off (Bench only, DIRECTOR 7, 2026-09-08 19:01:51Z)
 
-方針（the second-model reviewer、オペレータ同意）: 未知の接続はオペレータに尋ねず小さく検証する。Bench（規則の写し、B-?? で較正）と実機の確認は分けて記録する。**本試験は Bench のみ、実機は未確認。**
+> 日本語: [facts-vertical.ja.md](facts-vertical.ja.md)
 
-形: pinned wire L → comparator cA（compare、back = wire）→ front の solid S（強給電 = L）→ **S の真上の wire** → y=2 の comparator cB。
+Policy (the second-model reviewer, with the operator's agreement): an unknown connection is verified in the small rather than put to the operator as a question. The Bench (a replica of the rules, calibrated on B-??) and the confirmation on real hardware are recorded separately. **This test is Bench only; the real hardware is unconfirmed.**
 
-| 試験 | 読み手 | 結果（L = 0 / 3 / 5 / 9 / 15） |
+Shape: a pinned wire L → comparator cA (compare, back = the wire) → the solid S at its front (strongly powered = L) → **the wire directly above S** → comparator cB at y=2.
+
+| test | reader | result (L = 0 / 3 / 5 / 9 / 15) |
 |---|---|---|
-| T1 | cB の back = 上の wire | 上の wire = L、cB の出力 = L（無損失、5 値とも） |
-| T2 | cB の side = 上の wire、back = redstone_block（subtract） | 15 − L（0 → 15、3 → 12、5 → 10、9 → 6）= 正確 |
-| T3 | **干渉**: y=1 で S の隣 (2,1,1) に P の wire（15）を置く | 上の wire が **14** を読む（y=2 の wire は、水平隣が air の時その下の wire を読む = 斜め下の接続、−1） |
+| T1 | cB's back = the wire above | the wire above = L, cB's output = L (lossless, at all 5 values) |
+| T2 | cB's side = the wire above, back = redstone_block (subtract) | 15 − L (0 → 15, 3 → 12, 5 → 10, 9 → 6) = exact |
+| T3 | **interference**: at y=1, place P's wire (15) at (2,1,1), next to S | the wire above reads **14** (a wire at y=2 reads the wire below its horizontal neighbour when that neighbour is air = the diagonal-downward connection, −1) |
 
-∴ 規則として使えるもの（Bench）: (1) comparator → 強給電 solid → 真上の wire は無損失で、back でも side でも読める。(2) **y=2 の wire の水平隣 4 cell が air なら、その真下（y=1）に wire を置いてはいけない**（斜め下の接続で漏れる）。置くなら y=2 側の隣を solid で塞ぐ（solid の上の wire は読まれない: 隣が solid の時は隣の上の wire を見るので、隣 (2,2,1) を solid にすれば (2,3,1) を見て air）。逆に言えば、y=2 の制御線と y=1 のデータ線は**同じ列に重ねるか、solid で仕切る**。
+Hence the rules that can be used (Bench): (1) comparator → strongly powered solid → the wire directly above is lossless, and readable from the back as well as from the side. (2) **If the 4 cells horizontally adjacent to a wire at y=2 are air, no wire may be placed directly below it (at y=1)** (it leaks through the diagonal-downward connection). To place one anyway, block the neighbour on the y=2 side with a solid (a wire on top of a solid is not read: when the neighbour is solid it is the wire above that neighbour that is seen, so making (2,2,1) solid makes (2,3,1) the cell seen, and that is air). Put the other way round: a control line at y=2 and a data line at y=1 must either **be stacked in the same column or be separated by a solid**.

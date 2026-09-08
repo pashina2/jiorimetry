@@ -296,9 +296,19 @@ tools/checks/      the sweeps, checkers and evaluators used above
 tools/world/       synthetic world build, RCON probe, region capture
 ```
 
-Most of `docs/` is written in Japanese: these are the working records as they were made,
-with quotations and private material removed. The numbers, coordinates, file references and
-tables are unchanged.
+**Language convention.** Bilingual documents follow one rule: the English original is
+`name.md`, the Japanese is `name.ja.md`, and each links to the other on its first lines.
+That covers this README, the four rule sheets in `docs/rules/`, the slice contract, the
+block-coverage table, the ALU stage report, the live-world record, and `tools/README.md`.
+The result notes and world tables the seats produced — `docs/algebra/*-result.md`,
+`docs/placement/*-result.md`, `docs/placement/placealu2-partial.md`,
+`docs/world/world*-record.md`, `world*-tables.md`, `PUBLICATION_CHECKLIST.md` — are English
+originals and carry no translation. The remaining short order notes (the questions under
+`docs/algebra/` and `docs/placement/`, and `docs/alu-place-handover.md`) are the Japanese
+working records as they were written and have no English counterpart. Quotations and
+private material have been removed throughout; the numbers, coordinates, file references
+and tables are unchanged, both between the two files of a pair and against the original
+records.
 
 ---
 

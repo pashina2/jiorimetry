@@ -1,26 +1,28 @@
-# 配置の事実表（DC、1.20.6-yarn、DIRECTOR 7 が source から書いた。回路の形は含まない）
+# Placement rule sheet (DC, 1.20.6-yarn, written by DIRECTOR 7 from the source. Contains no circuit shapes)
 
-## redstone_wire（`net/minecraft/block/RedstoneWireBlock.java`）
-- 置ける場所: 下の block が `canRunOnTop`（:224-233、上面が full square の solid など）。空中には置けない。
-- 受ける level（`getReceivedRedstonePower` :251-275）: i = 周囲 6 面の block からの emitted power の max（`world.getReceivedRedstonePower`、wire 以外: gate / torch の出力、redstone_block 15、**強給電された solid はその受電 level を出す**）。j = 水平 4 方向の隣の wire の power の max、ただし **隣が solid で、その上が solid でなければ、隣の上の wire も見る（登り）**；隣が solid でなければ **隣の下の wire も見る（降り）**。結果 = max(i, j − 1)。∴ wire → wire は −1、gate 出力 / 強給電 solid → wire は無損失。
-- 上に solid があると登りの接続は切れる（:201、`getRenderConnectionType` の bl）。
-- wire は自分が向く（接続する）solid を弱給電する。弱給電された solid は wire を給電しないが、gate の back からは読める（強給電のみ、弱は 0 と読む点に注意: gate の back は `getEmittedRedstonePower` の 2 引数版で solid の **強** 受電を読む）。
+> 日本語: [facts-geometry.ja.md](facts-geometry.ja.md)
 
-## gate の出力（`AbstractRedstoneGateBlock.java`）
-- `getWeakRedstonePower` :81-88 / `getStrongRedstonePower` :76-78: powered で、問われた方向が出力方向なら level（comparator は stored output、repeater は 15）。出力は front の block へ: front が solid なら **強給電**（level = 出力）、wire なら wire の power になる（無損失）。
-- back の読み（facts-dc）: front の solid の強受電、wire の power、container、gate 出力。**side は wire / gate / redstone_block だけ**（solid の受電は読めない）。
-- gate は下に solid が要る（設置条件）。
+## redstone_wire (`net/minecraft/block/RedstoneWireBlock.java`)
+- Where it can be placed: where the block below satisfies `canRunOnTop` (:224-233, e.g. a solid whose top face is a full square). It cannot be placed in mid-air.
+- The level it receives (`getReceivedRedstonePower` :251-275): i = the max emitted power from the blocks on the 6 surrounding faces (`world.getReceivedRedstonePower`; for anything but wire: the output of a gate / torch, redstone_block 15, and **a strongly powered solid emits the level it is receiving**). j = the max power of the neighbouring wires in the 4 horizontal directions, except that **if the neighbour is solid and the block above it is not solid, the wire above that neighbour is seen as well (climbing)**; and if the neighbour is not solid, **the wire below that neighbour is also seen (descending)**. Result = max(i, j − 1). Hence wire → wire is −1, while gate output / strongly powered solid → wire is lossless.
+- A solid above breaks the climbing connection (:201, the bl in `getRenderConnectionType`).
+- A wire weakly powers the solid it points at (connects to). A weakly powered solid does not power a wire, but a gate can read it at its back (only strong power; note that weak reads as 0 there: a gate's back uses the 2-argument `getEmittedRedstonePower`, which reads a solid's **strong** received power).
 
-## solid（導体）の中継
-- comparator の front → solid S（強給電 U）→ S の隣の wire（U、無損失）→ 別の comparator の side（U）。または S を back で直に読む comparator（U）。1 つの S から複数の wire / comparator の back へ配れる（強給電は面ごとではなく block 全体）。
-- 強給電された solid が別の solid を給電することはない（強は 1 段で止まる）。
+## Gate output (`AbstractRedstoneGateBlock.java`)
+- `getWeakRedstonePower` :81-88 / `getStrongRedstonePower` :76-78: when powered and the queried direction is the output direction, the level (for a comparator the stored output, for a repeater 15). The output goes into the block at the front: if the front is solid it is **strongly powered** (level = the output), if it is wire it becomes that wire's power (lossless).
+- What the back reads (facts-dc): the strong received power of a solid at the front, the power of a wire, a container, a gate output. **The side takes only wire / gate / redstone_block** (a solid's received power cannot be read).
+- A gate needs a solid below it (placement condition).
 
-## 縦
-- wire の登り / 降り（上の規則）: −1 ずつ。
-- 強給電された solid の上 / 下に wire を置けば無損失で縦に渡る（solid の上面の wire は canRunOnTop で置ける；下は solid の下に wire を置く床が要る）。
-- comparator / repeater は水平のみ（facing は 4 方向）。torch は上の block を強給電する（反転が要らなければ使わない）。
+## Relaying through a solid (conductor)
+- comparator front → solid S (strongly powered, U) → the wire next to S (U, lossless) → the side of another comparator (U). Or a comparator that reads S directly at its back (U). One S can distribute to several wires / comparator backs (strong power belongs to the whole block, not to a single face).
+- A strongly powered solid never powers another solid (strong stops after one step).
 
-## 試験の器（Bench）に載せる条件
-- 入力 a / b / cin は **wire の cell** として置き、試験では level を 0 か 5 に固定する（pinned）。出力 sum / cout は wire の cell か comparator の front の solid（試験で level を読む）。
-- container は barrel、中身は個数で宣言（level 5 = 494 個、stack 64）。
-- 支持の solid（床）は数に含める（別欄）。
+## Vertical
+- Wire climbing / descending (the rule above): −1 each.
+- Putting a wire above or below a strongly powered solid crosses vertically without loss (a wire on the solid's top face can be placed by `canRunOnTop`; below, a floor is needed under the solid to put the wire on).
+- comparator / repeater are horizontal only (facing has 4 directions). A torch strongly powers the block above it (not used unless inversion is needed).
+
+## Conditions for mounting on the test instrument (Bench)
+- The inputs a / b / cin are placed as **wire cells**, and in a test their level is fixed at 0 or 5 (pinned). The outputs sum / cout are either a wire cell or the solid at a comparator's front (whose level the test reads).
+- A container is a barrel, and its contents are declared as an item count (level 5 = 494 items, stack 64).
+- The supporting solids (the floor) count towards the total (in a separate column).

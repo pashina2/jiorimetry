@@ -1,28 +1,30 @@
-# DC 信号強度演算の事実表（DERIVE-2 の与件、2026-09-07T13:18Z、DIRECTOR 7 が 1.20.6-yarn から読んで書いた。回路の形は含まない）
+# DC signal-strength rule sheet (the given for DERIVE-2, 2026-09-07T13:18Z, read out of 1.20.6-yarn and written by DIRECTOR 7. Contains no circuit shapes)
 
-単位: level 0..15（整数）。DC = 静止状態のみ。遅延・tick・priming は扱わない。
+> 日本語: [facts-dc.ja.md](facts-dc.ja.md)
 
-## comparator（`net/minecraft/block/ComparatorBlock.java`、`AbstractRedstoneGateBlock.java`）
-- 向き: `FACING` = gate から**入力側**へ向く方向。back = pos + FACING、front（出力）= pos − FACING、side = pos ± FACING を水平に 90° 回した 2 方向。
-- back の値 i（`AbstractRedstoneGateBlock.getPower` :130-139 + `ComparatorBlock.getPower` :102-120）: back の block が
-  - redstone_block → 15、redstone_wire → その power、gate / torch など emitsRedstonePower な block → その strong power（`RedstoneView.getEmittedRedstonePower` :45-62）、
-  - solid（導体）→ その block が受けている strong power（2 引数版 getEmittedRedstonePower: solid なら max(i, receivedStrong)）、
-  - container（`hasComparatorOutput`）→ その comparator 出力（下の式）。back が solid で i < 15 なら、**その 1 つ先**の block が container ならその値、item frame も同様。
-- side の値 j（`getMaxInputLevelSides` :141-147）: 2 側の max。読める源 = redstone_block 15、wire の power、gate / torch の strong power。**solid の受電は side からは読めない**（3 引数版に solid の節が無い）。
-- 出力（`calculateOutputSignal` :74-87）: i == 0 → 0。j > i → 0。subtract → i − j。compare → i。
-- 出力は front の block へ: front が solid なら strong power（level = 出力）、wire なら power。front の先の comparator はそれを back で読める。
+Unit: level 0..15 (integer). DC = steady state only. Delay, ticks and priming are out of scope.
 
-## container の level（`ScreenHandler.calculateComparatorOutput` :1023-1033、`MathHelper.lerpPositive` :665-668）
-- f = ( Σ_slot count / maxCount(item) ) / slots。level = floor(f × 14) + (f > 0 ? 1 : 0)。空 → 0、満杯 → 15。
-- barrel は 27 slot。stack 上限 64 の item なら、level k（1 ≤ k ≤ 14）に要る item 数 n は f = n / (64·27) が (k−1)/14 ≤ f < k/14 を満たす n。例: n = 1 → 1、n = 124 → 2、n = 247 → 3、… 15 は満杯 1728。
-- comparator の back に置けば定数源。値は容易に変えられる（可変値の源にもなる）。
+## comparator (`net/minecraft/block/ComparatorBlock.java`, `AbstractRedstoneGateBlock.java`)
+- Orientation: `FACING` = the direction from the gate towards its **input side**. back = pos + FACING, front (output) = pos − FACING, side = the two directions obtained by rotating pos ± FACING 90° horizontally.
+- The back value i (`AbstractRedstoneGateBlock.getPower` :130-139 + `ComparatorBlock.getPower` :102-120): if the block at the back is
+  - redstone_block → 15; redstone_wire → its power; a block that emitsRedstonePower such as a gate / torch → its strong power (`RedstoneView.getEmittedRedstonePower` :45-62);
+  - solid (conductor) → the strong power that block is receiving (the 2-argument getEmittedRedstonePower: for a solid, max(i, receivedStrong));
+  - a container (`hasComparatorOutput`) → its comparator output (formula below). If the back is solid and i < 15, then **the block one further on**, if it is a container, gives its value; the same holds for an item frame.
+- The side value j (`getMaxInputLevelSides` :141-147): the max of the two sides. Readable sources = redstone_block 15, the power of a wire, the strong power of a gate / torch. **A solid's received power cannot be read from the side** (the 3-argument version has no clause for solids).
+- Output (`calculateOutputSignal` :74-87): i == 0 → 0. j > i → 0. subtract → i − j. compare → i.
+- The output goes into the block at the front: if the front is solid it is strong power (level = the output), if it is wire it becomes that wire's power. A comparator beyond the front can read it at its back.
 
-## その他の部品（DC）
-- redstone_block: 15 の定数（back でも side でも 15）。
-- repeater（`RepeaterBlock`）: back > 0 なら出力 15、else 0（正規化）。side は gate のみ（lock）。
-- torch: 取り付け先の block が受電していなければ 15、していれば 0（反転）。上の block を strong power する。
-- redstone_wire: 隣の wire から −1 で伝播、gate / torch / redstone_block / strong-powered solid から直接 level を受ける。back / side のどちらからも読める。減衰は距離で引き算になるが、**subtract の side に定数を当てれば 1 block で引ける**ので、距離を使わなくてよい。
-- 導体（solid）: `AbstractBlock.Settings.solidBlockPredicate` = full cube（既定、:1179）かつ `solidBlock(Blocks::never)` で外されていない（glass 全種、observer、redstone_block、leaves、ice、glowstone、sea_lantern、beacon、moving piston、tnt、scaffolding、powder_snow、copper_grate、copper_bulb、dripstone、chorus_flower、bamboo は非導体）。wool、smooth_stone は導体。
+## The level of a container (`ScreenHandler.calculateComparatorOutput` :1023-1033, `MathHelper.lerpPositive` :665-668)
+- f = ( Σ_slot count / maxCount(item) ) / slots. level = floor(f × 14) + (f > 0 ? 1 : 0). Empty → 0, full → 15.
+- A barrel has 27 slots. For an item with a stack limit of 64, the item count n needed for level k (1 ≤ k ≤ 14) is the n whose f = n / (64·27) satisfies (k−1)/14 ≤ f < k/14. Examples: n = 1 → 1, n = 124 → 2, n = 247 → 3, … 15 is a full 1728.
+- Placed at a comparator's back it is a constant source. Its value is easy to change (so it can also be a source of a variable value).
 
-## 使ってよい部品
-comparator（compare / subtract）、container（barrel）、redstone_block、redstone_wire、solid（導体）、repeater、torch。lever は入力。lamp は出力の観測に使ってよい。
+## The other parts (DC)
+- redstone_block: the constant 15 (15 from the back and from the side alike).
+- repeater (`RepeaterBlock`): if back > 0 the output is 15, else 0 (normalisation). Only gates act on the side (lock).
+- torch: 15 if the block it is attached to is not receiving power, 0 if it is (inversion). It strong-powers the block above it.
+- redstone_wire: propagates from a neighbouring wire at −1, and takes the level directly from a gate / torch / redstone_block / strongly-powered solid. Readable from both the back and the side. Attenuation makes subtraction a matter of distance, but **putting a constant on a subtract's side subtracts in one block**, so distance need not be used.
+- Conductor (solid): `AbstractBlock.Settings.solidBlockPredicate` = full cube (the default, :1179) and not removed by `solidBlock(Blocks::never)` (all kinds of glass, observer, redstone_block, leaves, ice, glowstone, sea_lantern, beacon, moving piston, tnt, scaffolding, powder_snow, copper_grate, copper_bulb, dripstone, chorus_flower and bamboo are non-conductors). Wool and smooth_stone are conductors.
+
+## The parts that may be used
+comparator (compare / subtract), container (barrel), redstone_block, redstone_wire, solid (conductor), repeater, torch. A lever is an input. A lamp may be used to observe an output.
