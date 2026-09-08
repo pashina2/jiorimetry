@@ -97,7 +97,7 @@ def _check_keys(obj, where, required, optional=()):
     """Fail loud on a missing OR an unknown key, at every nesting level.
 
     Unknown keys are rejected and not ignored: a spec is the only thing
-    standing between a agent and a wrong measurement, and a silently dropped
+    standing between an agent and a wrong measurement, and a silently dropped
     `settle_gt` would produce a number that still looks like a reading."""
     if not isinstance(obj, dict):
         raise SpecError("%s: expected an object, got %s"

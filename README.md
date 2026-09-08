@@ -51,7 +51,7 @@ is the one that counts.
 
 ### 1-bit full adder (PLACE-1 / WORLD-1)
 
-Level encoding {0, 5}. Seven comparators. The algebra was produced by a agent with **zero
+Level encoding {0, 5}. Seven comparators. The algebra was produced by an agent with **zero
 project context** — it was given only the DC rule sheet and the question.
 
 - Bench: `ALL PASS` over all 8 input vectors — [`docs/placement/place1-bench-output.txt`](docs/placement/place1-bench-output.txt)
