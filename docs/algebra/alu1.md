@@ -6,4 +6,4 @@
 - 新規に導いたもの（席の開示）: level XOR（相互 subtract 2 つを 1 つの comparator の 2 side で max 合流）、kp の mux を c2 の 2 side で、論理演算 = carry 比較器、出力脚の gating（P を c7 / F の空き side に載せて殺す）、torch の Pbar。減算網と 5 node の mux は使わなかった。
 - **当席の独立検算**（`dc_eval_alu.py` = 混合部品の評価器、加算網で回帰 8/8 済み）: `net_alu1.json` で **32/32 PASS、r と f は全行で正確に {0,3}**（`eval_output.txt`）。
 - 未解決（席の列挙）: 余裕 0 の fan-out cell（a、W、c4 がそれぞれ 4 隣接）、2 side の comparator 4 つ（c2 / c7 / c3p / F）、P と Pbar の減衰の許容（P は 9 まで、Pbar は 3 まで）、W を lever から作る変換（+2 block）、r の dust cell を直読み。
-- the second-model reviewer の (c) に従い、配置は入出力の接合箇所（k 入力、f 出力、制御線の通し）から始め、2 段で桁と制御切替を確かめる。
+- Astra の (c) に従い、配置は入出力の接合箇所（k 入力、f 出力、制御線の通し）から始め、2 段で桁と制御切替を確かめる。

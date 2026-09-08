@@ -19,7 +19,7 @@ x2 は (6,1,6) facing south（front = S_x (6,1,5)、back = 中継 (6,1,7) = W3�
 
 ## 3. 次に試す変更（未実施）
 
-Wn の給電 repeater (4,1,7)（facing south、back (4,1,8) = Wn post）を東側へ移し、(4,1,7) を支持 solid にして **c6 を (4,2,7) facing north** に置く（back = S5 (4,2,6) ✓）。すると c6 の west side (3,2,7) = c4 の copy gate c4c（facing west、出力は東 = c6 へ）を**直接**読めるので S4b (4,2,7) と w4b (5,2,7) が不要になり、(5,1,6) の支持義務が消え、x2 の side (5,1,6) に a（第 3 の入力 cell、wire）を置ける。ただし c7 (6,2,7) の side は w4b (5,2,7) で c4 を読んでいたので、c7 用の c4 を別の中継（例: c4c の front を別の solid にして c7 側へ）で供給し直す。**動かす部品を共有している c4 / c6 / c7 なので、修正後は 32 行全部（r と f）を再確認する**（the second-model reviewer）。
+Wn の給電 repeater (4,1,7)（facing south、back (4,1,8) = Wn post）を東側へ移し、(4,1,7) を支持 solid にして **c6 を (4,2,7) facing north** に置く（back = S5 (4,2,6) ✓）。すると c6 の west side (3,2,7) = c4 の copy gate c4c（facing west、出力は東 = c6 へ）を**直接**読めるので S4b (4,2,7) と w4b (5,2,7) が不要になり、(5,1,6) の支持義務が消え、x2 の side (5,1,6) に a（第 3 の入力 cell、wire）を置ける。ただし c7 (6,2,7) の side は w4b (5,2,7) で c4 を読んでいたので、c7 用の c4 を別の中継（例: c4c の front を別の solid にして c7 側へ）で供給し直す。**動かす部品を共有している c4 / c6 / c7 なので、修正後は 32 行全部（r と f）を再確認する**（Astra）。
 
 ## 4. 干渉を直した箇所（動かすと再発する制約）
 
@@ -37,5 +37,5 @@ Wn の給電 repeater (4,1,7)（facing south、back (4,1,8) = Wn post）を東�
 ## 6. その後
 
 - 32/32 が出たら: (a) 合成世界（worldprobe、`docs/world/world1-record.md` の手順）で 32 行、(b) aiwb の raw program（barrel は別置き、bow 8 本 = level 3 なら **6 本**: 6/27 → floor(3.11)+1 = 4 ✗ → level 3 は **5 本**（5/27 = 0.185 → floor(2.59) + 1 = 3 ✓）、level 9 は 15 本（15/27 = 0.556 → floor(7.78) + 1 = 8 ✗ → 16 本: 0.593 → 8+1 = 9 ✓）を /data merge、torch は raw に入る）→ オペレータの `/aiwb place`。
-- 2 段の接合（f(i) → k(i+1)、P / Wn の通し）は the second-model reviewer (c) のとおり 1 段の後に。
+- 2 段の接合（f(i) → k(i+1)、P / Wn の通し）は Astra (c) のとおり 1 段の後に。
 - 保留中の盤の act: gateproof 常駐の起こし直し（オペレータの in-world 作業終了の合図で CONDUCTOR 6 へ）、着地 carry（今日の記録 = `notes/2026-09-08-*`、未着地）、厄払い #4〜#8（オペレータが止めた地点）。

@@ -7,4 +7,4 @@
 - 席の自己申告の袋小路（記録として）: 昇順の数え方は 9 個、torch の NOT は振幅 15 で使えない、wire の OR 合流は規則表に無い、XOR 段は ≥ 6 個。仮説（L から 2 個の comparator で d は作れない）は未証明。{0,3} は減衰の余裕が 0（3 → 2 で偽）と席が自ら注記。
 - 未解決の接続（席の列挙）: L の 3 方向 fan-out（c4.side、c5.side、c7.back）、gate 出力を side に入れる箇所 5 つ（直角配置か wire 1 cell）、第 2 side の汚染回避、定数の back 5 つ、入力を 3 で作る源。
 - 読み（DIRECTOR、INFERRED）: 規則表を 1 文字も足さず、source も開かず、加算とは別の算術（相補の数え上げ n と閾値）で通った。定番の comparator 減算器の形とは当席の知る限り一致しない。∴ 記憶の再生だけでは説明しにくい方へ 1 段動いた。物理化（PLACE）は未実施。
-- **the second-model reviewer の独立検算（16:57:39Z）**: `net_reuse1.json` を別の評価処理で 8/8、正確な {0,3}。訂正 1 件: 内訳は subtract 6 / compare 2。REUSE-1 の物理配置は未確認。
+- **Astra の独立検算（16:57:39Z）**: `net_reuse1.json` を別の評価処理で 8/8、正確な {0,3}。訂正 1 件: 内訳は subtract 6 / compare 2。REUSE-1 の物理配置は未確認。

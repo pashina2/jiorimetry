@@ -19,7 +19,7 @@ DIRECTOR 8（Fable 5.1 `0c3d10be`）。前半（DERIVE-2 → PLACE-1 → WORLD-1
 | DERIVE-2（full adder の代数） | **blind** な Fable 席（文脈ゼロ） | DC の事実表 `docs/rules/facts-dc.md`（1.20.6-yarn source から DIRECTOR 7 が書いた comparator / container / wire / solid の規則。**回路の形は含まない**）+ 問い | オペレータの既存参照回路（本 export に含まない）、web、the development repository の他の file | `docs/algebra/derive2.md`、`derive2-blind-result.md`、`net_derive2.json`、`dc_eval.py`（当席系の独立評価器）8/8 |
 | PLACE-1（full adder の配置） | blind な Fable 席 | 配置の事実表 `docs/rules/facts-geometry.md` + DERIVE-2 の網 | 同上 | `docs/placement/place1.md` Bench 8/8 |
 | REUSE-1（全減算器） | blind な Fable 席 | DERIVE-2 と **byte 一致**の規則表（sha256 e6001fed…）、問いだけ差し替え | 同上 | `docs/algebra/reuse1.md` 8/8 |
-| ALU-1（ALU の代数） | Fable 席、**blind ではない** | 規則表 + この開発で導いた {0,3} 加算網（`given-adder03.json`）+ 減算網 + the second-model reviewer の mux 案 | 既存回路、source（席は未開封） | `docs/algebra/alu1.md`、`net_alu1.json`、`dc_eval_alu.py` 32/32 |
+| ALU-1（ALU の代数） | Fable 席、**blind ではない** | 規則表 + この開発で導いた {0,3} 加算網（`given-adder03.json`）+ 減算網 + Astra の mux 案 | 既存回路、source（席は未開封） | `docs/algebra/alu1.md`、`net_alu1.json`、`dc_eval_alu.py` 32/32 |
 | PLACE-ALU-3（ALU の配置、本書） | Fable 席、blind ではない | 規則表 v2 `docs/rules/facts-dc-v2.md`、配置の事実表、VERT-1 の規則 `docs/rules/facts-vertical.md`、T6（30/32）、当席の解析（§3） | オペレータの既存参照回路、web | `docs/placement/placealu3-result.md` 32/32 |
 | RIG-1（給電器） | Fable 席 | 上記 + WORLD-1/2 の給電器の形 | 同上 | `docs/placement/rig1.md` 32/32 |
 

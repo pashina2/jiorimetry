@@ -2,7 +2,7 @@
 
 > 日本語: [facts-vertical.ja.md](facts-vertical.ja.md)
 
-Policy (the second-model reviewer, with the operator's agreement): an unknown connection is verified in the small rather than put to the operator as a question. The Bench (a replica of the rules, calibrated on B-??) and the confirmation on real hardware are recorded separately. **This test is Bench only; the real hardware is unconfirmed.**
+Policy (Astra, Astra, with the operator's agreement): an unknown connection is verified in the small rather than put to the operator as a question. The Bench (a replica of the rules, calibrated on B-??) and the confirmation on real hardware are recorded separately. **This test is Bench only; the real hardware is unconfirmed.**
 
 Shape: a pinned wire L → comparator cA (compare, back = the wire) → the solid S at its front (strongly powered = L) → **the wire directly above S** → comparator cB at y=2.
 

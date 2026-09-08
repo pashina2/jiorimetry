@@ -119,7 +119,7 @@ The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input n
 | DERIVE-2 (adder algebra) | blind, zero context | DC rule sheet + the question | the reference circuit, the web, every other file |
 | PLACE-1 (adder placement) | blind | geometry rule sheet + DERIVE-2's network | same |
 | REUSE-1 (full subtractor) | blind | a **byte-identical** rule sheet (sha256 `e6001fed…`), only the question swapped | same |
-| ALU-1 (ALU algebra) | not blind | rule sheet + the {0,3} adder and subtractor networks derived above + a mux suggestion from a second-model reviewer | the reference circuit; the source was not opened |
+| ALU-1 (ALU algebra) | not blind | rule sheet + the {0,3} adder and subtractor networks derived above + a mux suggestion from Astra (second-model reviewer) | the reference circuit; the source was not opened |
 | PLACE-ALU-3 (ALU placement) | not blind | rule sheets v2 + the failing 30/32 predecessor + this session's analysis | the reference circuit, the web |
 | RIG-1 (feeder) | not blind | the above + the synthetic-world feeder shape | same |
 
@@ -314,12 +314,12 @@ records.
 
 ## 9. Credits
 
+- **Astra** — second-model reviewer (design critique of the orders, independent re-checks of the derived networks, the 2,990-case mux check, and the review that reshaped the placement and the algorithmisation proposal).
 - **pashina** — operator: circuit semantics rulings, in-world verification, and the
   reference circuit used to calibrate the Bench.
 - Derivations, placements and tooling by LLM seats (Claude Fable 5.1 / Opus 5) under the
   operator's direction.
-- One design suggestion and two error corrections came from an independent second-model
-  reviewer, credited in the notes as such.
+- One design suggestion and two error corrections came from Astra — second-model reviewer (design critique, independent re-checks).
 
 MIT licensed — see [LICENSE](LICENSE).
 

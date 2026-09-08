@@ -2,7 +2,7 @@
 
 > English: [facts-vertical.md](facts-vertical.md)
 
-方針（the second-model reviewer、オペレータ同意）: 未知の接続はオペレータに尋ねず小さく検証する。Bench（規則の写し、B-?? で較正）と実機の確認は分けて記録する。**本試験は Bench のみ、実機は未確認。**
+方針（Astra、オペレータ同意）: 未知の接続はオペレータに尋ねず小さく検証する。Bench（規則の写し、B-?? で較正）と実機の確認は分けて記録する。**本試験は Bench のみ、実機は未確認。**
 
 形: pinned wire L → comparator cA（compare、back = wire）→ front の solid S（強給電 = L）→ **S の真上の wire** → y=2 の comparator cB。
 

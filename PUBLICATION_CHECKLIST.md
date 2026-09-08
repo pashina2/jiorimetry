@@ -15,7 +15,6 @@ file does not itself contain the literal strings it forbids. The regexes still m
 |---|---|---|---|
 | quotation marks around a person's words | `\xab` / `\xbb` (guillemets) | **0** | 0 |
 | verbatim-quotation marker | `逐[語]` | **0** | 0 |
-| second-model reviewer's name | `A[s]tra` (case-insensitive) | **0** | 0 |
 | private development repository name | `mc-ai[a]gent` | **0** | 0 |
 | operator's account name | `pas[i]s` | **0** | 0 |
 | e-mail addresses | `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}` | **0** | 0 |
@@ -43,7 +42,6 @@ line:
 Reproduce:
 
 ```
-for p in $'\xc2\xab|\xc2\xbb' '逐[語]' 'A[s]tra' 'mc-ai[a]gent' 'pas[i]s' \
          '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' '[a-z]:[\\/]users' \
          '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' \
          'api[_-]?key' 'BEGIN [A-Z ]*PRIVATE' '\bsecret\b' \
@@ -64,7 +62,7 @@ done
   anything in this repository.
 - Operations material: the private repository's state files, logs, session records, and
   handover documents beyond the one placement handover that carries the interference rules.
-- Every quoted utterance of the operator, the second-model reviewer, or anyone else.
+- Every quoted utterance of the operator, Astra, or anyone else (names are credited; utterances are not quoted).
   Decisions that were originally recorded as quotations are stated as facts instead
   ("the operator ruled that …").
 - All Discord, X, and screenshot material.
@@ -102,3 +100,8 @@ lines are pasted verbatim in `README.md` section 5.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all four commands in section 4 produce the results quoted above.
 - No git remote is configured. Publishing is the operator's act.
+
+
+## Amendment (2026-09-08, operator ruling)
+
+Other-company model seats are credited by name and role. Astra (second-model reviewer) is named in the credits and wherever its review shaped the work. The earlier scan that required 0 hits of the name is withdrawn.
