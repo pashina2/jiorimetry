@@ -296,8 +296,13 @@ mod is distributed here.
   the Bench said O = 0 from every seed, and the case was filed as a spec-vs-observation conflict. A per-gt trace of
   the loop cells (`docs/world/p4-decay-trace.md`) showed the loop decaying exactly as the algebra says — one level
   per wire hop, four game ticks per round, 56 ticks from 14 to 0 — while every run had cut the regime at 40 ticks.
-  The DC judge was right; what it lacks is a time clause (a settle bound), which the second reviewer had named as
-  the third condition of a boundary contract. Not yet added.
+  The DC judge was right; what it lacked was a time clause (a settle bound), which the second reviewer had named as
+  the third condition of a boundary contract. It is now in: `Bench.set_floors` / `settle_after` step the ticked
+  circuit from one input vector to the next, `placer0_check` drives every ordered pair of pin vectors and
+  `alu_check_contract` clause C7 sweeps the 128 rows of n=2 forward and back; a row must rest within 40 gt at its DC
+  solution. Under it the decaying p4 fails exactly where the world did (T 15 -> 0, not rested at 40 gt), v9 passes with
+  a worst settle of 26 gt, and the placer re-solved p4 once more without a loop (16 blocks, worst settle 8 gt), which
+  `feed.py` then ran in the world: `p4_throughline_v3 / placer0 / 2/2 / 2 / 0 / 12 / 0/12 / 8..8 (0 unsettled) / 68 / 3261` (`artifacts/world/feed1/out_p4v3/`).
 
 ## 7. Measured costs
 

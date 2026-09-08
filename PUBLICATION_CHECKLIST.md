@@ -5,7 +5,7 @@ root. `--exclude-dir=.git` and `--binary-files=without-match` are used throughou
 byte coincidences do not count as hits.
 
 Last run: 2026-09-08, re-run after the terminology change described in section 6.
-233 tracked files. Commit hashes are not cited here: every hash in this repository changed
+240 tracked files. Commit hashes are not cited here: every hash in this repository changed
 once, when the commit author was corrected before publication.
 
 ## 1. Scans
@@ -114,7 +114,7 @@ lines are pasted verbatim in `README.md` section 5.
 
 - Line endings: LF everywhere (0 of the 112 text files contain CRLF; the 7 PNGs are binary).
 - No `__pycache__`, no `.pyc`, no build output committed.
-- 233 files, 22,720,806 bytes (22.7 MB) tracked.
+- 240 files, 22,750,584 bytes (22.8 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all six commands in section 4 produce the results quoted above.
 - Not yet published as of this checklist: the repository is local and has no remote. The

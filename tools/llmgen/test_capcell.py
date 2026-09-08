@@ -272,6 +272,41 @@ class FloorAndLatchTests(unittest.TestCase):
             (1, 1, 1): (SMOOTH_STONE, {}),
         }
 
+    def decay_rig(self):
+        """The re-solved p4 shape: the same loop but with a wire hop (0,1,3)->(1,1,3) and
+        subtract comparators, so the loop loses one level per round and decays."""
+        return {
+            (0, 1, 1): (DUST, {"power": "0"}), (0, 0, 1): (SMOOTH_STONE, {}),
+            (0, 1, 2): (COMPARATOR, {"facing": "north", "mode": "subtract", "powered": "false"}),
+            (0, 0, 2): (SMOOTH_STONE, {}),
+            (0, 1, 3): (DUST, {"power": "0"}), (0, 0, 3): (SMOOTH_STONE, {}),
+            (1, 1, 3): (DUST, {"power": "0"}), (1, 0, 3): (SMOOTH_STONE, {}),
+            (1, 1, 2): (COMPARATOR, {"facing": "south", "mode": "subtract", "powered": "false"}),
+            (1, 0, 2): (SMOOTH_STONE, {}),
+            (1, 1, 1): (SMOOTH_STONE, {}),
+        }
+
+    def test_time_clause_sees_a_slow_decay_and_a_true_latch(self):
+        # decaying loop: DC says 0 after T goes 15 -> 0, and the ticked circuit gets there, but slowly
+        b = CC.Bench(self.decay_rig(), floors={(0, 1, 1): 15})
+        b.dc_solve()
+        self.assertEqual(b.dust_powers([(0, 1, 1), (1, 1, 3)]), (15, 14))
+        gt, rested, last = b.settle_after({(0, 1, 1): 0}, [(0, 1, 1), (1, 1, 3)], limit=40)
+        self.assertFalse(rested)                      # not within 40 gt
+        self.assertGreater(b.dust_powers([(0, 1, 1)])[0], 0)
+        b2 = CC.Bench(self.decay_rig(), floors={(0, 1, 1): 15})
+        b2.dc_solve()
+        gt, rested, last = b2.settle_after({(0, 1, 1): 0}, [(0, 1, 1), (1, 1, 3)], limit=120)
+        self.assertTrue(rested)
+        self.assertEqual(b2.dust_powers([(0, 1, 1), (1, 1, 3)]), (0, 0))
+        self.assertGreater(gt, 40)
+        # true latch: rests at once, but not at the DC solution
+        c = CC.Bench(self.latch_rig(), floors={(0, 1, 1): 15})
+        c.dc_solve()
+        gt, rested, last = c.settle_after({(0, 1, 1): 0}, [(0, 1, 1)], limit=40)
+        self.assertTrue(rested)
+        self.assertEqual(c.dust_powers([(0, 1, 1)]), (15,))
+
     def test_a_held_pin_hides_the_latch_and_a_floored_pin_shows_it(self):
         held = CC.Bench(self.latch_rig(), pinned={(0, 1, 1)})
         _, conv, conv_hot, diff = held.dc_solve_both()

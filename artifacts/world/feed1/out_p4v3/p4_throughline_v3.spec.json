@@ -1,0 +1,170 @@
+{
+ "name": "p4_throughline_v3",
+ "world": {
+  "template": "<host-path>/carpet-work",
+  "world_dir": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/world_build/world",
+  "bbox": {
+   "min": [
+    99,
+    63,
+    99
+   ],
+   "max": [
+    108,
+    68,
+    104
+   ]
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25598,
+  "java_xmx": "3G"
+ },
+ "drives": {
+  "p4_throughline_v3__T_0": {
+   "kind": "lever",
+   "pos": [
+    100,
+    66,
+    102
+   ],
+   "face": "floor",
+   "facing": "north"
+  }
+ },
+ "reads": [
+  {
+   "name": "O_0",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 0,
+   "match": "minecraft:redstone_wire[power=0]"
+  },
+  {
+   "name": "O_15",
+   "pos": [
+    107,
+    65,
+    101
+   ],
+   "bit": 1,
+   "match": "minecraft:redstone_wire[power=15]"
+  },
+  {
+   "name": "c1_1_0",
+   "pos": [
+    101,
+    65,
+    100
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "c2_2_1",
+   "pos": [
+    102,
+    66,
+    101
+   ],
+   "match": "minecraft:comparator[powered=true]"
+  },
+  {
+   "name": "d4_3_1",
+   "pos": [
+    104,
+    67,
+    101
+   ],
+   "match": "minecraft:repeater[powered=true]"
+  },
+  {
+   "name": "d6_2_1",
+   "pos": [
+    106,
+    66,
+    101
+   ],
+   "match": "minecraft:repeater[powered=true]"
+  }
+ ],
+ "regimes": [
+  {
+   "name": "wake_on",
+   "inputs": {
+    "p4_throughline_v3__T_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "wake_off",
+   "inputs": {
+    "p4_throughline_v3__T_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_T0",
+   "inputs": {
+    "p4_throughline_v3__T_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "warm_T15",
+   "inputs": {
+    "p4_throughline_v3__T_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10
+  },
+  {
+   "name": "v_T0",
+   "inputs": {
+    "p4_throughline_v3__T_0": 0
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 1,
+    "final_reads": {
+     "O_0": true,
+     "O_15": false,
+     "c1_1_0": true,
+     "c2_2_1": false,
+     "d4_3_1": false,
+     "d6_2_1": false
+    }
+   }
+  },
+  {
+   "name": "v_T15",
+   "inputs": {
+    "p4_throughline_v3__T_0": 1
+   },
+   "max_gt": 40,
+   "settle_gt": 10,
+   "expect": {
+    "final_value": 2,
+    "final_reads": {
+     "O_0": false,
+     "O_15": true,
+     "c1_1_0": false,
+     "c2_2_1": true,
+     "d4_3_1": true,
+     "d6_2_1": true
+    }
+   }
+  }
+ ],
+ "limits": {
+  "max_rcon": 600000
+ },
+ "out_dir": "<host-path><session-scratchpad>/feed1_runs/out_p4v3"
+}

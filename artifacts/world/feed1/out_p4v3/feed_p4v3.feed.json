@@ -1,0 +1,127 @@
+{
+ "job": "feed_p4v3",
+ "artifacts": [
+  {
+   "name": "p4_throughline_v3",
+   "kind": "placer0",
+   "artifact_cells": 66,
+   "readout_added": [],
+   "rows": 2,
+   "feeders": [
+    {
+     "pin": "T",
+     "cell": [
+      0,
+      1,
+      1
+     ],
+     "kind": "ctrl",
+     "note": "base [0, 1, 2]",
+     "lever": [
+      0,
+      2,
+      2
+     ],
+     "cells": [
+      [
+       [
+        0,
+        1,
+        2
+       ],
+       "minecraft:smooth_stone"
+      ],
+      [
+       [
+        0,
+        2,
+        2
+       ],
+       "minecraft:lever[face=floor,facing=north,powered=false]"
+      ]
+     ],
+     "substitutions": []
+    }
+   ],
+   "levers": {
+    "T_0": [
+     0,
+     2,
+     2
+    ]
+   },
+   "bench_pass": "2/2"
+  }
+ ],
+ "runs": [
+  {
+   "cmd": [
+    "<python>",
+    "<dev-repo>/tools/workbench/harness/worldprobe.py",
+    "run",
+    "--spec",
+    "<host-path><session-scratchpad>/feed1_runs/out_p4v3/p4_throughline_v3.spec.json",
+    "--run-dir",
+    "<host-path><session-scratchpad>/feed1_runs/out_p4v3/run_p4_throughline_v3"
+   ],
+   "returncode": 0,
+   "wall_s": 84.9,
+   "stdout": "wake_on              settle_gt=6 last_change_gt=6 final_value=2 events=[]\nwake_off             settle_gt=8 last_change_gt=8 final_value=1 events=[]\nwarm_T0              settle_gt=0 last_change_gt=0 final_value=1 events=[]\nwarm_T15             settle_gt=8 last_change_gt=8 final_value=2 events=[]\nv_T0                 settle_gt=8 last_change_gt=8 final_value=1 events=[]\nv_T15                settle_gt=8 last_change_gt=8 final_value=2 events=[]\nwrote <host-path><session-scratchpad>/feed1_runs/out_p4v3/p4_throughline_v3.run.result.json\nwrote <host-path><session-scratchpad>/feed1_runs/out_p4v3/p4_throughline_v3.run.tables.md\n",
+   "stderr": "",
+   "spec": "p4_throughline_v3",
+   "rcon": 3261,
+   "completed": true
+  }
+ ],
+ "table": [
+  {
+   "artifact": "p4_throughline_v3",
+   "kind": "placer0",
+   "bench": "2/2",
+   "world_rows": 2,
+   "world_fail": 0,
+   "read_points": 12,
+   "mismatch": "0/12",
+   "settle_gt": "8..8 (0 unsettled)",
+   "blocks": 68,
+   "rcon": 3261,
+   "first_counterexample": null
+  }
+ ],
+ "refused": null,
+ "world": {
+  "bbox": [
+   [
+    99,
+    63,
+    99
+   ],
+   [
+    108,
+    68,
+    104
+   ]
+  ],
+  "origins": {
+   "p4_throughline_v3": [
+    0,
+    0,
+    0
+   ]
+  },
+  "world_dir": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/world_build/world",
+  "blocks": 68,
+  "block_entities": 2,
+  "regions": [
+   "r.0.0.mca"
+  ],
+  "data_version": 3839
+ },
+ "specs": [
+  {
+   "artifact": "p4_throughline_v3",
+   "spec": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/p4_throughline_v3.spec.json",
+   "est_rcon": 2308
+  }
+ ]
+}

@@ -18,6 +18,9 @@ Clauses (M = measured on the Bench, S = structural on the layout, - = not checke
                    pairs across the boundary (y +- 1) are forbidden
                 M  n=3, all 512 rows: every slice's r equals the 1-bit function of (a_i, b_i, measured k_i) for the mode
                    (the local table is unchanged by the neighbours)
+ C7 time        M  n=2, the 128 rows driven forward and then backward on ONE bench: after each input change the tiled circuit must
+                   rest within T_BOUND (40) gt at the DC solution of the new row (r cells, f, intermediate k). A latch
+                   rests at the wrong value, a slow decay does not rest in time (FEED-1 p4: 56 gt), both FAIL
  C6 rules       S  lint L1 (support) / L2 (diagonal wire link) / L3 (wire beside a strongly powered relay, info) on the
                    tiled n=2 layout; repeater side lock on the tiled n=2 layout (a repeater/comparator facing into either
                    side of a repeater, neighbours included)
@@ -31,6 +34,7 @@ sys.path.insert(0, HERE)
 import alu_check_slices as CS
 import alu_check2 as C2
 W = "minecraft:redstone_wire"
+T_BOUND = 40
 
 
 def facing(state):
@@ -255,6 +259,41 @@ def main(path):
                             if c5bad <= 6:
                                 fail("C5", "%s A=%d B=%d k=%d: slice %d r=%s, local table says %d (k_i=%d)" % (mode, A, B, kk, i, rs[i], exp, ki))
     print("measured n=3 rows=%d: C2 through-entry mismatches=%d, C3 carry mismatches=%d (final f mismatches=%d), C5 local-table mismatches=%d, non-converged/bistable rows=%d" % (rows, c2bad, c3bad, fbad, c5bad, convbad))
+    # C7 time, n=2 in sweep order on one bench
+    n2 = 2
+    T2 = CS.tiled(lay, n2)
+    order = [(mode, A, B, kk) for mode in CS.MODES for A in range(2 ** n2) for B in range(2 ** n2) for kk in (0, 1)]
+    order = order + order[-2::-1]   # forward sweep, then back to the start: every input falls as well as rises
+    def pins_for(mode, A, B, kk):
+        P, Wn = CS.MODES[mode]
+        pins = {}
+        for key, lv in (("P", P), ("Wn", Wn)):
+            for c in S["through"][key]:
+                pins[tuple(c)] = lv
+        pins[tuple(k)] = 3 * kk
+        for i in range(n2):
+            for key, val in (("a", (A >> i) & 1), ("b", (B >> i) & 1)):
+                c = S["ports"][key]
+                pins[(c[0] + i * PX, c[1], c[2])] = 3 * val
+        return pins
+    watch = [(S["ports"]["r"][0] + i * PX, S["ports"]["r"][1], S["ports"]["r"][2]) for i in range(n2)] + [(k[0] + PX, k[1], k[2])]
+    first = pins_for(*order[0])
+    bench = CS.BS.build(T2, {p: {"power": v} for p, v in first.items()})
+    bench.dc_solve()
+    worst = 0
+    tbad = 0
+    for mode, A, B, kk in order[1:]:
+        gt, rested, last = bench.settle_after(pins_for(mode, A, B, kk), watch, limit=T_BOUND)
+        worst = max(worst, gt)
+        exp = [3 * bit_fn(mode, (A >> i) & 1, (B >> i) & 1, expected_carry(mode, A, B, kk, i)) for i in range(n2)] + [3 * expected_carry(mode, A, B, kk, 1)]
+        got = [int(bench.blocks[c][1]["power"]) for c in watch]
+        fcell = (S["ports"]["f"][0] + PX, S["ports"]["f"][1], S["ports"]["f"][2])
+        fgot = bench.cmp_out.get(fcell)
+        if not rested or got != exp or fgot != 3 * expected_carry(mode, A, B, kk, n2):
+            tbad += 1
+            if tbad <= 4:
+                fail("C7", "%s A=%d B=%d k=%d: rested=%s after %d gt, r/k=%s expected %s, f=%s" % (mode, A, B, kk, rested, gt, got, exp, fgot))
+    print("C7 time n=2: %d transitions, worst settle %d gt (bound %d), failures %d" % (len(order) - 1, worst, T_BOUND, tbad))
     print("CONTRACT %s: %d FAIL, %d notes" % ("PASS" if not fails else "FAIL", len(fails), len(notes)))
     return not fails
 

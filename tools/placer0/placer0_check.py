@@ -41,7 +41,25 @@ def check(prob, sol, verbose=False):
             ok=conv and got==exp
             if verbose or not ok: print(("ok  " if ok else "FAIL"),prob["name"],env,o["name"],"got",got,"expect",exp,"conv",conv)
             if not ok: fails.append((env,o["name"],got,exp))
+    if fails: return False, fails
+    # TIME clause (2026-09-08, after FEED-1's p4): drive the combos in order on ONE bench; after each change the
+    # circuit must rest within T_BOUND gt AND rest at the DC solution of the new row. A latch rests at the wrong
+    # value; a slow decay does not rest in time. Both are FAIL here, as they are in a 40 gt world regime.
+    outs=[tuple(o["cell"]) for o in prob["outputs"]]; worst=0
+    for src in combos:                      # every ordered pair (a -> b): both directions of every input are covered
+        for combo in combos:
+            if combo==src: continue
+            pins0={tuple(prob["pins"][n]["cell"]):{"power":lv} for n,lv in zip(names,src)}
+            bench=BS.build(lay,pins0); bench.dc_solve()
+            env=dict(zip(names,combo)); vals={tuple(prob["pins"][n]["cell"]):lv for n,lv in zip(names,combo)}
+            gt,rested,last=bench.settle_after(vals,outs,limit=T_BOUND); worst=max(worst,gt)
+            exp=[int(eval(o["expect"],{"max":max,"min":min},env)) for o in prob["outputs"]]
+            got=[int(bench.blocks[c][1]["power"]) for c in outs]
+            if not rested or got!=exp:
+                print("TIME",prob["name"],dict(zip(names,src)),"->",env,"rested",rested,"gt",gt,"got",got,"expect",exp); fails.append((env,"time",gt,got))
+    if verbose: print("time: worst settle %d gt (bound %d)"%(worst,T_BOUND))
     return (not fails), fails
+T_BOUND=40
 if __name__=="__main__":
     probs={p["name"]:p for p in json.load(open(sys.argv[1]))}; prob=probs[sys.argv[2]]; sol=json.load(open(sys.argv[3]))
     ok,info=check(prob,sol,"-v" in sys.argv); print("PASS" if ok else "FAIL", prob["name"], "blocks", len(sol["blocks"]), "" if ok else info[:6])

@@ -1,0 +1,695 @@
+{
+ "provenance": {
+  "writer": "worldprobe",
+  "report_kind": "bench_trace",
+  "spec_path": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/p4_throughline_v3.spec.json",
+  "spec_sha256": "43e74b0919df5086acf3f07400783bbb7eb7f445bb2a7dfdb22a82e56c0f9b45",
+  "utc": "2026-09-08T13:00:23Z"
+ },
+ "which": "run",
+ "spec_name": "p4_throughline_v3",
+ "run_dir": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/run_p4_throughline_v3",
+ "completed": true,
+ "world": {
+  "run_dir": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/run_p4_throughline_v3",
+  "template": "<host-path>/carpet-work",
+  "mode": "world_dir",
+  "source": "<host-path><session-scratchpad>/feed1_runs/out_p4v3/world_build/world",
+  "copied": [
+   {
+    "rel": ".",
+    "kind": "whole world directory"
+   }
+  ],
+  "absent": [],
+  "data_version": {
+   "world": 3839,
+   "template": 3839
+  }
+ },
+ "server": {
+  "host": "127.0.0.1",
+  "rcon_port": 25598
+ },
+ "tick_query": "The game is frozenTarget tick rate: 20.0 per second.\nAverage time per tick: 4.8ms (Target: 50.0ms)Percentiles: P50: 0.4ms P95: 37.4ms P99: 149.1ms, sample: 100",
+ "scarpet": {
+  "ok": true,
+  "reply": "= 5 (11ms)"
+ },
+ "regimes": [
+  {
+   "name": "wake_on",
+   "inputs": {
+    "p4_throughline_v3__T_0": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 6,
+   "settled": true,
+   "first_stable_gt": 6,
+   "last_change_gt": 6,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "010111",
+   "final_value": 2,
+   "final_reads": {
+    "O_0": false,
+    "O_15": true,
+    "c1_1_0": false,
+    "c2_2_1": true,
+    "d4_3_1": true,
+    "d6_2_1": true
+   },
+   "changes": [
+    [
+     0,
+     "100000",
+     1
+    ],
+    [
+     2,
+     "100100",
+     1
+    ],
+    [
+     4,
+     "100110",
+     1
+    ],
+    [
+     6,
+     "010111",
+     2
+    ]
+   ],
+   "series": [
+    "100000",
+    "100000",
+    "100100",
+    "100100",
+    "100110",
+    "100110",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111"
+   ]
+  },
+  {
+   "name": "wake_off",
+   "inputs": {
+    "p4_throughline_v3__T_0": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "101000",
+   "final_value": 1,
+   "final_reads": {
+    "O_0": true,
+    "O_15": false,
+    "c1_1_0": true,
+    "c2_2_1": false,
+    "d4_3_1": false,
+    "d6_2_1": false
+   },
+   "changes": [
+    [
+     0,
+     "010111",
+     2
+    ],
+    [
+     2,
+     "011111",
+     2
+    ],
+    [
+     4,
+     "011011",
+     2
+    ],
+    [
+     6,
+     "011001",
+     2
+    ],
+    [
+     8,
+     "101000",
+     1
+    ]
+   ],
+   "series": [
+    "010111",
+    "010111",
+    "011111",
+    "011111",
+    "011011",
+    "011011",
+    "011001",
+    "011001",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000"
+   ]
+  },
+  {
+   "name": "warm_T0",
+   "inputs": {
+    "p4_throughline_v3__T_0": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 0,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 0,
+   "settled": true,
+   "first_stable_gt": 0,
+   "last_change_gt": 0,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "101000",
+   "final_value": 1,
+   "final_reads": {
+    "O_0": true,
+    "O_15": false,
+    "c1_1_0": true,
+    "c2_2_1": false,
+    "d4_3_1": false,
+    "d6_2_1": false
+   },
+   "changes": [
+    [
+     0,
+     "101000",
+     1
+    ]
+   ],
+   "series": [
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000"
+   ]
+  },
+  {
+   "name": "warm_T15",
+   "inputs": {
+    "p4_throughline_v3__T_0": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "010111",
+   "final_value": 2,
+   "final_reads": {
+    "O_0": false,
+    "O_15": true,
+    "c1_1_0": false,
+    "c2_2_1": true,
+    "d4_3_1": true,
+    "d6_2_1": true
+   },
+   "changes": [
+    [
+     0,
+     "101000",
+     1
+    ],
+    [
+     2,
+     "100000",
+     1
+    ],
+    [
+     4,
+     "100100",
+     1
+    ],
+    [
+     6,
+     "100110",
+     1
+    ],
+    [
+     8,
+     "010111",
+     2
+    ]
+   ],
+   "series": [
+    "101000",
+    "101000",
+    "100000",
+    "100000",
+    "100100",
+    "100100",
+    "100110",
+    "100110",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111"
+   ]
+  },
+  {
+   "name": "v_T0",
+   "inputs": {
+    "p4_throughline_v3__T_0": 0
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "101000",
+   "final_value": 1,
+   "final_reads": {
+    "O_0": true,
+    "O_15": false,
+    "c1_1_0": true,
+    "c2_2_1": false,
+    "d4_3_1": false,
+    "d6_2_1": false
+   },
+   "changes": [
+    [
+     0,
+     "010111",
+     2
+    ],
+    [
+     2,
+     "011111",
+     2
+    ],
+    [
+     4,
+     "011011",
+     2
+    ],
+    [
+     6,
+     "011001",
+     2
+    ],
+    [
+     8,
+     "101000",
+     1
+    ]
+   ],
+   "series": [
+    "010111",
+    "010111",
+    "011111",
+    "011111",
+    "011011",
+    "011011",
+    "011001",
+    "011001",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000",
+    "101000"
+   ],
+   "expect": {
+    "final_value": {
+     "expected": 1,
+     "got": 1,
+     "equal": true
+    },
+    "final_reads": {
+     "O_0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "O_15": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c1_1_0": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c2_2_1": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "d4_3_1": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "d6_2_1": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     }
+    }
+   }
+  },
+  {
+   "name": "v_T15",
+   "inputs": {
+    "p4_throughline_v3__T_0": 1
+   },
+   "pre": {},
+   "trigger": null,
+   "trigger_events_gt": [],
+   "levers_changed": 1,
+   "max_gt": 40,
+   "settle_need_gt": 10,
+   "settle_gt": 8,
+   "settled": true,
+   "first_stable_gt": 8,
+   "last_change_gt": 8,
+   "plateau": false,
+   "truncated": false,
+   "final_bits": "010111",
+   "final_value": 2,
+   "final_reads": {
+    "O_0": false,
+    "O_15": true,
+    "c1_1_0": false,
+    "c2_2_1": true,
+    "d4_3_1": true,
+    "d6_2_1": true
+   },
+   "changes": [
+    [
+     0,
+     "101000",
+     1
+    ],
+    [
+     2,
+     "100000",
+     1
+    ],
+    [
+     4,
+     "100100",
+     1
+    ],
+    [
+     6,
+     "100110",
+     1
+    ],
+    [
+     8,
+     "010111",
+     2
+    ]
+   ],
+   "series": [
+    "101000",
+    "101000",
+    "100000",
+    "100000",
+    "100100",
+    "100100",
+    "100110",
+    "100110",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111",
+    "010111"
+   ],
+   "expect": {
+    "final_value": {
+     "expected": 2,
+     "got": 2,
+     "equal": true
+    },
+    "final_reads": {
+     "O_0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "O_15": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "c1_1_0": {
+      "expected": false,
+      "got": false,
+      "equal": true
+     },
+     "c2_2_1": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "d4_3_1": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     },
+     "d6_2_1": {
+      "expected": true,
+      "got": true,
+      "equal": true
+     }
+    }
+   }
+  }
+ ],
+ "rcon": {
+  "roundtrips": 3261,
+  "limit": 600000,
+  "by_phase": {
+   "prepare": 9,
+   "regime:wake_on": 540,
+   "regime:wake_off": 542,
+   "regime:warm_T0": 536,
+   "regime:warm_T15": 547,
+   "regime:v_T0": 546,
+   "regime:v_T15": 541
+  }
+ }
+}

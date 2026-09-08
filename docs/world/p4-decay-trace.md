@@ -46,3 +46,31 @@ level never drops, and the Bench's hot seed finds the second fixed point (WORLD-
   world: `max_gt` must exceed the bound, and a regime that ends with `last_change_gt == max_gt` is truncated, never
   settled, and must not be compared as a final value.
 - The counterexample is kept as `sol_p4_throughline.json` (DC-correct, 56 gt decay) beside the latched one.
+## 4. The time clause, and the third p4 (2026-09-08T13:02Z)
+
+Done after section 3 was written. `capcell.Bench` gained `set_floors` (an input vector changes behind floored pins,
+with the synchronous settle a lever flip gets) and `settle_after` (step the ticked circuit until it rests or a bound
+of gt passes; returns elapsed gt, rested, last change). `test_capcell.py` pins both cases on two rigs: the decaying
+loop is not rested at 40 gt and rests at 0 by 120 gt; the true latch rests at once at the wrong value.
+
+- `placer0_check.py`: after the DC pass, every ORDERED pair of pin vectors is driven on the Bench (DC-solve the
+  source vector, then `settle_after` to the target); the target must rest within 40 gt at its expected outputs. The
+  first version swept the vectors in one direction only and missed 15 -> 0; the pair form covers both directions.
+  Results: p1/p2/p5/p6 pass with worst settles 6..10 gt; the decaying p4 fails at T 15 -> 0 (not rested at 40 gt,
+  O = 15) - the same transition and value the world showed.
+- `alu_check_contract.py` clause C7: the 128 rows of n=2 are driven forward and then backward on one bench (254
+  transitions); r cells, the intermediate k and the top f must rest within 40 gt at the row's DC solution. v9: 254
+  transitions, worst settle 26 gt, 0 failures; the whole contract still PASS.
+- The placer, with this judge as its oracle, re-solved p4 in 1.2 s: 16 blocks, no loop (a barrel-backed subtract
+  comparator chain instead), worst settle 8 gt (`sol_p4_throughline.json`; the decaying one is kept as
+  `sol_p4_throughline.decay.json`, the latched one as `sol_p4_throughline.latched.json`).
+- `feed.py` ran it in the world, prediction written first (Bench 2/2, world 2/2, both transitions rest within 8 gt):
+
+```
+| p4_throughline_v3 | placer0 | 2/2 | 2 | 0 | 12 | 0/12 | 8..8 (0 unsettled) | 68 | 3261 |
+```
+
+The judge (DC + two seeds + time), the placer and the world now agree on all three p4 solutions: latch (bistable),
+slow decay (time), and the loop-free one (pass). `out_p4v3/` holds the feed.py outputs untouched.
+
+

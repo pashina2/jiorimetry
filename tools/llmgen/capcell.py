@@ -453,6 +453,31 @@ class Bench(M.Machine):
         self._restore(cold)
         return rounds, conv, conv_hot, diff
 
+    def set_floors(self, values):
+        """{pos: level}: change the source levels behind floored dust cells (an
+        input vector changes) and do the synchronous settle, as a lever flip
+        does. The ticked transient is then measured with `settle_after`."""
+        for pos, lv in values.items():
+            if pos not in self.floors:
+                raise M.MachineError("%r is not a floored cell" % (pos,))
+            self.floors[pos] = int(lv)
+            self._dirty.add(pos)
+            self._dirty.update(self._dust_near(pos))
+        self.settle()
+
+    def settle_after(self, values, watch, limit=40):
+        """The TIME clause of a DC check: apply a new input vector to the
+        floors and step until the schedule is empty or `limit` gt have
+        passed. Returns (gt_elapsed, rested, last_change_gt) for the watched
+        cells (see run_settle). A DC judge that accepts a row must also
+        accept that the circuit REACHES the row's DC solution within the
+        bound after the previous row (WORLD-4/FEED-1 p4: a 56 gt decay was
+        read as a latch by every 40 gt regime, 2026-09-08)."""
+        start = self.gt
+        self.set_floors(values)
+        gt, rested, last = self.run_settle(watch, limit=limit)
+        return gt - start, rested, (last - start if last else 0)
+
     def set_levers(self, values):
         """{pos: bool}, one settle for the lot (a vector is one edit)."""
         for pos, on in values.items():

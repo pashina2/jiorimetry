@@ -3,50 +3,56 @@
   [
    0,
    1,
+   2,
+   "minecraft:comparator[facing=north,mode=subtract]"
+  ],
+  [
    0,
-   "minecraft:barrel[facing=up,open=false]"
+   1,
+   3,
+   "minecraft:redstone_wire"
+  ],
+  [
+   0,
+   2,
+   1,
+   "minecraft:smooth_stone"
   ],
   [
    1,
    1,
-   0,
-   "minecraft:comparator[facing=west,mode=subtract]"
+   1,
+   "minecraft:smooth_stone"
   ],
   [
    1,
    1,
+   2,
+   "minecraft:comparator[facing=south,mode=subtract]"
+  ],
+  [
    1,
+   1,
+   3,
    "minecraft:redstone_wire"
   ],
   [
    1,
    2,
    1,
-   "minecraft:barrel[facing=up,open=false]"
-  ],
-  [
-   2,
-   1,
-   0,
-   "minecraft:smooth_stone"
-  ],
-  [
-   2,
-   1,
-   1,
-   "minecraft:smooth_stone"
-  ],
-  [
-   2,
-   2,
-   0,
    "minecraft:redstone_wire"
   ],
   [
    2,
+   1,
+   1,
+   "minecraft:smooth_stone"
+  ],
+  [
+   2,
    2,
    1,
-   "minecraft:comparator[facing=west,mode=subtract]"
+   "minecraft:repeater[facing=west]"
   ],
   [
    3,
@@ -97,8 +103,5 @@
    "minecraft:smooth_stone"
   ]
  ],
- "barrels": {
-  "1,2,1": 1,
-  "0,1,0": 1
- }
+ "barrels": {}
 }
