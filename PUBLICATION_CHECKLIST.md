@@ -4,8 +4,9 @@ Run before the repository is made public. Every command below is run from the re
 root. `--exclude-dir=.git` and `--binary-files=without-match` are used throughout, so PNG
 byte coincidences do not count as hits.
 
-Last run: 2026-09-08, re-run after the terminology change described in section 6.
-240 tracked files. Commit hashes are not cited here: every hash in this repository changed
+Last run: 2026-09-10, re-run after the README was re-cut into thesis / toolchain / facts /
+failures / reference / unproven and its per-round text moved to `docs/records/` (section 8).
+248 tracked files. Commit hashes are not cited here: every hash in this repository changed
 once, when the commit author was corrected before publication.
 
 ## 1. Scans
@@ -35,6 +36,13 @@ file does not itself contain the literal strings it forbids. The regexes still m
 The counts above are for the export excluding this file's own English labels: the words
 "Discord" and "Twitter" appear here three times as the *names* of the categories being
 excluded, and nowhere else in the repository.
+
+The 2026-09-10 re-run found two rows above at non-zero before any edit: the operator's save
+path in two order notes added after the previous run (`docs/world/feed1-spec.md`,
+`docs/world/world4-order.md`) and the withheld reference-circuit directory in three files
+(the same two and `docs/placement/slice1-result.md`). Both were rewritten to placeholders
+under the rule in section 3 — `<operator-save>` and `<reference-circuit-records>` — and the
+rows are 0 after that edit. Nothing else in those files was touched.
 
 These are pattern scans. They bound what a regular expression can find; they do not prove
 the absence of a quoted utterance or a game-code fragment that happens to avoid every
@@ -95,6 +103,11 @@ done
   They were kept because they record where a rule came from.
 - `sys.path` lines in every copied tool now resolve relative to the file, so the export runs
   from its own root with no configuration.
+- 2026-09-10: the operator's save path → `<operator-save>` (2 occurrences) and the withheld
+  reference-circuit directory → `<reference-circuit-records>` (3 occurrences), in
+  `docs/world/feed1-spec.md`, `docs/world/world4-order.md` and
+  `docs/placement/slice1-result.md`. Prose only; no measured value, coordinate or table
+  changed, and `tools/check_tables.py` still resolves every citation into those files.
 
 ## 4. Verification re-run before publishing
 
@@ -112,9 +125,9 @@ lines are pasted verbatim in `README.md` section 5.
 
 ## 5. Hygiene
 
-- Line endings: LF everywhere (0 of the 112 text files contain CRLF; the 7 PNGs are binary).
+- Line endings: LF everywhere (0 of the 240 text files contain CRLF; the 8 PNGs are binary).
 - No `__pycache__`, no `.pyc`, no build output committed.
-- 240 files, 22,750,584 bytes (22.8 MB) tracked.
+- 248 files, 22,840,343 bytes (22.8 MB) tracked.
 - Verified from a clean `git clone` of this repository, not from the working tree:
   all six commands in section 4 produce the results quoted above.
 - Not yet published as of this checklist: the repository is local and has no remote. The
@@ -175,3 +188,25 @@ Third round (same day, WORLD-4): the second reviewer asked for the placer's five
 
 Second reading, of the slice checker (same day): the function-table checker does not measure the contract, and `v8` violates clause 2 (through-line exit not restored to 15). Disposition: `tools/checks/alu_check_contract.py` added, `v9` replaces `v8` in the results, the contract amendment is recorded in `docs/placement/slice-contract.md`, and the README no longer says `v8` meets the contract.
 
+
+## 8. Amendment (2026-09-10): the README re-cut
+
+The README was re-cut into thesis, toolchain, facts, failures, reference, unproven,
+versioning and credits, in both languages, around the two tables `docs/facts.md` and
+`docs/failures.md`. What that changed here:
+
+- The per-round text (results by round, provenance, the failures in prose, the measured
+  costs and the repository layout) left the README unchanged into
+  `docs/records/readme-rounds.md` and its Japanese mirror, with `docs/records/README.md` as
+  the index. Only the relative links in that text were repointed.
+- The two counts section 1 of `docs/facts.md` flagged as no longer matching this repository
+  were resolved by running them. The Bench unit tests print `Ran 37 tests` / `OK (skipped=3)`;
+  the pinned-rig command `alu_check2.py artifacts/layouts/rig1_full_bench.json` prints
+  `PASS 12/32` and is no longer cited as the rig's instrument, which is the lever-driven
+  `tools/world/build_rig1.py` (`PASS 32/32`).
+- Every number in either README is now copied from `docs/facts.md`, `docs/failures.md` or the
+  output of a command run for this revision; the fact and failure rows quoted in the README
+  are copied from those files without retyping.
+- The version mark is defined in the README's versioning section (`w<surface>.r<round>` plus
+  the commit) and stands at `w2.r4`. `r` is counted from section 7 above; nothing is tagged.
+- `python tools/check_tables.py` was re-run after the change: 100 OK, 0 MISSING.

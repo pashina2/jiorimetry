@@ -8,7 +8,7 @@
 ## 入出力
 - 入力: layout JSON（複数可、1 world に z 方向 ≥ 10 cell 間隔で並べる）、行の生成規則（`pins` の全組合せ、または ALU の mode 表）、期待値の出所（`placer0_check` の expect 式、または `alu_check_slices` の関数表）。
 - 出力（1 directory）: `fed_layout.json`（給電器込み。Bench で期待値と一致した証拠 = 行ごとの一致表）、`world/`（region + block entity）、`run.spec.json`、worldprobe の `run.result.json` / `run.tables.md`（untouched）、`table.md`（artifact ごと: Bench PASS、world 行、world FAIL、read 点数、不一致率、整定 gt、block 数 = Astra の 4 項目 + read 点数）、最初の反例（cell 単位）。
-- 触らないもの: 規則表、Bench、対象 layout、saves/cpu、aiwb、tools/ の既存 file（新 file は `tools/world/feed.py` として追加）。
+- 触らないもの: 規則表、Bench、対象 layout、<operator-save>、aiwb、tools/ の既存 file（新 file は `tools/world/feed.py` として追加）。
 
 ## 給電器の合成（探索、座標は人が書かない）
 - data pin（level 3）: compare gate + back barrel 247 + side の lever wire（lever ON = bit 0）。gate の front = pin cell。gate / barrel / side wire / lever 台の 4〜7 cell を pin の周囲（layout の box の外側を優先、box 内の air も可）から探索し、**(1) layout の cell と衝突しない、(2) layout の wire / gate の side・back に触れない（L3 相当）、(3) 支持がある（L1）、(4) fed layout を Bench で全行解いて期待値と一致し、`dc_solve_both` の diff が空** を満たす最初の候補を採る。候補が無ければその pin を報告して止まる（層を跨ぐ落とし = WORLD-2 の a1/a2 の形も候補に含める）。
@@ -26,4 +26,4 @@
 3. 上の 2 件の wall time と rcon 数を表にする。
 
 ## 費用 / 席
-Opus 席、上限 3 h、目安 250k（一回払い）。以後の実機段は LLM 0（`feed.py` の実行と表の転記のみ）。web なし、`notes/bench/**` 禁止、git に触れない（着地は DIRECTOR）。
+Opus 席、上限 3 h、目安 250k（一回払い）。以後の実機段は LLM 0（`feed.py` の実行と表の転記のみ）。web なし、`<reference-circuit-records>/**` 禁止、git に触れない（着地は DIRECTOR）。

@@ -5,375 +5,261 @@
 An experimental toolchain that **derives** Minecraft 1.20.6 redstone circuits from rule
 sheets written out of the game source, rather than transcribing circuits a human already
 knows. The rules it starts from are the DC signal-strength rules: comparators, containers,
-dust attenuation, strongly-powered solids. The result is checked three times — on a Bench
-(a replica of the rules), then in a synthetic vanilla world, then in a real world the
-operator plays in.
+dust attenuation, strongly-powered solids. Every result is read on three surfaces — a Bench
+(a replica of the rules), a synthetic vanilla world (a headless server), and the live world
+the operator plays in. *Jiorimetry — 自織 (jiori, "self-weaving") + -metry.*
 
-Two artifacts exist so far:
-
-| artifact | Bench | synthetic vanilla world | operator's world |
-|---|---|---|---|
-| 1-bit full adder | 8/8 | 8/8, all reads matched | placed and read, 8/8 |
-| 1-bit ALU stage `v7` (ADD / SUB / AND / OR; one stage, not a tiling slice — section 3) | 32/32 | 32/32, 1024/1024 reads | placed, 23/23 static comparators, driven by a 5-lever rig with two lamps |
-| bit slice `alu_slice_v9` (pitch 12, tiled n=1/2/3; contract checker C1-C6 PASS) | 32/32, 128/128, 512/512 | two slices: 128/128, 14,976 read points 0 mismatches; reproduced unattended by `feed.py`, 19,328 points | not yet run |
-| bit slice at pitch 14 with the Wn port moved, found by the second reviewer's search with v9's interior fixed (`artifacts/layouts/reviewer_slice_p14_relocated.json`, 311 blocks) | 672/672 (n=1/2/3, the reviewer's judge) and 32/32, 128/128 here | two slices: 128/128, 20,608 read points 0 mismatches, unattended (`feed.py`) | not yet run |
+Sections: [1 Thesis](#1-thesis) · [2 The toolchain](#2-the-toolchain) · [3 Facts](#3-facts) ·
+[4 Failures](#4-failures) · [5 Reference](#5-reference) · [6 Unproven](#6-unproven) ·
+[7 Versioning](#7-versioning) · [8 Credits](#8-credits)
 
 ---
 
-## 1. What the method actually is
+## 1. Thesis
+
+A circuit that is copied carries no account of itself. It cannot be re-derived when a part,
+a constraint or the requirement changes, and it teaches nothing that transfers to the next
+circuit. So the object held here is not the circuit but the derivation: the rules the game
+computes with, written out of the source as a table a person can read, and a chain that
+turns a question into a placed artifact by applying them. The table is required to contain
+no circuit shapes. A shape written into the rules is an answer smuggled in, and everything
+downstream of it stops being a derivation and becomes a check of something already known.
+
+Three surfaces read the same artifact, and they are not redundant copies of one another. The
+rule replica is cheap enough to run on every candidate, but it can only be as correct as the
+reading of the source behind it. The synthetic world runs the game's own code, but not the
+save anyone plays in. The live world is the only place where the artifact has to actually
+stand, among chunks and neighbours nobody arranged for it. Each earlier surface exists to
+make failure cheap, and none of them may stand in for the last one: a reading on a cheaper
+surface is a prediction about the final surface, never a substitute for it.
+
+The judge — the thing that answers whether a layout does what was asked — should differ from
+the world in speed and in nothing else. Every shortcut that makes judging cheap is a
+convenience of the instrument, not a property of the game: a fixed point solved without
+time, an input held instead of driven, one starting state instead of two. The failures worth
+reporting here have all been failures of conveniences rather than of the rules, and each one
+was invisible until the world was asked. So a convenience is kept only while it is shown to
+hide nothing, and it is retired the moment it does. In the same spirit the requirement stays
+one shape — a table of input sequences and the outputs expected from them — rather than
+growing a new kind of checker for every new property, because an instrument that grows
+faster than the set of circuits it can build is not paying for itself.
+
+Derivation done by a language model is a cost and a risk paid again on every run. What can
+be inverted mechanically should be: forward rules read backwards give the candidate moves a
+search needs, and a decomposition that worked, stored with the conditions under which it may
+be reused, moves knowledge out of the model and into the machine. The share left to a model
+is the decomposition, and the direction is to shrink even that towards a finite search over
+a derived vocabulary. The order of work follows from the same reasoning: question the
+requirement, delete what it does not need, simplify what is left, shorten the loop, and only
+then automate — in that order, so that nothing is automated which should have been deleted.
+
+The measure is the whole chain, not any one tool. A stage is worth building when it shortens
+the cycle from a question to a verified reading, and a correction is worth its cost when it
+widens the range of circuits that can be derived next.
+
+---
+
+## 2. The toolchain
+
+Six steps, from the rules to a placed artifact. Each names the files that carry it.
 
 1. **A rule sheet.** A human-readable table of DC behaviour, written by reading the
-   decompiled 1.20.6 source and citing line numbers — `ComparatorBlock`, `ComposterBlock`,
-   `RedstoneTorchBlock`, `RedstoneWireBlock`, and the solidity predicates. The sheet
-   contains **no circuit shapes**. It is in [`docs/rules/`](docs/rules).
-2. **Algebra.** An agent — one model instance working from a written order — receives the
-   rule sheet and a question ("build a full adder out of these parts") and returns a
-   *network* of comparator/torch/constant nodes with an explicit level encoding — not a
-   layout. Verified by an independent evaluator written separately from the network. See
-   [`docs/algebra/`](docs/algebra).
-3. **Placement.** A second agent is given a geometry rule sheet (adjacency, dust shapes,
-   diagonal reads, vertical hand-off) and the network, and returns coordinates. See
-   [`docs/placement/`](docs/placement).
-4. **Bench.** `tools/llmgen/capcell.py` is a re-implementation of the DC rules that solves
-   a block list to a fixed point. It is calibrated against a pre-existing reference circuit
-   the agents never see. Running the layout through it costs nothing and takes a second.
-5. **Synthetic world.** The layout is written into region files of a fresh void 1.20.6
-   world with physical feeders instead of pinned inputs, a headless server ticks it, and
-   every dust and comparator is read back over RCON with freeze/step. See
-   [`docs/world/`](docs/world).
-6. **The operator's world.** The same block list is placed in a live save and read back
-   out of the region files.
+   decompiled 1.20.6 source and citing line numbers — comparators, composters, torches,
+   wire, and the solidity predicates. It contains no circuit shapes.
+   [`docs/rules/`](docs/rules).
+2. **Algebra.** An agent — one model instance working from a written order — is given the
+   rule sheet and a question, and returns a *network* of comparator, torch and constant
+   nodes with an explicit level encoding; not a layout. Evaluators written separately from
+   the network check it: `tools/checks/dc_eval.py`, `dc_eval_sub.py`, `dc_eval_alu.py`.
+   Records in [`docs/algebra/`](docs/algebra).
+3. **Placement.** Coordinates for that network, under a geometry rule sheet (adjacency,
+   dust shapes, diagonal reads, vertical hand-off). Derived by an agent in
+   [`docs/placement/`](docs/placement), and, for small problems, by the rule-driven placer
+   `tools/placer0/placer0.py` with its judge `tools/placer0/placer0_check.py`.
+4. **Bench.** `tools/llmgen/capcell.py` re-implements the DC rules over the machine and
+   part tables `tools/llmgen/machine.py` and `library.py`, solves a block list to a fixed
+   point from a cold and a hot seed, and steps it in game ticks for settle questions. It is
+   calibrated against a pre-existing reference circuit that no design agent is shown. The
+   layout checkers `tools/checks/alu_check2.py`, `alu_check_slices.py` and
+   `alu_check_contract.py` all ask this one oracle.
+5. **The synthetic world.** `tools/world/feed.py` takes a layout and its requirement,
+   searches for physical feeder cells to replace pinned inputs, builds a void 1.20.6 world
+   (`tools/world/synthworld.py`, `worldgen.py`), drives every row over RCON with
+   freeze/step (`tools/world/worldprobe.py`) and writes the result table from the run's own
+   output. Records in [`docs/world/`](docs/world).
+6. **The live world.** The same block list is emitted as a placement program
+   (`tools/llmgen/cell_to_program.py`), placed in the save, and read back out of the region
+   files without a server by `tools/world/regioncap.py`.
 
-The Bench is the cheap oracle; the synthetic world is the honest one; the operator's world
-is the one that counts.
-
----
-
-## 2. Results
-
-### 1-bit full adder (PLACE-1 / WORLD-1)
-
-Level encoding {0, 5}. Seven comparators. The algebra was produced by an agent with **zero
-project context** — it was given only the DC rule sheet and the question.
-
-- Bench: `ALL PASS` over all 8 input vectors — [`docs/placement/place1-bench-output.txt`](docs/placement/place1-bench-output.txt)
-- Synthetic world: 8/8, every read matched the Bench prediction, settle 2–10 game ticks —
-  [`docs/world/world1-tables.md`](docs/world/world1-tables.md), raw
-  [`artifacts/world/world1.run.result.json`](artifacts/world/world1.run.result.json)
-- Operator's world: placed and read back, 8/8.
-
-### 1-bit ALU stage (`alu_stage_v7`)
-
-Data lines carry {0, 3}. Two control lines: `P` ∈ {0, 15} selects arithmetic vs. logic,
-`Wn` ∈ {0, 15} selects ADD/AND vs. SUB/OR. Three identities do the work:
-
-- `r_SUB = r_ADD = parity(a, b, k)`
-- `f = maj(a ⊕ W, b, k)` — carry and borrow on one wire
-- `AND = carry(a, b, 0)`, `OR = carry(a, b, 1)` — the logic ops *are* the carry comparator
-
-176 blocks: 23 comparators, 14 repeaters, 35 dust, 6 containers (four level-3 constants,
-two level-9), 1 redstone block, 1 torch, 96 smooth stone. Box 11 × 3 × 12.
-
-- Bench: `PASS 32/32`, `r` and `f` land on exactly {0, 3} —
-  [`artifacts/rows/alu_stage_v7.json.rows.json`](artifacts/rows/alu_stage_v7.json.rows.json)
-- Synthetic world: **32/32 rows, 1024/1024 individual cell reads matched**, settle 2–14 gt —
-  [`docs/world/world2-record.md`](docs/world/world2-record.md), raw
-  [`artifacts/world/world2.run.result.json`](artifacts/world/world2.run.result.json)
-- Operator's world: 176/176 blocks placed, 23/23 static comparators matched, and three
-  driven states read out of the region files —
-  [`docs/world/live-alu-record.md`](docs/world/live-alu-record.md)
-- A 93-block feeder rig (5 levers, 4 composter constants, 2 lamps) makes all 32 rows
-  operable by hand — [`docs/placement/rig1-result.md`](docs/placement/rig1-result.md)
+`tools/check_tables.py` sits beside the chain: it verifies that every row of the two tables
+below cites a file in this repository and that the cited string is in it.
+[`tools/README.md`](tools/README.md) lists every file and what it needs.
 
 ---
 
-### Update (2026-09-07, later the same day): a bit slice that abuts
+## 3. Facts
 
-The stage v7 above is a working 1-bit stage but not a bit slice: its `a` input needed three cells (one outside the pitch), the second `P` entry and the `Wn` row were not through-lines, and its east edge was not closed. The operator ruled that bit-slice abutment and pitch alignment had to be met before any second stage. A slice contract was written (`docs/placement/slice-contract.md`) and an n-slice checker (`tools/checks/alu_check_slices.py`) that tiles a layout by its pitch and solves the n-bit ALU function for all inputs and modes. Result `artifacts/layouts/alu_slice_v8.json` (pitch 12, box 12x4x14, 292 blocks: comparator 50, repeater 15, wire 55, barrel 7): n=1 32/32, n=2 128/128, n=3 512/512, placement lint 0 on the tiled layout. Details and the boundary cell list: `docs/placement/slice1-result.md`; two-slice layer map: `artifacts/images/alu_slice_v8_x2_layers.png`. Not yet done: the two-slice run in a synthetic world and in the operator's world.
+One table, in [`docs/facts.md`](docs/facts.md) ([日本語](docs/facts.ja.md)). A row exists only
+if a file in this repository shows the number; each row carries the file, the literal string
+in it, and either a command that reproduces it here or the reason it cannot run here.
+Readings that are stated only in prose are listed under the table instead of being folded
+into it, and `tools/check_tables.py` re-checks every citation.
 
-**Second reviewer's correction (2026-09-08).** Astra read the checker and found that it verifies the n-bit function table only: clause 2 of the contract (the through-line exit restored to 15 inside each slice) was never measured, and `v8` violates it (P exits at 9, Wn at 12). A second checker, `tools/checks/alu_check_contract.py`, now measures every clause directly (box, through-line entry level per slice, carry level per slice, port faces, boundary pairs and per-slice local truth table, lint and repeater side lock) and states in its docstring what it does not check. `v8` fails it (1024 through-line mismatches over 512 rows). `artifacts/layouts/alu_slice_v9.json` replaces the two exit wires with repeaters facing west (block count unchanged) and passes both checkers: n=1 32/32, n=2 128/128, n=3 512/512, contract 0 FAIL. Two contract clauses were amended and the amendment is recorded in `docs/placement/slice-contract.md`; details in `docs/placement/slice1-result.md` section 4.
+Below are that table's rows for the two world surfaces, copied unchanged. The Bench rows and
+the unbacked assertions are in the file.
 
-**Two slices in the synthetic world (WORLD-4, 2026-09-08).** Two abutting `v9` slices, 41 feeder blocks, all 128 rows of n=2 driven by levers in a headless 1.20.6 world: r0, r1, f, the slice-1 through-line entries, the intermediate carry and every comparator's powered state agree with the Bench at all 14,976 read points. Record `docs/world/world4-record.md`, raw `artifacts/world/world4b1..b3.run.result.json` (three runs because of the rcon budget).
-
-### PLACER-0: a rule-driven placer, and the latch the world found
-
-The operator asked for the LLM-derived part to be algorithmised, and later ruled the direction outright: shrink what the LLM occupies, and end with the derivation itself as an algorithm. The first stage removed was the world stage: `tools/world/feed.py` (FEED-1) takes a layout, searches the feeder cells for every pin, checks the fed layout on the Bench against expected values computed from the requirement (not from the Bench), builds the world and the worldprobe spec, runs it, and writes the table from the tool's own output. It reproduced WORLD-2 and WORLD-4 unattended and ran a slice it had never seen (the reviewer's pitch-14 slice) at 128/128; the 13 world runs after it cost no model tokens. Record: `docs/world/feed1-record.md`; spec: `docs/world/feed1-spec.md`. PLACER-0 (`tools/placer0/`, `docs/placement/placer0.md`) is a small pilot: six placement problems cut from the ALU fragments (pins, output cells, forbidden cells, a block budget; `artifacts/placer0/problems.json`), a Bench-oracle judge, and an IDA* search over (partial layout, unresolved requirements) whose moves are the DC rules read backwards. It solved 5 of the 5 satisfiable problems with no human coordinates (p3 was unsatisfiable by the problem author's mistake). The second reviewer (Astra) then pointed out that the searcher and the judge share the Bench's rule gaps, and asked for the five solutions to be replayed in a world before anything larger was built. WORLD-4 did that: 13 of the 14 rows matched, and the one that did not (`p4_throughline`, T = 0) is a latch — see section 6. The Bench was corrected (pins are floors, and every DC solve now runs from a cold and a hot seed), the corrected judge rejects the old p4 solution, and the placer re-solved p4 in 0.9 s with a loop whose gain decays instead (`artifacts/placer0/sol_p4_throughline.json`; the latched one is kept as `sol_p4_throughline.latched.json`).
-
-![Two abutting slices of `alu_slice_v9`, layer by layer (pitch 12; n=2 Bench 128/128; contract C1-C6 PASS).](artifacts/images/alu_slice_v9_x2_layers.png)
-
-
-## 3. What is **not** claimed
-
-- **It is not a bit slice yet.** The operator assessed the bit-slice work — abutment of
-  neighbouring slices and pitch alignment — as not met, and ruled that it must be met
-  before a second stage is attempted. `v7` works as one stage; it is not a slice. A formal
-  slice contract (pitch ≤ 12 in +x, through-lines restored to 15 inside each slice, carry
-  hand-off exactly 0/3, ports on the south or top face only, and closure under tiling) is
-  written down in [`docs/placement/slice-contract.md`](docs/placement/slice-contract.md),
-  and reading `v7` against that contract scores **20/32** — see the reproduction below.
-- **No 8-bit anything.** No multi-bit adder or ALU has been built.
-- **No timing claims.** Everything here is DC / steady state. Settle times are reported as
-  observations, not as a model.
-- **No density or speed comparison** against hand-built circuits. Costs are reported in
-  absolute numbers only.
-- **No claim that the models had no prior exposure to redstone.** The claim is narrower and
-  checkable: the rule sheets are source-derived and contain no circuit shapes, the first
-  algebra stage was produced blind, and later stages reused only artifacts verified inside
-  this development. See §4.
-
----
-
-## 4. Provenance (what each agent was given)
-
-| stage | context | given | withheld |
+| predicate | surface | evidence | how to regenerate |
 |---|---|---|---|
-| DERIVE-2 (adder algebra) | blind, zero context | DC rule sheet + the question | the reference circuit, the web, every other file |
-| PLACE-1 (adder placement) | blind | geometry rule sheet + DERIVE-2's network | same |
-| REUSE-1 (full subtractor) | blind | a **byte-identical** rule sheet (sha256 `e6001fed…`), only the question swapped | same |
-| ALU-1 (ALU algebra) | not blind | rule sheet + the {0,3} adder and subtractor networks derived above + a mux suggestion from Astra (second-model reviewer, GPT-6) | the reference circuit; the source was not opened |
-| PLACE-ALU-3 (ALU placement) | not blind | rule sheets v2 + the failing 30/32 predecessor + this session's analysis | the reference circuit, the web |
-| RIG-1 (feeder) | not blind | the above + the synthetic-world feeder shape | same |
-
-The operator's own pre-existing reference circuit was used **only** to calibrate the Bench.
-It was never shown to any agent that produced a design.
+| The ALU stage `v7` was placed in a live save and 176 of 176 block placements matched the block list, with 6 of 6 containers holding the declared counts. | operator's world | `docs/world/live-alu-record.md` - `176/176 placements matched` | not regenerable here: the save is not distributed; the untouched region captures of that session are `artifacts/world/capture.rest-20260907T2117Z.json`, `capture.add001-20260907T2125Z.json` and `capture.sub001-20260907T2126Z.json` |
+| At rest, 23 of 23 comparators of the placed stage were in the state the Bench put them in. | operator's world | `docs/world/live-alu-record.md` - `23/23 comparators matched the Bench` | not regenerable here: same save |
+| Two driven states read out of the region files matched the Bench, 24 of 24 comparators in each: with the control lever on, r = 3 and f = 0; with it off, r = 3 and f = 3. | operator's world | `docs/world/live-alu-record.md` - `24/24 matched` | not regenerable here: same save |
+| The 1-bit full adder reproduced the Bench in a synthetic vanilla world over all 8 input vectors, settling in 2 to 10 game ticks. | synthetic world | `docs/world/world1-record.md` - `matches 8/8.` | not regenerable here: a world run needs a 1.20.6 server jar, a Java 21 runtime and an RCON server directory, none of which are distributed (`tools/README.md`); the recorded run is `artifacts/world/world1.run.result.json` |
+| Beyond the two outputs of the adder, 112 comparator state comparisons over the 8 recorded vectors were equal, 0 unequal. | synthetic world | `docs/world/world1-record.md` - `112 read comparisons over the 8 recorded vectors, 0 unequal` | not regenerable here: same reason |
+| The ALU stage `v7` reproduced the Bench in a synthetic vanilla world in all 32 rows, on r, on f and on the folded output value. | synthetic world | `docs/world/world2-record.md` - `matches 32/32 for r, 32/32 for f` | not regenerable here: same reason; the recorded run is `artifacts/world/world2.run.result.json` |
+| Counting every read point of that run, 1024 of 1024 were equal, of which 736 comparator state comparisons are on the stage's own 23 comparators. | synthetic world | `docs/world/world2-record.md` - `1024/1024 equal` | not regenerable here: same reason |
+| Two abutting `alu_slice_v9` slices reproduced the Bench in all 128 rows of n=2 at 14976 read points, 0 unequal. | synthetic world | `docs/world/world4-record.md` - `14976` | not regenerable here: same reason; the recorded runs are `artifacts/world/world4b1.run.result.json`, `world4b2` and `world4b3` |
+| In that run 13 of the 128 rows never closed a 10 game-tick stability window inside the fixed bound of 40, and are reported as unsettled rather than rounded. | synthetic world | `docs/world/world4-record.md` - `13 rows never closed a 10-gt window` | not regenerable here: same reason |
+| Of the five placer solutions driven in a synthetic world, 13 of the 14 rows matched at every read point and one did not; over all rows 105 of 112 read points were equal. | synthetic world | `docs/world/world4-record.md` - `105 of 112 equal` | not regenerable here: same reason |
+| Driven by the world tool with no model in the loop, the ALU stage `v7` gave 32 world rows, 0 failures and 1472 of 1472 read points equal, on feeder cells the tool searched for itself. | synthetic world | `artifacts/world/feed1/out_v7/feed_v7.feed.md` - `0/1472` | not regenerable here: same reason; the job is `artifacts/world/feed1/job_v7.json` |
+| The same tool gave the two `v9` slices 128 world rows, 0 failures and 19328 of 19328 read points equal, 13 rows unsettled. | synthetic world | `artifacts/world/feed1/out_world4/feed_world4.feed.md` - `0/19328` | not regenerable here: same reason; the job is `artifacts/world/feed1/job_world4.json` |
+| A pitch-14 slice the tool had never seen, found by the second reviewer's search with `v9`'s interior fixed, gave 128 world rows, 0 failures and 20608 of 20608 read points equal. | synthetic world | `artifacts/world/feed1/out_p14_final/feed_p14.feed.md` - `0/20608` | not regenerable here: same reason; the job is `artifacts/world/feed1/job_p14.json` |
+| The loop-free third solution of the through-line problem gave 2 world rows, 0 failures, 12 of 12 read points equal and a worst settle of 8 game ticks over 68 blocks. | synthetic world | `docs/world/p4-decay-trace.md` - `p4_throughline_v3` | not regenerable here: same reason; the outputs are under `artifacts/world/feed1/out_p4v3/` |
+| A per-game-tick trace of the decaying loop shows one level lost per wire hop and 4 game ticks per round, so 56 ticks from level 14 to 0. | synthetic world | `docs/world/p4-decay-trace.md` - `14 rounds = 56 gt` | not regenerable here: same reason; the recorded run is `artifacts/world/feed1/out_p4trace/p4_trace.run.result.json` |
+| The 13 world runs driven by the tool cost 3648392 RCON calls and 1483.3 seconds of measured wall time, and 0 model tokens while any server was up. | synthetic world | `docs/world/feed1-record.md` - `3648392` | not regenerable here: same reason |
 
 ---
 
-## 5. Reproduction
+## 4. Failures
 
-Python 3.11+, standard library only. No packages to install for the Bench path.
+One table, in [`docs/failures.md`](docs/failures.md) ([日本語](docs/failures.ja.md)), the same
+shape: a row exists only if a file here shows it. Each row names what the instruments were
+built to believe, the file that showed otherwise, what changed in this repository because of
+it, and how to reproduce the failure. Failures whose evidence was never exported are named
+under the table and nothing more is claimed about them.
+
+The first four rows, copied unchanged; the rest are in the file.
+
+| what was believed | evidence | what changed | how to reproduce |
+|---|---|---|---|
+| A pinned input cell holds its level, so no solution can drive its own input and a pin is a safe way to ask the rule replica a question. | `docs/world/world4-record.md` - `the through-line is latched` | A pin became a floor (the maximum of the pinned source and the neighbours) in `tools/llmgen/capcell.py`; the corrected judge rejects the solution that passed before, which is kept as `artifacts/placer0/sol_p4_throughline.latched.json`. | `cd tools/placer0 && python placer0_check.py ../../artifacts/placer0/problems.json p4_throughline ../../artifacts/placer0/sol_p4_throughline.latched.json` (prints BISTABLE and FAIL) |
+| One cold-start iteration of the rule replica finds the circuit's DC answer. | `docs/world/world4-record.md` - `in none of the other 13` | Every DC solve now runs from a cold and a hot seed and reports the cells on which the two answers differ; the behaviour is pinned by unit tests in `tools/llmgen/test_capcell.py`. | `cd tools/llmgen && python -m unittest test_capcell` |
+| The judge, the placer and the world would agree on the re-solved through-line: the prediction, written before the run, was 2 of 2. | `docs/world/feed1-record.md` - `FALSIFIED` | The conflict was traced to time, not to DC: a settle bound entered the Bench (`set_floors`, `settle_after`), the placer's judge drives every ordered pair of pin vectors, and the contract checker gained a time clause. The decaying solution is kept as `artifacts/placer0/sol_p4_throughline.decay.json`. | `cd tools/placer0 && python placer0_check.py ../../artifacts/placer0/problems.json p4_throughline ../../artifacts/placer0/sol_p4_throughline.decay.json` (prints TIME and FAIL) |
+| A 40 game-tick observation window is long enough to call a regime settled, so a value still standing at the end of it is a latch. | `docs/world/p4-decay-trace.md` - `14 rounds = 56 gt` | A regime whose last change lands on the bound is recorded as truncated, never as a settled final value; the time clause bounds the settle instead of the observer. | recorded only: the trace needs a server. The Bench side of the same verdict is the row above. |
+
+### Records
+
+The per-round accounts, kept as they were written.
+
+- [`docs/records/`](docs/records) — index of every record, and the README's earlier per-round
+  text (results by round, provenance, failures in prose, measured costs, repository layout).
+- [`docs/world/world1-record.md`](docs/world/world1-record.md) — the adder in a synthetic world.
+- [`docs/world/world2-record.md`](docs/world/world2-record.md) — the ALU stage in a synthetic world.
+- [`docs/world/world4-record.md`](docs/world/world4-record.md) — two slices and the placer's solutions, and the latch.
+- [`docs/world/feed1-record.md`](docs/world/feed1-record.md) — the world stage as one command.
+- [`docs/world/p4-decay-trace.md`](docs/world/p4-decay-trace.md) — the per-tick trace that separated a decay from a latch.
+- [`docs/world/live-alu-record.md`](docs/world/live-alu-record.md) — the placement and readings in the live world.
+- [`docs/placement/slice1-result.md`](docs/placement/slice1-result.md) and [`slice-contract.md`](docs/placement/slice-contract.md) — the slice contract and the layouts measured against it.
+- [`docs/placement/placer0-result.md`](docs/placement/placer0-result.md) — the rule-driven placer pilot.
+- [`docs/placement/xcheck-second-reviewer-slice-search.md`](docs/placement/xcheck-second-reviewer-slice-search.md) — cross-check of the second reviewer's search.
+- [`docs/report-alu-stage.md`](docs/report-alu-stage.md) — the narrative record of the ALU stage.
+
+---
+
+## 5. Reference
+
+Python 3.11+, standard library only, run from the repository root. Nothing to install for
+the Bench path.
 
 ```
 git clone https://github.com/pashina2/jiorimetry.git && cd jiorimetry
 ```
 
 Without git: [download the repository as a ZIP](https://github.com/pashina2/jiorimetry/archive/refs/heads/main.zip),
-unpack it, and run the commands below from the unpacked directory.
+unpack it, and run the commands from the unpacked directory.
 
-### Bench — the ALU stage `v7`, 32 rows
-
-```
-$ python tools/checks/alu_check2.py artifacts/layouts/alu_stage_v7.json
-LINT L3 wire touches strongly-powered relay (5, 2, 7) relay (4, 2, 7) driven by (3, 2, 7)
-LINT L3 wire touches strongly-powered relay (8, 1, 3) relay (7, 1, 3) driven by (6, 1, 3)
-LINT L3 wire touches strongly-powered relay (8, 1, 3) relay (8, 1, 4) driven by (9, 1, 4)
-LINT L3 wire touches strongly-powered relay (6, 2, 9) relay (5, 2, 9) driven by (5, 2, 8)
-LINT L3 wire touches strongly-powered relay (6, 2, 9) relay (6, 2, 8) driven by (6, 2, 7)
-LINT L3 wire touches strongly-powered relay (2, 2, 7) relay (2, 2, 6) driven by (2, 2, 5)
-LINT L3 wire touches strongly-powered relay (8, 1, 5) relay (8, 1, 4) driven by (9, 1, 4)
-LINT L3 wire touches strongly-powered relay (5, 2, 2) relay (5, 1, 2) driven by (5, 1, 1)
-LINT L3 wire touches strongly-powered relay (3, 2, 5) relay (3, 1, 5) driven by (3, 1, 4)
-PASS 32/32
-```
-
-`L1` (vanilla placement support) and `L2` (diagonal dust reads) are hard lints and are 0.
-`L3` is informational.
-
-### Bench — the full adder, 8 rows
-
-```
-$ python tools/checks/bench_sweep.py artifacts/layouts/layout_place1.json
-(0, 0, 0, 'sum', 0, 'cout', 0, 'dec', 0, 0, 'rounds', 3, True, True)
-(0, 0, 1, 'sum', 5, 'cout', 0, 'dec', 1, 0, 'rounds', 4, True, True)
-(0, 1, 0, 'sum', 5, 'cout', 0, 'dec', 1, 0, 'rounds', 4, True, True)
-(0, 1, 1, 'sum', 0, 'cout', 5, 'dec', 0, 1, 'rounds', 3, True, True)
-(1, 0, 0, 'sum', 5, 'cout', 0, 'dec', 1, 0, 'rounds', 4, True, True)
-(1, 0, 1, 'sum', 0, 'cout', 5, 'dec', 0, 1, 'rounds', 3, True, True)
-(1, 1, 0, 'sum', 0, 'cout', 5, 'dec', 0, 1, 'rounds', 3, True, True)
-(1, 1, 1, 'sum', 5, 'cout', 5, 'dec', 1, 1, 'rounds', 3, True, True)
-ALL PASS
-```
-
-### The documented negative — `v7` read as a slice
-
-This is expected to **fail**. It is the measurement that keeps the slice claim honest.
-
-```
-$ python tools/checks/alu_check_slices.py artifacts/layouts/v7_as_slice.json 1
-FAIL OR A 1 B 0 k 0 r [0] f 0 conv True
-FAIL OR A 1 B 0 k 1 r [0] f 0 conv True
-n=1 PASS 20/32
-```
-
-(Twelve rows fail; the two shown are the last of them. At `n=2` the same layout scores
-38/128.)
-
-### Algebra evaluators (independent of the Bench)
-
-```
-$ python tools/checks/dc_eval.py     artifacts/layouts/net_derive2.json   # ALL PASS
-$ python tools/checks/dc_eval_sub.py artifacts/layouts/net_reuse1.json    # ALL PASS
-$ python tools/checks/dc_eval_alu.py artifacts/layouts/net_alu1.json      # PASS 32/32
-```
-
-### The 30/32 predecessor, and the rig
-
-```
-$ python tools/checks/check_alu_stage.py artifacts/layouts/alu_stage_T6_30of32.json
-FAIL SUB (1, 0, 1) r 0 f 3 conv True
-FAIL SUB (1, 1, 0) r 0 f 3 conv True
-PASS 30/32
-
-$ python tools/checks/alu_check2.py artifacts/layouts/rig1_full_bench.json
-PASS 32/32
-```
-
-The rig sweep drives the circuit from **lever states only** — no pinned inputs — and
-reproduces the pinned rows exactly.
-
-### Unit tests
-
-The Bench and its strength model carry unit tests; they were copied with it.
-
-```
-$ cd tools/llmgen && python -m unittest test_capcell test_strength
-.......s....s............s........
-----------------------------------------------------------------------
-Ran 34 tests in 16.768s
-
-OK (skipped=3)
-```
-
-(The three skips are fixture-dependent tests whose fixtures are not part of this export.)
-
-### Layout regeneration
-
-`tools/world/make_layout_world1.py` and `make_layout_world2.py` regenerate
-`artifacts/layouts/layout_world1.json` and `layout_world2.json` from the stage layouts.
-Both reproduce the committed files byte-for-byte.
-
-### World stages (requires software you must supply)
-
-`tools/world/` drives a real server. It is included for completeness; it will not run out of
-the box. See [`tools/README.md`](tools/README.md) for what you must supply (a Minecraft
-1.20.6 server jar, a Java 21 runtime, an RCON-enabled server directory). No jar, save, or
-mod is distributed here.
-
----
-
-## 6. Failures worth reporting
-
-- **Netlist-style synthesis, 27,103 blocks.** An earlier approach borrowed the EDA pipeline
-  wholesale — cut the arithmetic into a gate netlist, then hand it to a placer. The placer
-  could not carry signal strength through the net, so it spent about 158 dust per
-  comparator and produced a 27,103-block artifact that was larger than the naive baseline.
-  The correction was to stop cutting: derive the algebra and the placement together, in
-  signal-strength terms, and never lower to a boolean netlist.
-- **T6 at 30/32, fixed by changing the algebra rather than the coordinates.** Two SUB rows
-  failed because the `a` input had no cell it could legally reach on the `x2` comparator's
-  side. Every geometric fix collided with a support cell already in use. The fix was to
-  rewrite that part of the algebra — `S_x = max(a, W3)`, `as = sub(a, [Wn])`,
-  `xm = sub(S_x, [as])` — and to move the `P` kill from one comparator's side to a shared
-  side. That deleted a whole column of the layout and the impossible cell with it.
-  See [`docs/placement/placealu3-result.md`](docs/placement/placealu3-result.md).
-- **Rig drafts caught on the Bench, not in the world.** `draft_1` scored 32/32 but carried
-  14 diagonal dust links and was rejected against the L2 constraint; `draft_2` scored 20/32
-  because one repeater's back cell was air. And one feeder cell had to be left as air
-  because the cell above it is a strongly-powered stage relay — a rule learned in the
-  synthetic world and applied before any block reached the operator's save. Three separate
-  world builds were avoided at zero cost.
-- **Operational misses recorded in the notes**, including a container reported as filled
-  that was not (twice), and a table of coordinates typed with U+2212 instead of
-  hyphen-minus, which the game rejected.
-
----
-
-- **A held pin hides a latch (WORLD-4, `p4_throughline` at T = 0).** The PLACER-0 solution
-  passed the Bench judge and the placer's oracle (the same Bench) and latched in the world:
-  a solution relay strongly powered the pin dust, so after T had been 15 the pin held
-  itself at 15. The Bench could not see it because a pinned cell was a HELD value that the
-  circuit could not raise, and because a cold-start iteration walks to the 0 fixed point even
-  when a second one exists. Both are fixed in `tools/llmgen/capcell.py`: a pin is now a
-  floor (max of neighbours and source), and `dc_solve_both` solves from a cold and a hot
-  seed and reports the cells on which the two solutions differ (`test_capcell.py`,
-  `FloorAndLatchTests`). Under the corrected Bench the old p4 is BISTABLE at T = 0 exactly
-  where the world latched, and every other layout in this repository still passes. The class
-  of failure had been predicted by the second reviewer before the run; the world supplied the
-  instance. Record: `docs/world/world4-record.md` sections 7.1-7.3.
-
-- **A decay of 56 gt read as a latch (FEED-1, the re-solved `p4`).** After the Bench was corrected, the placer
-  re-solved `p4` with a loop that loses one level per round. In the world it still read O = 15 at T = 0 in three runs,
-  the Bench said O = 0 from every seed, and the case was filed as a spec-vs-observation conflict. A per-gt trace of
-  the loop cells (`docs/world/p4-decay-trace.md`) showed the loop decaying exactly as the algebra says — one level
-  per wire hop, four game ticks per round, 56 ticks from 14 to 0 — while every run had cut the regime at 40 ticks.
-  The DC judge was right; what it lacked was a time clause (a settle bound), which the second reviewer had named as
-  the third condition of a boundary contract. It is now in: `Bench.set_floors` / `settle_after` step the ticked
-  circuit from one input vector to the next, `placer0_check` drives every ordered pair of pin vectors and
-  `alu_check_contract` clause C7 sweeps the 128 rows of n=2 forward and back; a row must rest within 40 gt at its DC
-  solution. Under it the decaying p4 fails exactly where the world did (T 15 -> 0, not rested at 40 gt), v9 passes with
-  a worst settle of 26 gt, and the placer re-solved p4 once more without a loop (16 blocks, worst settle 8 gt), which
-  `feed.py` then ran in the world: `p4_throughline_v3 / placer0 / 2/2 / 2 / 0 / 12 / 0/12 / 8..8 (0 unsettled) / 68 / 3261` (`artifacts/world/feed1/out_p4v3/`).
-
-## 7. Measured costs
-
-Agent time and tokens for the **closing stage only** (2026-09-07: 32/32 → synthetic world →
-operator's world → feeder rig). Earlier stages are not instrumented to the same standard.
-
-| stage | model class | wall clock | tokens |
+| tool | command | in / out | what a pass prints |
 |---|---|---|---|
-| PLACE-ALU-3 (the 32/32 layout) | Fable | 12 min | 145k |
-| WORLD-2 (synthetic world run) | Opus | 21 min | 187k |
-| PLACER-0 (rule-driven placer pilot) | Opus | 50 min | 232k |
-| WORLD-4 (five PLACER-0 solutions + two v9 slices in a synthetic world) | Opus | 46 min | 296k |
-| FEED-1 (`feed.py`: the world stage as one command; built once) | Opus | 2 h 20 min | 337k |
-| PLACER-1a (fragment search at pitch 11; BUDGET x3, two placer defects found) | Opus | 1 h 17 min | 290k |
-| every world run after FEED-1 (13 runs, 3.6 M rcon calls, 25 min wall) | none | — | 0 |
-| in-world marker investigation | Sonnet | 3.4 min | 108k |
-| in-world marker fix | Opus | 35 min | 111k |
-| RIG-1 (one aborted attempt + the real one) | Fable | 9 + 15.5 min | 75k + 192k |
-| **total** | | **≈ 1.6 h of agent time** | **≈ 820k** |
+| Bench, full-adder sweep | `python tools/checks/bench_sweep.py artifacts/layouts/layout_place1.json` | a layout JSON in; nothing written | one line per input vector, then `ALL PASS` |
+| Bench, ALU stage | `python tools/checks/alu_check2.py artifacts/layouts/alu_stage_v7.json` | a layout JSON in; writes `LAYOUT.rows.json` beside it | `LINT L3 …` informational lines, then `PASS 32/32`; the hard lints `L1` (vanilla support) and `L2` (diagonal dust reads) print nothing when they are clean |
+| Bench, slice function table | `python tools/checks/alu_check_slices.py artifacts/layouts/alu_slice_v9.json 3` | a layout JSON and a tiling count; nothing written | `n=3 PASS 512/512` (n=1 and n=2 take seconds; n=3 takes minutes) |
+| Bench, slice contract | `python tools/checks/alu_check_contract.py artifacts/layouts/alu_slice_v9.json` | a layout JSON; nothing written | one line per clause C1–C7 with its measurement, then `CONTRACT PASS` with no FAIL (minutes) |
+| Bench, the documented negative | `python tools/checks/alu_check_slices.py artifacts/layouts/v7_as_slice.json 1` | as above | expected to fail: `FAIL` lines and `n=1 PASS 20/32`. The stage is not a slice, and this is the measurement that says so |
+| Algebra evaluators (independent of the Bench) | `python tools/checks/dc_eval.py artifacts/layouts/net_derive2.json`, `dc_eval_sub.py artifacts/layouts/net_reuse1.json`, `dc_eval_alu.py artifacts/layouts/net_alu1.json` | a network JSON in; nothing written | `ALL PASS` for the first two, `PASS 32/32` for the ALU network |
+| The rule-driven placer | `cd tools/placer0 && python placer0.py ../../artifacts/placer0/problems.json p2_copy_into_side` | a problem file and a problem name; prints a placement | the placement it found and its block count; `UNKNOWN` at the bound for the infeasible problem |
+| The placer's judge | `cd tools/placer0 && python placer0_check.py ../../artifacts/placer0/problems.json p4_throughline ../../artifacts/placer0/sol_p4_throughline.json` | a problem, a name and a solution JSON | `PASS`; a rejected solution prints its reason, `BISTABLE` or `TIME`, and `FAIL` |
+| The feeder rig | `python tools/world/build_rig1.py` | writes two JSON files beside itself | one line per row, then `PASS 32/32  (r,f identical to pinned alu_check2 rows: 32/32)` |
+| Layout regeneration | `python tools/world/make_layout_world1.py && python tools/world/make_layout_world2.py` | writes the world layouts beside the scripts | nothing; the files match the committed ones — check with `git status --porcelain` and `cmp` |
+| The world stage | `python tools/world/feed.py JOB.json --out RUNDIR --run` | a job JSON naming a layout and its requirement; writes the world, the probe spec, the run results and a table under `RUNDIR` | the feeder cells it found, then one table row per artifact: Bench rows, world rows, world failures, read points, settle bound and block count. Requires software this repository does not ship — see [`tools/README.md`](tools/README.md) |
+| Table checker | `python tools/check_tables.py` | reads the four fact and failure tables; nothing written | one line per row and `100 OK, 0 MISSING`, exit 0 |
+| Unit tests, the Bench | `cd tools/llmgen && python -m unittest test_capcell test_strength` | — | `Ran 37 tests`, `OK (skipped=3)`. The three skips need the reference circuit, which is not part of this export |
+| Unit tests, the world tool | `cd tools/world && python -m unittest test_feed` | — | `OK`; these need no server |
 
-Astra's review is not in this table: it ran outside this instrumentation, and its wall
-clock and tokens were not measured. The table is therefore the cost of the deriving and
-placing agents only, not of every agent that shaped the result.
-
-Human cost over the same stage: three placement commands, filling six containers by hand,
-two client restarts, and flipping levers.
-
----
-
-## 8. Repository layout
-
-```
-docs/rules/        source-derived rule sheets (DC, DC v2, geometry, vertical hand-off)
-docs/algebra/      the derived networks and their independent evaluators
-docs/placement/    layout derivations, the 30/32 predecessor, the rig, the slice contract
-docs/world/        synthetic-world and live-world records with per-cell tables
-docs/report-alu-stage.md   the narrative record of the ALU stage
-artifacts/layouts/ block lists and node networks (JSON)
-artifacts/programs/ placement programs
-artifacts/rows/    per-row truth tables and node value tables
-artifacts/world/   worldprobe specs and results (measured values unchanged; run metadata redacted — PUBLICATION_CHECKLIST.md section 3), and region captures
-artifacts/placer0/ the six PLACER-0 problems and the solutions the placer found
-tools/placer0/     the rule-driven placer and its Bench-oracle judge
-tools/world/feed.py the world stage as one command: feeder search, Bench check against the requirement, world, spec, run, table
-artifacts/world/feed1/ the feed.py outputs of the runs cited above (specs, worldprobe results, tables; run metadata redacted)
-artifacts/images/  layer maps and network diagrams
-tools/llmgen/      the Bench (capcell) and the rule machine it runs on
-tools/checks/      the sweeps, checkers and evaluators used above
-tools/world/       synthetic world build, RCON probe, region capture
-```
-
-**Language convention.** Bilingual documents follow one rule: the English original is
-`name.md`, the Japanese is `name.ja.md`, and each links to the other on its first lines.
-That covers this README, the four rule sheets in `docs/rules/`, the slice contract, the
-block-coverage table, the ALU stage report, the live-world record, and `tools/README.md`.
-The result notes and world tables the agents produced — `docs/algebra/*-result.md`,
-`docs/placement/*-result.md`, `docs/placement/placealu2-partial.md`,
-`docs/world/world*-record.md`, `world*-tables.md`, `PUBLICATION_CHECKLIST.md` — are English
-originals and carry no translation. The remaining short order notes (the questions under
-`docs/algebra/` and `docs/placement/`, and `docs/alu-place-handover.md`) are the Japanese
-working records as they were written and have no English counterpart. Quotations and
-private material have been removed throughout, and one term was normalised (one model
-instance working from a written order is called an **agent**); the numbers, coordinates,
-file references and tables are unchanged, both between the two files of a pair and against
-the original records.
-
-**The name.** *Jiorimetry — 自織 (jiori, "self-weaving") + -metry.*
+Two corrections to older printed lines. The unit-test line used to show 34 tests; the suite
+here runs 37 with 3 skipped, the added tests being the pin-as-floor and settle-time cases,
+and the count above was measured by running it. And the pinned rig line used to show
+`python tools/checks/alu_check2.py artifacts/layouts/rig1_full_bench.json` at `PASS 32/32`;
+run today it prints `PASS 12/32`, because a pinned input became a floor rather than a held
+value, so pinning an input to 0 no longer overrides the physical feeder that the same layout
+already carries. That command is not the rig's instrument. The instrument is
+`tools/world/build_rig1.py` above, which drives the circuit from lever states only and still
+prints `PASS 32/32`.
 
 ---
 
-## 9. Credits
+## 6. Unproven
+
+What no file here shows. These are not softened claims; they are absences.
+
+- **The slices in the live world.** `alu_slice_v9` and the pitch-14 slice have been read on
+  the Bench and in a synthetic world only. Nothing has been placed in the live world beyond
+  the single ALU stage and its rig.
+- **The adder in the live world.** It is mentioned in prose, but no table, capture or
+  per-cell reading of that placement is in this repository; `docs/facts.md` lists it under
+  the assertions with no file.
+- **Anything multi-bit.** No multi-bit adder or ALU has been built, in any world.
+- **Timing.** Everything here is the DC steady state plus a settle bound measured in game
+  ticks. There is no timing model, and no instrument here for tick-order behaviour — the
+  priming of comparators by queued ticks, pulses, or anything that depends on the order
+  within a tick. Those rules are not in the rule sheets this chain derives from.
+- **Density or speed against hand-built circuits.** Never measured. Costs are reported in
+  absolute numbers only.
+- **The models' prior exposure to redstone.** Not claimed either way. The checkable claim is
+  narrower: the rule sheets are source-derived and contain no circuit shapes, the first
+  algebra stage was produced with no project context, and later stages reused only artifacts
+  verified inside this development.
+- **The failures listed as not exported.** `docs/failures.md` names them under its table:
+  the hand-written inverse rules that missed a threshold gate, the netlist-style synthesis
+  that reached 27,103 blocks, the fragment search said to have found two placer defects, the
+  coordinate table typed with a minus sign the game rejects, and the rejected rig and slice
+  drafts. Their records were not exported, so only the descriptions can be cited.
+- **The measured-cost table and the human cost** of the closing stage: read off session
+  counters at the time, with no instrument output behind them. Kept in
+  [`docs/records/`](docs/records) as written, not as a fact row.
+
+---
+
+## 7. Versioning
+
+The version mark is `w<surface>.r<round>` followed by the commit the reader has checked out.
+`w` is the strongest surface on which a row of the facts table stands — 0 the Bench, 1 the
+synthetic world, 2 the live world. `r` is the number of completed rounds in which an
+independent reviewer's findings were answered by a file in this repository, counted from
+[`PUBLICATION_CHECKLIST.md`](PUBLICATION_CHECKLIST.md) section 7 and the reviewer records
+under `docs/`: the publication reading of the four key documents, answered in the checklist's
+sections 5 and 6 and in both READMEs; the reading of the slice checker, answered by
+`tools/checks/alu_check_contract.py`, `artifacts/layouts/alu_slice_v9.json` and the amended
+`docs/placement/slice-contract.md`; the round that asked for the placer's solutions to be
+replayed in a world, answered by `tools/llmgen/capcell.py`, `tools/placer0/` and
+`docs/world/world4-record.md`; and the round that followed the world stage becoming a tool,
+answered by `tools/world/feed.py`, `artifacts/world/feed1/`,
+`artifacts/layouts/reviewer_slice_p14_relocated.json`,
+`docs/placement/xcheck-second-reviewer-slice-search.md` and `docs/world/p4-decay-trace.md`.
+The current mark is therefore **`w2.r4`**, plus the commit — `git rev-parse --short HEAD`.
+Nothing is tagged.
+
+---
+
+## 8. Credits
 
 - **Astra** — second-model reviewer (GPT-6, OpenAI). Design critique of the orders, independent re-checks of the derived networks, the 2,990-case mux check, and the review that reshaped the placement and the algorithmisation proposal.
 - **pashina** — operator: circuit semantics rulings, in-world verification, and the
@@ -385,7 +271,3 @@ MIT licensed — see [LICENSE](LICENSE).
 
 Not affiliated with Mojang or Microsoft. Minecraft is a trademark of Mojang Studios. No
 game code, jar, world save, or mod is distributed in this repository.
-
----
-
----

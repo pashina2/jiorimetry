@@ -50,7 +50,7 @@ PX=12, Z=13, 292 blocks: smooth_stone 164 (35 floor at y=0, the rest supports/re
 
 ## 6. Files opened, time, tokens
 
-Opened: the order; `alu_check_slices.py`, `v7_as_slice.json` (slice section only); `../2026-09-08-placealu3/alu_stage_v7.json`, `alu_check2.py`, `placealu3-result.md`, `node_values.txt`; `../2026-09-08-alu1/net_alu1.json`; `../2026-09-08-placealu2/bench_sweep.py`, `facts-dc-v2-given.md`; `../2026-09-07-place1/facts-geometry-given.md`; `../2026-09-08-vert/README.md`; `../2026-09-08-alu-place-handover.md` (header list + section 4); `tools/workbench/llmgen/capcell.py` (a 3-line grep only; it lives in the main checkout, not in this worktree). Not opened: `machine.py`, anything under `notes/bench/`, web. No world / aiwb / tools / git touched.
+Opened: the order; `alu_check_slices.py`, `v7_as_slice.json` (slice section only); `../2026-09-08-placealu3/alu_stage_v7.json`, `alu_check2.py`, `placealu3-result.md`, `node_values.txt`; `../2026-09-08-alu1/net_alu1.json`; `../2026-09-08-placealu2/bench_sweep.py`, `facts-dc-v2-given.md`; `../2026-09-07-place1/facts-geometry-given.md`; `../2026-09-08-vert/README.md`; `../2026-09-08-alu-place-handover.md` (header list + section 4); `tools/workbench/llmgen/capcell.py` (a 3-line grep only; it lives in the main checkout, not in this worktree). Not opened: `machine.py`, anything under `<reference-circuit-records>/`, web. No world / aiwb / tools / git touched.
 
 Wall time: 22:52:27Z (order read) -> 23:19Z (result written), about 27 min; the n=3 run alone took 3 min 11 s. Self-estimated tokens: about 95k input (file reads + reasoning), about 30k output.
 
