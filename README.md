@@ -17,45 +17,47 @@ Sections: [1 Thesis](#1-thesis) · [2 The toolchain](#2-the-toolchain) · [3 Fac
 
 ## 1. Thesis
 
-A circuit that is copied carries no account of itself. It cannot be re-derived when a part,
-a constraint or the requirement changes, and it teaches nothing that transfers to the next
-circuit. So the object held here is not the circuit but the derivation: the rules the game
-computes with, written out of the source as a table a person can read, and a chain that
-turns a question into a placed artifact by applying them. The table is required to contain
-no circuit shapes. A shape written into the rules is an answer smuggled in, and everything
-downstream of it stops being a derivation and becomes a check of something already known.
+What this repository holds is not a circuit. It is a derivation.
 
-Three surfaces read the same artifact, and they are not redundant copies of one another. The
-rule replica is cheap enough to run on every candidate, but it can only be as correct as the
-reading of the source behind it. The synthetic world runs the game's own code, but not the
-save anyone plays in. The live world is the only place where the artifact has to actually
-stand, among chunks and neighbours nobody arranged for it. Each earlier surface exists to
-make failure cheap, and none of them may stand in for the last one: a reading on a cheaper
-surface is a prediction about the final surface, never a substitute for it.
+A copied circuit cannot say why it works. Change one part and it has to be rebuilt, and
+nothing carries over to the next circuit. Here the order is reversed. The rules the game
+computes with are read out of the source and written as a table a person can read. The table
+is applied to a question, and one chain leads from the question to a placed artifact. The
+table contains no circuit shapes. A table with a shape in it has written the answer first.
+What happens downstream of it is not a derivation; it is a check of something already known.
 
-The judge — the thing that answers whether a layout does what was asked — should differ from
-the world in speed and in nothing else. Every shortcut that makes judging cheap is a
-convenience of the instrument, not a property of the game: a fixed point solved without
-time, an input held instead of driven, one starting state instead of two. The failures worth
-reporting here have all been failures of conveniences rather than of the rules, and each one
-was invisible until the world was asked. So a convenience is kept only while it is shown to
-hide nothing, and it is retired the moment it does. In the same spirit the requirement stays
-one shape — a table of input sequences and the outputs expected from them — rather than
-growing a new kind of checker for every new property, because an instrument that grows
-faster than the set of circuits it can build is not paying for itself.
+There are three reading surfaces. The rule replica is cheap and runs on every candidate. Its
+correctness cannot exceed the correctness of the person who read the source. The synthetic
+world runs the game's own code, but it is not a save anyone plays in. The live world is the
+only place where the artifact has to stand among chunks and neighbours nobody arranged. The
+first two surfaces exist to make failure cheap. A reading on a cheap surface is a prediction
+about the last surface. A prediction does not replace the last surface.
 
-Derivation done by a language model is a cost and a risk paid again on every run. What can
-be inverted mechanically should be: forward rules read backwards give the candidate moves a
-search needs, and a decomposition that worked, stored with the conditions under which it may
-be reused, moves knowledge out of the model and into the machine. The share left to a model
-is the decomposition, and the direction is to shrink even that towards a finite search over
-a derived vocabulary. The order of work follows from the same reasoning: question the
-requirement, delete what it does not need, simplify what is left, shorten the loop, and only
-then automate — in that order, so that nothing is automated which should have been deleted.
+The judge should differ from the world in speed and in nothing else. If anything else
+differs, the judge is answering for its own convenience, not for the world. Every shortcut
+that makes judging cheap is a convenience of the instrument, not a property of the game. A
+fixed point without time. An input held instead of driven. One starting state. The failures
+this repository reports are failures of conveniences, not of rules. None of them was visible
+until the world was asked. A convenience stays only while it is shown to hide nothing. The
+moment it hides something, it is retired.
 
-The measure is the whole chain, not any one tool. A stage is worth building when it shortens
-the cycle from a question to a verified reading, and a correction is worth its cost when it
-widens the range of circuits that can be derived next.
+The requirement keeps one shape: a sequence of inputs and a table of the outputs expected
+from it. Building a new checker for every new property makes the instrument grow faster than
+the circuits. An instrument that grows that way does not pay for itself.
+
+Leaving derivation to a language model pays a cost and a risk on every run. What can be
+inverted is inverted. Forward rules read backwards give the candidate moves a search needs.
+A decomposition that worked is stored with the conditions under which it may be reused, and
+knowledge moves from the model into the machine. What stays with the model is the
+decomposition. Even that is being shrunk towards a finite search over a derived vocabulary.
+
+The order of work follows from the same reasoning. Question the requirement. Delete what it
+does not need. Simplify what is left. Shorten the loop. Then automate. In that order, so
+that nothing is automated which should have been deleted.
+
+The measure is the whole chain. A stage is built when it shortens the cycle from a question
+to a verified reading. A correction is paid for when it widens the range of circuits that can
+be derived next. Any other improvement has only moved a cost somewhere else in the chain.
 
 ---
 
